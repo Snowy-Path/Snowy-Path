@@ -2,16 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Simple interaction test script.
+/// Derives from InteractionBase.
+/// Change the light color to blue.
+/// </summary>
 public class InteractionTestScript : InteractionBase {
+
+    #region Variables
 
     public Light cubeLight;
     private bool _isBlue = false;
 
     private Color _baseColor;
 
+    #endregion
+
+    #region Built In Methods
+
+    /// <summary>
+    /// Called at start. Store the base color.
+    /// </summary>
     void Start() {
         _baseColor = cubeLight.color;
     }
+
+    #endregion
+
+
+    #region Override Methods
 
     public override void Interact() {
 
@@ -22,4 +41,15 @@ public class InteractionTestScript : InteractionBase {
         }
         _isBlue = !_isBlue;
     }
+
+    public override void ShowInteractionFeedback() {
+
+    }
+
+    public override void HideInteractionFeedback() {
+
+    }
+
+    #endregion
+
 }

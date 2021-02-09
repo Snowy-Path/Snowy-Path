@@ -9,14 +9,20 @@ using UnityEngine;
 /// </summary>
 public class InteractionController : MonoBehaviour {
 
+    #region Variables
+
     [Header("Interaction settings")]
 
-    #region variables
     public float interactionMaxDistance;
     public LayerMask interactableLayer;
     public Camera playerCamera;
     private InteractionBase m_interactable;
+
     #endregion
+
+
+
+    #region Built In Methods
 
     /// <summary>
     /// Called at each frame. Checks if a IInteractable asset is detected and interact with it.
@@ -26,8 +32,12 @@ public class InteractionController : MonoBehaviour {
         CheckForInteractableInput();
     }
 
+    #endregion
+
+    #region Methods
+
     /// <summary>
-    /// Checks if an interactable is detected through a raycast in the camera direction. If it is, retrieves the detected object interface
+    /// Checks if an interactable is detected through a raycast in the camera direction. If it is, retrieves the detected object interface.
     /// </summary>
     private void CheckForInteractable() {
 
@@ -56,7 +66,7 @@ public class InteractionController : MonoBehaviour {
 
 
     /// <summary>
-    /// 
+    /// Check if the player pressed the interaction button and call the interact method if so.
     /// </summary>
     private void CheckForInteractableInput() {
         if (Input.GetKeyDown(KeyCode.C)) {
@@ -65,4 +75,7 @@ public class InteractionController : MonoBehaviour {
             }
         }
     }
+
+    #endregion
+
 }
