@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
-    [Header("Scene set up")]
+    [Header("Set up")]
     [SerializeField] Camera playerCamera;
     [SerializeField] Transform groundChecker;
     [SerializeField] float groundCheckRadius = 0.2f;
@@ -22,17 +22,15 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float lookSpeed = 2.0f;
     [SerializeField] float lookXLimit = 45.0f;
 
-    [SerializeField] bool canMove = true;
-
-
     private CharacterController controller;
+    private bool canMove = true;
     private Vector3 inputs = Vector3.zero;
     private bool isGrounded = true;
 
     private Vector3 xyVelocity = Vector3.zero;
-    private Vector2 lookPos = Vector2.zero;
-    private float rotationX = 0;
     private Vector3 yVelocity = Vector3.zero;
+    private Vector2 lookPos = Vector2.zero;
+    private float xRotation = 0;
 
     private bool isRunning;
 
@@ -144,9 +142,9 @@ public class PlayerController : MonoBehaviour {
 
     private void Rotate() {
         if (canMove) {
-            rotationX += -lookPos.y * lookSpeed;
-            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            xRotation += -lookPos.y * lookSpeed;
+            xRotation = Mathf.Clamp(xRotation, -lookXLimit, lookXLimit);
+            playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
             transform.rotation *= Quaternion.Euler(0, lookPos.x * lookSpeed, 0);
         }
     }
