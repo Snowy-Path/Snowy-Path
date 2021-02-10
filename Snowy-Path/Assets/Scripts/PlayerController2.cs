@@ -7,20 +7,20 @@ using UnityEngine.SceneManagement;
 public class PlayerController2 : MonoBehaviour      //PROTOTYPE VERSION (BASIC)
 {
     [Header("Scene set up")]
-    public Camera playerCamera;
+    [SerializeField] Camera playerCamera;
     [SerializeField] Transform groundChecker;
     [SerializeField] float groundCheckRadius = 0.2f;
     [SerializeField] LayerMask groundLayer;
-    public float gravity = -9.81f;
+    [SerializeField] float gravity = -9.81f;
 
     [Header("Stats")]
-    public float walkingSpeed = 7.5f;
-    public float runningSpeed = 10f;
-    public float jumpForce = 10f;
+    [SerializeField] float walkingSpeed = 7.5f;
+    [SerializeField] float runningSpeed = 10f;
+    [SerializeField] float jumpForce = 10f;
 
     [Header("Camera")]
-    public float lookSpeed = 2.0f;
-    public float lookXLimit = 45.0f;
+    [SerializeField] float lookSpeed = 2.0f;
+    [SerializeField] float lookXLimit = 45.0f;
 
     [SerializeField] bool canMove = true;
 
@@ -31,8 +31,9 @@ public class PlayerController2 : MonoBehaviour      //PROTOTYPE VERSION (BASIC)
 
     private Vector3 xyMove = Vector3.zero;
     private float rotationX = 0;
-    private float currentSpeed = 0;
     private Vector3 velocity = Vector3.zero;
+
+    float curve;
 
     void Start()
     {
@@ -43,31 +44,37 @@ public class PlayerController2 : MonoBehaviour      //PROTOTYPE VERSION (BASIC)
 
     void Update()
     {
-        //Update state
+        //Update status
         isGrounded = Physics.CheckSphere(groundChecker.position, groundCheckRadius, groundLayer, QueryTriggerInteraction.Ignore);
-        currentSpeed = (Input.GetKey(KeyCode.LeftShift)) ? runningSpeed : walkingSpeed;
 
         //Update Axis
         inputs.x = Input.GetAxis("Horizontal");
         inputs.z = Input.GetAxis("Vertical");
+        inputs.Normalize();
 
-        Vector3 lookDirection = playerCamera.transform.TransformDirection(Vector3.forward);
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
-        float curSpeedX = currentSpeed * inputs.x;
-        float curSpeedZ = currentSpeed * inputs.z;
-        xyMove = (forward * curSpeedZ) + (right * curSpeedX);
+        float xSpeed = 0f;
+        float zSpeed = 0f;
 
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            zSpeed = runningSpeed;
+        }
+        else {
+            zSpeed = inputs.z * walkingSpeed;
+            xSpeed = inputs.x;
+        }
+
+        xyMove = (forward * zSpeed) + (right * xSpeed);
+
+        //Reduce gravity if grounded
         if (isGrounded && velocity.y < 0)
             velocity.y = -2f;
 
-        //Jump
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
-        }
+        Jump();
 
+        //Apply gravity
         velocity.y += gravity * Time.deltaTime;
 
         //Camera 
@@ -79,6 +86,12 @@ public class PlayerController2 : MonoBehaviour      //PROTOTYPE VERSION (BASIC)
         if (canMove)
             controller.Move(xyMove * Time.fixedDeltaTime);
         controller.Move(velocity * Time.fixedDeltaTime);
+    }
+
+    private void Jump() {
+        if (Input.GetButtonDown("Jump") && isGrounded) {
+            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+        }
     }
 
     private void Rotate()
