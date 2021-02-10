@@ -68,9 +68,8 @@ public class PlayerController : MonoBehaviour {
         //if (Input.GetButtonDown("Jump"))
         //    Jump();
         #endregion
-
         //Compute speed
-        if (isRunning) {
+        if (isRunning && inputs.z > 0.5f) {
             zSpeed = runningSpeed;
         }
         else {
@@ -111,17 +110,24 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void OnStartRun(InputAction.CallbackContext context) {
-        ToggleRun(true);
-        Debug.Log("Run");
+        if (context.phase == InputActionPhase.Performed) {
+            ToggleRun(true);
+            Debug.Log("Start Run");
+        }
     }
 
     public void OnStopRun(InputAction.CallbackContext context) {
-        ToggleRun(false);
-        Debug.Log("Stop Run");
+        if (context.phase == InputActionPhase.Performed) {
+            ToggleRun(false);
+            Debug.Log("Stop Run");
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context) {
-        Jump();
+        if (context.phase == InputActionPhase.Performed) {
+            Jump();
+            Debug.Log("Jump");
+        }
     }
     #endregion
 
