@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Controls the interaction input and trigger interaction if it is possible
@@ -20,8 +20,6 @@ public class InteractionController : MonoBehaviour {
 
     #endregion
 
-
-
     #region Built In Methods
 
     /// <summary>
@@ -29,7 +27,6 @@ public class InteractionController : MonoBehaviour {
     /// </summary>
     void Update() {
         CheckForInteractable();
-        CheckForInteractableInput();
     }
 
     #endregion
@@ -69,10 +66,18 @@ public class InteractionController : MonoBehaviour {
     /// Check if the player pressed the interaction button and call the interact method if so.
     /// </summary>
     private void CheckForInteractableInput() {
-        if (Input.GetKeyDown(KeyCode.C)) {
-            if (m_interactable != null) {
-                m_interactable.Interact();
-            }
+        if (m_interactable != null) {
+            m_interactable.Interact();
+        }
+    }
+
+    /// <summary>
+    /// Method called in the Unity Event "Interact" from the Input System.
+    /// Call the utility method which interact with the detected object.
+    /// </summary>
+    public void OnInteract(InputAction.CallbackContext context) {
+        if (context.phase.Equals(InputActionPhase.Performed)) {
+            CheckForInteractableInput();
         }
     }
 
