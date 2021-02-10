@@ -84,6 +84,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "a6665a46-997a-4d74-9519-15c8e112f7cf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -123,7 +131,7 @@
                 {
                     "name": "",
                     "id": "8928d366-cf0d-4987-915d-924fc92543d7",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -279,7 +287,7 @@
                     "id": "041bd41b-4e6d-476f-b08a-f8a7e4a9f7a7",
                     "path": "<Pointer>/delta",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=2,y=2)",
+                    "processors": "",
                     "groups": "",
                     "action": "Look",
                     "isComposite": false,
@@ -310,7 +318,7 @@
                 {
                     "name": "",
                     "id": "98a6827a-21db-49d5-95a3-3a5e447fef12",
-                    "path": "<Keyboard>/shift",
+                    "path": "<Keyboard>/b",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
@@ -333,7 +341,7 @@
                     "name": "",
                     "id": "7054152e-bb60-434b-b1f7-dcda9408fabf",
                     "path": "<Keyboard>/shift",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "Press(pressPoint=0.2,behavior=1)",
                     "processors": "",
                     "groups": "",
                     "action": "SprintStop",
@@ -348,6 +356,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "SprintStop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "97bbc02b-d8c2-43a0-a2b8-e45fa37d5c6f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a52b5d2b-9631-4955-adc0-161542a1af39",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

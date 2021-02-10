@@ -756,6 +756,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 77b9ab6020da7b54189ee8acf426e511, type: 2}
+    - target: {fileID: 8320657801043981160, guid: 09b0ed7b7c900134fb0d83e546b913fd,
+        type: 3}
+      propertyPath: lookSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8320657801043981160, guid: 09b0ed7b7c900134fb0d83e546b913fd,
+        type: 3}
+      propertyPath: runningSpeed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
 --- !u!1 &1676079033
@@ -944,6 +954,158 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1720217755 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 18293541002357363, guid: 09b0ed7b7c900134fb0d83e546b913fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1639364802}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1720217756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720217755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 8835575e411ecde44a47bfcc6c522507,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1720217757}
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 23bca425-cf65-4678-ad63-d9b12199d81d
+    m_ActionName: Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1720217757}
+        m_MethodName: OnLook
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 90164e93-6148-4292-9821-877d3966b0a6
+    m_ActionName: Gameplay/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f6dd91cc-af81-4f54-9368-b2ae01ba1481
+    m_ActionName: Gameplay/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e3e8f448-3722-420b-b16e-a1ec0f27fe0a
+    m_ActionName: Gameplay/SwitchTool[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ce22756b-35bd-4603-8eae-f5b1a8f27bdc
+    m_ActionName: Gameplay/LeftHandMain[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 407893ae-a6b9-4566-9511-581d04fa9b21
+    m_ActionName: Gameplay/LeftHandSecondary[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 424fed16-b6c5-4016-abfa-eaa0facb990c
+    m_ActionName: Gameplay/RightHandMain[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 55035848-cc4f-449a-bcb7-873422184fd6
+    m_ActionName: Gameplay/RightHandSecondary[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1720217757}
+        m_MethodName: OnStartRun
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6dcdb6fe-0a4d-454d-b0b6-d05b3d783684
+    m_ActionName: Gameplay/SprintStart[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1720217757}
+        m_MethodName: OnStopRun
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c537ff56-6bf1-4cb3-854b-bf61017b1975
+    m_ActionName: Gameplay/SprintStop[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ad4d9aa6-16ab-4bd3-a7c8-88ed0e5df26a
+    m_ActionName: UI/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1720217757}
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a6665a46-997a-4d74-9519-15c8e112f7cf
+    m_ActionName: Gameplay/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &1720217757 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8320657801043981160, guid: 09b0ed7b7c900134fb0d83e546b913fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1639364802}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720217755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df02db647a8f7d43b3238a22151f41c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2126874593
 GameObject:
   m_ObjectHideFlags: 0

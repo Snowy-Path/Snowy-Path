@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
@@ -53,19 +54,19 @@ public class PlayerController : MonoBehaviour {
         float zSpeed = 0f;
 
         #region DEBUG
-        UpdateInputs(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
+        //UpdateInputs(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
 
-        lookPos.x = Input.GetAxis("Mouse X");
-        lookPos.y = Input.GetAxis("Mouse Y");
+        //lookPos.x = Input.GetAxis("Mouse X");
+        //lookPos.y = Input.GetAxis("Mouse Y");
 
-        if (Input.GetKey(KeyCode.LeftShift)) {
-            ToggleRun(true);
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift)) {
-            ToggleRun(false);
-        }
-        if (Input.GetButtonDown("Jump"))
-            Jump();
+        //if (Input.GetKey(KeyCode.LeftShift)) {
+        //    ToggleRun(true);
+        //}
+        //if (Input.GetKeyUp(KeyCode.LeftShift)) {
+        //    ToggleRun(false);
+        //}
+        //if (Input.GetButtonDown("Jump"))
+        //    Jump();
         #endregion
 
         //Compute speed
@@ -99,25 +100,29 @@ public class PlayerController : MonoBehaviour {
     #endregion
 
     #region INPUTS SYSTEM EVENTS
-    //public void OnMove(InputAction.CallbackContext context) {
-    //    UpdateInputs(context.ReadValue<Vector2>());
-    //}
+    public void OnMove(InputAction.CallbackContext context) {
+        UpdateInputs(context.ReadValue<Vector2>());
+        //Debug.Log($"Move : {context.ReadValue<Vector2>()}");
+    }
 
-    //public void OnLook(InputAction.CallbackContext context) {
-    //    lookPos = context.ReadValue<Vector2>();
-    //}
+    public void OnLook(InputAction.CallbackContext context) {
+        lookPos = context.ReadValue<Vector2>();
+        //Debug.Log($"Look : {context.ReadValue<Vector2>()}");
+    }
 
-    //public void OnStartRun(InputAction.CallbackContext context) {
-    //    ToggleRun(true);
-    //}
+    public void OnStartRun(InputAction.CallbackContext context) {
+        ToggleRun(true);
+        Debug.Log("Run");
+    }
 
-    //public void OnStopRun(InputAction.CallbackContext context) {
-    //    ToggleRun(false);
-    //}
+    public void OnStopRun(InputAction.CallbackContext context) {
+        ToggleRun(false);
+        Debug.Log("Stop Run");
+    }
 
-    //public void OnJump(InputAction.CallbackContext context) {
-    //    Jump();
-    //}
+    public void OnJump(InputAction.CallbackContext context) {
+        Jump();
+    }
     #endregion
 
     #region PRIVATE METHODS
