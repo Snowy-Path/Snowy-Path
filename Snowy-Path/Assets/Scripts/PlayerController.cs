@@ -68,7 +68,6 @@ public class PlayerController : MonoBehaviour {
             Jump();
         #endregion
 
-
         //Compute speed
         if (isRunning) {
             zSpeed = runningSpeed;
@@ -97,7 +96,6 @@ public class PlayerController : MonoBehaviour {
 
         controller.Move(yVelocity * Time.fixedDeltaTime);
     }
-
     #endregion
 
     #region INPUTS SYSTEM EVENTS
