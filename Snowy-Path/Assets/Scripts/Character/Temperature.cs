@@ -50,6 +50,7 @@ public class Temperature : MonoBehaviour
 
     private GenericHealth m_health;
     private Inventory m_inventory;
+    private Weather m_weather;
 
     void Start()
     {
@@ -57,6 +58,7 @@ public class Temperature : MonoBehaviour
 
         m_health = GetComponent<GenericHealth>();
         m_inventory = GetComponent<Inventory>();
+        m_weather = GetComponent<Weather>();
     }
 
     void Update()
@@ -121,7 +123,7 @@ public class Temperature : MonoBehaviour
 
     float GetTemperatureLossRate()
     {
-        return blizzardLossRate - (blizzardLossRate * (float)m_inventory.GetCurrentCloth().type / 100f);
+        return (1 + m_weather.GetCurrentWeather().blizzardStrength) - ((1 + m_weather.GetCurrentWeather().blizzardStrength) * (float)m_inventory.GetCurrentCloth().type / 100f);
     }
 
     void OnTriggerEnter(Collider other)
