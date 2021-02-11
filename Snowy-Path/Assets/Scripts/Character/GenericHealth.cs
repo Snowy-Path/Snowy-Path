@@ -52,4 +52,10 @@ public class GenericHealth : MonoBehaviour
         else
             onHit.Invoke(gameObject.tag, value);
     }
+
+    /// WARNING: For debug purpose only
+    public int GetCurrentHealth()
+    {
+        return m_currentHealth;
+    }
 }
