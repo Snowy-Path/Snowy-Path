@@ -54,6 +54,16 @@ public class PlayerController : MonoBehaviour {
         ApplyGravity();
         Look();
 
+        #region DEBUG
+        Keyboard keyboard = Keyboard.current;
+        if (keyboard.kKey.wasPressedThisFrame) {
+            AlterateSpeed(0.5f);
+        }
+        if (keyboard.jKey.wasPressedThisFrame) {
+            AlterateSpeed(1f);
+        }
+        #endregion
+
         //Move
         if (canMove) {
             controller.Move(xyVelocity * Time.fixedDeltaTime);
@@ -92,7 +102,7 @@ public class PlayerController : MonoBehaviour {
     #endregion
 
     #region PUBLIC METHODS
-    //TODO : Replace by Stat
+    //TODO : Replace by Stat ?
     private float speedFactor = 1f;
     public void AlterateSpeed(float factor) {
         speedFactor = factor;
@@ -111,6 +121,9 @@ public class PlayerController : MonoBehaviour {
         if (isGrounded) {
             if (isRunning && inputs.z > 0.5f) {
                 currentSpeed = runningSpeed;
+            }
+            else if (inputs.z <= 0.1f) {
+                currentSpeed = backwardSpeed;
             }
             else {
                 currentSpeed = walkingSpeed;
