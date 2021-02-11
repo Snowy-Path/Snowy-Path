@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour {
     [Header("Set up")]
     [SerializeField] Camera playerCamera;
@@ -25,15 +26,16 @@ public class PlayerController : MonoBehaviour {
 
     private CharacterController controller;
     private bool canMove = true;
-    private Vector3 inputs = Vector3.zero;
     private bool isGrounded = true;
+    private bool isRunning;
 
+    private float currentSpeed = 0f;
+    private Vector3 inputs = Vector3.zero;
     private Vector3 xyVelocity = Vector3.zero;
     private Vector3 yVelocity = Vector3.zero;
-    private Vector2 lookPos = Vector2.zero;
-    private float xRotation = 0;
 
-    private bool isRunning;
+    private Vector2 lookPos = Vector2.zero;
+    private float xRotation = 0f;
 
     #region MONOBEHAVIOUR METHODS
 
@@ -48,48 +50,11 @@ public class PlayerController : MonoBehaviour {
         //Update ground status
         isGrounded = Physics.CheckSphere(groundChecker.position, groundCheckRadius, groundLayer, QueryTriggerInteraction.Ignore);
 
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 right = transform.TransformDirection(Vector3.right);
-        float xSpeed = 0f;
-        float zSpeed = 0f;
+        UpdateVelocity();
+        ApplyGravity();
+        Look();
 
-        #region DEBUG
-        //UpdateInputs(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
-
-        //lookPos.x = Input.GetAxis("Mouse X");
-        //lookPos.y = Input.GetAxis("Mouse Y");
-
-        //if (Input.GetKey(KeyCode.LeftShift)) {
-        //    ToggleRun(true);
-        //}
-        //if (Input.GetKeyUp(KeyCode.LeftShift)) {
-        //    ToggleRun(false);
-        //}
-        //if (Input.GetButtonDown("Jump"))
-        //    Jump();
-        #endregion
-        //Compute speed
-        if (isRunning && inputs.z > 0.5f) {
-            zSpeed = runningSpeed;
-        }
-        else {
-            zSpeed = inputs.z * walkingSpeed;
-            xSpeed = inputs.x * walkingSpeed;
-        }
-        xyVelocity = (forward * zSpeed) + (right * xSpeed);
-
-        //Rotate camera 
-        Rotate();
-
-        //Reduce gravity if grounded
-        if (isGrounded && yVelocity.y < 0)
-            yVelocity.y = -2f;
-
-        //Apply gravity
-        yVelocity.y += gravity * Time.deltaTime;
-    }
-
-    void FixedUpdate() {
+        //Move
         if (canMove) {
             controller.Move(xyVelocity * Time.fixedDeltaTime);
         }
@@ -101,39 +66,60 @@ public class PlayerController : MonoBehaviour {
     #region INPUTS SYSTEM EVENTS
     public void OnMove(InputAction.CallbackContext context) {
         UpdateInputs(context.ReadValue<Vector2>());
-        //Debug.Log($"Move : {context.ReadValue<Vector2>()}");
     }
 
     public void OnLook(InputAction.CallbackContext context) {
         lookPos = context.ReadValue<Vector2>();
-        //Debug.Log($"Look : {context.ReadValue<Vector2>()}");
     }
 
     public void OnStartRun(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             ToggleRun(true);
-            Debug.Log("Start Run");
         }
     }
 
     public void OnStopRun(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             ToggleRun(false);
-            Debug.Log("Stop Run");
         }
     }
 
     public void OnJump(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Jump();
-            Debug.Log("Jump");
         }
     }
     #endregion
 
+    #region PUBLIC METHODS
+    //TODO : Replace by Stat
+    private float speedFactor = 1f;
+    public void AlterateSpeed(float factor) {
+        speedFactor = factor;
+    }
+    #endregion
+
     #region PRIVATE METHODS
-    private void ToggleRun(bool run) {
-        isRunning = run;
+    private void UpdateVelocity() {
+
+        Vector3 forward = transform.TransformDirection(Vector3.forward);
+        Vector3 right = transform.TransformDirection(Vector3.right);
+        float xSpeed = 0f;
+        float zSpeed = 0f;
+
+        //Check for speed change if player is on ground
+        if (isGrounded) {
+            if (isRunning && inputs.z > 0.5f) {
+                currentSpeed = runningSpeed;
+            }
+            else {
+                currentSpeed = walkingSpeed;
+            }
+        }
+
+        zSpeed = inputs.z * currentSpeed * speedFactor;
+        xSpeed = inputs.x * currentSpeed * speedFactor;
+        xyVelocity = (forward * zSpeed) + (right * xSpeed);
     }
 
     private void UpdateInputs(Vector2 contextInputs) {
@@ -143,13 +129,26 @@ public class PlayerController : MonoBehaviour {
         //inputs.Normalize();
     }
 
+    private void ApplyGravity() {
+        //Reduce gravity if grounded
+        if (isGrounded && yVelocity.y < 0)
+            yVelocity.y = -2f;
+
+        //Apply gravity
+        yVelocity.y += gravity * Time.deltaTime;
+    }
+
     private void Jump() {
         if (isGrounded) {
             yVelocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
         }
     }
 
-    private void Rotate() {
+    private void ToggleRun(bool run) {
+        isRunning = run;
+    }
+
+    private void Look() {
         if (canMove) {
             xRotation += -lookPos.y * lookSpeed;
             xRotation = Mathf.Clamp(xRotation, -lookXLimit, lookXLimit);
