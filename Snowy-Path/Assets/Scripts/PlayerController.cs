@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour {
     private Vector2 lookPos = Vector2.zero;
     private float xRotation = 0f;
 
+    private float inputThreshold = 0.2f;
+
     #region MONOBEHAVIOUR METHODS
 
     void Start() {
@@ -119,10 +121,10 @@ public class PlayerController : MonoBehaviour {
 
         //Check for speed change if player is on ground
         if (isGrounded) {
-            if (isRunning && inputs.z > 0.5f) {
+            if (isRunning && inputs.z >= inputThreshold) {
                 currentSpeed = runningSpeed;
             }
-            else if (inputs.z <= 0.1f) {
+            else if (inputs.z <= inputThreshold) {
                 currentSpeed = backwardSpeed;
             }
             else {
