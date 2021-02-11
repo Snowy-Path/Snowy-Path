@@ -20,6 +20,10 @@ public class HeatSource : MonoBehaviour
         SphereCollider sphereCollider = child.AddComponent<SphereCollider>();
         sphereCollider.isTrigger = true;
         sphereCollider.radius = radius;
+
+        // Initialize a static rigidbody
+        Rigidbody rigidbody = child.AddComponent<Rigidbody>();
+        rigidbody.isKinematic = true;
     }
 
     void OnDrawGizmos()
