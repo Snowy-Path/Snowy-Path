@@ -55,6 +55,8 @@ public class InteractionController : MonoBehaviour {
             } else {
                 m_interactable = null;
             }
+        } else if (m_interactable != null) {
+            m_interactable = null;
         }
 
         Debug.DrawRay(_ray.origin, _ray.direction * interactionMaxDistance, _hitSomething ? Color.green : Color.red);
