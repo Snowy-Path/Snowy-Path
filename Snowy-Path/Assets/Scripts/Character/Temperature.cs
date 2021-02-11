@@ -31,11 +31,11 @@ public class Temperature : MonoBehaviour
     [Tooltip("Amount of time (in seconds) to wait between two temperature regen ticks")]
     public float temperatureRegenerationCooldown = 1f;
 
-    [Tooltip("Amount of temperature lost per tick when in the cold")]
-    public float temperatureLoss;
-
     [Tooltip("Amount of time (in seconds) to wait between two temperature loss ticks")]
     public float temperatureLossCooldown = 1f;
+
+    [Tooltip("[WIP] Blizzard loss rate (should be replaced by weather class)")]
+    public float blizzardLossRate = 1f; // FIXME: Replace this once weather system is implemented
 
     private float m_currentTemperature = 0;
     private float m_healthRegenerationCooldownTimer = 0;
@@ -119,9 +119,7 @@ public class Temperature : MonoBehaviour
 
     float GetTemperatureLossRate()
     {
-        // FIXME: blizzardLossRate should come from weather system
-        float blizzardLossRate = 0.5f;
-        return (1 + blizzardLossRate) - ((1 + blizzardLossRate) * (float)m_inventory.GetCurrentCloth().type / 100f);
+        return blizzardLossRate - (blizzardLossRate * (float)m_inventory.GetCurrentCloth().type / 100f);
     }
 
     void OnTriggerEnter(Collider other)
