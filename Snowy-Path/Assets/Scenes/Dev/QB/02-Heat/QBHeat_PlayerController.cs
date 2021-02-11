@@ -28,6 +28,6 @@ public class QBHeat_PlayerController : MonoBehaviour
         else if (keyboard.downArrowKey.isPressed)
             velocity.z = -1;
 
-        transform.position = transform.position + velocity * speed * Time.deltaTime;
+        GetComponent<CharacterController>().Move(velocity * speed * Time.deltaTime);
     }
 }
