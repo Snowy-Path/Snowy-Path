@@ -16,6 +16,7 @@ public class InteractionController : MonoBehaviour {
     public float interactionMaxDistance;
     public LayerMask interactableLayer;
     public Camera playerCamera;
+
     private InteractionBase m_interactable;
 
     #endregion
@@ -50,12 +51,14 @@ public class InteractionController : MonoBehaviour {
 
                 if (m_interactable != _interactable) {
                     m_interactable = _interactable;
+                    m_interactable.ShowInteractionFeedback();
                 }
 
             } else {
                 m_interactable = null;
             }
         } else if (m_interactable != null) {
+            m_interactable.HideInteractionFeedback();
             m_interactable = null;
         }
 

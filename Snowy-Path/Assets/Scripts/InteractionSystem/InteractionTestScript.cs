@@ -29,7 +29,6 @@ public class InteractionTestScript : InteractionBase {
 
     #endregion
 
-
     #region Override Methods
 
     public override void Interact() {
@@ -43,11 +42,13 @@ public class InteractionTestScript : InteractionBase {
     }
 
     public override void ShowInteractionFeedback() {
-
+        Debug.Log("SHOW");
+        GetComponent<Renderer>().material.SetFloat("Boolean_917F005B", 1);
     }
 
     public override void HideInteractionFeedback() {
-
+        Debug.Log("HIDE");
+        GetComponent<Renderer>().material.SetFloat("Boolean_917F005B", 0);
     }
 
     #endregion
