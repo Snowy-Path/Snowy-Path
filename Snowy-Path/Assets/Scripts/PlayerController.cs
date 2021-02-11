@@ -24,20 +24,31 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float lookSpeed = 2.0f;
     [SerializeField] float lookXLimit = 45.0f;
 
+    //Status
     private CharacterController controller;
     private bool canMove = true;
     private bool isGrounded = true;
-    private bool isRunning;
+    private bool isRunning = false;
 
+    //Sprint
+    private float maxSprintDuration = 6f;
+    private float sprintTimer = 0f;
+    private float sprintRecoveryTimer = 0f;
+    private const float sprintTimeToRegen = 1f;
+    private const float sprintRecoveryRate = .5f;
+
+    //Velocity
     private float currentSpeed = 0f;
     private Vector3 inputs = Vector3.zero;
     private Vector3 xyVelocity = Vector3.zero;
     private Vector3 yVelocity = Vector3.zero;
 
+    //Look
     private Vector2 lookPos = Vector2.zero;
     private float xRotation = 0f;
 
-    private float inputThreshold = 0.2f;
+    //Parameters
+    private const float inputThreshold = 0.2f;
 
     #region MONOBEHAVIOUR METHODS
 
@@ -55,6 +66,21 @@ public class PlayerController : MonoBehaviour {
         UpdateVelocity();
         ApplyGravity();
         Look();
+
+        //Update stamina
+        if (isRunning) {
+            sprintTimer += Time.deltaTime;
+            sprintRecoveryTimer = 0.0f;
+            if (sprintTimer >= maxSprintDuration)
+                ToggleRun(false);
+        }
+        else if (sprintTimer > 0) {
+            if (sprintRecoveryTimer >= sprintTimeToRegen) {
+                sprintTimer = Mathf.Clamp(sprintTimer - (sprintRecoveryRate * Time.deltaTime), 0.0f, maxSprintDuration);
+            }
+            else
+                sprintRecoveryTimer += Time.deltaTime;
+        }
 
         #region DEBUG
         Keyboard keyboard = Keyboard.current;
@@ -160,7 +186,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void ToggleRun(bool run) {
-        isRunning = run;
+        if (sprintTimer < maxSprintDuration) {
+            isRunning = run;
+        }
+        else
+            isRunning = false;
     }
 
     private void Look() {
@@ -173,9 +203,14 @@ public class PlayerController : MonoBehaviour {
     }
     #endregion
 
-
+    #region GIZMOS
     private void OnDrawGizmos() {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(groundChecker.position, groundCheckRadius);
     }
+
+    private void OnGUI() {
+        GUI.Label(new Rect(50, 400, 400, 200), $"Sprint duration : {sprintTimer}");
+}
+    #endregion
 }
