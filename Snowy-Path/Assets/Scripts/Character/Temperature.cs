@@ -126,31 +126,35 @@ public class Temperature : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // If the player wasn't near an heat source, reset the timers
-        if (m_heatSources < 1) {
-            m_damageHypothermiaCooldownTimer = 0;
-            m_healthRegenerationCooldownTimer = 0;
-            m_temperatureRegenerationCooldownTimer = 0;
-        }
+        if (other.tag == "HeatSource") {
+            // If the player wasn't near an heat source, reset the timers
+            if (m_heatSources < 1) {
+                m_damageHypothermiaCooldownTimer = 0;
+                m_healthRegenerationCooldownTimer = 0;
+                m_temperatureRegenerationCooldownTimer = 0;
+            }
 
-        // Increase counter if we enter an heat source
-        m_heatSources += 1;
+            // Increase counter if we enter an heat source
+            m_heatSources += 1;
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
-        // Decrease counter if we exit an heat source
-        m_heatSources -= 1;
+        if (other.tag == "HeatSource") {
+            // Decrease counter if we exit an heat source
+            m_heatSources -= 1;
 
-        // If the player is no longer near an heat source, reset the timers
-        if (m_heatSources < 1) {
-            m_damageHypothermiaCooldownTimer = 0;
-            m_healthRegenerationCooldownTimer = 0;
-            m_temperatureRegenerationCooldownTimer = 0;
+            // If the player is no longer near an heat source, reset the timers
+            if (m_heatSources < 1) {
+                m_damageHypothermiaCooldownTimer = 0;
+                m_healthRegenerationCooldownTimer = 0;
+                m_temperatureRegenerationCooldownTimer = 0;
+            }
+
+            if (m_heatSources < 0)
+                Debug.LogError("Player Temperature: Heat sources counter is negative. That's not supposed to happen.");
         }
-
-        if (m_heatSources < 0)
-            Debug.LogError("Player Temperature: Heat sources counter is negative. That's not supposed to happen.");
     }
 
     /// WARNING: For debug purpose only
