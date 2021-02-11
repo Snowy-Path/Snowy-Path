@@ -7,10 +7,12 @@ public class Temperature : MonoBehaviour
     [Tooltip("Maximum internal temperature value")]
     public float maxTemperature;
 
-    [Tooltip("Player will start regenerating HP above this value")]
+    [Tooltip("Player will start regenerating HP above this value (% of max temperature)")]
+    [Range(0f, 1f)]
     public float maxTemperatureThreshold;
 
-    [Tooltip("Player will start losing HP below this value")]
+    [Tooltip("Player will start losing HP below this value (% of max temperature)")]
+    [Range(0f, 1f)]
     public float minTemperatureThreshold;
 
     [Tooltip("Amount of HP regenerated per regen tick")]
@@ -93,7 +95,7 @@ public class Temperature : MonoBehaviour
         //---------------------------------------------------------------------
         // Process regen or hypothermia depending on current temperature
         //---------------------------------------------------------------------
-        if (m_currentTemperature > maxTemperatureThreshold) {
+        if (m_currentTemperature > maxTemperatureThreshold * maxTemperature) {
             // Increase our health regen timer
             m_healthRegenerationCooldownTimer += Time.deltaTime;
 
@@ -104,7 +106,7 @@ public class Temperature : MonoBehaviour
                 m_health.Heal(healthRegeneration);
             }
         }
-        else if (m_currentTemperature < minTemperatureThreshold) {
+        else if (m_currentTemperature < minTemperatureThreshold * maxTemperature) {
             // Increase our hypothermia timer
             m_damageHypothermiaCooldownTimer += Time.deltaTime;
 
