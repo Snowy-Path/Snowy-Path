@@ -17,7 +17,7 @@ public class InteractionController : MonoBehaviour {
     public LayerMask interactableLayer;
     public Camera playerCamera;
 
-    private InteractionBase m_interactable;
+    private Interactable m_interactable;
 
     #endregion
 
@@ -45,7 +45,7 @@ public class InteractionController : MonoBehaviour {
         bool _hitSomething = Physics.Raycast(_ray, out _hitInfo, interactionMaxDistance, interactableLayer);
 
         if (_hitSomething) {
-            InteractionBase _interactable = _hitInfo.transform.GetComponent<InteractionBase>();
+            Interactable _interactable = _hitInfo.transform.GetComponent<Interactable>();
 
             if (_interactable != null) { // We really did hit an interactable object
 
@@ -57,6 +57,7 @@ public class InteractionController : MonoBehaviour {
             } else {
                 m_interactable = null;
             }
+
         } else if (m_interactable != null) {
             m_interactable.HideInteractionFeedback();
             m_interactable = null;
