@@ -42,13 +42,11 @@ public class InteractionTestScript : InteractionBase {
     }
 
     public override void ShowInteractionFeedback() {
-        Debug.Log("SHOW");
-        GetComponent<Renderer>().material.SetFloat("Boolean_917F005B", 1);
+        GetComponent<Renderer>().material.SetFloat("IsActive", 1);
     }
 
     public override void HideInteractionFeedback() {
-        Debug.Log("HIDE");
-        GetComponent<Renderer>().material.SetFloat("Boolean_917F005B", 0);
+        GetComponent<Renderer>().material.SetFloat("IsActive", 0);
     }
 
     #endregion
