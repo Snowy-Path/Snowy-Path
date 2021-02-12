@@ -13,9 +13,23 @@ public class InteractionController : MonoBehaviour {
 
     [Header("Interaction settings")]
 
-    public float interactionMaxDistance;
-    public LayerMask interactableLayer;
-    public Camera playerCamera;
+    [SerializeField]
+    [Min(0.0f)]
+    [Tooltip("The maximum distance to interact with any interactable object.")]
+    private float maxDistance = 2.0f;
+
+    [SerializeField]
+    [Min(0.0f)]
+    [Tooltip("The on-screen radius of detection. Allow player to interact with objects than is not exactly on the cursor. The more the value is, the more flexible it is.")]
+    private float radius = 0.05f;
+
+    [SerializeField]
+    [Tooltip("The only layer the detection use.")]
+    private LayerMask interactableLayer;
+
+    [SerializeField]
+    [Header("Player Camera")]
+    private Camera playerCamera;
 
     private Interactable m_interactable;
 
@@ -42,7 +56,7 @@ public class InteractionController : MonoBehaviour {
         Ray _ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
         RaycastHit _hitInfo;
 
-        bool _hitSomething = Physics.Raycast(_ray, out _hitInfo, interactionMaxDistance, interactableLayer);
+        bool _hitSomething = Physics.SphereCast(_ray, radius, out _hitInfo, maxDistance, interactableLayer);
 
         if (_hitSomething) {
             Interactable _interactable = _hitInfo.transform.GetComponent<Interactable>();
@@ -63,7 +77,7 @@ public class InteractionController : MonoBehaviour {
             m_interactable = null;
         }
 
-        Debug.DrawRay(_ray.origin, _ray.direction * interactionMaxDistance, _hitSomething ? Color.green : Color.red);
+        Debug.DrawRay(_ray.origin, _ray.direction * maxDistance, _hitSomething ? Color.green : Color.red);
 
     }
 
