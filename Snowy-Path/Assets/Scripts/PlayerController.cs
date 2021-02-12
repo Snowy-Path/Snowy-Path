@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float backwardSpeed = 7.5f;
     [SerializeField] float runningSpeed = 10f;
     [SerializeField] float jumpForce = 10f;
+    [SerializeField] float maxSprintDuration = 6f;
 
     [Header("Camera")]
     [SerializeField] float lookSpeed = 2.0f;
@@ -31,11 +32,10 @@ public class PlayerController : MonoBehaviour {
     private bool isRunning = false;
 
     //Sprint
-    private float maxSprintDuration = 6f;
     private float sprintTimer = 0f;
     private float sprintRecoveryTimer = 0f;
     private const float sprintTimeToRegen = 1f;
-    private const float sprintRecoveryRate = .5f;
+    private const float sprintRecoveryRate = 0.5f;
 
     //Velocity
     private float currentSpeed = 0f;
@@ -49,13 +49,21 @@ public class PlayerController : MonoBehaviour {
 
     //Parameters
     private const float inputThreshold = 0.2f;
+    private const float speedCorrectionFactor = 0.37f;
 
     #region MONOBEHAVIOUR METHODS
 
     void Start() {
         controller = GetComponent<CharacterController>();
+
+        //Lock and hide cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        //Apply speeds correction
+        walkingSpeed *= speedCorrectionFactor;
+        runningSpeed *= speedCorrectionFactor;
+        backwardSpeed *= speedCorrectionFactor;
     }
 
     void Update() {
@@ -63,6 +71,7 @@ public class PlayerController : MonoBehaviour {
         //Update ground status
         isGrounded = Physics.CheckSphere(groundChecker.position, groundCheckRadius, groundLayer, QueryTriggerInteraction.Ignore);
 
+        //Process movement
         UpdateVelocity();
         ApplyGravity();
         Look();
@@ -71,10 +80,12 @@ public class PlayerController : MonoBehaviour {
         if (isRunning) {
             sprintTimer += Time.deltaTime;
             sprintRecoveryTimer = 0.0f;
+
+            //Stop sprint if reached max sprint duration
             if (sprintTimer >= maxSprintDuration)
                 ToggleRun(false);
         }
-        else if (sprintTimer > 0) {
+        else if (sprintTimer > 0) {     //Sprint recovery
             if (sprintRecoveryTimer >= sprintTimeToRegen) {
                 sprintTimer = Mathf.Clamp(sprintTimer - (sprintRecoveryRate * Time.deltaTime), 0.0f, maxSprintDuration);
             }
@@ -96,7 +107,6 @@ public class PlayerController : MonoBehaviour {
         if (canMove) {
             controller.Move(xyVelocity * Time.fixedDeltaTime);
         }
-
         controller.Move(yVelocity * Time.fixedDeltaTime);
     }
     #endregion
@@ -158,6 +168,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
+        //Compute x and z speed
         zSpeed = inputs.z * currentSpeed * speedFactor;
         xSpeed = inputs.x * currentSpeed * speedFactor;
         xyVelocity = (forward * zSpeed) + (right * xSpeed);
@@ -167,7 +178,6 @@ public class PlayerController : MonoBehaviour {
         //Update Axis
         inputs.x = contextInputs.x;
         inputs.z = contextInputs.y;
-        //inputs.Normalize();
     }
 
     private void ApplyGravity() {
@@ -203,7 +213,7 @@ public class PlayerController : MonoBehaviour {
     }
     #endregion
 
-    #region GIZMOS
+    #region DEBUG
     private void OnDrawGizmos() {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(groundChecker.position, groundCheckRadius);
@@ -211,6 +221,6 @@ public class PlayerController : MonoBehaviour {
 
     private void OnGUI() {
         GUI.Label(new Rect(50, 400, 400, 200), $"Sprint duration : {sprintTimer}");
-}
+    }
     #endregion
 }
