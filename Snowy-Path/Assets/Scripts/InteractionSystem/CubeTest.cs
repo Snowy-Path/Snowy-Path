@@ -4,10 +4,9 @@ using UnityEngine;
 
 /// <summary>
 /// Simple interaction test script.
-/// Derives from InteractionBase.
-/// Change the light color to blue.
+/// Change the directional light color to blue.
 /// </summary>
-public class InteractionTestScript : InteractionBase {
+public class CubeTest : MonoBehaviour {
 
     #region Variables
 
@@ -21,7 +20,8 @@ public class InteractionTestScript : InteractionBase {
     #region Built In Methods
 
     /// <summary>
-    /// Called at start. Store the base color.
+    /// Called at start.
+    /// Store the base color.
     /// </summary>
     void Start() {
         _baseColor = cubeLight.color;
@@ -29,9 +29,13 @@ public class InteractionTestScript : InteractionBase {
 
     #endregion
 
-    #region Override Methods
+    #region Interaction Methods
 
-    public override void Interact() {
+    /// <summary>
+    /// Switch the color to blue.
+    /// And then back to the normal.
+    /// </summary>
+    public void SwitchColor() {
 
         if (!_isBlue) {
             cubeLight.color = Color.blue;
@@ -41,11 +45,17 @@ public class InteractionTestScript : InteractionBase {
         _isBlue = !_isBlue;
     }
 
-    public override void ShowInteractionFeedback() {
+    /// <summary>
+    /// Show the outline feedback from the shader.
+    /// </summary>
+    public void ShowOutlineEffect() {
         GetComponent<Renderer>().material.SetFloat("IsActive", 1);
     }
 
-    public override void HideInteractionFeedback() {
+    /// <summary>
+    /// Hide the outline feedback from the shader.
+    /// </summary>
+    public void HideOutlineEffect() {
         GetComponent<Renderer>().material.SetFloat("IsActive", 0);
     }
 
