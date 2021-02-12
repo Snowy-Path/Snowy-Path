@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour {
         Look();
 
         //Update stamina
-        if (isRunning) {
+        if (isRunning && inputs.z >= inputThreshold) {
             sprintTimer += Time.deltaTime;
             sprintRecoveryTimer = 0.0f;
 
