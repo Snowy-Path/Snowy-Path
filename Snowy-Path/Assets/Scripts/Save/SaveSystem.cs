@@ -26,7 +26,7 @@ public sealed class SaveSystem {
     }
 
     // Saves
-    UInt16 nbrSaveAllowed = 50;
+    UInt16 nbrSaveAllowed = 10;
     SaveData[] saveDataArray;
 
     /// <summary>
@@ -44,8 +44,7 @@ public sealed class SaveSystem {
 
         try {
             // Formatter serialization data
-            formatter.Serialize(stream, save.headerData);
-            formatter.Serialize(stream, save.playerData);
+            formatter.Serialize(stream, save);
         }
         catch (SerializationException e) {
             Debug.Log("Failed to serialize. Reason: " + e.Message);
@@ -76,7 +75,7 @@ public sealed class SaveSystem {
                 BinaryFormatter formatter = new BinaryFormatter();
 
                 // Return Datas
-                save.playerData = formatter.Deserialize(stream) as PlayerData;
+                save = formatter.Deserialize(stream) as SaveData;
             }
             catch (SerializationException e) {
                 Debug.LogError("Failed to deserialize " + path + ". Reason: " + e.Message);
@@ -136,4 +135,14 @@ public sealed class SaveSystem {
         }
     }
 
+
+    public void CreateNewSave(int slot) {
+        // Create new SaveData
+        SaveData newSave = new SaveData();
+        newSave.headerData = new HeaderData();
+        newSave.playerData = new PlayerData();
+        saveDataArray[slot] = newSave;
+        SaveData(newSave);
+
+    }
 }
