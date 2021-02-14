@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SphereTest : MonoBehaviour
+public class CapsuleTest : MonoBehaviour
 {
-
     #region Interaction Methods
 
     /// <summary>
@@ -22,5 +21,4 @@ public class SphereTest : MonoBehaviour
     }
 
     #endregion
-
 }

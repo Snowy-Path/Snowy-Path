@@ -59,16 +59,24 @@ public class InteractionController : MonoBehaviour {
         bool _hitSomething = Physics.SphereCast(_ray, radius, out _hitInfo, maxDistance, interactableLayer);
 
         if (_hitSomething) {
-            Interactable _interactable = _hitInfo.transform.GetComponent<Interactable>();
+            Interactable _interHit = _hitInfo.transform.GetComponent<Interactable>();
 
-            if (_interactable != null) { // We really did hit an interactable object
+            if (_interHit != null) { // We really did hit an interactable object
 
-                if (m_interactable != _interactable) {
-                    m_interactable = _interactable;
+                if (m_interactable != _interHit) {
+
+                    if (m_interactable != null) {
+                        m_interactable.HideInteractionFeedback();
+                    }
+
+                    m_interactable = _interHit;
                     m_interactable.ShowInteractionFeedback();
                 }
 
             } else {
+                if (m_interactable != null) {
+                    m_interactable.HideInteractionFeedback();
+                }
                 m_interactable = null;
             }
 
