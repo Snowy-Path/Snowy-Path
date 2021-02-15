@@ -291,7 +291,7 @@ Transform:
   m_LocalScale: {x: 5, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &758191339
 GameObject:
@@ -429,6 +429,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2020511682}
     - target: {fileID: 18293541002357363, guid: 09b0ed7b7c900134fb0d83e546b913fd,
         type: 3}
       propertyPath: m_Name
@@ -437,7 +441,7 @@ PrefabInstance:
     - target: {fileID: 18293541002357375, guid: 09b0ed7b7c900134fb0d83e546b913fd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 18293541002357375, guid: 09b0ed7b7c900134fb0d83e546b913fd,
         type: 3}
@@ -491,75 +495,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
---- !u!1 &1443782520
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1443782523}
-  - component: {fileID: 1443782522}
-  - component: {fileID: 1443782521}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1443782521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1443782520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &1443782522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1443782520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &1443782523
+--- !u!4 &1421747724 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1443782520}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1489255180 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1844625849285241327, guid: 09b0ed7b7c900134fb0d83e546b913fd,
+  m_CorrespondingSourceObject: {fileID: 7018637878986329272, guid: 09b0ed7b7c900134fb0d83e546b913fd,
     type: 3}
   m_PrefabInstance: {fileID: 1264410796}
   m_PrefabAsset: {fileID: 0}
@@ -591,11 +529,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1965735081}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.17, y: -0.29, z: -1.1066666}
-  m_LocalScale: {x: 0.7, y: 0.7999999, z: 4.85}
+  m_LocalPosition: {x: -0.28, y: -0.29000002, z: -1.1066666}
+  m_LocalScale: {x: 0.7, y: 0.79999983, z: 4.85}
   m_Children:
   - {fileID: 883249900}
-  m_Father: {fileID: 1489255180}
+  m_Father: {fileID: 1421747724}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &1965735083
@@ -766,11 +704,8 @@ MonoBehaviour:
   range: 50
   reloadingTime: 1.5
   projectileDispersion: 0.2
-  timeBetweenShooting: 0.07
   gunEnd: {fileID: 883249900}
   AmmoText: {fileID: 264226062}
-  ammo: 0
-  currentMagazineCapacity: 0
   maxAmmo: 50
   maxMagazineCapacity: 30
   projectilePerShot: 10
@@ -990,3 +925,9 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!20 &2020511682 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1603986337316317576, guid: 09b0ed7b7c900134fb0d83e546b913fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1264410796}
+  m_PrefabAsset: {fileID: 0}

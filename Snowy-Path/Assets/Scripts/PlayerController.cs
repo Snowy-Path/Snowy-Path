@@ -89,10 +89,12 @@ public class PlayerController : MonoBehaviour {
 
         #region DEBUG
         Keyboard keyboard = Keyboard.current;
-        if (keyboard.kKey.wasPressedThisFrame) {
+        if (keyboard.kKey.wasPressedThisFrame)
+        {
             AlterateSpeed(0.5f);
         }
-        if (keyboard.jKey.wasPressedThisFrame) {
+        if (keyboard.jKey.wasPressedThisFrame)
+        {
             AlterateSpeed(1f);
         }
         //if (keyboard.wKey.wasPressedThisFrame) {

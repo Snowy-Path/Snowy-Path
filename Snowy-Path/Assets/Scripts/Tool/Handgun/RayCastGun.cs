@@ -1,33 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class RayCastGun : Tool
 {
 
-    public float damageDealt = 1;                                            
+    public float damageDealt = 1;
+    [SerializeField]
     public float fireRate = 0.25f;
+    [SerializeField]
     public float groupfire = 0.001f;
     public float range = 50f;                                        
     public float reloadingTime;
     public float projectileDispersion;
-    public float timeBetweenShooting = 0.07f;
     
 
     public Transform gunEnd; //Reference to the gun end object, marking the muzzle location of the gun
     public Text AmmoText; //For HUD ammo count
+    
     private Camera fpsCam; //Reference to camera                                                
     private WaitForSeconds shotDuration = new WaitForSeconds(0.07f);// Determines how long time line will remain visible    
     private LineRenderer laserLine; //Visual effect                                        
     private float nextFire;
-    private int projectileShot;
+    private float timeBetweenShooting = 0.07f;
     private Vector3 dispersion;
-
+    private int projectileShot;
     private int ammo;
     private int currentMagazineCapacity = 0;
-    public int maxAmmo;
-    public int maxMagazineCapacity, projectilePerShot;
-    bool reloading, readyToShoot;
+    
+    public int maxAmmo; 
+    public int maxMagazineCapacity;
+    public int projectilePerShot;
+    private bool reloading, readyToShoot;
 
 
 
@@ -45,17 +50,20 @@ public class RayCastGun : Tool
 
     void Update()
     {
+        Keyboard keyboard = Keyboard.current;
+        
         //If the Player press fire button, isn't shooting or reloading and have ammo left
-        if (Input.GetButtonDown("Fire1") && Time.time > nextFire && !reloading && ammo > 0 && readyToShoot)
+        if (keyboard.eKey.wasPressedThisFrame && Time.time > nextFire && !reloading && ammo > 0 && readyToShoot)
         {
             //Start shooting method
             projectileShot = projectilePerShot;
             MainInteraction();
             ammo--;
         }
-        //If 
-        if (Input.GetButtonDown("Fire2") && maxAmmo>0)
+        //If the Player press reload button
+        if (keyboard.fKey.wasPressedThisFrame && maxAmmo>0)
         {
+            //Start reloading method
             SecondaryInteraction();
         }
         //Update HUD
