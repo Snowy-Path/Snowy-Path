@@ -86,10 +86,17 @@ public class Interactable : MonoBehaviour {
     #region Utility Method
 
     /// <summary>
-    /// Destroy itself
+    /// Destroy itself.
     /// </summary>
     public void DestroyItself() {
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Switch activation state at each call.
+    /// </summary>
+    public void SwitchActivation() {
+        IsActive = !IsActive;
     }
 
     #endregion
