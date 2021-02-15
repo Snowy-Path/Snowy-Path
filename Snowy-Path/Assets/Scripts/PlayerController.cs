@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour {
 
     //Parameters
     private const float inputThreshold = 0.2f;
-    private const float speedCorrectionFactor = 0.37f;
 
     #region MONOBEHAVIOUR METHODS
 
@@ -59,11 +58,6 @@ public class PlayerController : MonoBehaviour {
         //Lock and hide cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        //Apply speeds correction
-        walkingSpeed *= speedCorrectionFactor;
-        runningSpeed *= speedCorrectionFactor;
-        backwardSpeed *= speedCorrectionFactor;
     }
 
     void Update() {
@@ -101,15 +95,39 @@ public class PlayerController : MonoBehaviour {
         if (keyboard.jKey.wasPressedThisFrame) {
             AlterateSpeed(1f);
         }
+        //if (keyboard.wKey.wasPressedThisFrame) {
+        //    isMoving = true;
+        //    starPos = transform.position;
+        //}
+        //else if(keyboard.wKey.wasReleasedThisFrame) {
+        //    float dist = (transform.position - starPos).magnitude;
+        //    float speed = dist / moveTestTimer;
+        //    float factor = speed / runningSpeed;
+        //    Debug.Log($"Dist={dist}  Time={moveTestTimer}  Speed={speed}  CurrentSpeed={currentSpeed}  Factor={factor}");
+
+        //    isMoving = false;
+        //    moveTestTimer = 0;
+        //}
+
+        //if(isMoving) {
+        //    moveTestTimer += Time.deltaTime;
+        //}
         #endregion
 
         //Move
         if (canMove) {
-            controller.Move(xyVelocity * Time.fixedDeltaTime);
+            controller.Move(xyVelocity * Time.deltaTime);
         }
-        controller.Move(yVelocity * Time.fixedDeltaTime);
+        controller.Move(yVelocity * Time.deltaTime);
     }
     #endregion
+
+    #region DEBUG
+    //Vector3 starPos;
+    //float moveTestTimer = 0f;
+    //bool isMoving = false;
+    #endregion
+
 
     #region INPUTS SYSTEM EVENTS
     public void OnMove(InputAction.CallbackContext context) {
@@ -160,7 +178,7 @@ public class PlayerController : MonoBehaviour {
             if (isRunning && inputs.z >= inputThreshold) {
                 currentSpeed = runningSpeed;
             }
-            else if (inputs.z <= inputThreshold) {
+            else if (inputs.z <= -inputThreshold) {
                 currentSpeed = backwardSpeed;
             }
             else {
@@ -221,6 +239,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnGUI() {
         GUI.Label(new Rect(50, 400, 400, 200), $"Sprint duration : {sprintTimer}");
+        GUI.Label(new Rect(50, 350, 400, 200), $"CurrentSpeed : {currentSpeed}");
     }
     #endregion
 }
