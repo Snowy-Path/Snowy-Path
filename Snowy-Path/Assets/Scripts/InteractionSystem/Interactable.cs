@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// Combined with the Interactable layer, this script makes the gameobject interactable.
+/// This script makes the gameobject interactable.
 /// Provides events called from the InteractionController script.
 /// </summary>
 [DisallowMultipleComponent]
@@ -17,7 +17,20 @@ public class Interactable : MonoBehaviour {
     [SerializeField]
     [Tooltip("If false, the interaction and feedbacks doesn't occur.")]
     private bool isActive = true;
-    public bool IsActive { get => isActive; }
+    public bool IsActive {
+        get => isActive;
+        set {
+            if (isActive == value) {
+                return;
+            }
+            isActive = value;
+            if (isActive) {
+                onShowFeedback.Invoke();
+            } else {
+                onHideFeedback.Invoke();
+            }
+        }
+    }
 
 
     [Header("UnityEvents callbacks")]
@@ -34,14 +47,16 @@ public class Interactable : MonoBehaviour {
     #endregion
 
 
-    #region Interaction Methods
+    #region Interaction Methods v2
 
     /// <summary>
     /// Triggers the UnityEvent onInteract.
     /// Used when the player interact with the gameobject.
     /// </summary>
     public void Interact() {
-        onInteract.Invoke();
+        if (IsActive) {
+            onInteract.Invoke();
+        }
     }
 
     /// <summary>
@@ -50,7 +65,9 @@ public class Interactable : MonoBehaviour {
     /// Used when the player looks at the gameobject.
     /// </summary>
     public void ShowInteractionFeedback() {
-        onShowFeedback.Invoke();
+        if (IsActive) {
+            onShowFeedback.Invoke();
+        }
     }
 
     /// <summary>
@@ -58,7 +75,9 @@ public class Interactable : MonoBehaviour {
     /// Used when the player stops looking at the gameobject.
     /// </summary>
     public void HideInteractionFeedback() {
-        onHideFeedback.Invoke();
+        if (IsActive) {
+            onHideFeedback.Invoke();
+        }
     }
 
     #endregion
@@ -71,14 +90,6 @@ public class Interactable : MonoBehaviour {
     /// </summary>
     public void DestroyItself() {
         Destroy(gameObject);
-    }
-
-    /// <summary>
-    /// Change the activation state of the current interaction script.
-    /// If it was true, it is now set to false and vice-versa.
-    /// </summary>
-    public void SwitchActivation() {
-        isActive = !isActive;
     }
 
     #endregion

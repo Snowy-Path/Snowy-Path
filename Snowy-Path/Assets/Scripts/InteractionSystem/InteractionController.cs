@@ -58,29 +58,35 @@ public class InteractionController : MonoBehaviour {
 
         bool _hitSomething = Physics.SphereCast(_ray, radius, out _hitInfo, maxDistance, interactableLayer);
 
+        // If we hit an object
         if (_hitSomething) {
-            Interactable _interHit = _hitInfo.transform.GetComponent<Interactable>();
+            Interactable _interHit = _hitInfo.transform.GetComponent<Interactable>(); // Try to retrieve it's interactable component
 
             if (_interHit != null) { // We really did hit an interactable object
 
-                if (m_interactable != _interHit) {
+                if (m_interactable != _interHit) { //If previous object is different from current object
 
-                    if (m_interactable != null) {
+                    if (m_interactable != null) { // Hide previous object if it was a real object
                         m_interactable.HideInteractionFeedback();
                     }
 
+                    // Switch and show current object if it is active
                     m_interactable = _interHit;
                     m_interactable.ShowInteractionFeedback();
                 }
 
-            } else {
+            } else { // A non-interactable object was detected
+
+                // Hide previous object if it was a real object & switch to null
                 if (m_interactable != null) {
                     m_interactable.HideInteractionFeedback();
+                    m_interactable = null;
                 }
-                m_interactable = null;
             }
 
         } else if (m_interactable != null) {
+            // If nothing was hit
+            // Hide previous object if it was a real object & switch to null
             m_interactable.HideInteractionFeedback();
             m_interactable = null;
         }
@@ -89,12 +95,16 @@ public class InteractionController : MonoBehaviour {
 
     }
 
+    private bool CanInteract() {
+        return m_interactable != null && m_interactable.IsActive;
+    }
 
     /// <summary>
-    /// Check if the player pressed the interaction button and call the interact method if so.
+    /// Check if there is an available Interactable object and if it is possible to interact with it.
+    /// Is so, make the interact.
     /// </summary>
     private void CheckForInteractableInput() {
-        if (m_interactable != null) {
+        if (CanInteract()) {
             m_interactable.Interact();
         }
     }
