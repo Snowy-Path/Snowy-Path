@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Controls the interaction input and trigger interaction if it is possible
+/// Controls the interaction input and trigger interaction if it is possible.
+/// The detection depends on a layer.
 /// </summary>
 public class InteractionController : MonoBehaviour {
 
@@ -38,7 +39,7 @@ public class InteractionController : MonoBehaviour {
     #region Built In Methods
 
     /// <summary>
-    /// Called at each frame. Checks if a IInteractable asset is detected and interact with it.
+    /// Called at each frame. Checks if an Interactable asset is detected.
     /// </summary>
     void Update() {
         CheckForInteractable();
@@ -101,7 +102,7 @@ public class InteractionController : MonoBehaviour {
 
     /// <summary>
     /// Check if there is an available Interactable object and if it is possible to interact with it.
-    /// Is so, make the interact.
+    /// If so, makes the interaction.
     /// </summary>
     private void CheckForInteractableInput() {
         if (CanInteract()) {
