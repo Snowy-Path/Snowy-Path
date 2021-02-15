@@ -70,20 +70,36 @@
                     "interactions": ""
                 },
                 {
-                    "name": "SprintStart",
+                    "name": "Jump",
                     "type": "Button",
-                    "id": "6dcdb6fe-0a4d-454d-b0b6-d05b3d783684",
+                    "id": "a6665a46-997a-4d74-9519-15c8e112f7cf",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "SprintStop",
+                    "name": "Sprint",
                     "type": "Button",
-                    "id": "c537ff56-6bf1-4cb3-854b-bf61017b1975",
+                    "id": "4f99d743-b2b4-40ae-a638-3984e724c1aa",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "StartSprint",
+                    "type": "Button",
+                    "id": "2972af61-df80-421f-b2c1-e45ed53d0ead",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "StopSprint",
+                    "type": "Button",
+                    "id": "710a4dfd-14dc-4ff8-8381-e878e82fb3aa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)"
                 }
             ],
             "bindings": [
@@ -123,7 +139,7 @@
                 {
                     "name": "",
                     "id": "8928d366-cf0d-4987-915d-924fc92543d7",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -279,7 +295,7 @@
                     "id": "041bd41b-4e6d-476f-b08a-f8a7e4a9f7a7",
                     "path": "<Pointer>/delta",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=2,y=2)",
+                    "processors": "",
                     "groups": "",
                     "action": "Look",
                     "isComposite": false,
@@ -309,45 +325,56 @@
                 },
                 {
                     "name": "",
-                    "id": "98a6827a-21db-49d5-95a3-3a5e447fef12",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "Press",
+                    "id": "97bbc02b-d8c2-43a0-a2b8-e45fa37d5c6f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SprintStart",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "77749577-fa19-4c8e-86d6-c7a03b41ccfd",
-                    "path": "<Gamepad>/leftStickPress",
-                    "interactions": "Press",
+                    "id": "a52b5d2b-9631-4955-adc0-161542a1af39",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SprintStart",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "7054152e-bb60-434b-b1f7-dcda9408fabf",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "Press(behavior=1)",
+                    "id": "d20e5b71-75a9-418a-9382-beabf9957e77",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SprintStop",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "b0f8b763-f453-458e-adf7-4e3d3c1337ae",
-                    "path": "<Gamepad>/leftStickPress",
-                    "interactions": "Press(behavior=1)",
+                    "id": "0852db50-0363-4156-bcf1-06ece1894363",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SprintStop",
+                    "action": "StartSprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "41c2ed87-f36f-4224-bf76-9b2a68465cad",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StopSprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
