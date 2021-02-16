@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Camera")]
     [SerializeField] float lookSpeed = 2.0f;
-    [SerializeField] float lookXLimit = 45.0f;
+    [SerializeField] float lookYLimit = 45.0f;
 
     //Status
     private CharacterController controller;
@@ -224,7 +224,7 @@ public class PlayerController : MonoBehaviour {
     private void Look() {
         if (canMove) {
             xRotation += -lookPos.y * lookSpeed;
-            xRotation = Mathf.Clamp(xRotation, -lookXLimit, lookXLimit);
+            xRotation = Mathf.Clamp(xRotation, -lookYLimit, lookYLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
             transform.rotation *= Quaternion.Euler(0, lookPos.x * lookSpeed, 0);
         }
