@@ -22,14 +22,14 @@ public class RayCastGun : Tool
     private Camera fpsCam; //Reference to camera                                                
     private WaitForSeconds shotDuration = new WaitForSeconds(0.07f);// Determines how long time line will remain visible    
     private LineRenderer laserLine; //Visual effect                                        
-    private float nextFire;
+    private float nextFire; //time between shooting
     private float timeBetweenShooting = 0.07f;
-    private Vector3 dispersion;
-    private int projectileShot;
+    private Vector3 forwardVector;
+    public int projectileShot;
     private int ammo;
     private int currentMagazineCapacity = 0;
     
-    public int maxAmmo; 
+    public int maxAmmo; //ammo carried by the Player
     public int maxMagazineCapacity;
     public int projectilePerShot;
     private bool reloading, readyToShoot;
@@ -58,6 +58,7 @@ public class RayCastGun : Tool
             //Start shooting method
             projectileShot = projectilePerShot;
             MainInteraction();
+            //counting ammo
             ammo--;
         }
         //If the Player press reload button
@@ -71,7 +72,10 @@ public class RayCastGun : Tool
 
     }
 
-
+    /// <summary>
+    /// Visual effect of a laser line
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ShotEffect()
         {
             //Enable laserline effect during shotDuration
@@ -80,6 +84,9 @@ public class RayCastGun : Tool
             laserLine.enabled = false;
         }
 
+    /// <summary>
+    /// Shooting method using Raycast, invoked as many times as there are projectiles per shot
+    /// </summary>
     private new void MainInteraction()
     {
 
@@ -100,21 +107,25 @@ public class RayCastGun : Tool
         //Spread effective if several projectiles
         if (projectileShot > 1)
         {
-            float x = Random.Range(-projectileDispersion, projectileDispersion);
-            float y = Random.Range(-projectileDispersion, projectileDispersion);
-            dispersion = new Vector3(x, y, 0);
 
-
+            //calculate random angle within unity circle for dispersion
+            forwardVector = Vector3.forward;
+            float deviation = Random.Range(0f, projectileDispersion);
+            float angle = Random.Range(0f, 360f);
+            forwardVector = Quaternion.AngleAxis(deviation, Vector3.up) * forwardVector;
+            forwardVector = Quaternion.AngleAxis(angle, Vector3.forward) * forwardVector;
+            forwardVector = fpsCam.transform.rotation * forwardVector;
         }
+
         else
         {
-            dispersion = new Vector3(0,0,0);
+            forwardVector = fpsCam.transform.forward;
 
         }
 
 
         //If the ray hit something
-        if (Physics.Raycast(rayOrigin, fpsCam.transform.forward + dispersion , out hit, range))
+        if (Physics.Raycast(rayOrigin, forwardVector, out hit, range))
         {
         //Set the corresponding endline point
             laserLine.SetPosition(1, hit.point );
@@ -125,17 +136,21 @@ public class RayCastGun : Tool
             laserLine.SetPosition(1, rayOrigin + ((fpsCam.transform.forward) * range));
         }
     
-        //Counting ammo
+        //Counting projectiles
         projectileShot--;
-        
+        //Set player reaady to shot during time between shooting
         Invoke("ResetShot", timeBetweenShooting);
-    
+        
+        //Shoot again if multiple projectiles
         if (projectileShot > 1 && ammo > 0)
             Invoke("MainInteraction", groupfire);
-            
+        //Update currentmagazinecapacity
         currentMagazineCapacity = maxMagazineCapacity - ammo;
     }
 
+    /// <summary>
+    /// Reload weapon if enough Ammo in inventory
+    /// </summary>
     private new void SecondaryInteraction()
     {
         if (maxAmmo >= 0) 
@@ -148,12 +163,17 @@ public class RayCastGun : Tool
 
     }
 
-
+    /// <summary>
+    /// Set Player ready to shot again
+    /// </summary>
     private void ResetShot()
     {
         readyToShoot = true;
     }
 
+    /// <summary>
+    /// Reload the weapon at max magazine capacity if enough max ammo
+    /// </summary>
     private void ReloadFinished()
     {
         //Calculate cuurentMagazineCapacity
@@ -191,11 +211,15 @@ public class RayCastGun : Tool
         
 
     }
-    
-    //HUD for Ammo Counting
-    public void UpdateAmmoText(float currentAmmo, float maxAmmo)
+
+    /// <summary>
+    /// Update the HUD Ammo Counter
+    /// </summary>
+    /// <param name="currentAmmo"></param>
+    /// <param name="maxmagazineCapacity"></param>
+    public void UpdateAmmoText(float currentAmmo, float maxmagazineCapacity)
     {
-        AmmoText.text = currentAmmo + "/" + maxAmmo;
+        AmmoText.text = currentAmmo + "/" + maxmagazineCapacity;
     }
 
 }
