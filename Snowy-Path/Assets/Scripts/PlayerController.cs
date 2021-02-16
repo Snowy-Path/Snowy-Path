@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour {
+
     [Header("Set up")]
     [SerializeField] Camera playerCamera;
     [SerializeField] Transform groundChecker;
@@ -21,15 +22,17 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Sprint")]
     [SerializeField] float maxSprintDuration = 6f;
+    [Tooltip("Recovery rate factor -> recovery = time * sprintRoveryRate")]
     [SerializeField] float sprintRecoveryRate = 0.5f;
 
     [Header("Jump")]
-    [SerializeField] float jumpForce = 10f;
+    [SerializeField] float jumpHeight = 1.5f;
     [SerializeField] float airSpeedX = 3f;
     [SerializeField] float airSpeedZ = 1f;
 
     [Header("Camera")]
     [SerializeField] float lookSpeed = 2.0f;
+    [Tooltip("Look limit angle up and down")]
     [SerializeField] float lookXLimit = 45.0f;
 
     //Status
@@ -52,7 +55,7 @@ public class PlayerController : MonoBehaviour {
 
     //Look
     private Vector2 lookPos = Vector2.zero;
-    private float xRotation = 0f;
+    private float yRotation = 0f;
 
     //Parameters
     private const float inputThreshold = 0.2f;
@@ -233,7 +236,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Jump() {
         if (isGrounded) {
-            yVelocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+            yVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
     }
 
@@ -247,9 +250,9 @@ public class PlayerController : MonoBehaviour {
 
     private void Look() {
         if (canMove) {
-            xRotation += -lookPos.y * lookSpeed;
-            xRotation = Mathf.Clamp(xRotation, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+            yRotation += -lookPos.y * lookSpeed;
+            yRotation = Mathf.Clamp(yRotation, -lookXLimit, lookXLimit);
+            playerCamera.transform.localRotation = Quaternion.Euler(yRotation, 0, 0);
             transform.rotation *= Quaternion.Euler(0, lookPos.x * lookSpeed, 0);
         }
     }
