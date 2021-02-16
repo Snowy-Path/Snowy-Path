@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JDPistolTest : MonoBehaviour
+public class JDCompassTest : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -17,6 +17,6 @@ public class JDPistolTest : MonoBehaviour
     }
 
     public void Use() {
-        Debug.Log("PAN PAN !");
+        Debug.Log("Youre here !");
     }
 }

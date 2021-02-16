@@ -6,23 +6,27 @@ using UnityEngine.InputSystem;
 public class HandController : MonoBehaviour {
 
     private HandTool[] tools;
-    private int currentToolIndex;
+    private int currentToolIndex = -1;
 
     // Start is called before the first frame update
     void Start() {
         tools = GetComponentsInChildren<HandTool>();
+        SwitchTool(1);
     }
 
     public void OnUseTool(InputAction.CallbackContext context) {
-        tools[currentToolIndex].UseTool();
+        if (context.phase == InputActionPhase.Performed)
+            tools[currentToolIndex].UseTool();
     }
 
     public void OnPreviousTool(InputAction.CallbackContext context) {
-        SwitchTool(-1);
+        if (context.phase == InputActionPhase.Performed)
+            SwitchTool(-1);
     }
 
     public void OnNextTool(InputAction.CallbackContext context) {
-        SwitchTool(1);
+        if (context.phase == InputActionPhase.Performed)
+            SwitchTool(1);
     }
 
     private void SwitchTool(int indexShift) {

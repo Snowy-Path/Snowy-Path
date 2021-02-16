@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TorchTest : MonoBehaviour
+public class JDTorchTest : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public GameObject fireFX;
+
+    public void ToggleFire() {
+        fireFX.SetActive(!fireFX.activeSelf);
     }
 }
