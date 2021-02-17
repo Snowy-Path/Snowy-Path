@@ -19,7 +19,7 @@ public class HandController : MonoBehaviour {
     #region INPUT SYSTEM EVENTS
     public void OnUseTool(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed)
-            tools[currentToolIndex].PrimaryUse();
+            UseCurrentTool();
     }
 
     public void OnPreviousTool(InputAction.CallbackContext context) {
@@ -49,7 +49,15 @@ public class HandController : MonoBehaviour {
     }
     #endregion
 
+    private void UseCurrentTool() {
+        if (tools.Length > 0)
+            tools[currentToolIndex].PrimaryUse();
+    }
+
     private void SwitchTool(int indexShift) {
+        if (tools.Length == 0)
+            return;
+
         currentToolIndex += indexShift;
 
         if (currentToolIndex >= tools.Length) {
