@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c29b2e8d01d99734d82959c1f5fc4334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 6962937896743089283}
   playerControl: {fileID: 0}
   interactControl: {fileID: 0}
 --- !u!114 &6962937896743089283
@@ -418,6 +417,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8194cdd8-b1ee-4455-bbf5-9d88462918fa
     m_ActionName: Stamp/Pause[/XInputControllerWindows/start,/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6962937896743089280}
+        m_MethodName: OnResume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ac247f09-c9b5-4a1e-af8d-9ea58cd88086
+    m_ActionName: UI/Resume[/Keyboard/t,/XInputControllerWindows/start]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

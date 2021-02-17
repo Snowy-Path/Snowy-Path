@@ -42,6 +42,7 @@ public class InputDebug : MonoBehaviour {
     /// Used ONLY in this script.
     /// </summary>
     private enum ActionMap {
+        UI,
         Gameplay,
         Map,
         Stamp
@@ -51,14 +52,21 @@ public class InputDebug : MonoBehaviour {
         inputType = newMap;
 
         switch (inputType) {
+            case ActionMap.UI:
+                playerInput.SwitchCurrentActionMap("UI");
+                playerControl.GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
+                break;
+
             case ActionMap.Gameplay:
                 playerInput.SwitchCurrentActionMap("Gameplay");
                 playerControl.GetComponent<PlayerInput>().SwitchCurrentActionMap("Gameplay");
                 break;
+
             case ActionMap.Map:
                 playerInput.SwitchCurrentActionMap("Map");
                 playerControl.GetComponent<PlayerInput>().SwitchCurrentActionMap("Map");
                 break;
+
             case ActionMap.Stamp:
                 playerInput.SwitchCurrentActionMap("Stamp");
                 playerControl.GetComponent<PlayerInput>().SwitchCurrentActionMap("Stamp");
@@ -344,9 +352,30 @@ public class InputDebug : MonoBehaviour {
     public void OnPause(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnPause");
+            Time.timeScale = 0f;
+            ChangeActionMap(ActionMap.UI);
             //Insert action here
         }
     }
+
+
+
+    #region UI
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
+    public void OnResume(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            Debug.Log($"OnResume");
+            Time.timeScale = 1f;
+            ChangeActionMap(ActionMap.Gameplay);
+            //Insert action here
+        }
+    }
+
+    #endregion
 
 
     #region GUI
@@ -358,12 +387,20 @@ public class InputDebug : MonoBehaviour {
     private void OnGUI() {
 
         switch (inputType) {
+
+            case ActionMap.UI:
+                GUI.Box(new Rect(10, 10, 200, 70), "UI");
+
+                GUI.Label(new Rect(20, 40, 180, 30), $"Nothing to show ...");
+                break;
+
             case ActionMap.Gameplay:
                 GUI.Box(new Rect(10, 10, 200, 370), "Gameplay");
 
                 GUI.Label(new Rect(20, 40, 180, 30), $"Move : {move}");
                 GUI.Label(new Rect(20, 70, 180, 30), $"Look : {look}");
                 GUI.Label(new Rect(20, 100, 180, 30), $"Tool : {tool}");
+
                 GUI.Label(new Rect(20, 130, 180, 30), $"CanInteract : {interactControl.CanInteract()}");
 
                 GUI.Label(new Rect(20, 160, 180, 30), $"Sprint duration : {playerControl.SprintTimer}");
