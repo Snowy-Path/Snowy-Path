@@ -3,16 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
+using System;
 
 public class HandController : MonoBehaviour {
-
-    enum HandPosition {
-        None,
-        Compass,
-        Pistol,
-        Scope,
-        Torch
-    }
 
     private IHandTool[] tools;
     private int currentToolIndex = -1;
@@ -38,6 +31,22 @@ public class HandController : MonoBehaviour {
         if (context.phase == InputActionPhase.Performed)
             SwitchTool(1);
     }
+
+    public void OnEquipMap(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            EquipTool(typeof(JDCompassTest));
+        }
+    }
+
+    public void OnEquipGun(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed)
+            EquipTool(typeof(JDPistolTest));
+    }
+
+    public void OnEquipScope(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed)
+            EquipTool(typeof(JDScopeTest));
+    }
     #endregion
 
     private void SwitchTool(int indexShift) {
@@ -58,6 +67,30 @@ public class HandController : MonoBehaviour {
         foreach (IHandTool tool in tools) {
             tool.ToggleDisplay(false);
         }
+    }
+
+    private bool EquipTool(Type type) {
+        if (TryGetToolIndex(type, out int index)) {
+            currentToolIndex = index;
+            HideTools();
+            tools[currentToolIndex].ToggleDisplay(true);
+            return true;
+        }
+        else
+            return false;
+    }
+
+    private bool TryGetToolIndex(Type type, out int index) {
+
+        for (int i = 0; i < tools.Length; i++) {
+            if (tools[i].GetType() == type) {
+                index = i;
+                return true;
+            }
+        }
+
+        index = -1;
+        return false;
     }
 
 }

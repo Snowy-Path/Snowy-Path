@@ -8,3 +8,11 @@ public interface IHandTool {
     void ToggleDisplay(bool display);
 
 }
+
+public enum EToolType {
+    None,
+    Compass,
+    Pistol,
+    Scope,
+    Torch
+}
