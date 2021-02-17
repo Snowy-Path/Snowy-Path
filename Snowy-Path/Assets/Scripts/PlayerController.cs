@@ -38,20 +38,36 @@ public class PlayerController : MonoBehaviour {
     //Status
     private CharacterController controller;
     private bool canMove = true;
+
     private bool isGrounded = true;
+    public bool IsGrounded { get => isGrounded; }
+
     private bool isRunning = false;
+    public bool IsRunning { get => isRunning; }
 
     //Sprint
     private float sprintTimer = 0f;
+    public float SprintTimer { get => sprintTimer; }
+
     private float sprintRecoveryTimer = 0f;
+    public float SprintRecoveryTimer { get => sprintRecoveryTimer; }
+
     private const float sprintTimeToRegen = 0f;
 
     //Velocity
     private float currentSpeed = 0f;
+    public float CurrentSpeed { get => currentSpeed; }
+
     private Vector3 inputs = Vector3.zero;
+
     private Vector3 xzVelocity = Vector3.zero;
+    public Vector3 XZVelocity { get => xzVelocity; }
+
     private Vector3 yVelocity = Vector3.zero;
+    public Vector3 YVelocity { get => yVelocity; }
+
     private Vector3 airVelocity = Vector3.zero;
+    public Vector3 AirVelocity { get => airVelocity; }
 
     //Look
     private Vector2 lookPos = Vector2.zero;
@@ -181,6 +197,7 @@ public class PlayerController : MonoBehaviour {
     #region PUBLIC METHODS
     //TODO : Replace by Stat ?
     private float speedFactor = 1f;
+
     public void AlterateSpeed(float factor) {
         speedFactor = factor;
     }
@@ -264,10 +281,10 @@ public class PlayerController : MonoBehaviour {
         Gizmos.DrawWireSphere(groundChecker.position, groundCheckRadius);
     }
 
-    private void OnGUI() {
-        GUI.Label(new Rect(50, 400, 400, 200), $"Sprint duration : {sprintTimer}");
-        GUI.Label(new Rect(50, 375, 400, 200), $"CurrentSpeed : {currentSpeed}");
-        GUI.Label(new Rect(50, 350, 400, 200), $"Velocity : {xzVelocity}");
-    }
+    //private void OnGUI() {
+    //    GUI.Label(new Rect(50, 400, 400, 200), $"Sprint duration : {sprintTimer}");
+    //    GUI.Label(new Rect(50, 375, 400, 200), $"CurrentSpeed : {currentSpeed}");
+    //    GUI.Label(new Rect(50, 350, 400, 200), $"Velocity : {xzVelocity}");
+    //}
     #endregion
 }

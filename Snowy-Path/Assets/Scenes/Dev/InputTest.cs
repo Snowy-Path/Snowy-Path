@@ -6,12 +6,11 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class InputTest : MonoBehaviour {
 
-    PlayerInput playerInput;
+    public PlayerInput playerInput;
+    public PlayerController playerControl;
+
     ActionMap inputType = ActionMap.Gameplay;
 
-    void Start() {
-        playerInput = GetComponent<PlayerInput>();
-    }
 
     enum Tool {
         Map,
@@ -32,12 +31,15 @@ public class InputTest : MonoBehaviour {
         switch (inputType) {
             case ActionMap.Gameplay:
                 playerInput.SwitchCurrentActionMap("Gameplay");
+                playerControl.GetComponent<PlayerInput>().SwitchCurrentActionMap("Gameplay");
                 break;
             case ActionMap.Map:
                 playerInput.SwitchCurrentActionMap("Map");
+                playerControl.GetComponent<PlayerInput>().SwitchCurrentActionMap("Map");
                 break;
             case ActionMap.Stamp:
                 playerInput.SwitchCurrentActionMap("Stamp");
+                playerControl.GetComponent<PlayerInput>().SwitchCurrentActionMap("Stamp");
                 break;
         }
     }
@@ -246,26 +248,33 @@ public class InputTest : MonoBehaviour {
 
         switch (inputType) {
             case ActionMap.Gameplay:
-                GUI.Box(new Rect(10, 10, 160, 220), "Gameplay");
+                GUI.Box(new Rect(10, 10, 200, 340), "Gameplay");
 
-                GUI.Label(new Rect(20, 40, 140, 30), $"Move : {move}");
-                GUI.Label(new Rect(20, 70, 140, 30), $"Look : {look}");
-                GUI.Label(new Rect(20, 100, 140, 30), $"Tool : {tool}");
+                GUI.Label(new Rect(20, 40, 180, 30), $"Move : {move}");
+                GUI.Label(new Rect(20, 70, 180, 30), $"Look : {look}");
+                GUI.Label(new Rect(20, 100, 180, 30), $"Tool : {tool}");
 
-                GUI.Label(new Rect(20, 130, 140, 30), $"Running : {running}");
-                GUI.Label(new Rect(20, 160, 140, 30), $"Jumping : {jumping}");
-                GUI.Label(new Rect(20, 190, 140, 30), $"Interacting : {interacting}");
+                GUI.Label(new Rect(20, 130, 180, 30), $"Sprint duration : {playerControl.SprintTimer}");
+                GUI.Label(new Rect(20, 160, 180, 30), $"Sprint Reco T : {playerControl.SprintRecoveryTimer}");
+                GUI.Label(new Rect(20, 190, 180, 30), $"CurrentSpeed : {playerControl.CurrentSpeed}");
+                GUI.Label(new Rect(20, 220, 180, 30), $"G Velocity : {playerControl.XZVelocity + playerControl.YVelocity}");
+                GUI.Label(new Rect(20, 250, 180, 30), $"Air Velocity : {playerControl.AirVelocity}");
+
+                GUI.Label(new Rect(20, 280, 180, 30), $"Running : {playerControl.IsRunning}");
+                GUI.Label(new Rect(20, 310, 180, 30), $"Grounded : {playerControl.IsGrounded}");
                 break;
 
             case ActionMap.Map:
-                GUI.Box(new Rect(10, 10, 160, 100), "Map");
+                GUI.Box(new Rect(10, 10, 200, 100), "Map");
 
-                GUI.Label(new Rect(20, 40, 140, 30), $"MapMove : {mapMove}");
-                GUI.Label(new Rect(20, 70, 140, 30), $"MapZoom : {mapZoom}");
+                GUI.Label(new Rect(20, 40, 180, 30), $"MapMove : {mapMove}");
+                GUI.Label(new Rect(20, 70, 180, 30), $"MapZoom : {mapZoom}");
                 break;
 
             case ActionMap.Stamp:
-                GUI.Box(new Rect(10, 10, 160, 220), "Stamp");
+                GUI.Box(new Rect(10, 10, 200, 70), "Stamp");
+
+                GUI.Label(new Rect(20, 40, 180, 30), $"Nothing to show ...");
                 break;
         }
 
