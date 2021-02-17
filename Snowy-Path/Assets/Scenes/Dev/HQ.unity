@@ -514,6 +514,7 @@ GameObject:
   - component: {fileID: 1965735085}
   - component: {fileID: 1965735087}
   - component: {fileID: 1965735083}
+  - component: {fileID: 1965735084}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -633,6 +634,20 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &1965735084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965735081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62183bcf65bc26446bd6bf21ddb67bf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AmmoText: {fileID: 264226062}
+  gun: {fileID: 1965735087}
 --- !u!23 &1965735085
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -705,7 +720,8 @@ MonoBehaviour:
   reloadingTime: 1.5
   projectileDispersion: 0.2
   gunEnd: {fileID: 883249900}
-  AmmoText: {fileID: 264226062}
+  projectileShot: 0
+  ammo: 0
   maxAmmo: 50
   maxMagazineCapacity: 30
   projectilePerShot: 10

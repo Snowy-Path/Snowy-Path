@@ -7,18 +7,14 @@ public class RayCastGun : Tool
 {
 
     public float damageDealt = 1;
-    [SerializeField]
     public float fireRate = 0.25f;
-    [SerializeField]
     public float groupfire = 0.001f;
     public float range = 50f;                                        
     public float reloadingTime;
     public float projectileDispersion;
     
 
-    public Transform gunEnd; //Reference to the gun end object, marking the muzzle location of the gun
-    public Text AmmoText; //For HUD ammo count
-    
+    public Transform gunEnd; //Reference to the gun end object, marking the muzzle location of the gun   
     private Camera fpsCam; //Reference to camera                                                
     private WaitForSeconds shotDuration = new WaitForSeconds(0.07f);// Determines how long time line will remain visible    
     private LineRenderer laserLine; //Visual effect                                        
@@ -26,7 +22,7 @@ public class RayCastGun : Tool
     private float timeBetweenShooting = 0.07f;
     private Vector3 forwardVector;
     public int projectileShot;
-    private int ammo;
+    public int ammo;
     private int currentMagazineCapacity = 0;
     
     public int maxAmmo; //ammo carried by the Player
@@ -67,8 +63,7 @@ public class RayCastGun : Tool
             //Start reloading method
             SecondaryInteraction();
         }
-        //Update HUD
-        UpdateAmmoText(ammo, maxMagazineCapacity);
+
 
     }
 
@@ -212,14 +207,6 @@ public class RayCastGun : Tool
 
     }
 
-    /// <summary>
-    /// Update the HUD Ammo Counter
-    /// </summary>
-    /// <param name="currentAmmo"></param>
-    /// <param name="maxmagazineCapacity"></param>
-    public void UpdateAmmoText(float currentAmmo, float maxmagazineCapacity)
-    {
-        AmmoText.text = currentAmmo + "/" + maxmagazineCapacity;
-    }
+
 
 }
