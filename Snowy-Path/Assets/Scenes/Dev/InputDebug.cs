@@ -363,7 +363,7 @@ public class InputDebug : MonoBehaviour {
     #region UI
 
     /// <summary>
-    /// 
+    /// Resume action callback.
     /// </summary>
     /// <param name="context">Contains input values.</param>
     public void OnResume(InputAction.CallbackContext context) {
