@@ -15,18 +15,23 @@ public class Telescope : MonoBehaviour
     private bool isScoped;
     private void Start()
     {
-        scopeCamera.SetActive(true);
+        scopeOverlay.SetActive(true);
         scopeCamera.SetActive(false);
+        scopeOverlay.SetActive(false);
+        scopeCamera.SetActive(true);
+        //MainCamera.fieldOfView = normalFOV;
+
     }
+
     void Update()
     {
         Keyboard keyboard = Keyboard.current;
-        if (keyboard.eKey.wasPressedThisFrame)
+        if (keyboard.hKey.wasPressedThisFrame)
         {
             MainInteraction();
         }
         //If in scope mode, change FOV
-        if (keyboard.fKey.wasPressedThisFrame && isScoped)
+        if (keyboard.jKey.wasPressedThisFrame && isScoped)
         {
             SecondaryInteraction();
         }
@@ -85,5 +90,6 @@ public class Telescope : MonoBehaviour
         MainCamera.fieldOfView = magnification1;
 
     }
-
 }
+
+
