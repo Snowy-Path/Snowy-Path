@@ -2,21 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JDCompassTest : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+public class JDCompassTest : MonoBehaviour, IHandTool {
+
+    public void PrimaryUse() {
+        Locate();
+    }
+    public void ToggleDisplay(bool display) {
+        gameObject.SetActive(display);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void Use() {
+    private void Locate() {
         Debug.Log("Youre here !");
     }
+
+    
 }

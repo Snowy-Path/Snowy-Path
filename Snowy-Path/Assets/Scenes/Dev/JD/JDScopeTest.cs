@@ -2,21 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JDScopeTest : MonoBehaviour
+public class JDScopeTest : MonoBehaviour, IHandTool
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public void PrimaryUse() {
+        Look();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void ToggleDisplay(bool display) {
+        gameObject.SetActive(display);
     }
 
-    public void Use() {
+    private void Look() {
         Debug.Log("Looking far away !");
     }
 }

@@ -2,21 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class HandController : MonoBehaviour {
 
-    private HandTool[] tools;
+    enum HandPosition {
+        None,
+        Compass,
+        Pistol,
+        Scope,
+        Torch
+    }
+
+    private IHandTool[] tools;
     private int currentToolIndex = -1;
 
     // Start is called before the first frame update
     void Start() {
-        tools = GetComponentsInChildren<HandTool>();
+        tools = GetComponentsInChildren<MonoBehaviour>().OfType<IHandTool>().ToArray();
         SwitchTool(1);
     }
 
+    #region INPUT SYSTEM EVENTS
     public void OnUseTool(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed)
-            tools[currentToolIndex].UseTool();
+            tools[currentToolIndex].PrimaryUse();
     }
 
     public void OnPreviousTool(InputAction.CallbackContext context) {
@@ -28,6 +38,7 @@ public class HandController : MonoBehaviour {
         if (context.phase == InputActionPhase.Performed)
             SwitchTool(1);
     }
+    #endregion
 
     private void SwitchTool(int indexShift) {
         currentToolIndex += indexShift;
@@ -40,12 +51,12 @@ public class HandController : MonoBehaviour {
         }
 
         HideTools();
-        tools[currentToolIndex].gameObject.SetActive(true);
+        tools[currentToolIndex].ToggleDisplay(true);
     }
 
     private void HideTools() {
-        foreach (HandTool tool in tools) {
-            tool.gameObject.SetActive(false);
+        foreach (IHandTool tool in tools) {
+            tool.ToggleDisplay(false);
         }
     }
 
