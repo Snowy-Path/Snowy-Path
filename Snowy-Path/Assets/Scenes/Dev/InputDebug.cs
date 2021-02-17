@@ -3,23 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Used in the Prefab InputDebug.
+/// Bind every event of every Action Map in the InputAction object.
+/// Either prints on console/debug output OR show on-screen values if needed.
+/// Linked to the PlayerController and the InteractionController to retrieves more value and act as a debug overlay for them.
+/// </summary>
 [RequireComponent(typeof(PlayerInput))]
-public class InputTest : MonoBehaviour {
+public class InputDebug : MonoBehaviour {
 
-    public PlayerInput playerInput;
+    #region Common Variables
+    private PlayerInput playerInput;
+    [Tooltip("The PlayerController script of the player Prefab.")]
     public PlayerController playerControl;
+    [Tooltip("The InteractionController script of the player Prefab.")]
+    public InteractionController interactControl;
+    #endregion
 
-    ActionMap inputType = ActionMap.Gameplay;
+    private ActionMap inputType = ActionMap.Gameplay;
 
+    void Awake() {
+        playerInput = GetComponent<PlayerInput>();
+    }
 
-    enum Tool {
+    /// <summary>
+    /// Simple enum to tools.
+    /// Used ONLY in this script.
+    /// </summary>
+    private enum Tool {
         Map,
         Telescope,
         Gun,
         COUNT
     }
 
-    enum ActionMap {
+    /// <summary>
+    /// Simple enum to switch ActionMap.
+    /// Used ONLY in this script.
+    /// </summary>
+    private enum ActionMap {
         Gameplay,
         Map,
         Stamp
@@ -47,6 +69,7 @@ public class InputTest : MonoBehaviour {
 
     #region Gameplay
 
+    // Gameplay Variables
     private Vector2 move;
     private Vector2 look;
     private bool running = false;
@@ -54,19 +77,30 @@ public class InputTest : MonoBehaviour {
     private bool interacting = false; //Never reset in this test
     private Tool tool = Tool.Map;
 
-
+    /// <summary>
+    /// Move action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnMove(InputAction.CallbackContext context) {
         Debug.Log($"OnMove");
         move = context.ReadValue<Vector2>();
         //Insert action here
     }
 
+    /// <summary>
+    /// Look action callback.
+    /// </summary>
+    /// <param name="context"></param>
     public void OnLook(InputAction.CallbackContext context) {
         Debug.Log($"OnLook");
         look = context.ReadValue<Vector2>();
         //Insert action here
     }
 
+    /// <summary>
+    /// Interact action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnInteract(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnInteract");
@@ -75,6 +109,10 @@ public class InputTest : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// SwitchTool action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnSwitchTools(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnSwitchTools");
@@ -89,6 +127,10 @@ public class InputTest : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// LeftHandMain action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnLeftHandMain(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnLeftHandMain");
@@ -101,6 +143,10 @@ public class InputTest : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// LeftHandSecondary action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnLeftHandSecondary(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnLeftHandSecondary");
@@ -108,6 +154,10 @@ public class InputTest : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// RightHandMain action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnRightHandMain(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnRightHandMain");
@@ -115,6 +165,10 @@ public class InputTest : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// RightHandSecondary action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnRightHandSecondary(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnRightHandSecondary");
@@ -122,6 +176,10 @@ public class InputTest : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Jump action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnJump(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnJump");
@@ -130,6 +188,10 @@ public class InputTest : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// SprintStart action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnStartRun(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnStartRun");
@@ -138,6 +200,10 @@ public class InputTest : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// SprintStart action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnStopRun(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnStopRun");
@@ -146,6 +212,10 @@ public class InputTest : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// SelectMap action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnSelectMap(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnSelectMap");
@@ -154,6 +224,10 @@ public class InputTest : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// SelectTelescope action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnSelectTelescope(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnSelectTelescope");
@@ -162,6 +236,10 @@ public class InputTest : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// SelectGun action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnSelectGun(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnSelectGun");
@@ -176,9 +254,14 @@ public class InputTest : MonoBehaviour {
 
     #region Map
 
+    // Map movement variables
     private Vector2 mapMove;
     private float mapZoom;
 
+    /// <summary>
+    /// BackToGame action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnBackToGame(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnBackToGame");
@@ -187,6 +270,10 @@ public class InputTest : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// ApplyStamp action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnApplyStamp(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnApplyStamp");
@@ -195,12 +282,20 @@ public class InputTest : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// MapMove action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnMapMove(InputAction.CallbackContext context) {
         Debug.Log($"OnMapMove");
         mapMove = context.ReadValue<Vector2>();
         //Insert action here
     }
 
+    /// <summary>
+    /// MapZoom action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnMapZoom(InputAction.CallbackContext context) {
         Debug.Log($"OnMapZoom");
         mapZoom = context.ReadValue<float>();
@@ -214,6 +309,10 @@ public class InputTest : MonoBehaviour {
 
     #region Stamp
 
+    /// <summary>
+    /// DrawValidate action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnDrawValidate(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnDrawValidate");
@@ -222,6 +321,10 @@ public class InputTest : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Erase action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnErase(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnErase");
@@ -233,6 +336,11 @@ public class InputTest : MonoBehaviour {
     #endregion
 
 
+    /// <summary>
+    /// Pause action callback.
+    /// Must be bind to every Pause actions.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
     public void OnPause(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnPause");
@@ -243,25 +351,29 @@ public class InputTest : MonoBehaviour {
 
     #region GUI
 
+    /// <summary>
+    /// On-screen GUI for debug purposes.
+    /// Depending on the ActionMap currently bind, it displays corresponding informations.
+    /// </summary>
     private void OnGUI() {
-
 
         switch (inputType) {
             case ActionMap.Gameplay:
-                GUI.Box(new Rect(10, 10, 200, 340), "Gameplay");
+                GUI.Box(new Rect(10, 10, 200, 370), "Gameplay");
 
                 GUI.Label(new Rect(20, 40, 180, 30), $"Move : {move}");
                 GUI.Label(new Rect(20, 70, 180, 30), $"Look : {look}");
                 GUI.Label(new Rect(20, 100, 180, 30), $"Tool : {tool}");
+                GUI.Label(new Rect(20, 130, 180, 30), $"CanInteract : {interactControl.CanInteract()}");
 
-                GUI.Label(new Rect(20, 130, 180, 30), $"Sprint duration : {playerControl.SprintTimer}");
-                GUI.Label(new Rect(20, 160, 180, 30), $"Sprint Reco T : {playerControl.SprintRecoveryTimer}");
-                GUI.Label(new Rect(20, 190, 180, 30), $"CurrentSpeed : {playerControl.CurrentSpeed}");
-                GUI.Label(new Rect(20, 220, 180, 30), $"G Velocity : {playerControl.XZVelocity + playerControl.YVelocity}");
-                GUI.Label(new Rect(20, 250, 180, 30), $"Air Velocity : {playerControl.AirVelocity}");
+                GUI.Label(new Rect(20, 160, 180, 30), $"Sprint duration : {playerControl.SprintTimer}");
+                GUI.Label(new Rect(20, 190, 180, 30), $"Sprint Reco T : {playerControl.SprintRecoveryTimer}");
+                GUI.Label(new Rect(20, 220, 180, 30), $"CurrentSpeed : {playerControl.CurrentSpeed}");
+                GUI.Label(new Rect(20, 250, 180, 30), $"G Velocity : {playerControl.XZVelocity + playerControl.YVelocity}");
+                GUI.Label(new Rect(20, 280, 180, 30), $"Air Velocity : {playerControl.AirVelocity}");
 
-                GUI.Label(new Rect(20, 280, 180, 30), $"Running : {playerControl.IsRunning}");
-                GUI.Label(new Rect(20, 310, 180, 30), $"Grounded : {playerControl.IsGrounded}");
+                GUI.Label(new Rect(20, 310, 180, 30), $"Running : {playerControl.IsRunning}");
+                GUI.Label(new Rect(20, 340, 180, 30), $"Grounded : {playerControl.IsGrounded}");
                 break;
 
             case ActionMap.Map:
