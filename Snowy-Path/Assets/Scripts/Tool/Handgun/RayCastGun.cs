@@ -51,11 +51,7 @@ public class RayCastGun : Tool
         //If the Player press fire button, isn't shooting or reloading and have ammo left
         if (keyboard.eKey.wasPressedThisFrame && Time.time > nextFire && !reloading && ammo > 0 && readyToShoot)
         {
-            //Start shooting method
-            projectileShot = projectilePerShot;
             MainInteraction();
-            //counting ammo
-            ammo--;
         }
         //If the Player press reload button
         if (keyboard.fKey.wasPressedThisFrame && maxAmmo>0)
@@ -79,10 +75,12 @@ public class RayCastGun : Tool
             laserLine.enabled = false;
         }
 
+
+
     /// <summary>
     /// Shooting method using Raycast, invoked as many times as there are projectiles per shot
     /// </summary>
-    private new void MainInteraction()
+    private void Shot()
     {
 
         readyToShoot = false;
@@ -138,7 +136,7 @@ public class RayCastGun : Tool
         
         //Shoot again if multiple projectiles
         if (projectileShot > 1 && ammo > 0)
-            Invoke("MainInteraction", groupfire);
+            Invoke("Shot", groupfire);
         //Update currentmagazinecapacity
         currentMagazineCapacity = maxMagazineCapacity - ammo;
     }
@@ -146,6 +144,14 @@ public class RayCastGun : Tool
     /// <summary>
     /// Reload weapon if enough Ammo in inventory
     /// </summary>
+    /// 
+
+    private new void MainInteraction()
+    {
+        projectileShot = projectilePerShot;
+        Shot();
+        ammo--;
+    }
     private new void SecondaryInteraction()
     {
         if (maxAmmo >= 0) 
