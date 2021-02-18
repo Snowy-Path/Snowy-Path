@@ -11,16 +11,23 @@ public class SphereTest : MonoBehaviour
     /// Show the outline feedback from the shader.
     /// </summary>
     public void ShowOutlineEffect() {
-        GetComponent<Renderer>().material.SetFloat("IsActive", 1);
+        GetComponent<Renderer>().materials[0].SetFloat("IsActive", 1);
     }
 
     /// <summary>
     /// Hide the outline feedback from the shader.
     /// </summary>
     public void HideOutlineEffect() {
-        GetComponent<Renderer>().material.SetFloat("IsActive", 0);
+        //GetComponent<Renderer>().material.SetFloat("IsActive", 0);
+        GetComponent<Renderer>().materials[0].SetFloat("IsActive", 0);
     }
 
     #endregion
+
+    private void OnDestroy() {
+        for (int i = 0; i < GetComponent<Renderer>().materials.Length; i++) {
+            Destroy(GetComponent<Renderer>().materials[i]);
+        }
+    }
 
 }
