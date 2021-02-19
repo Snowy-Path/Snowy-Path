@@ -5,7 +5,7 @@ using UnityEditor.Events;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class InteractionMenu : MonoBehaviour
+public class InteractableCreationMenu
 {
 
     /// <summary>
@@ -45,7 +45,7 @@ public class InteractionMenu : MonoBehaviour
         Material[] oldMaterials = rend.sharedMaterials;
         Material[] newMateriels = new Material[oldMaterials.Length + 1];
 
-        newMateriels[0] = (Material)Resources.Load("Materials/OutlineEffect", typeof(Material)); //To place the outline shader at the first place FOREVER
+        newMateriels[0] = RetrieveOutlineEffectMaterial(); //To place the outline shader at the first place FOREVER
 
         for (int i = 0; i < oldMaterials.Length; i++) {
             newMateriels[i + 1] = oldMaterials[i];
@@ -70,21 +70,13 @@ public class InteractionMenu : MonoBehaviour
         GameObject go = new GameObject("MeshInteractable");
 
         // Position
-        Camera sceneCam = SceneView.lastActiveSceneView.camera;
-        Ray ray = new Ray(sceneCam.transform.position, sceneCam.transform.forward);
-
-        RaycastHit info;
-        if (Physics.Raycast(ray, out info, 50.0f)) {
-            go.transform.position = info.point;
-        } else {
-            go.transform.position = sceneCam.transform.position + sceneCam.transform.forward * 50.0f;
-        }
+        MenuUtility.PlaceInFrontOfCamera(go);
 
         // Renderer
         MeshRenderer renderer = go.AddComponent<MeshRenderer>();
 
         // Outline shader
-        renderer.material = (Material)Resources.Load("Materials/OutlineEffect", typeof(Material)); //To place the outline shader at the first place FOREVER
+        renderer.material = RetrieveOutlineEffectMaterial(); //To place the outline shader at the first place FOREVER
 
         // Mesh filter
         go.AddComponent<MeshFilter>();
@@ -219,9 +211,13 @@ public class InteractionMenu : MonoBehaviour
     }
 
 
+    private static Material RetrieveOutlineEffectMaterial() {
+        //return (Material)Resources.Load("Materials/OutlineEffect", typeof(Material));
+        return (Material)AssetDatabase.LoadAssetAtPath("Assets/Materials/OutlineEffect.mat", typeof(Material));
+    }
+
     /// <summary>
     /// Utility method used in each method creating a primitive Interactable.
-    /// It moves the created gameobject in the center of the viewport like a simple Cube creation does.
     /// Calls the method adding the Interactable script.
     /// And adds the OutlineEffect material in first position.
     /// </summary>
@@ -229,15 +225,7 @@ public class InteractionMenu : MonoBehaviour
     private static void CompletePrimitive(GameObject go) {
 
         // Position
-        Camera sceneCam = SceneView.lastActiveSceneView.camera;
-        Ray ray = new Ray(sceneCam.transform.position, sceneCam.transform.forward);
-
-        RaycastHit info;
-        if (Physics.Raycast(ray, out info, 50.0f)) {
-            go.transform.position = info.point;
-        } else {
-            go.transform.position = sceneCam.transform.position + sceneCam.transform.forward * 50.0f;
-        }
+        MenuUtility.PlaceInFrontOfCamera(go);
 
         // Interactable
         AddInteractableScript(go);
@@ -246,7 +234,7 @@ public class InteractionMenu : MonoBehaviour
         Renderer rend = go.GetComponent<Renderer>();
 
         Material[] ms = new Material[2];
-        ms[0] = (Material)Resources.Load("Materials/OutlineEffect", typeof(Material)); //To place the outline shader at the first place FOREVER
+        ms[0] = RetrieveOutlineEffectMaterial(); //To place the outline shader at the first place FOREVER
         ms[1] = rend.sharedMaterial;
 
         rend.sharedMaterials = ms;
