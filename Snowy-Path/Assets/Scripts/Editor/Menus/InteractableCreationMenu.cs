@@ -5,8 +5,9 @@ using UnityEditor.Events;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class InteractableCreationMenu
-{
+public class InteractableCreationMenu {
+
+    #region Make Interactable
 
     /// <summary>
     /// Menu field. Makes all the selected gameobjects Interactable.
@@ -57,6 +58,9 @@ public class InteractableCreationMenu
         AddInteractableScript(go);
     }
 
+    #endregion
+
+    #region Create pre-defined objects
 
     /// <summary>
     /// Create an empty Interactable mesh.
@@ -210,6 +214,9 @@ public class InteractableCreationMenu
 
     }
 
+    #endregion
+
+    #region Interactable Utility
 
     private static Material RetrieveOutlineEffectMaterial() {
         //return (Material)Resources.Load("Materials/OutlineEffect", typeof(Material));
@@ -261,5 +268,7 @@ public class InteractableCreationMenu
         UnityAction hideMethodDelegate = System.Delegate.CreateDelegate(typeof(UnityAction), interac, "HideOutlineEffect") as UnityAction;
         UnityEventTools.AddPersistentListener(interac.onHideFeedback, hideMethodDelegate);
     }
+
+    #endregion
 
 }

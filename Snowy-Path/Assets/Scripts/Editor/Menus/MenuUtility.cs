@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class MenuUtility
-{
+public class MenuUtility {
 
     /// <summary>
     /// Moves the created gameobject in the center of the viewport like a simple Cube creation does.
