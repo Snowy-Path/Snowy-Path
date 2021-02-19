@@ -31,9 +31,9 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float airSpeedZ = 1f;
 
     [Header("Camera")]
-    [SerializeField] float lookSpeed = 2.0f;
+    [SerializeField] float lookSpeed = 1.0f;
     [Tooltip("Look limit angle up and down")]
-    [SerializeField] float lookXLimit = 45.0f;
+	[SerializeField] float lookYLimit = 45.0f;
 
     //Status
     private CharacterController controller;
@@ -250,9 +250,11 @@ public class PlayerController : MonoBehaviour {
 
     private void Look() {
         if (canMove) {
+
             yRotation += -lookPos.y * lookSpeed;
-            yRotation = Mathf.Clamp(yRotation, -lookXLimit, lookXLimit);
+            yRotation = Mathf.Clamp(yRotation, -lookYLimit, lookYLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(yRotation, 0, 0);
+
             transform.rotation *= Quaternion.Euler(0, lookPos.x * lookSpeed, 0);
         }
     }
