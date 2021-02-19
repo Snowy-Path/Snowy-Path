@@ -25,8 +25,8 @@ public class RayCastGun : Tool
     public int ammo;
     private int currentMagazineCapacity = 0;
     
-    public int maxAmmo; //ammo carried by the Player
-    public int maxMagazineCapacity;
+    public int maxAmmo=5; //ammo carried by the Player
+    public int maxMagazineCapacity=1;
     public int projectilePerShot;
     private bool reloading, readyToShoot;
 
@@ -52,6 +52,11 @@ public class RayCastGun : Tool
         if (keyboard.eKey.wasPressedThisFrame && Time.time > nextFire && !reloading && ammo > 0 && readyToShoot)
         {
             MainInteraction();
+            if (maxAmmo > 0)
+            {
+                //Start reloading method
+                SecondaryInteraction();
+            }
         }
         //If the Player press reload button
         if (keyboard.fKey.wasPressedThisFrame && maxAmmo>0)

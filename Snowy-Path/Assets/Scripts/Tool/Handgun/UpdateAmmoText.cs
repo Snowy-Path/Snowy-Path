@@ -10,9 +10,10 @@ public class UpdateAmmoText : MonoBehaviour
     public RayCastGun gun;
     void Update()
     {
-        float ammo = gun.ammo;
-        float maxMagazineCapacity = gun.maxMagazineCapacity;
-        UpdateAmmoCount(ammo, maxMagazineCapacity);
+        int ammo = gun.ammo;
+        int maxMagazineCapacity = gun.maxMagazineCapacity;
+        int maxAmmo = gun.maxAmmo;
+        UpdateAmmoCount(ammo, maxMagazineCapacity, maxAmmo);
     }
 
 
@@ -21,8 +22,8 @@ public class UpdateAmmoText : MonoBehaviour
     /// </summary>
     /// <param name="currentAmmo"></param>
     /// <param name="maxmagazineCapacity"></param>
-    private void UpdateAmmoCount(float currentAmmo, float maxmagazineCapacity)
+    private void UpdateAmmoCount(int currentAmmo, int maxmagazineCapacity, int maxAmmo)
     {
-        AmmoText.text = currentAmmo + "/" + maxmagazineCapacity;
+        AmmoText.text = currentAmmo + "/" + maxmagazineCapacity + " MaxAmmo=" + maxAmmo;
     }
 }
