@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -599,6 +599,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1063712801}
+  - component: {fileID: 1063712802}
   m_Layer: 5
   m_Name: Map
   m_TagString: Untagged
@@ -627,6 +628,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1063712802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063712800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d928ef7c59675d45be4280f6bc18d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 1299795598}
+  zoomStep: 0.1
+  zoomMin: 1
+  zoomMax: 5
 --- !u!1 &1144091214
 GameObject:
   m_ObjectHideFlags: 0
@@ -1279,7 +1296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
       propertyPath: m_ActionEvents.Array.data[10].m_ActionId
@@ -1290,6 +1307,14 @@ PrefabInstance:
       value: 710a4dfd-14dc-4ff8-8381-e878e82fb3aa
       objectReference: {fileID: 0}
     - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionId
+      value: ea414b9d-9c6b-426a-b304-e19aa756f657
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_ActionId
+      value: 14f92272-7476-4569-99d5-f2a1773d6361
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
       propertyPath: m_ActionEvents.Array.data[10].m_ActionName
       value: Gameplay/StartSprint[/Keyboard/leftShift]
       objectReference: {fileID: 0}
@@ -1298,12 +1323,60 @@ PrefabInstance:
       value: Gameplay/StopSprint[/Keyboard/leftShift]
       objectReference: {fileID: 0}
     - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionName
+      value: UI/Zoom In[/Mouse/forwardButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_ActionName
+      value: UI/Zoom Out[/Mouse/backButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1063712802}
+    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1063712802}
+    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
       propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnStartRun
       objectReference: {fileID: 0}
     - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
       propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnStopRun
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Zoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ZoomOut
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 18293541002357363, guid: 09b0ed7b7c900134fb0d83e546b913fd,
         type: 3}

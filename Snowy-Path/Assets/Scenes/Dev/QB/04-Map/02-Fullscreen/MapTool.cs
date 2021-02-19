@@ -7,8 +7,11 @@ public class MapTool : MonoBehaviour
 {
     public GameObject mapUI;
 
+    private PlayerInput m_playerInput;
+
     void Start()
     {
+        m_playerInput = GetComponentInParent<PlayerInput>();
     }
 
     void Update()
@@ -20,12 +23,12 @@ public class MapTool : MonoBehaviour
             if (mapUI.activeSelf) {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-                GetComponentInParent<PlayerInput>().SwitchCurrentActionMap("UI");
+                m_playerInput.SwitchCurrentActionMap("UI");
             }
             else {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
-                GetComponentInParent<PlayerInput>().SwitchCurrentActionMap("Gameplay");
+                m_playerInput.SwitchCurrentActionMap("Gameplay");
             }
         }
     }
