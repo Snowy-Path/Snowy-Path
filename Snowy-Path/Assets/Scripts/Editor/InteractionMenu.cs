@@ -14,9 +14,11 @@ public class InteractionMenu : MonoBehaviour
     /// <param name="menuCommand"></param>
     [MenuItem("GameObject/Interaction/MakeInteractable", false, 10)]
     static void MakeInteractable(MenuCommand menuCommand) {
+
         for (int i = 0; i < Selection.gameObjects.Length; i++) {
             MakeGameObjectInteractable(Selection.gameObjects[i]);
         }
+
     }
 
     /// <summary>
@@ -37,8 +39,10 @@ public class InteractionMenu : MonoBehaviour
     /// <param name="go">The modified gameobject.</param>
     private static void MakeGameObjectInteractable(GameObject go) {
 
+        Renderer rend = go.GetComponent<Renderer>();
+
         // Outline shader
-        Material[] oldMaterials = go.GetComponent<Renderer>().sharedMaterials;
+        Material[] oldMaterials = rend.sharedMaterials;
         Material[] newMateriels = new Material[oldMaterials.Length + 1];
 
         newMateriels[0] = (Material)Resources.Load("Materials/OutlineEffect", typeof(Material)); //To place the outline shader at the first place FOREVER
@@ -47,7 +51,7 @@ public class InteractionMenu : MonoBehaviour
             newMateriels[i + 1] = oldMaterials[i];
         }
 
-        go.GetComponent<Renderer>().sharedMaterials = newMateriels;
+        rend.sharedMaterials = newMateriels;
 
         // Interactable script
         AddInteractableScript(go);
@@ -239,11 +243,13 @@ public class InteractionMenu : MonoBehaviour
         AddInteractableScript(go);
 
         // Outline shader
+        Renderer rend = go.GetComponent<Renderer>();
+
         Material[] ms = new Material[2];
         ms[0] = (Material)Resources.Load("Materials/OutlineEffect", typeof(Material)); //To place the outline shader at the first place FOREVER
-        ms[1] = go.GetComponent<Renderer>().sharedMaterial;
+        ms[1] = rend.sharedMaterial;
 
-        go.GetComponent<Renderer>().sharedMaterials = ms;
+        rend.sharedMaterials = ms;
 
     }
 
@@ -254,7 +260,8 @@ public class InteractionMenu : MonoBehaviour
     /// <param name="go">The modified gameobject.</param>
     private static void AddInteractableScript(GameObject go) {
         // Interactable script
-        Interactable interac = (Interactable)go.AddComponent(typeof(Interactable));
+        //Interactable interac = (Interactable)Undo.AddComponent(go, typeof(Interactable));
+        Interactable interac = (Interactable)Undo.AddComponent(go, typeof(Interactable));
 
         // Show Interaction Feedback
         interac.onShowFeedback = new UnityEvent();
