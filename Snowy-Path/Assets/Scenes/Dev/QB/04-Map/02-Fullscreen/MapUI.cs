@@ -17,7 +17,6 @@ public class MapUI : MonoBehaviour
     public void Zoom(InputAction.CallbackContext context)
     {
         float scroll = context.ReadValue<float>();
-        Debug.Log(Time.time + "-" + scroll);
 
         Vector3 newScale = Vector3.zero;
         if (scroll > 0) {
