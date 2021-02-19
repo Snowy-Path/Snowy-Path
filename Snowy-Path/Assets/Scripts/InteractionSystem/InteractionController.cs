@@ -96,7 +96,7 @@ public class InteractionController : MonoBehaviour {
 
     }
 
-    private bool CanInteract() {
+    internal bool CanInteract() {
         return m_interactable != null && m_interactable.IsActive;
     }
 
