@@ -3,10 +3,19 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// Represent the Clothes prefabs creation menu under "GameObjects > Clothes".
+/// It holds every pre-defined Clothes prefab instantiation methods.
+/// </summary>
 public class ClothesCreationMenu {
 
+    /// <summary>
+    /// Instantiate a Light Cloth Prefab with the Interactable script.
+    /// It also holds a simple "PickableCloth" script to swap the cloth held in the first Inventory script found in the scene.
+    /// </summary>
+    /// <param name="menuCommand"></param>
     [MenuItem("GameObject/Clothes/Light Cloth", false, 10)]
-    static void CreateLightCloth(MenuCommand menuCommand) {
+    public static void CreateLightCloth(MenuCommand menuCommand) {
 
         // LightCloth prefab
         GameObject go = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Clothes/Light_Cloth.prefab", typeof(GameObject)));
@@ -22,8 +31,13 @@ public class ClothesCreationMenu {
 
     }
 
+    /// <summary>
+    /// Instantiate a Medium Cloth Prefab with the Interactable script.
+    /// It also holds a simple "PickableCloth" script to swap the cloth held in the first Inventory script found in the scene.
+    /// </summary>
+    /// <param name="menuCommand"></param>
     [MenuItem("GameObject/Clothes/Medium Cloth", false, 20)]
-    static void CreateMediumCloth(MenuCommand menuCommand) {
+    public static void CreateMediumCloth(MenuCommand menuCommand) {
 
         // LightCloth prefab
         GameObject go = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Clothes/Medium_Cloth.prefab", typeof(GameObject)));
@@ -39,8 +53,13 @@ public class ClothesCreationMenu {
 
     }
 
+    /// <summary>
+    /// Instantiate a Heavy Cloth Prefab with the Interactable script.
+    /// It also holds a simple "PickableCloth" script to swap the cloth held in the first Inventory script found in the scene.
+    /// </summary>
+    /// <param name="menuCommand"></param>
     [MenuItem("GameObject/Clothes/Heavy Cloth", false, 30)]
-    static void CreateHeavyCloth(MenuCommand menuCommand) {
+    public static void CreateHeavyCloth(MenuCommand menuCommand) {
 
         // LightCloth prefab
         GameObject go = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Clothes/Heavy_Cloth.prefab", typeof(GameObject)));

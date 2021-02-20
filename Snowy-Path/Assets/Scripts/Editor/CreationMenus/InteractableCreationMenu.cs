@@ -5,6 +5,10 @@ using UnityEditor.Events;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Represent the Interactable gameobject creation menu under "GameObjects > Interactable".
+/// It holds every pre-defined Interactable asset creation methods.
+/// </summary>
 public class InteractableCreationMenu {
 
     #region Make Interactable
