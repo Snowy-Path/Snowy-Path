@@ -13,8 +13,8 @@ public class InteractableCreationMenu {
     /// Menu field. Makes all the selected gameobjects Interactable.
     /// </summary>
     /// <param name="menuCommand"></param>
-    [MenuItem("GameObject/Interaction/MakeInteractable", false, 10)]
-    static void MakeInteractable(MenuCommand menuCommand) {
+    [MenuItem("GameObject/Interaction/Make Interactable", false, 10)]
+    public static void MakeInteractable(MenuCommand menuCommand) {
 
         for (int i = 0; i < Selection.gameObjects.Length; i++) {
             MakeGameObjectInteractable(Selection.gameObjects[i]);
@@ -27,7 +27,7 @@ public class InteractableCreationMenu {
     /// In this method we can add more condition.
     /// </summary>
     /// <returns>False if no transform is selected. True otherwise.</returns>
-    [MenuItem("GameObject/Interaction/MakeInteractable", true)]
+    [MenuItem("GameObject/Interaction/Make Interactable", true)]
     private static bool ValidateMakeInteractable() {
         // Return false if no transform is selected.
         return Selection.activeTransform != null;
@@ -67,8 +67,8 @@ public class InteractableCreationMenu {
     /// The gameobject needs to be completed in order to work.
     /// </summary>
     /// <param name="menuCommand"></param>
-    [MenuItem("GameObject/Interaction/MeshInteractable", false, 50)]
-    static void CreateMeshInteractableGameObject(MenuCommand menuCommand) {
+    [MenuItem("GameObject/Interaction/Mesh Interactable", false, 50)]
+    public static void CreateMeshInteractableGameObject(MenuCommand menuCommand) {
 
         // Gameobject & name
         GameObject go = new GameObject("MeshInteractable");
@@ -104,8 +104,8 @@ public class InteractableCreationMenu {
     /// Create a Cube primitive with Interactable script and utility.
     /// </summary>
     /// <param name="menuCommand"></param>
-    [MenuItem("GameObject/Interaction/CubeInteractable", false, 100)]
-    static void CreateCubeInteractableGameObject(MenuCommand menuCommand) {
+    [MenuItem("GameObject/Interaction/Cube Interactable", false, 100)]
+    public static void CreateCubeInteractableGameObject(MenuCommand menuCommand) {
 
         // Gameobject & name
         GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -127,8 +127,8 @@ public class InteractableCreationMenu {
     /// Create a Sphere primitive with Interactable script and utility.
     /// </summary>
     /// <param name="menuCommand"></param>
-    [MenuItem("GameObject/Interaction/SphereInteractable", false, 110)]
-    static void CreateSphereInteractableGameObject(MenuCommand menuCommand) {
+    [MenuItem("GameObject/Interaction/Sphere Interactable", false, 110)]
+    public static void CreateSphereInteractableGameObject(MenuCommand menuCommand) {
 
         // Gameobject & name
         GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -150,8 +150,8 @@ public class InteractableCreationMenu {
     /// Create a Capsule primitive with Interactable script and utility.
     /// </summary>
     /// <param name="menuCommand"></param>
-    [MenuItem("GameObject/Interaction/CapsuleInteractable", false, 120)]
-    static void CreateCapsuleInteractableGameObject(MenuCommand menuCommand) {
+    [MenuItem("GameObject/Interaction/Capsule Interactable", false, 120)]
+    public static void CreateCapsuleInteractableGameObject(MenuCommand menuCommand) {
 
         // Gameobject & name
         GameObject go = GameObject.CreatePrimitive(PrimitiveType.Capsule);
@@ -173,8 +173,8 @@ public class InteractableCreationMenu {
     /// Create a Cylinder primitive with Interactable script and utility.
     /// </summary>
     /// <param name="menuCommand"></param>
-    [MenuItem("GameObject/Interaction/CylinderInteractable", false, 130)]
-    static void CreateCylinderInteractableGameObject(MenuCommand menuCommand) {
+    [MenuItem("GameObject/Interaction/Cylinder Interactable", false, 130)]
+    public static void CreateCylinderInteractableGameObject(MenuCommand menuCommand) {
 
         // Gameobject & name
         GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
@@ -196,8 +196,8 @@ public class InteractableCreationMenu {
     /// Create a Plane primitive with Interactable script and utility.
     /// </summary>
     /// <param name="menuCommand"></param>
-    [MenuItem("GameObject/Interaction/PlaneInteractable", false, 140)]
-    static void CreatePlaneInteractableGameObject(MenuCommand menuCommand) {
+    [MenuItem("GameObject/Interaction/Plane Interactable", false, 140)]
+    public static void CreatePlaneInteractableGameObject(MenuCommand menuCommand) {
 
         // Gameobject & name
         GameObject go = GameObject.CreatePrimitive(PrimitiveType.Plane);
