@@ -13,11 +13,11 @@ public class CampfireCreationMenu {
     /// Instantiate a Campfire Prefab with the Interactable script.
     /// </summary>
     /// <param name="menuCommand"></param>
-    [MenuItem("GameObject/Campfire/Campfire", false, 10)]
+    [MenuItem("GameObject/Campfire", false, 10)]
     public static void CreateCampfire(MenuCommand menuCommand) {
 
         // LightCloth prefab
-        GameObject go = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Campfire.prefab", typeof(GameObject)));
+        GameObject go = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Campfire/Campfire.prefab", typeof(GameObject)));
 
         // Position
         MenuUtility.PlaceInFrontOfCamera(go);
