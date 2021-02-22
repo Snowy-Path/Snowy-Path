@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DynamicSet : MonoBehaviour {
-    public GameObject setA;
-    public GameObject setB;
+    public GameObject defaultSet;
+    public GameObject alternativeSet;
 
     public List<DynamicSystem.DynamicCondition> conditions;
 
@@ -28,7 +28,9 @@ public class DynamicSet : MonoBehaviour {
             }
         }
 
-        setA.gameObject.SetActive(!result);
-        setB.gameObject.SetActive(result);
+        if (defaultSet)
+            defaultSet.gameObject.SetActive(!result);
+        if (alternativeSet)
+            alternativeSet.gameObject.SetActive(result);
     }
 }

@@ -7,4 +7,6 @@ public enum EDynamicEvent {
     None,
     Left,
     Right,
+    Button,
+    Step
 }

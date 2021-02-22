@@ -9,5 +9,6 @@ public class DynamicComponent : MonoBehaviour
 
     public void SendDynamicEvent() {    //To be call by interactable onUse UnityEvent
         DynamicSystem.RegisterEvent(dynamicEvent);
+        Debug.Log($"Firing {dynamicEvent.dynamicEvent}={dynamicEvent.eventStatus}");
     }
 }
