@@ -8,6 +8,7 @@ using UnityEngine.Events;
 /// Provides events called from the InteractionController script.
 /// </summary>
 [DisallowMultipleComponent]
+[RequireComponent(typeof(Collider))]
 public class Interactable : MonoBehaviour {
 
     #region Variables
