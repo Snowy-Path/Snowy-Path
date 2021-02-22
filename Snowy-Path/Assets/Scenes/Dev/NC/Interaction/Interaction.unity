@@ -171,7 +171,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: a7fc1bfb9686c3c4e976a216407a2961, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -267,6 +267,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: ccdc94ed9a8614c45b25db183c4708d0, type: 2}
+  - {fileID: 2100000, guid: a7fc1bfb9686c3c4e976a216407a2961, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -339,7 +340,7 @@ MonoBehaviour:
   onShowFeedback:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 255108595}
+      - m_Target: {fileID: 255108594}
         m_MethodName: ShowOutlineEffect
         m_Mode: 1
         m_Arguments:
@@ -353,7 +354,7 @@ MonoBehaviour:
   onHideFeedback:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 255108595}
+      - m_Target: {fileID: 255108594}
         m_MethodName: HideOutlineEffect
         m_Mode: 1
         m_Arguments:
@@ -376,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b2cf7786b2efb499fcfc85a46df43c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubeLight: {fileID: 647719307}
+  cubeLight: {fileID: 933329729}
 --- !u!1001 &548840748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -384,30 +385,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
-      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
-      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
-      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 548840751}
-    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
-      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
-      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnInteract
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720217756, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
-      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 18293541002357363, guid: 09b0ed7b7c900134fb0d83e546b913fd,
         type: 3}
       propertyPath: m_Name
@@ -431,7 +408,7 @@ PrefabInstance:
     - target: {fileID: 18293541002357375, guid: 09b0ed7b7c900134fb0d83e546b913fd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 18293541002357375, guid: 09b0ed7b7c900134fb0d83e546b913fd,
         type: 3}
@@ -470,36 +447,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
---- !u!1 &548840749 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 18293541002357363, guid: 09b0ed7b7c900134fb0d83e546b913fd,
-    type: 3}
-  m_PrefabInstance: {fileID: 548840748}
-  m_PrefabAsset: {fileID: 0}
---- !u!20 &548840750 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 1603986337316317576, guid: 09b0ed7b7c900134fb0d83e546b913fd,
-    type: 3}
-  m_PrefabInstance: {fileID: 548840748}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &548840751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 548840749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3184d73a324f6204cb650a22a47c00b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxDistance: 2
-  radius: 0.05
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  playerCamera: {fileID: 548840750}
 --- !u!1 &615754219
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +459,6 @@ GameObject:
   - component: {fileID: 615754224}
   - component: {fileID: 615754223}
   - component: {fileID: 615754222}
-  - component: {fileID: 615754220}
   - component: {fileID: 615754221}
   m_Layer: 8
   m_Name: Sphere
@@ -521,18 +467,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &615754220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 615754219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f49106a7039d7e149a7b7dd87f1255e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &615754221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,7 +508,7 @@ MonoBehaviour:
   onShowFeedback:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 615754220}
+      - m_Target: {fileID: 615754221}
         m_MethodName: ShowOutlineEffect
         m_Mode: 1
         m_Arguments:
@@ -588,7 +522,7 @@ MonoBehaviour:
   onHideFeedback:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 615754220}
+      - m_Target: {fileID: 615754221}
         m_MethodName: HideOutlineEffect
         m_Mode: 1
         m_Arguments:
@@ -631,6 +565,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: ccdc94ed9a8614c45b25db183c4708d0, type: 2}
+  - {fileID: 2100000, guid: cd1ea7bbb497b0b499288182e9455aec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -792,7 +727,6 @@ GameObject:
   - component: {fileID: 814237041}
   - component: {fileID: 814237040}
   - component: {fileID: 814237044}
-  - component: {fileID: 814237045}
   m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
@@ -833,6 +767,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: ccdc94ed9a8614c45b25db183c4708d0, type: 2}
+  - {fileID: 2100000, guid: cd1ea7bbb497b0b499288182e9455aec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -905,7 +840,7 @@ MonoBehaviour:
   onShowFeedback:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 814237045}
+      - m_Target: {fileID: 814237044}
         m_MethodName: ShowOutlineEffect
         m_Mode: 1
         m_Arguments:
@@ -919,7 +854,7 @@ MonoBehaviour:
   onHideFeedback:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 814237045}
+      - m_Target: {fileID: 814237044}
         m_MethodName: HideOutlineEffect
         m_Mode: 1
         m_Arguments:
@@ -930,18 +865,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &814237045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!108 &933329729 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 3104171485096424341, guid: 09b0ed7b7c900134fb0d83e546b913fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 548840748}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814237039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2239e794a0ea3854a93b1f3870dac285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1438217902
 GameObject:
   m_ObjectHideFlags: 0

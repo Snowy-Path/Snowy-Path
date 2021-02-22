@@ -8,6 +8,7 @@ using UnityEngine.Events;
 /// Provides events called from the InteractionController script.
 /// </summary>
 [DisallowMultipleComponent]
+[RequireComponent(typeof(Collider))]
 public class Interactable : MonoBehaviour {
 
     #region Variables
@@ -47,7 +48,7 @@ public class Interactable : MonoBehaviour {
     #endregion
 
 
-    #region Interaction Methods v2
+    #region Interaction Methods
 
     /// <summary>
     /// Triggers the UnityEvent onInteract.
@@ -63,6 +64,7 @@ public class Interactable : MonoBehaviour {
     /// Triggers the show interaction feedback.
     /// Could be any feedback (UI, VFX, SFX ...)
     /// Used when the player looks at the gameobject.
+    /// MUST NOT BE USED ITSELF ON THE onShowFeedback UnityEvent.
     /// </summary>
     public void ShowInteractionFeedback() {
         if (IsActive) {
@@ -73,6 +75,7 @@ public class Interactable : MonoBehaviour {
     /// <summary>
     /// Triggers the hide interaction feedback.
     /// Used when the player stops looking at the gameobject.
+    /// MUST NOT BE USED ITSELF ON THE onHideFeedback UnityEvent.
     /// </summary>
     public void HideInteractionFeedback() {
         if (IsActive) {
@@ -99,6 +102,26 @@ public class Interactable : MonoBehaviour {
         IsActive = !IsActive;
     }
 
+    /// <summary>
+    /// Show the outline feedback from the shader.
+    /// </summary>
+    public void ShowOutlineEffect() {
+        GetComponent<Renderer>().materials[0].SetFloat("IsActive", 1);
+    }
+
+    /// <summary>
+    /// Hide the outline feedback from the shader.
+    /// </summary>
+    public void HideOutlineEffect() {
+        GetComponent<Renderer>().materials[0].SetFloat("IsActive", 0);
+    }
+
     #endregion
+
+    private void OnDestroy() {
+        for (int i = 0; i < GetComponent<Renderer>().materials.Length; i++) {
+            Destroy(GetComponent<Renderer>().materials[i]);
+        }
+    }
 
 }
