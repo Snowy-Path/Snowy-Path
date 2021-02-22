@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4883790788636828582}
   - component: {fileID: 4883790788636828583}
   - component: {fileID: 4883790788636828600}
+  - component: {fileID: 2166646255462153659}
+  - component: {fileID: 4104561768435308289}
   m_Layer: 0
   m_Name: Campfire
   m_TagString: Untagged
@@ -111,7 +113,18 @@ MonoBehaviour:
   isActive: 1
   onInteract:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2166646255462153659}
+        m_MethodName: LaunchSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onShowFeedback:
     m_PersistentCalls:
       m_Calls:
@@ -140,3 +153,29 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2166646255462153659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883790788636828601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b5e77ebc7945246bc4f0a22ddad535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4104561768435308289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883790788636828601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd57ff595a7a9a4297c79d606bc4a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 10
+  showDebug: 0
