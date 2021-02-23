@@ -13,7 +13,7 @@ public class Campfire : MonoBehaviour
 
     private float extinctionFireTimer = 0f;
 
-    // bool for stopping timer when fire is not active
+    // Stopping timer when fire is not active
     private bool isFireActive = false;
 
     public bool showDebug = false;
@@ -33,11 +33,17 @@ public class Campfire : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Call every method necessary when interacting with the campfire
+    /// </summary>
     public void IgniteFire() {
         GetComponentInChildren<MeshRenderer>().materials[1].color = new Color(1, 0, 0);
         isFireActive = true;
     }
 
+    /// <summary>
+    /// Call every method necessary when the campfire need to be exctinguished
+    /// </summary>
     internal void ExctinguishFire() {
         GetComponentInChildren<MeshRenderer>().materials[1].color = new Color(0,0,0);
         isFireActive = false;
