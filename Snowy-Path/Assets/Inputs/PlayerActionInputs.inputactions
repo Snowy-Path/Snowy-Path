@@ -877,6 +877,14 @@
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Map Move",
+                    "type": "Button",
+                    "id": "98b740be-9fe5-4974-96e5-8b24bd91940a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -912,6 +920,39 @@
                     "action": "Map Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "Click And Drag Binding",
+                    "id": "7a56fbb4-2568-48f5-8382-1ab6ba3a0958",
+                    "path": "ClickAndDragBinding",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Map Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "MouseButton",
+                    "id": "2ecbc0ef-4be2-4fb1-93dd-ac68563ed719",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Map Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "MouseVector",
+                    "id": "8e0c4e73-51b6-4d6f-8137-5a128e886449",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Map Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
