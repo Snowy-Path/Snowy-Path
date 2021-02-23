@@ -10,7 +10,7 @@ public class MapUI : MonoBehaviour
     public float zoomMin = 1f;
     public float zoomMax = 5f;
 
-    public float mouseDragSpeed = 20f;
+    public float mouseDragSpeed = 100f;
 
     void Start()
     {
@@ -56,8 +56,8 @@ public class MapUI : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         var mouseDelta = context.ReadValue<Vector2>();
-        var delta = mouseDelta * mouseDragSpeed * Time.deltaTime;
-        map.anchoredPosition += delta;
+        var delta = mouseDelta * mouseDragSpeed;
+        map.anchoredPosition = Vector2.Lerp(map.anchoredPosition, map.anchoredPosition + delta, Time.deltaTime);
 
         KeepMapCenteredInView();
     }
