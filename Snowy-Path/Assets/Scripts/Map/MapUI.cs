@@ -51,6 +51,9 @@ public class MapUI : MonoBehaviour
         }
 
         KeepMapCenteredInView();
+
+        foreach (MapPin mapPin in GetComponentsInChildren<MapPin>())
+            mapPin.UpdateScale();
     }
 
     public void Move(InputAction.CallbackContext context)
