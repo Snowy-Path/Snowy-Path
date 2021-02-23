@@ -31,6 +31,49 @@ Transform:
   m_Father: {fileID: 4883790788636828580}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3619676524758950032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6856248615802629921}
+  - component: {fileID: 367426228134213982}
+  m_Layer: 0
+  m_Name: CampfireZone
+  m_TagString: CampfireZone
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6856248615802629921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3619676524758950032}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4883790788636828580}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &367426228134213982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3619676524758950032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7052b8a749bfcdb4d99226b7d5d818d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4883790788636828601
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,8 +88,7 @@ GameObject:
   - component: {fileID: 2166646255462153659}
   - component: {fileID: 4104561768435308289}
   - component: {fileID: 8051277226097667132}
-  - component: {fileID: 5209302312291666892}
-  - component: {fileID: 8020962856871096362}
+  - component: {fileID: 1716144021}
   m_Layer: 0
   m_Name: Campfire
   m_TagString: Untagged
@@ -66,6 +108,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7327304530663613965}
+  - {fileID: 6856248615802629921}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -101,6 +144,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2166646255462153659}
         m_MethodName: LaunchSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8051277226097667132}
+        m_MethodName: IgniteFire
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -163,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 10
-  showDebug: 0
+  showDebug: 1
 --- !u!114 &8051277226097667132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,21 +230,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67fa8fac496017e41abe62abb2d6dd5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extinctionTime: 5
---- !u!135 &5209302312291666892
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4883790788636828601}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &8020962856871096362
+  extinctionTime: 50
+  radius: 30
+  isFireActive: 0
+  showDebug: 1
+--- !u!54 &1716144021
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Campfire : MonoBehaviour
 {
+
     [Tooltip("Time for the fire to extinguish")]
-    public float extinctionTime = 0;
+    public float extinctionTime = 0f;
 
-    private float extinctionFireTimer = 0;
+    [Tooltip("Radius of the extinction range")]
+    public float radius = 0f;
 
-    public bool isFireActive = false;
+    private float extinctionFireTimer = 0f;
+
+    // bool for stopping timer when fire is not active
+    private bool isFireActive = false;
+
+    public bool showDebug = false;
 
     private void Update() {
 
@@ -24,18 +31,23 @@ public class Campfire : MonoBehaviour
                 ExctinguishFire();
             }
         }
-
     }
 
     public void IgniteFire() {
         GetComponentInChildren<MeshRenderer>().materials[1].color = new Color(1, 0, 0);
         isFireActive = true;
-
     }
 
-    void ExctinguishFire() {
+    internal void ExctinguishFire() {
         GetComponentInChildren<MeshRenderer>().materials[1].color = new Color(0,0,0);
         isFireActive = false;
     }
 
+    void OnDrawGizmos() {
+        if (showDebug) {
+            Gizmos.color = new Color(1, 1, 1, 0.25f);
+            Gizmos.DrawSphere(transform.position, radius);
+            Gizmos.DrawWireSphere(transform.position, radius);
+        }
+    }
 }
