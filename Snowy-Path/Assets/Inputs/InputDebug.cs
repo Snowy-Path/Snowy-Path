@@ -13,28 +13,23 @@ using UnityEngine.InputSystem;
 public class InputDebug : MonoBehaviour {
 
     #region Common Variables
+
     private PlayerInput playerInput;
+
     [Tooltip("The PlayerController script of the player Prefab.")]
     public PlayerController playerControl;
+
     [Tooltip("The InteractionController script of the player Prefab.")]
     public InteractionController interactControl;
+
+    [Tooltip("The HandController script of the player Prefab.")]
+    public HandController handControl;
     #endregion
 
     private ActionMap inputType = ActionMap.Gameplay;
 
     void Awake() {
         playerInput = GetComponent<PlayerInput>();
-    }
-
-    /// <summary>
-    /// Simple enum to tools.
-    /// Used ONLY in this script.
-    /// </summary>
-    private enum Tool {
-        Map,
-        Telescope,
-        Gun,
-        COUNT
     }
 
     /// <summary>
@@ -80,7 +75,6 @@ public class InputDebug : MonoBehaviour {
     // Gameplay Variables
     private Vector2 move;
     private Vector2 look;
-    private Tool tool = Tool.Map;
 
     /// <summary>
     /// Move action callback.
@@ -121,11 +115,9 @@ public class InputDebug : MonoBehaviour {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnMainTool");
             //Insert action here
-
-            if (tool == Tool.Map) {
-                ChangeActionMap(ActionMap.Map);
-            }
-
+            //if (handControl.CurrentToolIndex) {
+            //    ChangeActionMap(ActionMap.Map);
+            //}
         }
     }
 
@@ -191,7 +183,6 @@ public class InputDebug : MonoBehaviour {
     public void OnSelectMap(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnSelectMap");
-            tool = Tool.Map;
             //Insert action here
         }
     }
@@ -203,7 +194,6 @@ public class InputDebug : MonoBehaviour {
     public void OnSelectTelescope(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnSelectTelescope");
-            tool = Tool.Telescope;
             //Insert action here
         }
     }
@@ -215,7 +205,6 @@ public class InputDebug : MonoBehaviour {
     public void OnSelectGun(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnSelectGun");
-            tool = Tool.Gun;
             //Insert action here
         }
     }
@@ -237,10 +226,10 @@ public class InputDebug : MonoBehaviour {
     /// <param name="context"></param>
     public void OnSwitchTools(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnSwitchTools");
-            //Insert action here
             int res = (int)context.ReadValue<float>();
-            Debug.Log(res);
+            Debug.Log($"OnSwitchTools : {res}");
+            //Insert action here
+
         }
     }
 
@@ -383,22 +372,21 @@ public class InputDebug : MonoBehaviour {
                 break;
 
             case ActionMap.Gameplay:
-                GUI.Box(new Rect(10, 10, 200, 370), "Gameplay");
+                GUI.Box(new Rect(10, 10, 200, 340), "Gameplay");
 
                 GUI.Label(new Rect(20, 40, 180, 30), $"Move : {move}");
                 GUI.Label(new Rect(20, 70, 180, 30), $"Look : {look}");
-                GUI.Label(new Rect(20, 100, 180, 30), $"Tool : {tool}");
+                //GUI.Label(new Rect(20, 100, 180, 30), $"Tool : {tool}");
 
                 GUI.Label(new Rect(20, 130, 180, 30), $"CanInteract : {interactControl.CanInteract()}");
 
                 GUI.Label(new Rect(20, 160, 180, 30), $"Sprint duration : {playerControl.SprintTimer}");
-                GUI.Label(new Rect(20, 190, 180, 30), $"Sprint Reco T : {playerControl.SprintRecoveryTimer}");
-                GUI.Label(new Rect(20, 220, 180, 30), $"CurrentSpeed : {playerControl.CurrentSpeed}");
-                GUI.Label(new Rect(20, 250, 180, 30), $"G Velocity : {playerControl.XZVelocity + playerControl.YVelocity}");
-                GUI.Label(new Rect(20, 280, 180, 30), $"Air Velocity : {playerControl.AirVelocity}");
+                GUI.Label(new Rect(20, 190, 180, 30), $"CurrentSpeed : {playerControl.CurrentSpeed}");
+                GUI.Label(new Rect(20, 220, 180, 30), $"G Velocity : {playerControl.XZVelocity + playerControl.YVelocity}");
+                GUI.Label(new Rect(20, 250, 180, 30), $"Air Velocity : {playerControl.AirVelocity}");
 
-                GUI.Label(new Rect(20, 310, 180, 30), $"Running : {playerControl.IsRunning}");
-                GUI.Label(new Rect(20, 340, 180, 30), $"Grounded : {playerControl.IsGrounded}");
+                GUI.Label(new Rect(20, 280, 180, 30), $"Running : {playerControl.IsRunning}");
+                GUI.Label(new Rect(20, 310, 180, 30), $"Grounded : {playerControl.IsGrounded}");
                 break;
 
             case ActionMap.Map:
