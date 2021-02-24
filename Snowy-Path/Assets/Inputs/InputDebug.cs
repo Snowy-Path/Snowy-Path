@@ -114,30 +114,12 @@ public class InputDebug : MonoBehaviour {
     }
 
     /// <summary>
-    /// SwitchTool action callback.
-    /// </summary>
-    /// <param name="context">Contains input values.</param>
-    public void OnSwitchTools(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnSwitchTools");
-
-            Tool nextTool = tool + 1;
-            if (nextTool == Tool.COUNT) {
-                nextTool = Tool.Map;
-            }
-            tool = nextTool;
-
-            Debug.Log(tool);
-        }
-    }
-
-    /// <summary>
     /// LeftHandMain action callback.
     /// </summary>
     /// <param name="context">Contains input values.</param>
-    public void OnLeftHandMain(InputAction.CallbackContext context) {
+    public void OnMainTool(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnLeftHandMain");
+            Debug.Log($"OnMainTool");
             //Insert action here
 
             if (tool == Tool.Map) {
@@ -151,9 +133,9 @@ public class InputDebug : MonoBehaviour {
     /// LeftHandSecondary action callback.
     /// </summary>
     /// <param name="context">Contains input values.</param>
-    public void OnLeftHandSecondary(InputAction.CallbackContext context) {
+    public void OnSecondaryTool(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnLeftHandSecondary");
+            Debug.Log($"OnSecondaryTool");
             //Insert action here
         }
     }
@@ -162,20 +144,9 @@ public class InputDebug : MonoBehaviour {
     /// RightHandMain action callback.
     /// </summary>
     /// <param name="context">Contains input values.</param>
-    public void OnRightHandMain(InputAction.CallbackContext context) {
+    public void OnAttack(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnRightHandMain");
-            //Insert action here
-        }
-    }
-
-    /// <summary>
-    /// RightHandSecondary action callback.
-    /// </summary>
-    /// <param name="context">Contains input values.</param>
-    public void OnRightHandSecondary(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnRightHandSecondary");
+            Debug.Log($"OnAttack");
             //Insert action here
         }
     }
@@ -246,6 +217,30 @@ public class InputDebug : MonoBehaviour {
             Debug.Log($"OnSelectGun");
             tool = Tool.Gun;
             //Insert action here
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
+    public void OnGalerie(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            Debug.Log($"OnGalerie");
+            //Insert action here
+        }
+    }
+
+    /// <summary>
+    /// SwitchTools action callback.
+    /// </summary>
+    /// <param name="context"></param>
+    public void OnSwitchTools(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            Debug.Log($"OnSwitchTools");
+            //Insert action here
+            int res = (int)context.ReadValue<float>();
+            Debug.Log(res);
         }
     }
 
