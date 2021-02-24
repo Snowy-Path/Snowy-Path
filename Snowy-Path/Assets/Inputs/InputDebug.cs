@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 /// <summary>
 /// Used in the Prefab InputDebug.
@@ -11,6 +12,11 @@ using UnityEngine.InputSystem;
 /// </summary>
 [RequireComponent(typeof(PlayerInput))]
 public class InputDebug : MonoBehaviour {
+
+    /*
+    Changed to lastest input for both controller & keyboard/mouse.
+    Fixed attack animation starting multiple times in a row.
+    */
 
     #region Common Variables
 
@@ -108,21 +114,56 @@ public class InputDebug : MonoBehaviour {
     }
 
     /// <summary>
-    /// LeftHandMain action callback.
+    /// Main tool use action callback.
     /// </summary>
     /// <param name="context">Contains input values.</param>
     public void OnMainTool(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnMainTool");
-            //Insert action here
-            //if (handControl.CurrentToolIndex) {
-            //    ChangeActionMap(ActionMap.Map);
-            //}
+
+        Debug.Log($"OnMainTool : {context.phase}");
+
+        switch (context.phase) {
+
+            case InputActionPhase.Performed:
+                if (context.interaction is SlowTapInteraction) {
+                    Debug.Log($"OnMainTool : finished holding");
+                    // Insert finishing hold instructions here
+                } else {
+                    Debug.Log($"OnMainTool : performed press : FIRE IN TEH HOLE");
+                    // Insert press instructions here
+                }
+                break;
+
+            case InputActionPhase.Started:
+                if (context.interaction is SlowTapInteraction) {
+                    Debug.Log($"OnMainTool : started holding");
+                    // Insert finishing hold instructions here
+                }
+                break;
         }
+
+    }
+
+    public void OnMainToolV2(InputAction.CallbackContext context) {
+
+        Debug.Log($"OnMainTool : {context.phase}");
+
+        switch (context.phase) {
+
+            case InputActionPhase.Started:
+                // Call Interface "START HOLD"
+                // Call Interface "MAKE PRESS"
+                break;
+
+            case InputActionPhase.Canceled:
+                // Call Interface "STOP HOLD"
+                break;
+
+        }
+
     }
 
     /// <summary>
-    /// LeftHandSecondary action callback.
+    /// Secondary tool use action callback.
     /// </summary>
     /// <param name="context">Contains input values.</param>
     public void OnSecondaryTool(InputAction.CallbackContext context) {
@@ -133,7 +174,7 @@ public class InputDebug : MonoBehaviour {
     }
 
     /// <summary>
-    /// RightHandMain action callback.
+    /// Attack action callback.
     /// </summary>
     /// <param name="context">Contains input values.</param>
     public void OnAttack(InputAction.CallbackContext context) {
@@ -155,23 +196,23 @@ public class InputDebug : MonoBehaviour {
     }
 
     /// <summary>
-    /// SprintStart action callback.
+    /// Hold sprint action callback.
     /// </summary>
     /// <param name="context">Contains input values.</param>
-    public void OnStartRun(InputAction.CallbackContext context) {
+    public void OnHoldSprint(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnStartRun");
+            Debug.Log($"OnHoldSprint");
             //Insert action here
         }
     }
 
     /// <summary>
-    /// SprintStart action callback.
+    /// Toggle sprint action callback.
     /// </summary>
     /// <param name="context">Contains input values.</param>
-    public void OnStopRun(InputAction.CallbackContext context) {
+    public void OnToggleSprint(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnStopRun");
+            Debug.Log($"OnToggleSprint");
             //Insert action here
         }
     }
@@ -210,7 +251,7 @@ public class InputDebug : MonoBehaviour {
     }
 
     /// <summary>
-    /// 
+    /// Galerie action callback.
     /// </summary>
     /// <param name="context">Contains input values.</param>
     public void OnGalerie(InputAction.CallbackContext context) {

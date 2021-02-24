@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 392668514}
+  - component: {fileID: 452045982}
   m_Layer: 9
   m_Name: Pistol
   m_TagString: Untagged
@@ -31,6 +32,18 @@ Transform:
   m_Father: {fileID: 7018637878986329272}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &452045982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392668513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbaaa1dfe3875b443a8be66b7b835d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &819869766
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +336,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1456919800}
+  - component: {fileID: 1975866226}
   m_Layer: 9
   m_Name: Scope
   m_TagString: Untagged
@@ -345,6 +359,18 @@ Transform:
   m_Father: {fileID: 7018637878986329272}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1975866226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456919799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd2ef1e52c50c34cbaba515acc921d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1662040981
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1662040982}
+  - component: {fileID: 482893614}
   m_Layer: 9
   m_Name: MapCompass
   m_TagString: Untagged
@@ -377,6 +404,18 @@ Transform:
   m_Father: {fileID: 7018637878986329272}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &482893614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662040981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 245629e03fb191c42a5885953a5b6868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1790824123
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,8 +737,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8320657801043981160}
-        m_MethodName: OnStartRun
-        m_Mode: 0
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -713,8 +752,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8320657801043981160}
-        m_MethodName: OnStopRun
-        m_Mode: 0
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -772,12 +811,12 @@ MonoBehaviour:
     m_ActionName: Gameplay/MainTool[/XInputControllerWindows/leftTrigger,/Mouse/leftButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 494666349435943351}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1244149388}
+        m_MethodName: OnUseTool
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerControl: {fileID: 0}
   interactControl: {fileID: 0}
+  handControl: {fileID: 0}
 --- !u!114 &8031886313515195771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,7 +106,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 871401637362982970}
-        m_MethodName: OnStartRun
+        m_MethodName: OnHoldSprint
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -120,7 +121,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 871401637362982970}
-        m_MethodName: OnStopRun
+        m_MethodName: OnToggleSprint
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
