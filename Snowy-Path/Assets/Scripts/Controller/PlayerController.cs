@@ -165,7 +165,6 @@ public class PlayerController : MonoBehaviour {
     //bool isMoving = false;
     #endregion
 
-
     #region INPUTS SYSTEM EVENTS
     public void OnMove(InputAction.CallbackContext context) {
         UpdateInputs(context.ReadValue<Vector2>());
