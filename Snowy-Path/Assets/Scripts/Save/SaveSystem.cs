@@ -27,6 +27,8 @@ public sealed class SaveSystem : MonoBehaviour {
             return;
         }
 
+        DontDestroyOnLoad(this.gameObject);
+
         // Input the nbr of saved possible
         saveDataArray = new SaveData[nbrSaveAllowed];
         FindAndLoadExistingSave();
