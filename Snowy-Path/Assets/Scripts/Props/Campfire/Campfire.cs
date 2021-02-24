@@ -18,6 +18,15 @@ public class Campfire : MonoBehaviour
 
     public bool showDebug = false;
 
+    private HeatSource heatSource;
+
+    private void Start() {
+        heatSource = GetComponent<HeatSource>();
+        heatSource.enabled = false;
+        GetComponentInChildren<MeshRenderer>().materials[1].color = new Color(0, 0, 0);
+
+    }
+
     private void Update() {
 
         if (isFireActive) {
@@ -39,6 +48,7 @@ public class Campfire : MonoBehaviour
     public void IgniteFire() {
         GetComponentInChildren<MeshRenderer>().materials[1].color = new Color(1, 0, 0);
         isFireActive = true;
+        heatSource.enabled = true;
     }
 
     /// <summary>
@@ -47,6 +57,9 @@ public class Campfire : MonoBehaviour
     internal void ExctinguishFire() {
         GetComponentInChildren<MeshRenderer>().materials[1].color = new Color(0,0,0);
         isFireActive = false;
+        heatSource.enabled = false;
+
+
     }
 
     void OnDrawGizmos() {
