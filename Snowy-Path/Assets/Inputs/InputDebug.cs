@@ -115,35 +115,10 @@ public class InputDebug : MonoBehaviour {
 
     /// <summary>
     /// Main tool use action callback.
+    /// Use Started & Canceled CallbackContext to simulate both hold & press action with the same binding.
     /// </summary>
     /// <param name="context">Contains input values.</param>
     public void OnMainTool(InputAction.CallbackContext context) {
-
-        Debug.Log($"OnMainTool : {context.phase}");
-
-        switch (context.phase) {
-
-            case InputActionPhase.Performed:
-                if (context.interaction is SlowTapInteraction) {
-                    Debug.Log($"OnMainTool : finished holding");
-                    // Insert finishing hold instructions here
-                } else {
-                    Debug.Log($"OnMainTool : performed press : FIRE IN TEH HOLE");
-                    // Insert press instructions here
-                }
-                break;
-
-            case InputActionPhase.Started:
-                if (context.interaction is SlowTapInteraction) {
-                    Debug.Log($"OnMainTool : started holding");
-                    // Insert finishing hold instructions here
-                }
-                break;
-        }
-
-    }
-
-    public void OnMainToolV2(InputAction.CallbackContext context) {
 
         Debug.Log($"OnMainTool : {context.phase}");
 
