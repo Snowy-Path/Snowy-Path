@@ -5,13 +5,13 @@ public static class DynamicSystem {
     #region Specific structures
     [System.Serializable]
     public struct EventStatusPair {
-        public EDynamicEvent dynamicEvent;
+        public DynamicEvent dynamicEvent;
         public bool eventStatus;
     }
 
     [System.Serializable]
     public struct DynamicCondition {
-        public EDynamicEvent dynamicEvent;
+        public DynamicEvent dynamicEvent;
         public bool desiredStatus;
     }
     #endregion
@@ -19,20 +19,23 @@ public static class DynamicSystem {
     public delegate void RegisteredEventHandler();
     public static RegisteredEventHandler onEventRegistered;
 
-    public static Dictionary<EDynamicEvent, bool> RegisteredEvents {
+    public static Dictionary<DynamicEvent, bool> RegisteredEvents {
         get {
-            if (registeredEvents == null) { registeredEvents = new Dictionary<EDynamicEvent, bool>(); }  //Init dictionary if null
+            if (registeredEvents == null) { registeredEvents = new Dictionary<DynamicEvent, bool>(); }  //Init dictionary if null
             return registeredEvents;
         }
         private set { registeredEvents = value; }
     }
-    private static Dictionary<EDynamicEvent, bool> registeredEvents;
+    private static Dictionary<DynamicEvent, bool> registeredEvents;
 
     /// <summary>
     /// Register an event
     /// </summary>
     /// <param name="eventStatusPair">The event-status to be registerd</param>
     public static void RegisterEvent(EventStatusPair eventStatusPair) {
+        if (eventStatusPair.dynamicEvent == null)
+            return;
+
         //Update event if its already in dictionary
         if (RegisteredEvents.ContainsKey(eventStatusPair.dynamicEvent)) {
             RegisteredEvents[eventStatusPair.dynamicEvent] = eventStatusPair.eventStatus;

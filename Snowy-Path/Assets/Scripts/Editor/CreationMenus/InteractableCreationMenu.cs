@@ -42,7 +42,7 @@ public class InteractableCreationMenu {
     /// It adds the Interactable script and the OutlineEffect material in first position while conserving other materials.
     /// </summary>
     /// <param name="go">The modified gameobject.</param>
-    private static void MakeGameObjectInteractable(GameObject go) {
+    internal static void MakeGameObjectInteractable(GameObject go) {
 
         Renderer rend = go.GetComponent<Renderer>();
 
