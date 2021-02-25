@@ -80,9 +80,6 @@ public class InputDebug : MonoBehaviour {
     // Gameplay Variables
     private Vector2 move;
     private Vector2 look;
-    private bool running = false;
-    private bool jumping = false; //Never reset in this test
-    private bool interacting = false; //Never reset in this test
     private Tool tool = Tool.Map;
 
     /// <summary>
@@ -112,7 +109,6 @@ public class InputDebug : MonoBehaviour {
     public void OnInteract(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnInteract");
-            interacting = true;
             //Insert action here
         }
     }
@@ -191,7 +187,6 @@ public class InputDebug : MonoBehaviour {
     public void OnJump(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnJump");
-            jumping = true;
             //Insert action here
         }
     }
@@ -203,7 +198,6 @@ public class InputDebug : MonoBehaviour {
     public void OnStartRun(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnStartRun");
-            running = true;
             //Insert action here
         }
     }
@@ -215,7 +209,6 @@ public class InputDebug : MonoBehaviour {
     public void OnStopRun(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnStopRun");
-            running = false;
             //Insert action here
         }
     }
