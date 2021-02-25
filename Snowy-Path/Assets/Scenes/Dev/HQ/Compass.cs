@@ -49,7 +49,6 @@ public class Compass : MonoBehaviour
     {
 
         {
-            //Vector3 lookPos = target.position - transform.position;
             Needle.LookAt(NorthPole);
             Needle.localEulerAngles = new Vector3(0, Needle.localEulerAngles.y, 0);
             //Vector3 lookPos = NorthLayer.position - transform.position;
@@ -75,7 +74,7 @@ public class Compass : MonoBehaviour
         {
 
             isjaming = false;
-            Needle.localPosition=Vector3.Slerp(Needle.localEulerAngles, new Vector3(0, Needle.localEulerAngles.y, 0), Time.deltaTime * speed);
+            Needle.localEulerAngles=Vector3.Slerp(Needle.localEulerAngles, new Vector3(0, Needle.localEulerAngles.y, 0), Time.deltaTime * speed);
 
         }
         
