@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 /// <summary>
 /// Used in the Prefab InputDebug.
@@ -12,29 +13,29 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class InputDebug : MonoBehaviour {
 
+    /*
+    Changed to lastest input for both controller & keyboard/mouse.
+    Fixed attack animation starting multiple times in a row.
+    */
+
     #region Common Variables
+
     private PlayerInput playerInput;
+
     [Tooltip("The PlayerController script of the player Prefab.")]
     public PlayerController playerControl;
+
     [Tooltip("The InteractionController script of the player Prefab.")]
     public InteractionController interactControl;
+
+    [Tooltip("The HandController script of the player Prefab.")]
+    public HandController handControl;
     #endregion
 
     private ActionMap inputType = ActionMap.Gameplay;
 
     void Awake() {
         playerInput = GetComponent<PlayerInput>();
-    }
-
-    /// <summary>
-    /// Simple enum to tools.
-    /// Used ONLY in this script.
-    /// </summary>
-    private enum Tool {
-        Map,
-        Telescope,
-        Gun,
-        COUNT
     }
 
     /// <summary>
@@ -80,7 +81,6 @@ public class InputDebug : MonoBehaviour {
     // Gameplay Variables
     private Vector2 move;
     private Vector2 look;
-    private Tool tool = Tool.Map;
 
     /// <summary>
     /// Move action callback.
@@ -114,68 +114,47 @@ public class InputDebug : MonoBehaviour {
     }
 
     /// <summary>
-    /// SwitchTool action callback.
+    /// Main tool use action callback.
+    /// Use Started & Canceled CallbackContext to simulate both hold & press action with the same binding.
     /// </summary>
     /// <param name="context">Contains input values.</param>
-    public void OnSwitchTools(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnSwitchTools");
+    public void OnMainTool(InputAction.CallbackContext context) {
 
-            Tool nextTool = tool + 1;
-            if (nextTool == Tool.COUNT) {
-                nextTool = Tool.Map;
-            }
-            tool = nextTool;
+        Debug.Log($"OnMainTool : {context.phase}");
 
-            Debug.Log(tool);
+        switch (context.phase) {
+
+            case InputActionPhase.Started:
+                // Call Interface "START HOLD"
+                // Call Interface "MAKE PRESS"
+                break;
+
+            case InputActionPhase.Canceled:
+                // Call Interface "STOP HOLD"
+                break;
+
         }
+
     }
 
     /// <summary>
-    /// LeftHandMain action callback.
+    /// Secondary tool use action callback.
     /// </summary>
     /// <param name="context">Contains input values.</param>
-    public void OnLeftHandMain(InputAction.CallbackContext context) {
+    public void OnSecondaryTool(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnLeftHandMain");
-            //Insert action here
-
-            if (tool == Tool.Map) {
-                ChangeActionMap(ActionMap.Map);
-            }
-
-        }
-    }
-
-    /// <summary>
-    /// LeftHandSecondary action callback.
-    /// </summary>
-    /// <param name="context">Contains input values.</param>
-    public void OnLeftHandSecondary(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnLeftHandSecondary");
+            Debug.Log($"OnSecondaryTool");
             //Insert action here
         }
     }
 
     /// <summary>
-    /// RightHandMain action callback.
+    /// Attack action callback.
     /// </summary>
     /// <param name="context">Contains input values.</param>
-    public void OnRightHandMain(InputAction.CallbackContext context) {
+    public void OnAttack(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnRightHandMain");
-            //Insert action here
-        }
-    }
-
-    /// <summary>
-    /// RightHandSecondary action callback.
-    /// </summary>
-    /// <param name="context">Contains input values.</param>
-    public void OnRightHandSecondary(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnRightHandSecondary");
+            Debug.Log($"OnAttack");
             //Insert action here
         }
     }
@@ -192,23 +171,23 @@ public class InputDebug : MonoBehaviour {
     }
 
     /// <summary>
-    /// SprintStart action callback.
+    /// Hold sprint action callback.
     /// </summary>
     /// <param name="context">Contains input values.</param>
-    public void OnStartRun(InputAction.CallbackContext context) {
+    public void OnHoldSprint(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnStartRun");
+            Debug.Log($"OnHoldSprint");
             //Insert action here
         }
     }
 
     /// <summary>
-    /// SprintStart action callback.
+    /// Toggle sprint action callback.
     /// </summary>
     /// <param name="context">Contains input values.</param>
-    public void OnStopRun(InputAction.CallbackContext context) {
+    public void OnToggleSprint(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnStopRun");
+            Debug.Log($"OnToggleSprint");
             //Insert action here
         }
     }
@@ -220,7 +199,6 @@ public class InputDebug : MonoBehaviour {
     public void OnSelectMap(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnSelectMap");
-            tool = Tool.Map;
             //Insert action here
         }
     }
@@ -232,7 +210,6 @@ public class InputDebug : MonoBehaviour {
     public void OnSelectTelescope(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnSelectTelescope");
-            tool = Tool.Telescope;
             //Insert action here
         }
     }
@@ -244,8 +221,31 @@ public class InputDebug : MonoBehaviour {
     public void OnSelectGun(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log($"OnSelectGun");
-            tool = Tool.Gun;
             //Insert action here
+        }
+    }
+
+    /// <summary>
+    /// Galerie action callback.
+    /// </summary>
+    /// <param name="context">Contains input values.</param>
+    public void OnGalerie(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            Debug.Log($"OnGalerie");
+            //Insert action here
+        }
+    }
+
+    /// <summary>
+    /// SwitchTools action callback.
+    /// </summary>
+    /// <param name="context"></param>
+    public void OnSwitchTools(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            int res = (int)context.ReadValue<float>();
+            Debug.Log($"OnSwitchTools : {res}");
+            //Insert action here
+
         }
     }
 
@@ -388,22 +388,21 @@ public class InputDebug : MonoBehaviour {
                 break;
 
             case ActionMap.Gameplay:
-                GUI.Box(new Rect(10, 10, 200, 370), "Gameplay");
+                GUI.Box(new Rect(10, 10, 200, 340), "Gameplay");
 
                 GUI.Label(new Rect(20, 40, 180, 30), $"Move : {move}");
                 GUI.Label(new Rect(20, 70, 180, 30), $"Look : {look}");
-                GUI.Label(new Rect(20, 100, 180, 30), $"Tool : {tool}");
+                //GUI.Label(new Rect(20, 100, 180, 30), $"Tool : {tool}");
 
                 GUI.Label(new Rect(20, 130, 180, 30), $"CanInteract : {interactControl.CanInteract()}");
 
                 GUI.Label(new Rect(20, 160, 180, 30), $"Sprint duration : {playerControl.SprintTimer}");
-                GUI.Label(new Rect(20, 190, 180, 30), $"Sprint Reco T : {playerControl.SprintRecoveryTimer}");
-                GUI.Label(new Rect(20, 220, 180, 30), $"CurrentSpeed : {playerControl.CurrentSpeed}");
-                GUI.Label(new Rect(20, 250, 180, 30), $"G Velocity : {playerControl.XZVelocity + playerControl.YVelocity}");
-                GUI.Label(new Rect(20, 280, 180, 30), $"Air Velocity : {playerControl.AirVelocity}");
+                GUI.Label(new Rect(20, 190, 180, 30), $"CurrentSpeed : {playerControl.CurrentSpeed}");
+                GUI.Label(new Rect(20, 220, 180, 30), $"G Velocity : {playerControl.XZVelocity + playerControl.YVelocity}");
+                GUI.Label(new Rect(20, 250, 180, 30), $"Air Velocity : {playerControl.AirVelocity}");
 
-                GUI.Label(new Rect(20, 310, 180, 30), $"Running : {playerControl.IsRunning}");
-                GUI.Label(new Rect(20, 340, 180, 30), $"Grounded : {playerControl.IsGrounded}");
+                GUI.Label(new Rect(20, 280, 180, 30), $"Running : {playerControl.IsRunning}");
+                GUI.Label(new Rect(20, 310, 180, 30), $"Grounded : {playerControl.IsGrounded}");
                 break;
 
             case ActionMap.Map:
