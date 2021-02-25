@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour {
+
     [Header("Set up")]
     [SerializeField] Camera playerCamera;
     [SerializeField] Transform groundChecker;
@@ -15,40 +16,66 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float gravity = -9.81f;
 
     [Header("Movement")]
-    [SerializeField] float walkingSpeed = 7.5f;
-    [SerializeField] float backwardSpeed = 7.5f;
-    [SerializeField] float runningSpeed = 10f;
-    [SerializeField] float jumpForce = 10f;
+    [SerializeField] float walkingSpeed = 4f;
+    [SerializeField] float backwardSpeed = 2f;
+    [SerializeField] float runningSpeed = 8f;
+
+    [Header("Sprint")]
     [SerializeField] float maxSprintDuration = 6f;
+    [Tooltip("Recovery rate factor -> recovery = time * sprintRoveryRate")]
+    [SerializeField] float sprintRecoveryRate = 0.5f;
+
+    [Header("Jump")]
+    [SerializeField] float jumpHeight = 1.5f;
+    [SerializeField] float airSpeedX = 3f;
+    [SerializeField] float airSpeedZ = 1f;
 
     [Header("Camera")]
-    [SerializeField] float lookSpeed = 2.0f;
-    [SerializeField] float lookXLimit = 45.0f;
+    [SerializeField] float lookSpeed = 1.0f;
+    [Tooltip("Look limit angle up and down")]
+	[SerializeField] float lookYLimit = 45.0f;
 
     //Status
     private CharacterController controller;
     private bool canMove = true;
+
     private bool isGrounded = true;
+    public bool IsGrounded { get => isGrounded; }
+
     private bool isRunning = false;
+    public bool IsRunning { get => isRunning; }
 
     //Sprint
     private float sprintTimer = 0f;
+    public float SprintTimer { get => sprintTimer; }
+
     private float sprintRecoveryTimer = 0f;
-    private const float sprintTimeToRegen = 1f;
-    private const float sprintRecoveryRate = 0.5f;
+    public float SprintRecoveryTimer { get => sprintRecoveryTimer; }
+
+    private const float sprintTimeToRegen = 0f;
 
     //Velocity
     private float currentSpeed = 0f;
+    public float CurrentSpeed { get => currentSpeed; }
+
     private Vector3 inputs = Vector3.zero;
-    private Vector3 xyVelocity = Vector3.zero;
+
+    private Vector3 xzVelocity = Vector3.zero;
+    public Vector3 XZVelocity { get => xzVelocity; }
+
     private Vector3 yVelocity = Vector3.zero;
+    public Vector3 YVelocity { get => yVelocity; }
+
+    private Vector3 airVelocity = Vector3.zero;
+    public Vector3 AirVelocity { get => airVelocity; }
 
     //Look
     private Vector2 lookPos = Vector2.zero;
-    private float xRotation = 0f;
+    private float yRotation = 0f;
 
     //Parameters
     private const float inputThreshold = 0.2f;
+    private float startStepOffset;
 
     #region MONOBEHAVIOUR METHODS
 
@@ -58,12 +85,19 @@ public class PlayerController : MonoBehaviour {
         //Lock and hide cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        startStepOffset = controller.stepOffset;
     }
 
     void Update() {
 
         //Update ground status
         isGrounded = Physics.CheckSphere(groundChecker.position, groundCheckRadius, groundLayer, QueryTriggerInteraction.Ignore);
+        if (isGrounded) {
+            controller.stepOffset = startStepOffset;
+        }
+        else {
+            controller.stepOffset = 0;
+        }
 
         //Process movement
         UpdateVelocity();
@@ -116,7 +150,10 @@ public class PlayerController : MonoBehaviour {
 
         //Move
         if (canMove) {
-            controller.Move(xyVelocity * Time.deltaTime);
+            controller.Move(xzVelocity * speedFactor * Time.deltaTime);
+            if (!isGrounded) {
+                controller.Move(airVelocity * Time.deltaTime);
+            }
         }
         controller.Move(yVelocity * Time.deltaTime);
     }
@@ -160,6 +197,7 @@ public class PlayerController : MonoBehaviour {
     #region PUBLIC METHODS
     //TODO : Replace by Stat ?
     private float speedFactor = 1f;
+
     public void AlterateSpeed(float factor) {
         speedFactor = factor;
     }
@@ -170,8 +208,8 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
-        float xSpeed = 0f;
-        float zSpeed = 0f;
+
+
 
         //Check for speed change if player is on ground
         if (isGrounded) {
@@ -184,12 +222,18 @@ public class PlayerController : MonoBehaviour {
             else {
                 currentSpeed = walkingSpeed;
             }
+            airVelocity = Vector3.zero;
+            //Compute x and z speed
+            float zSpeed = inputs.z * currentSpeed;
+            float xSpeed = inputs.x * currentSpeed;
+            xzVelocity = (forward * zSpeed) + (right * xSpeed);
+        }
+        else {
+            float xSpeed = inputs.x * airSpeedX;
+            float zSpeed = inputs.z * airSpeedZ;
+            airVelocity = ((forward * zSpeed) + (right * xSpeed));
         }
 
-        //Compute x and z speed
-        zSpeed = inputs.z * currentSpeed * speedFactor;
-        xSpeed = inputs.x * currentSpeed * speedFactor;
-        xyVelocity = (forward * zSpeed) + (right * xSpeed);
     }
 
     private void UpdateInputs(Vector2 contextInputs) {
@@ -209,12 +253,12 @@ public class PlayerController : MonoBehaviour {
 
     private void Jump() {
         if (isGrounded) {
-            yVelocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+            yVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
     }
 
     private void ToggleRun(bool run) {
-        if (sprintTimer < maxSprintDuration) {
+        if (sprintTimer <= 0) {
             isRunning = run;
         }
         else
@@ -223,9 +267,11 @@ public class PlayerController : MonoBehaviour {
 
     private void Look() {
         if (canMove) {
-            xRotation += -lookPos.y * lookSpeed;
-            xRotation = Mathf.Clamp(xRotation, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+
+            yRotation += -lookPos.y * lookSpeed;
+            yRotation = Mathf.Clamp(yRotation, -lookYLimit, lookYLimit);
+            playerCamera.transform.localRotation = Quaternion.Euler(yRotation, 0, 0);
+
             transform.rotation *= Quaternion.Euler(0, lookPos.x * lookSpeed, 0);
         }
     }
@@ -237,9 +283,10 @@ public class PlayerController : MonoBehaviour {
         Gizmos.DrawWireSphere(groundChecker.position, groundCheckRadius);
     }
 
-    private void OnGUI() {
-        GUI.Label(new Rect(50, 400, 400, 200), $"Sprint duration : {sprintTimer}");
-        GUI.Label(new Rect(50, 350, 400, 200), $"CurrentSpeed : {currentSpeed}");
-    }
+    //private void OnGUI() {
+    //    GUI.Label(new Rect(50, 400, 400, 200), $"Sprint duration : {sprintTimer}");
+    //    GUI.Label(new Rect(50, 375, 400, 200), $"CurrentSpeed : {currentSpeed}");
+    //    GUI.Label(new Rect(50, 350, 400, 200), $"Velocity : {xzVelocity}");
+    //}
     #endregion
 }

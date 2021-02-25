@@ -123,7 +123,12 @@ public class Temperature : MonoBehaviour
 
     float GetTemperatureLossRate()
     {
-        return (1 + m_weather.GetCurrentWeather().blizzardStrength) - ((1 + m_weather.GetCurrentWeather().blizzardStrength) * (float)m_inventory.GetCurrentCloth().type / 100f);
+        float clothType = 0f;
+        Cloth cloth = m_inventory.GetCurrentCloth();
+        if (cloth != null)
+            clothType = (float)cloth.type;
+
+        return (1 + m_weather.GetCurrentWeather().blizzardStrength) - ((1 + m_weather.GetCurrentWeather().blizzardStrength) * clothType / 100f);
     }
 
     void OnTriggerEnter(Collider other)
