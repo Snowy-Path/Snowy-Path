@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class JDTorchTest : MonoBehaviour, IHandTool {
 
-    public EToolType ToolType { get => EToolType.Torch; }
-
     public GameObject fireFX;
 
-    public void StartPrimaryUse() {
+    public void PrimaryUse() {
         ToggleFire();
-    }
-   public void CancelPrimaryUse() {
-    }
-
-    public void SecondaryUse() {
     }
 
     public void ToggleDisplay(bool display) {
@@ -24,6 +17,4 @@ public class JDTorchTest : MonoBehaviour, IHandTool {
     private void ToggleFire() {
         fireFX.SetActive(!fireFX.activeSelf);
     }
-
- 
 }

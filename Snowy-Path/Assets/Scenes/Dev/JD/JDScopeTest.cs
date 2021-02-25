@@ -4,18 +4,8 @@ using UnityEngine;
 
 public class JDScopeTest : MonoBehaviour, IHandTool
 {
-    public EToolType ToolType { get => EToolType.Scope; }
-
-    public void StartPrimaryUse() {
+    public void PrimaryUse() {
         Look();
-    }
-
-    public void CancelPrimaryUse() {
-        Debug.Log("Stop using scope");
-    }
-
-    public void SecondaryUse() {
-        Debug.Log("Apply x4 zoom");
     }
 
     public void ToggleDisplay(bool display) {

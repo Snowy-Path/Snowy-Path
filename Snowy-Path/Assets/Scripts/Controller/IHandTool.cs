@@ -4,16 +4,14 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public interface IHandTool {
-    EToolType ToolType { get;}
-    void StartPrimaryUse();
-    void CancelPrimaryUse();
-    void SecondaryUse();
+    void PrimaryUse();
     void ToggleDisplay(bool display);
+
 }
 
 public enum EToolType {
     None,
-    MapCompass,
+    Compass,
     Pistol,
     Scope,
     Torch
