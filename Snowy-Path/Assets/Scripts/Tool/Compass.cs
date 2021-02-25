@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Compass : MonoBehaviour
 {
     private SphereCollider jammingcollider;
-    public Transform NorthPole; //Position of north pole
+    public Vector3 NorthPole; //Position of north pole
     public Transform Needle;
     public float jammingspeed = 20.0f;
     public float JammingRange;
@@ -120,7 +120,7 @@ public class Compass : MonoBehaviour
     /// </summary>
     private void OnDrawGizmos()
     {
-        Gizmos.DrawCube(NorthPole.position, new Vector3(0.5f, 4f, 0.5f));
+        Gizmos.DrawCube(NorthPole, new Vector3(0.5f, 4f, 0.5f));
     }
 
 }
