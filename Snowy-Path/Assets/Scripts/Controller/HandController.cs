@@ -12,7 +12,7 @@ public class HandController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        tools = GetComponentsInChildren<MonoBehaviour>().OfType<IHandTool>().ToArray();
+        tools = GetComponentsInChildren<IHandTool>().ToArray();
         SwitchTool(1);
     }
 
