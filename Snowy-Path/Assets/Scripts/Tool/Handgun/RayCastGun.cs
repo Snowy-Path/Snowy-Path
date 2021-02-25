@@ -249,12 +249,6 @@ public class RayCastGun : Tool
                 reloading = false;
 
             }
-
         }
-
-
     }
-
-
-
 }
