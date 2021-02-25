@@ -5,19 +5,23 @@ using UnityEngine.UI;
 
 public class Compass : MonoBehaviour
 {
-
+    public SphereCollider collider;
     public Transform NorthPole;
     public Transform Needle;
-    public float speed = 1.0f;
-    public float number;
+    public float speed = 20.0f;
     public float JammingRange;
 
     private float jammingchangetime = 1f;
     private float jammingtimer = 0f;
     private bool isjaming;
+    private float number;
 
 
-
+    private void Start()
+    {
+        collider = GetComponent<SphereCollider>();
+        collider.radius = JammingRange;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -59,7 +63,6 @@ public class Compass : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ennemy"))
         {
-            Debug.Log("CA JAM");
             isjaming = true;
 
         }
@@ -70,9 +73,12 @@ public class Compass : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ennemy"))
         {
-            Debug.Log("CA JAM PLUS");
+
             isjaming = false;
+            Needle.localPosition=Vector3.Slerp(Needle.localEulerAngles, new Vector3(0, Needle.localEulerAngles.y, 0), Time.deltaTime * speed);
+
         }
+        
 
     }
 
