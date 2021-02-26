@@ -43,14 +43,11 @@ public class HandController : MonoBehaviour {
             SecondaryUseCurrentTool();
     }
 
-    public void OnPreviousTool(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed)
-            SwitchTool(-1);
-    }
-
-    public void OnNextTool(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed)
-            SwitchTool(1);
+    public void OnScrollTool(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            int shift = (int)context.ReadValue<float>();
+            SwitchTool(shift);
+        }
     }
 
     public void OnEquipMap(InputAction.CallbackContext context) {
