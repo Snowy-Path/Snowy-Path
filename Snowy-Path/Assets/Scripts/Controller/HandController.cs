@@ -7,19 +7,40 @@ using System;
 
 public class HandController : MonoBehaviour {
 
+    public IHandTool CurrentTool {
+        get {
+            if (currentToolIndex > 0) {
+                return tools[currentToolIndex];
+            }
+            else
+                return null;
+        }
+    }
+
     private IHandTool[] tools;
     private int currentToolIndex = -1;
 
     // Start is called before the first frame update
     void Start() {
-        tools = GetComponentsInChildren<IHandTool>().ToArray();
+        tools = GetComponentsInChildren<IHandTool>();
         SwitchTool(1);
     }
 
     #region INPUT SYSTEM EVENTS
-    public void OnUseTool(InputAction.CallbackContext context) {
+    public void OnPrimaryUseTool(InputAction.CallbackContext context) {
+        switch (context.phase) {
+            case InputActionPhase.Started:
+                PrimaryUseCurrentTool();
+                break;
+            case InputActionPhase.Canceled:
+                CancelUseCurrentTool();
+                break;
+        }
+    }
+
+    public void OnSecondaryUseTool(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed)
-            UseCurrentTool();
+            SecondaryUseCurrentTool();
     }
 
     public void OnPreviousTool(InputAction.CallbackContext context) {
@@ -34,27 +55,44 @@ public class HandController : MonoBehaviour {
 
     public void OnEquipMap(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
-            EquipTool(typeof(JDCompassTest));
+            EquipTool(EToolType.MapCompass);
         }
     }
 
     public void OnEquipGun(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed)
-            EquipTool(typeof(JDPistolTest));
+            EquipTool(EToolType.Pistol);
     }
 
     public void OnEquipScope(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed)
-            EquipTool(typeof(JDScopeTest));
+            EquipTool(EToolType.Scope);
     }
     #endregion
 
     /// <summary>
-    /// Use active tool
+    /// Use active tool primary function
     /// </summary>
-    private void UseCurrentTool() {
+    private void PrimaryUseCurrentTool() {
         if (tools.Length > 0)
-            tools[currentToolIndex].PrimaryUse();
+            tools[currentToolIndex].StartPrimaryUse();
+    }
+
+    /// <summary>
+    /// Use active tool secondary function
+    /// </summary>
+    private void SecondaryUseCurrentTool() {
+        if (tools.Length > 0)
+            tools[currentToolIndex].SecondaryUse();
+    }
+
+
+    /// <summary>
+    /// Cancel active tool use
+    /// </summary>
+    private void CancelUseCurrentTool() {
+        if (tools.Length > 0)
+            tools[currentToolIndex].CancelPrimaryUse();
     }
 
     /// <summary>
@@ -95,7 +133,7 @@ public class HandController : MonoBehaviour {
     /// </summary>
     /// <param name="type">The type of tool to equip</param>
     /// <returns>Returns true if a tool was equiped, fase if not</returns>
-    private bool EquipTool(Type type) {
+    private bool EquipTool(EToolType type) {
         if (TryGetToolIndex(type, out int index)) {
             currentToolIndex = index;
 
@@ -114,10 +152,10 @@ public class HandController : MonoBehaviour {
     /// <param name="type">The type of tool to found</param>
     /// <param name="index">Found tool index or -1 if no mathching tool</param>
     /// <returns>Returns true if a tool of matching type has been found</returns>
-    private bool TryGetToolIndex(Type type, out int index) {
+    private bool TryGetToolIndex(EToolType type, out int index) {
 
         for (int i = 0; i < tools.Length; i++) {
-            if (tools[i].GetType() == type) {
+            if (tools[i].ToolType == type) {
                 index = i;
                 return true;
             }
@@ -126,5 +164,4 @@ public class HandController : MonoBehaviour {
         index = -1;
         return false;
     }
-
 }
