@@ -237,7 +237,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1437083488534674567}
-        m_MethodName: OnUseTool
+        m_MethodName: OnPrimaryUseTool
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -252,7 +252,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1437083488534674567}
-        m_MethodName: OnUseTool
+        m_MethodName: OnSecondaryUseTool
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -634,7 +634,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1437083488951513501}
-  - component: {fileID: 1437083489233032485}
+  - component: {fileID: 2023343007}
   m_Layer: 9
   m_Name: MapCompass
   m_TagString: Untagged
@@ -658,7 +658,7 @@ Transform:
   m_Father: {fileID: 8256996042156590771}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1437083489233032485
+--- !u!114 &2023343007
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -667,9 +667,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1437083488951513502}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 245629e03fb191c42a5885953a5b6868, type: 3}
+  m_Script: {fileID: 11500000, guid: 9dad7c30c7b33404d802d68c1ea743d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NorthPole: {x: 0, y: 0, z: 100000}
+  Needle: {fileID: 2377815802117831009}
+  jammingspeed: 20
+  JammingRange: 0
 --- !u!1 &1437083489062470832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,6 +1796,12 @@ PrefabInstance:
 --- !u!4 &1475829020424799374 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9c92b8f7f6b0c5b4c952a35c6e2702bc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1437083489112384357}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2377815802117831009 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -5544431357015074300, guid: 9c92b8f7f6b0c5b4c952a35c6e2702bc,
     type: 3}
   m_PrefabInstance: {fileID: 1437083489112384357}
   m_PrefabAsset: {fileID: 0}

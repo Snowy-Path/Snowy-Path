@@ -34,6 +34,7 @@ public class RayCastGun : Tool, IHandTool
     public int maxMagazineCapacity = 1;
     public int projectilePerShot;
 
+    public EToolType ToolType => EToolType.Pistol;
 
     void Start()
     {
@@ -184,8 +185,9 @@ public class RayCastGun : Tool, IHandTool
     /// Reload weapon if enough Ammo in inventory
     /// </summary>
     /// 
-    public void PrimaryUse() {
-        if(Time.time > nextFire && !reloading && ammo > 0 && readyToShoot) {
+
+    public void StartPrimaryUse() {
+        if (Time.time > nextFire && !reloading && ammo > 0 && readyToShoot) {
             projectileShot = projectilePerShot;
             Shot();
             StartCoroutine("DammageApply");
@@ -196,6 +198,17 @@ public class RayCastGun : Tool, IHandTool
                 SecondaryInteraction();
             }
         }
+    }
+
+    public void CancelPrimaryUse() {
+        //Cancel is not possible on pistol
+
+
+    }
+
+    public void SecondaryUse() {
+        Debug.Log("Nothing");
+
     }
 
     public void ToggleDisplay(bool display) {
