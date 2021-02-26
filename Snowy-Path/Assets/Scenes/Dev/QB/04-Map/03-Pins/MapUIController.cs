@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class MapUIController : MonoBehaviour
 {
     public float mapPinScale = 1f;
+    public InputActionAsset m_inputActionAsset;
 
     private MapUI m_mapUI;
     private MapPinPanel m_pinPanel;
+    private bool m_canPlacePin = false;
 
     void Start()
     {
@@ -19,11 +21,18 @@ public class MapUIController : MonoBehaviour
 
     void Update()
     {
+        InputAction moveAction = m_inputActionAsset.FindAction("UI/Map Move");
+        Debug.Log(moveAction + " " + moveAction.triggered);
+        if (moveAction.triggered)
+            m_canPlacePin = false;
     }
 
     public void OnPinPlaced(InputAction.CallbackContext context)
     {
-        if (context.canceled) {
+        if (context.started)
+            m_canPlacePin = true;
+
+        if (m_canPlacePin && context.canceled) {
             int currentPinType = m_pinPanel.CurrentPinType;
             if (currentPinType != -1) {
                 GameObject child = new GameObject("MapPin");
