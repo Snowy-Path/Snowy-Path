@@ -26,6 +26,9 @@ public class ClothCreationMenu {
         // Scene utility
         GameObjectUtility.SetParentAndAlign(go, menuCommand.context as GameObject);
 
+        // Last child of parent / Bottom of hierarchy
+        go.transform.SetAsLastSibling();
+
         Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
         Selection.activeObject = go;
 
@@ -48,6 +51,9 @@ public class ClothCreationMenu {
         // Scene utility
         GameObjectUtility.SetParentAndAlign(go, menuCommand.context as GameObject);
 
+        // Last child of parent / Bottom of hierarchy
+        go.transform.SetAsLastSibling();
+
         Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
         Selection.activeObject = go;
 
@@ -69,6 +75,9 @@ public class ClothCreationMenu {
 
         // Scene utility
         GameObjectUtility.SetParentAndAlign(go, menuCommand.context as GameObject);
+
+        // Last child of parent / Bottom of hierarchy
+        go.transform.SetAsLastSibling();
 
         Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
         Selection.activeObject = go;
