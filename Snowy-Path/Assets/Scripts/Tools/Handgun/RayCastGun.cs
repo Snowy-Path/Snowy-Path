@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class RayCastGun : Tool
+public class RayCastGun : Tool, IHandTool
 {
     public static bool endEnnemySet = false;
     public int damageDealt = 0;
@@ -52,7 +52,7 @@ public class RayCastGun : Tool
         Keyboard keyboard = Keyboard.current;
 
         //If the Player press fire button, isn't shooting or reloading and have ammo left
-        if (keyboard.eKey.wasPressedThisFrame && Time.time > nextFire && !reloading && ammo > 0 && readyToShoot)
+        if (keyboard.eKey.wasPressedThisFrame )
         {
             MainInteraction();
             if (maxAmmo > 0)
@@ -184,15 +184,24 @@ public class RayCastGun : Tool
     /// Reload weapon if enough Ammo in inventory
     /// </summary>
     /// 
+    public void PrimaryUse() {
+        if(Time.time > nextFire && !reloading && ammo > 0 && readyToShoot) {
+            projectileShot = projectilePerShot;
+            Shot();
+            StartCoroutine("DammageApply");
+            ammo--;
 
-    private new void MainInteraction()
-    {
-        projectileShot = projectilePerShot;
-        Shot();
-        StartCoroutine("DammageApply");
-        ammo--;
-
+            if (maxAmmo > 0) {
+                //Start reloading method
+                SecondaryInteraction();
+            }
+        }
     }
+
+    public void ToggleDisplay(bool display) {
+        gameObject.SetActive(display);
+    }
+
     private new void SecondaryInteraction()
     {
         if (maxAmmo >= 0)
@@ -251,4 +260,6 @@ public class RayCastGun : Tool
             }
         }
     }
+
+
 }
