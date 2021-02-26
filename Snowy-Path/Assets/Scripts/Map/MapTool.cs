@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class MapTool : MonoBehaviour
 {
-    public GameObject mapUI;
+    public GameObject map;
 
     private PlayerInput m_playerInput;
 
@@ -18,9 +18,9 @@ public class MapTool : MonoBehaviour
     {
         var keyboard = Keyboard.current;
         if (keyboard.mKey.wasPressedThisFrame) {
-            mapUI.SetActive(!mapUI.activeSelf);
+            map.SetActive(!map.activeSelf);
 
-            if (mapUI.activeSelf) {
+            if (map.activeSelf) {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 m_playerInput.SwitchCurrentActionMap("UI");

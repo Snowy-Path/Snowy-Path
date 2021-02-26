@@ -7,7 +7,7 @@ public class MapPinPanel : MonoBehaviour
 {
     public List<Color> pinTypes;
 
-    private int m_currentPinType = -1;
+    private int m_currentPinType = 0;
     public int CurrentPinType { get { return m_currentPinType; } }
     public Color CurrentPinColor { get { return pinTypes[m_currentPinType]; } }
 
