@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MapPinPanel : MonoBehaviour
 {
+    public Map map;
     public List<Color> pinTypes;
 
     private int m_currentPinType = 0;
@@ -38,5 +39,7 @@ public class MapPinPanel : MonoBehaviour
 
     void OnButtonClick(int i) {
         m_currentPinType = i;
+
+        map.OnPinTypeChanged();
     }
 }

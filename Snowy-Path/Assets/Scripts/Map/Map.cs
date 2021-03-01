@@ -16,6 +16,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
     private bool m_isDragging = false;
     private bool m_isPinModeEnabled = false;
     private RectTransform m_rectTransform;
+    private GameObject m_lastPinPlaced;
 
     void Start()
     {
@@ -63,8 +64,49 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
         Zoom(data);
     }
 
+    public void PinConfirm()
+    {
+        m_isPinModeEnabled = false;
+        pinPanel.gameObject.SetActive(false);
+        m_lastPinPlaced = null;
+    }
+
+    public void PinRemove()
+    {
+        m_isPinModeEnabled = false;
+        pinPanel.gameObject.SetActive(false);
+        Destroy(m_lastPinPlaced);
+        m_lastPinPlaced = null;
+    }
+
+    public void PinCancel()
+    {
+        m_isPinModeEnabled = false;
+        pinPanel.gameObject.SetActive(false);
+        Destroy(m_lastPinPlaced);
+        m_lastPinPlaced = null;
+    }
+
+    void OnButtonClick(GameObject button)
+    {
+        m_lastPinPlaced = button;
+        m_isPinModeEnabled = true;
+        pinPanel.gameObject.SetActive(true);
+    }
+
+    public void OnPinTypeChanged()
+    {
+        if (m_lastPinPlaced != null)
+            m_lastPinPlaced.GetComponent<Image>().color = pinPanel.CurrentPinColor;
+    }
+
     void PlacePin(PointerEventData data)
     {
+        if (m_lastPinPlaced != null) {
+            Destroy(m_lastPinPlaced);
+            m_lastPinPlaced = null;
+        }
+
         int currentPinType = pinPanel.CurrentPinType;
         if (!m_isPinModeEnabled) {
             m_isPinModeEnabled = true;
@@ -93,9 +135,11 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
         image.color = pinPanel.CurrentPinColor;
 
         Button button = child.AddComponent<Button>();
-        // button.onClick.AddListener(() => OnButtonClick(mapPinID));
+        button.onClick.AddListener(() => OnButtonClick(child));
 
         child.AddComponent<MapPin>().scale = mapPinScale;
+
+        m_lastPinPlaced = child;
     }
 
     void Zoom(PointerEventData data)
