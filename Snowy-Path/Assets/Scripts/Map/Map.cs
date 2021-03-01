@@ -63,7 +63,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
         Zoom(data);
     }
 
-    private void PlacePin(PointerEventData data)
+    void PlacePin(PointerEventData data)
     {
         int currentPinType = pinPanel.CurrentPinType;
         if (!m_isPinModeEnabled) {
@@ -98,7 +98,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
         child.AddComponent<MapPin>().scale = mapPinScale;
     }
 
-    public void Zoom(PointerEventData data)
+    void Zoom(PointerEventData data)
     {
         float scroll = data.scrollDelta.y;
 
@@ -130,7 +130,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
             mapPin.UpdateScale();
     }
 
-    private void DragMap(PointerEventData data)
+    void DragMap(PointerEventData data)
     {
         var delta = data.delta * mouseDragSpeed;
         m_rectTransform.anchoredPosition = Vector2.Lerp(m_rectTransform.anchoredPosition, m_rectTransform.anchoredPosition + delta, Time.deltaTime);
