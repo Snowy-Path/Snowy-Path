@@ -15,6 +15,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
 
     private bool m_isDragging = false;
     private bool m_isPinModeEnabled = false;
+    private bool m_isEditingPin = false;
     private RectTransform m_rectTransform;
     private GameObject m_lastPinPlaced;
 
@@ -66,6 +67,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
 
     public void PinConfirm()
     {
+        m_isEditingPin = false;
         m_isPinModeEnabled = false;
         pinPanel.gameObject.SetActive(false);
         m_lastPinPlaced = null;
@@ -73,6 +75,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
 
     public void PinRemove()
     {
+        m_isEditingPin = false;
         m_isPinModeEnabled = false;
         pinPanel.gameObject.SetActive(false);
         Destroy(m_lastPinPlaced);
@@ -83,13 +86,19 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
     {
         m_isPinModeEnabled = false;
         pinPanel.gameObject.SetActive(false);
-        Destroy(m_lastPinPlaced);
-        m_lastPinPlaced = null;
+
+        if (!m_isEditingPin) {
+            Destroy(m_lastPinPlaced);
+            m_lastPinPlaced = null;
+        }
+
+        m_isEditingPin = false;
     }
 
-    void OnButtonClick(GameObject button)
+    void OnPinClick(GameObject pin)
     {
-        m_lastPinPlaced = button;
+        m_isEditingPin = true;
+        m_lastPinPlaced = pin;
         m_isPinModeEnabled = true;
         pinPanel.gameObject.SetActive(true);
     }
@@ -135,7 +144,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
         image.color = pinPanel.CurrentPinColor;
 
         Button button = child.AddComponent<Button>();
-        button.onClick.AddListener(() => OnButtonClick(child));
+        button.onClick.AddListener(() => OnPinClick(child));
 
         child.AddComponent<MapPin>().scale = mapPinScale;
 
