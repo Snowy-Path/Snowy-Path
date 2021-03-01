@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
     [Header("Camera")]
     [SerializeField] float lookSpeed = 1.0f;
     [Tooltip("Look limit angle up and down")]
-	[SerializeField] float lookYLimit = 45.0f;
+    [SerializeField] float lookYLimit = 45.0f;
 
     //Status
     private CharacterController controller;
@@ -111,15 +111,18 @@ public class PlayerController : MonoBehaviour {
 
             //Stop sprint if reached max sprint duration
             if (sprintTimer >= maxSprintDuration)
-                ToggleRun(false);
+                isRunning = false;
         }
-        else if (sprintTimer > 0) {     //Sprint recovery
+        else if (sprintTimer > 0) {     //If not running, start recovery
+            isRunning = false;
+
             if (sprintRecoveryTimer >= sprintTimeToRegen) {
                 sprintTimer = Mathf.Clamp(sprintTimer - (sprintRecoveryRate * Time.deltaTime), 0.0f, maxSprintDuration);
             }
             else
                 sprintRecoveryTimer += Time.deltaTime;
         }
+
 
         #region DEBUG
         Keyboard keyboard = Keyboard.current;
@@ -174,15 +177,23 @@ public class PlayerController : MonoBehaviour {
         lookPos = context.ReadValue<Vector2>();
     }
 
-    public void OnStartRun(InputAction.CallbackContext context) {
+    public void OnHoldSprint(InputAction.CallbackContext context) {
+        switch (context.phase) {
+            case InputActionPhase.Started:
+                ToggleRun(true);
+                break;
+            case InputActionPhase.Canceled:
+                ToggleRun(false);
+                break;
+        }
         if (context.phase == InputActionPhase.Performed) {
             ToggleRun(true);
         }
     }
 
-    public void OnStopRun(InputAction.CallbackContext context) {
+    public void OnToggleSprint(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
-            ToggleRun(false);
+            ToggleRun(!isRunning);
         }
     }
 
@@ -207,7 +218,6 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
-
 
 
         //Check for speed change if player is on ground
