@@ -5,12 +5,16 @@ using UnityEngine.InputSystem;
 
 public class MapTool : MonoBehaviour
 {
-    public GameObject map;
+    public GameObject mapObject;
+    public RectTransform mapPreview;
 
+    private RectTransform m_map;
     private PlayerInput m_playerInput;
+    private CanvasRenderer m_canvasRenderer;
 
     void Start()
     {
+        m_map = mapObject.GetComponentInChildren<Map>().GetComponent<RectTransform>();
         m_playerInput = GetComponentInParent<PlayerInput>();
     }
 
@@ -18,14 +22,17 @@ public class MapTool : MonoBehaviour
     {
         var keyboard = Keyboard.current;
         if (keyboard.mKey.wasPressedThisFrame) {
-            map.SetActive(!map.activeSelf);
+            mapObject.SetActive(!mapObject.activeSelf);
 
-            if (map.activeSelf) {
+            if (mapObject.activeSelf) {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 m_playerInput.SwitchCurrentActionMap("UI");
             }
             else {
+                mapPreview.localScale = m_map.localScale;
+                mapPreview.anchoredPosition = m_map.anchoredPosition;
+
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 m_playerInput.SwitchCurrentActionMap("Gameplay");
