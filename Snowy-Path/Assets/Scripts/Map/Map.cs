@@ -19,6 +19,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
     private RectTransform m_rectTransform;
     private GameObject m_lastPinPlaced;
     private Vector3 m_lastPinPosition;
+    private Color m_lastPinColor;
 
     void Start()
     {
@@ -92,8 +93,10 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
             Destroy(m_lastPinPlaced);
             m_lastPinPlaced = null;
         }
-        else
+        else {
             m_lastPinPlaced.transform.position = m_lastPinPosition;
+            m_lastPinPlaced.GetComponent<Image>().color = m_lastPinColor;
+        }
 
         m_isEditingPin = false;
     }
@@ -103,6 +106,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
         m_isEditingPin = true;
         m_lastPinPosition = pin.transform.position;
         m_lastPinPlaced = pin;
+        m_lastPinColor = pin.GetComponent<Image>().color;
         OpenPinPanel();
     }
 
