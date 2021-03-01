@@ -13,7 +13,7 @@ public class PowderCreationMenu {
     /// Instantiate a Powder Prefab with the Interactable script.
     /// </summary>
     /// <param name="menuCommand"></param>
-    [MenuItem("GameObject/Powders/Powder", false, 10)]
+    [MenuItem("GameObject/Powder", false, 10)]
     public static void CreatePowder(MenuCommand menuCommand) {
 
         // LightCloth prefab
@@ -24,6 +24,9 @@ public class PowderCreationMenu {
 
         // Scene utility
         GameObjectUtility.SetParentAndAlign(go, menuCommand.context as GameObject);
+
+        // Last child of parent / Bottom of hierarchy
+        go.transform.SetAsLastSibling();
 
         Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
         Selection.activeObject = go;
