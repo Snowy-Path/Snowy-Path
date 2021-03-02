@@ -11,6 +11,9 @@ public class WolfController : MonoBehaviour {
 
     private void Start() {
         navMeshAgent = GetComponent<NavMeshAgent>();
+    }
+
+    private void Update() {
         HeadForDestination();
     }
 
