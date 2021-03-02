@@ -579,7 +579,7 @@ GameObject:
   - component: {fileID: 1648512249}
   m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -614,7 +614,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1.6
   m_Radius: 0.3
-  m_SlopeLimit: 45
+  m_SlopeLimit: 30
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -644,9 +644,11 @@ MonoBehaviour:
   maxSprintDuration: 4
   sprintRecoveryRate: 0.66
   jumpHeight: 1
-  airSpeedFactor: 0.6
+  airSpeedFactor: 0.8
   airSpeedX: 3
   airSpeedZ: 2
+  slideSpeed: 10
+  groundMaxDist: 0.6
   lookSpeed: 0.1
   lookYLimit: 45
 --- !u!114 &2481539305689220675
@@ -1411,7 +1413,7 @@ GameObject:
   - component: {fileID: 5978893885102536851}
   - component: {fileID: 3734762775362929644}
   - component: {fileID: 8745903255082434868}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1426,7 +1428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6831642984538434871}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.85, z: 0}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 0.6, y: 0.8, z: 0.6}
   m_Children: []
   m_Father: {fileID: 18293541002357375}

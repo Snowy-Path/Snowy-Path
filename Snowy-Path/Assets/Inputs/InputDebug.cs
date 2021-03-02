@@ -399,8 +399,7 @@ public class InputDebug : MonoBehaviour {
                 GUI.Label(new Rect(20, 160, 180, 30), $"Sprint duration : {playerControl.SprintTimer}");
                 GUI.Label(new Rect(20, 190, 180, 30), $"CurrentSpeed : {playerControl.CurrentSpeed}");
                 GUI.Label(new Rect(20, 220, 180, 30), $"G Velocity : {playerControl.XZVelocity + playerControl.YVelocity}");
-                GUI.Label(new Rect(20, 250, 180, 30), $"Air Velocity : {playerControl.AirVelocity}");
-                GUI.Label(new Rect(20, 270, 180, 30), $"Actual Velocity : {playerControl.ActualVelocity}");
+                GUI.Label(new Rect(20, 250, 180, 30), $"Actual Velocity : {playerControl.ActualVelocity}");
 
                 GUI.Label(new Rect(20, 300, 180, 30), $"Running : {playerControl.IsRunning}");
                 GUI.Label(new Rect(20, 320, 180, 30), $"Grounded : {playerControl.IsGrounded}");
