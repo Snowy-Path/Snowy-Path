@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Jump")]
     [SerializeField] float jumpHeight = 1.5f;
+    [SerializeField] float airSpeedFactor = 0.7f;
     [SerializeField] float airSpeedX = 3f;
     [SerializeField] float airSpeedZ = 1f;
 
@@ -68,6 +69,10 @@ public class PlayerController : MonoBehaviour {
 
     private Vector3 airVelocity = Vector3.zero;
     public Vector3 AirVelocity { get => airVelocity; }
+    public Vector3 ActualVelocity { get => controller.velocity; }
+
+    //TODO : Replace by Stat ?
+    public float SpeedFactor { get; set; }
 
     //Look
     private Vector2 lookPos = Vector2.zero;
@@ -86,6 +91,7 @@ public class PlayerController : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         startStepOffset = controller.stepOffset;
+        SpeedFactor = 1f;
     }
 
     void Update() {
@@ -105,7 +111,7 @@ public class PlayerController : MonoBehaviour {
         Look();
 
         //Update stamina
-        if (isRunning && inputs.z >= inputThreshold) {
+        if (isRunning) {
             sprintTimer += Time.deltaTime;
             sprintRecoveryTimer = 0.0f;
 
@@ -127,10 +133,10 @@ public class PlayerController : MonoBehaviour {
         #region DEBUG
         Keyboard keyboard = Keyboard.current;
         if (keyboard.kKey.wasPressedThisFrame) {
-            AlterateSpeed(0.5f);
-        }
-        if (keyboard.jKey.wasPressedThisFrame) {
-            AlterateSpeed(1f);
+            if (SpeedFactor != 1f)
+                SpeedFactor = 1f;
+            else
+                SpeedFactor = 0.5f;
         }
         //if (keyboard.wKey.wasPressedThisFrame) {
         //    isMoving = true;
@@ -153,11 +159,19 @@ public class PlayerController : MonoBehaviour {
 
         //Move
         if (canMove) {
-            controller.Move(xzVelocity * speedFactor * Time.deltaTime);
-            if (!isGrounded) {
-                controller.Move(airVelocity * Time.deltaTime);
+            Vector3 finalVelocity = Vector3.zero;
+
+            if (isGrounded) {
+                finalVelocity = xzVelocity;
             }
+            else {
+                //xzVelocity = xzVelocity - new Vector3(0.0001f, 0, 0001f); 
+                finalVelocity = (xzVelocity + airVelocity) * airSpeedFactor;
+            }
+
+            controller.Move(finalVelocity * SpeedFactor * Time.deltaTime);
         }
+
         controller.Move(yVelocity * Time.deltaTime);
     }
     #endregion
@@ -180,20 +194,17 @@ public class PlayerController : MonoBehaviour {
     public void OnHoldSprint(InputAction.CallbackContext context) {
         switch (context.phase) {
             case InputActionPhase.Started:
-                ToggleRun(true);
+                ToggleSprint(true);
                 break;
             case InputActionPhase.Canceled:
-                ToggleRun(false);
+                ToggleSprint(false);
                 break;
-        }
-        if (context.phase == InputActionPhase.Performed) {
-            ToggleRun(true);
         }
     }
 
     public void OnToggleSprint(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
-            ToggleRun(!isRunning);
+            ToggleSprint(!isRunning);
         }
     }
 
@@ -204,25 +215,15 @@ public class PlayerController : MonoBehaviour {
     }
     #endregion
 
-    #region PUBLIC METHODS
-    //TODO : Replace by Stat ?
-    private float speedFactor = 1f;
-
-    public void AlterateSpeed(float factor) {
-        speedFactor = factor;
-    }
-    #endregion
-
     #region PRIVATE METHODS
     private void UpdateVelocity() {
 
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
-
         //Check for speed change if player is on ground
         if (isGrounded) {
-            if (isRunning && inputs.z >= inputThreshold) {
+            if (isRunning) {
                 currentSpeed = runningSpeed;
             }
             else if (inputs.z <= -inputThreshold) {
@@ -232,6 +233,7 @@ public class PlayerController : MonoBehaviour {
                 currentSpeed = walkingSpeed;
             }
             airVelocity = Vector3.zero;
+
             //Compute x and z speed
             float zSpeed = inputs.z * currentSpeed;
             float xSpeed = inputs.x * currentSpeed;
@@ -266,8 +268,8 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void ToggleRun(bool run) {
-        if (sprintTimer <= 0) {
+    private void ToggleSprint(bool run) {
+        if (sprintTimer <= 0 && inputs.z >= inputThreshold) {
             isRunning = run;
         }
         else
@@ -284,6 +286,10 @@ public class PlayerController : MonoBehaviour {
             transform.rotation *= Quaternion.Euler(0, lookPos.x * lookSpeed, 0);
         }
     }
+
+    //void OnControllerColliderHit(ControllerColliderHit hit) {
+    //    Debug.Log(hit.normal);
+    //}
     #endregion
 
     #region DEBUG
@@ -291,11 +297,5 @@ public class PlayerController : MonoBehaviour {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(groundChecker.position, groundCheckRadius);
     }
-
-    //private void OnGUI() {
-    //    GUI.Label(new Rect(50, 400, 400, 200), $"Sprint duration : {sprintTimer}");
-    //    GUI.Label(new Rect(50, 375, 400, 200), $"CurrentSpeed : {currentSpeed}");
-    //    GUI.Label(new Rect(50, 350, 400, 200), $"Velocity : {xzVelocity}");
-    //}
     #endregion
 }
