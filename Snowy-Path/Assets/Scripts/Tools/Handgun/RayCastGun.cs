@@ -47,30 +47,6 @@ public class RayCastGun : Tool, IHandTool
         readyToShoot = true;
     }
 
-
-    void Update()
-    {
-        Keyboard keyboard = Keyboard.current;
-
-        //If the Player press fire button, isn't shooting or reloading and have ammo left
-        if (keyboard.eKey.wasPressedThisFrame )
-        {
-            MainInteraction();
-            if (maxAmmo > 0)
-            {
-                //Start reloading method
-                SecondaryInteraction();
-            }
-        }
-        //If the Player press reload button
-        if (keyboard.fKey.wasPressedThisFrame && maxAmmo > 0)
-        {
-            //Start reloading method
-            SecondaryInteraction();
-        }
-
-    }
-
     /// <summary>
     /// Visual effect of a laser line
     /// </summary>
