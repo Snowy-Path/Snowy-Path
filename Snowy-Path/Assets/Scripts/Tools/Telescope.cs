@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Telescope : MonoBehaviour
+public class Telescope : MonoBehaviour, IHandTool
 {
 
     public GameObject scopeOverlay; //Overlay effect on UI
@@ -13,6 +13,9 @@ public class Telescope : MonoBehaviour
     public float magnification2;
     private float normalFOV; //Basic Camera FOV
     private bool isScoped;
+
+    public EToolType ToolType =>EToolType.Scope;
+
     private void Start()
     {
         scopeOverlay.SetActive(true);
@@ -23,43 +26,28 @@ public class Telescope : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        Keyboard keyboard = Keyboard.current;
-        if (keyboard.hKey.wasPressedThisFrame)
-        {
-            MainInteraction();
-        }
-        //If in scope mode, change FOV
-        if (keyboard.jKey.wasPressedThisFrame && isScoped)
-        {
-            SecondaryInteraction();
-        }
-    }
-    /// <summary>
-    /// If unscoped, active scope mode, else disactive it
-    /// </summary>
-    void MainInteraction()
-    {
+    public void StartPrimaryUse() {
         isScoped = !isScoped;
-        if (isScoped)
-        {
+        if (isScoped) {
             StartCoroutine(OnScoped());
 
         }
-        else
-        {
+        else {
             OnUnscoped();
 
         }
-
     }
-    /// <summary>
-    /// Change FOV to zoom further
-    /// </summary>
-    void SecondaryInteraction()
-    {
+
+    public void CancelPrimaryUse() {
+        // Nothing
+    }
+
+    public void SecondaryUse() {
         MainCamera.fieldOfView = magnification2;
+    }
+
+    public void ToggleDisplay(bool display) {
+        gameObject.SetActive(display);
     }
 
     /// <summary>
@@ -90,6 +78,8 @@ public class Telescope : MonoBehaviour
         MainCamera.fieldOfView = magnification1;
 
     }
+
+
 }
 
 
