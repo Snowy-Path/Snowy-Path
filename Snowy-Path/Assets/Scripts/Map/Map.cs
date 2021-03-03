@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IScrollHandler, ICancelHandler, ISubmitHandler
+public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IScrollHandler
 {
     public float mapPinScale = 1f;
     public float zoomStep = 0.1f;
@@ -13,6 +14,11 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
     public float mouseDragSpeed = 100f;
     public MapPinPanel pinPanel;
     public MapCompass mapCompass;
+    public InputActionAsset inputActionAsset;
+    public RectTransform cursor;
+    public float cursorSpeed = 200f;
+    public float cursorScrollSpeed = 2f;
+    public float controllerZoomSpeed = 0.5f;
 
     private bool m_isDragging = false;
     private bool m_isPinModeEnabled = false;
@@ -21,9 +27,18 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
     private GameObject m_lastPinPlaced;
     private Vector3 m_lastPinPosition;
     private Color m_lastPinColor;
+    private Vector2 m_cursorVelocity;
+    private float m_zoomVelocity = 0f;
 
     void Start()
     {
+        inputActionAsset.FindAction("Map/Confirm").performed += OnConfirm;
+        inputActionAsset.FindAction("Map/Cancel").performed += OnCancel;
+        inputActionAsset.FindAction("Map/Navigate").performed += OnNavigate;
+        inputActionAsset.FindAction("Map/Navigate").canceled += OnNavigate;
+        inputActionAsset.FindAction("Map/Zoom").performed += OnZoom;
+        inputActionAsset.FindAction("Map/Zoom").canceled += OnZoom;
+
         if (pinPanel == null)
             Debug.LogError("[MapUIController] Can't find map pin panel.");
         else
@@ -31,6 +46,21 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
 
         m_rectTransform = GetComponent<RectTransform>();
     }
+
+    // Note: Here we apply the movement/zoom using the velocities (Controller mode only)
+    void Update()
+    {
+        cursor.anchoredPosition = cursor.anchoredPosition + m_cursorVelocity * Time.deltaTime;
+        m_rectTransform.anchoredPosition = Vector2.Lerp(m_rectTransform.anchoredPosition, -cursor.anchoredPosition * m_rectTransform.localScale, Time.deltaTime * cursorScrollSpeed);
+        if (m_zoomVelocity != 0)
+            Zoom(m_zoomVelocity, RectTransformUtility.WorldToScreenPoint(Camera.current, cursor.transform.position), true);
+        else
+            KeepMapCenteredInView();
+    }
+
+    //=========================================================================
+    // Unity EventSystem callbacks
+    //=========================================================================
 
     public void OnPointerClick(PointerEventData data)
     {
@@ -40,44 +70,59 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
 
     public void OnBeginDrag(PointerEventData data)
     {
-        // Debug.Log("begin drag:" + data);
         m_isDragging = true;
         DragMap(data);
     }
 
     public void OnDrag(PointerEventData data)
     {
-        // Debug.Log("drag:" + data);
         DragMap(data);
     }
 
     public void OnEndDrag(PointerEventData data)
     {
-        // Debug.Log("end drag:" + data);
         DragMap(data);
         m_isDragging = false;
     }
 
     public void OnScroll(PointerEventData data)
     {
-        Zoom(data);
+        Zoom(data.scrollDelta.y, data.position);
     }
 
-    public void OnCancel(BaseEventData data)
+    //=========================================================================
+    // Unity InputSystem callbacks
+    //=========================================================================
+
+    void OnCancel(InputAction.CallbackContext context)
     {
-        Debug.Log("cancel:" + data);
         if (m_isPinModeEnabled)
             ClosePinPanel();
         else
             mapCompass.CloseFullscreenMap();
     }
 
-    public void OnSubmit(BaseEventData data)
+    void OnConfirm(InputAction.CallbackContext context)
     {
-        Debug.Log("submit:" + data);
         if (m_isPinModeEnabled)
             PinConfirm();
     }
+
+    void OnNavigate(InputAction.CallbackContext context)
+    {
+        var movement = context.ReadValue<Vector2>();
+        m_cursorVelocity = movement * cursorSpeed;
+    }
+
+    void OnZoom(InputAction.CallbackContext context)
+    {
+        var delta = context.ReadValue<float>();
+        m_zoomVelocity = delta;
+    }
+
+    //=========================================================================
+    // Pin management
+    //=========================================================================
 
     public void PinConfirm()
     {
@@ -121,8 +166,6 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
         m_lastPinColor = pin.GetComponent<Image>().color;
 
         OpenPinPanel();
-
-        GetComponent<Selectable>().Select();
     }
 
     public void OnPinTypeChanged()
@@ -184,9 +227,16 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
         m_lastPinPlaced = child;
     }
 
-    void Zoom(PointerEventData data)
+    //=========================================================================
+    // Map movement and zoom
+    //=========================================================================
+
+    void Zoom(float scrollDelta, Vector2 position, bool isController = false)
     {
-        float scroll = data.scrollDelta.y;
+        float scroll = scrollDelta;
+        float zoomStep = this.zoomStep;
+        if (isController)
+            zoomStep *= controllerZoomSpeed;
 
         Vector3 newScale = Vector3.zero;
         if (scroll > 0) {
@@ -199,7 +249,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
         if (scroll != 0 && newScale.x >= zoomMin && newScale.x <= zoomMax) {
             m_rectTransform.localScale = newScale;
 
-            Vector2 mousePosition = data.position;
+            Vector2 mousePosition = position;
             Vector2 relativeMousePosition;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(m_rectTransform, mousePosition, null, out relativeMousePosition);
             if (scroll > 0)
@@ -214,6 +264,12 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
 
         foreach (MapPin mapPin in GetComponentsInChildren<MapPin>())
             mapPin.UpdateScale();
+
+        cursor.transform.localScale = new Vector3(
+            1f / cursor.transform.parent.localScale.x,
+            1f / cursor.transform.parent.localScale.y,
+            1f / cursor.transform.parent.localScale.z
+        );
     }
 
     void DragMap(PointerEventData data)
