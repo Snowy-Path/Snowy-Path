@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MapTool : MonoBehaviour
+public class MapTool : MonoBehaviour, IHandTool
 {
+    public EToolType ToolType { get => EToolType.MapCompass; }
+
     public GameObject mapObject;
     public Camera inGameMapCamera;
 
@@ -23,28 +25,40 @@ public class MapTool : MonoBehaviour
         m_mapCanvasComponent = mapObject.GetComponentInParent<Canvas>();
     }
 
-    void Update()
-    {
-        var keyboard = Keyboard.current;
-        if (keyboard.mKey.wasPressedThisFrame) {
-            if (!m_isFullscreenMode) {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
+    public void StartPrimaryUse() {
+        Locate();
+    } 
+    
+    public void CancelPrimaryUse() {
+        Debug.Log("Stop using map and compass");
+    }
 
-                m_playerInput.SwitchCurrentActionMap("UI");
-                m_mapCanvasComponent.worldCamera = null;
-                m_isFullscreenMode = true;
-            }
-            else {
-                m_map.ClosePinPanel();
+    public void SecondaryUse() {
+        if (!m_isFullscreenMode) {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
 
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-
-                m_playerInput.SwitchCurrentActionMap("Gameplay");
-                m_mapCanvasComponent.worldCamera = inGameMapCamera;
-                m_isFullscreenMode = false;
-            }
+            m_playerInput.SwitchCurrentActionMap("UI");
+            m_mapCanvasComponent.worldCamera = null;
+            m_isFullscreenMode = true;
         }
+        else {
+            m_map.ClosePinPanel();
+
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+
+            m_playerInput.SwitchCurrentActionMap("Gameplay");
+            m_mapCanvasComponent.worldCamera = inGameMapCamera;
+            m_isFullscreenMode = false;
+        }
+    }
+
+    public void ToggleDisplay(bool display) {
+        gameObject.SetActive(display);
+    }
+
+    private void Locate() {
+        Debug.Log("Youre here !");
     }
 }

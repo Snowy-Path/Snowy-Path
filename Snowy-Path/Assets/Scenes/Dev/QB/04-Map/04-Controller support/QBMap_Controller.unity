@@ -818,12 +818,32 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1752174923}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1993006855 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1662040981, guid: 09b0ed7b7c900134fb0d83e546b913fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2124325178}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1993006856 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1662040982, guid: 09b0ed7b7c900134fb0d83e546b913fd,
     type: 3}
   m_PrefabInstance: {fileID: 2124325178}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1993006857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993006855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 557db6b441536ed4a86bf8929f36a8c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapObject: {fileID: 617051551}
+  inGameMapCamera: {fileID: 470774862}
 --- !u!1001 &2124325178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1089,7 +1109,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 482893614, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
 --- !u!4 &2124325179 stripped
 Transform:
@@ -1097,26 +1118,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2124325178}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2124325181 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1032012291, guid: 09b0ed7b7c900134fb0d83e546b913fd,
-    type: 3}
-  m_PrefabInstance: {fileID: 2124325178}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2124325182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2124325181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 557db6b441536ed4a86bf8929f36a8c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapObject: {fileID: 617051551}
-  inGameMapCamera: {fileID: 470774862}
 --- !u!1001 &4167193696956321072
 PrefabInstance:
   m_ObjectHideFlags: 0
