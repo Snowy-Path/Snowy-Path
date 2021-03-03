@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class WolfController : MonoBehaviour {
 
+    private StateMachine m_fsm;
     public GameObject target;
     private NavMeshAgent navMeshAgent;
 
@@ -14,7 +15,15 @@ public class WolfController : MonoBehaviour {
     }
 
     private void Update() {
-        HeadForDestination();
+        m_fsm.OnUpdate();
+    }
+
+    private void FixedUpdate() {
+        m_fsm.OnFixedUpdate();
+    }
+
+    private void LateUpdate() {
+        m_fsm.OnLateUpdate();
     }
 
     private void HeadForDestination() {
