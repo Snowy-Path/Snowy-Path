@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] Camera playerCamera;
     [SerializeField] Transform groundChecker;
     [SerializeField] float groundCheckRadius = 0.2f;
-    [SerializeField] LayerMask groundLayer;             //Temp
+    [SerializeField] LayerMask groundLayer;
     [SerializeField] float gravity = -9.81f;
 
     [Space]
@@ -23,9 +23,13 @@ public class PlayerController : MonoBehaviour {
 
     [Space]
     [Header("Sprint")]
+    [Tooltip("Max sprint duration")]
     [SerializeField] float maxSprintDuration = 6f;
     [Tooltip("Recovery rate factor -> recovery = time * sprintRoveryRate")]
     [SerializeField] float sprintRecoveryRate = 0.5f;
+    [Tooltip("Mulitplier for lateral speed when sprinting")]
+    [SerializeField] private float sprintLateralFactor = 0.5f;
+
 
     [Space]
     [Header("Jump")]
@@ -41,6 +45,7 @@ public class PlayerController : MonoBehaviour {
 
     [Space]
     [Header("Camera")]
+    [Tooltip("Look sensitivity")]
     [SerializeField] float lookSpeed = 1.0f;
     [Tooltip("Look limit angle up and down")]
     [SerializeField] float lookYLimit = 45.0f;
@@ -48,7 +53,8 @@ public class PlayerController : MonoBehaviour {
     //Status
     private CharacterController controller;
     private bool canMove = true;
-    private bool isOnSlope = false;
+    private bool isSliding = false;
+    private ControllerColliderHit colliderHit;
 
     private bool isGrounded = true;
     public bool IsGrounded { get => isGrounded; }
@@ -87,9 +93,45 @@ public class PlayerController : MonoBehaviour {
     private float yRotation = 0f;
 
     //Parameters
+    private float startGroundCheckRadius;
     private float startStepOffset;
     private const float inputThreshold = 0.2f;
     private const float slopeSensorDist = 0.1f;
+
+
+    #region INPUTS SYSTEM EVENTS
+    public void OnMove(InputAction.CallbackContext context) {
+        UpdateInputs(context.ReadValue<Vector2>());
+    }
+
+    public void OnLook(InputAction.CallbackContext context) {
+        lookPos = context.ReadValue<Vector2>();
+    }
+
+    public void OnHoldSprint(InputAction.CallbackContext context) {
+        switch (context.phase) {
+            case InputActionPhase.Started:
+                ToggleSprint(true);
+                break;
+            case InputActionPhase.Canceled:
+                ToggleSprint(false);
+                break;
+        }
+    }
+
+    public void OnToggleSprint(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            ToggleSprint(!IsRunning);
+        }
+    }
+
+    public void OnJump(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            Jump();
+        }
+    }
+    #endregion
+
 
     #region MONOBEHAVIOUR METHODS
 
@@ -100,13 +142,14 @@ public class PlayerController : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         startStepOffset = controller.stepOffset;
+        startGroundCheckRadius = groundCheckRadius;
         SpeedFactor = 1f;
     }
 
     void Update() {
 
         //Update ground status
-        UpdateGroundSlopeStatus();
+        isGrounded = Physics.CheckSphere(groundChecker.position, groundCheckRadius, groundLayer, QueryTriggerInteraction.Ignore);
         if (isGrounded) {
             controller.stepOffset = startStepOffset;
         }
@@ -117,20 +160,18 @@ public class PlayerController : MonoBehaviour {
         //Process movement
         ApplyGravity();
         UpdateVelocity();
+        Sliding();
         Look();
 
         //Update stamina
         if (isRunning) {
-            sprintTimer += Time.deltaTime;
-            sprintRecoveryTimer = 0.0f;
-
-            //Stop sprint if reached max sprint duration
-            if (sprintTimer >= maxSprintDuration)
-                isRunning = false;
+            isRunning = isGrounded && sprintTimer <= maxSprintDuration && inputs.z >= inputThreshold;
+            if (inputs.z >= inputThreshold) {
+                sprintTimer += Time.deltaTime;
+                sprintRecoveryTimer = 0.0f;
+            }
         }
-        else if (sprintTimer > 0) {     //If not running, start recovery
-            isRunning = false;
-
+        else {
             if (sprintRecoveryTimer >= sprintTimeToRegen) {
                 sprintTimer = Mathf.Clamp(sprintTimer - (sprintRecoveryRate * Time.deltaTime), 0.0f, maxSprintDuration);
             }
@@ -180,39 +221,6 @@ public class PlayerController : MonoBehaviour {
     //bool isMoving = false;
     #endregion
 
-    #region INPUTS SYSTEM EVENTS
-    public void OnMove(InputAction.CallbackContext context) {
-        UpdateInputs(context.ReadValue<Vector2>());
-    }
-
-    public void OnLook(InputAction.CallbackContext context) {
-        lookPos = context.ReadValue<Vector2>();
-    }
-
-    public void OnHoldSprint(InputAction.CallbackContext context) {
-        switch (context.phase) {
-            case InputActionPhase.Started:
-                ToggleSprint(true);
-                break;
-            case InputActionPhase.Canceled:
-                ToggleSprint(false);
-                break;
-        }
-    }
-
-    public void OnToggleSprint(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            ToggleSprint(!isRunning);
-        }
-    }
-
-    public void OnJump(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            Jump();
-        }
-    }
-    #endregion
-
     #region PRIVATE METHODS
     private void UpdateVelocity() {
 
@@ -232,19 +240,21 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-
-        if (isGrounded) {
+        if (isGrounded && !isSliding) {
             //Compute x and z speed
-            float zSpeed = inputs.z * currentSpeed;
-            float xSpeed = inputs.x * currentSpeed;
+            Vector3 sprintInputs = inputs;
+            if (IsRunning) {
+                sprintInputs.x *= sprintLateralFactor;
+                sprintInputs.Normalize();
+            }
+            float zSpeed = sprintInputs.z * currentSpeed;
+            float xSpeed = sprintInputs.x * currentSpeed;
             xzVelocity = Vector3.ClampMagnitude((forward * zSpeed) + (right * xSpeed), currentSpeed);
         }
-        else if (isOnSlope) {
+        else if (isSliding) {
             float zSpeed = inputs.z * currentSpeed;
             float xSpeed = inputs.x * currentSpeed;
-            xzVelocity = Vector3.ClampMagnitude((forward * zSpeed) + (right * xSpeed), currentSpeed) * 0.5f;
-            xzVelocity = ComputeSlopeVelocity();
-            Debug.Log("on slope");
+            xzVelocity = Vector3.ClampMagnitude((forward * zSpeed) + (right * xSpeed), currentSpeed * 0.5f);
         }
         else {
             float xSpeed = inputs.x * airSpeedX;
@@ -262,7 +272,7 @@ public class PlayerController : MonoBehaviour {
 
     private void ApplyGravity() {
         //Reduce gravity if grounded
-        if ((isGrounded && yVelocity.y < 0) || isOnSlope)
+        if ((isGrounded && yVelocity.y < 0) || isSliding)
             yVelocity.y = -2f;
         else
             //Apply gravity
@@ -270,14 +280,14 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Jump() {
-        if (isGrounded && !isOnSlope) {
+        if (isGrounded && !isSliding) {
             yVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
     }
 
-    private void ToggleSprint(bool run) {
-        if (isGrounded && sprintTimer <= 0 && inputs.z >= inputThreshold) {
-            isRunning = run;
+    private void ToggleSprint(bool sprint) {
+        if (isGrounded && sprintTimer <= 0) {
+            isRunning = sprint;
         }
         else
             isRunning = false;
@@ -294,92 +304,41 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void UpdateGroundSlopeStatus() {
-
-        bool sphereCheck = Physics.CheckSphere(groundChecker.position, groundCheckRadius, groundLayer, QueryTriggerInteraction.Ignore);
-        RaycastHit hit;
-        Ray ray = new Ray(transform.position + 0.5f * Vector3.up, Vector3.down);
-        bool rayCheck = Physics.Raycast(ray, out hit, groundMaxDist, groundLayer);
-
-        isGrounded = (sphereCheck && rayCheck);
-        isOnSlope = (sphereCheck && !rayCheck && (colliderHit == null || colliderHit.normal.y <= 7));
-        if (colliderHit != null)
-            Debug.Log(colliderHit.normal);
-
-        //Debug.Log($"Grounded : {isGrounded}  Slope : {isOnSlope}");
-    }
-
     private void Sliding() {
         if (colliderHit == null)
-            return Vector3.zero;
+            return;
 
-        Vector3 slopeVelocity = Vector3.zero;
+        RaycastHit hit;
+        bool rayCheck = Physics.Raycast(transform.position, Vector3.down, out hit, 5f, groundLayer);
+        bool sphereCheck = Physics.CheckSphere(transform.position, 0.3f, groundLayer);
 
-        RaycastHit slopeHit;
-        Ray raySlope = new Ray(colliderHit.point + colliderHit.normal * slopeSensorDist, Vector3.down);
-        if (Physics.Raycast(raySlope, out slopeHit, 5f)) {
+        if (rayCheck ) {
+            float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
 
-            Vector3 slopeDirection = (slopeHit.point - colliderHit.point).normalized;
-            float slopeAngle = Vector3.Angle(new Vector3(slopeDirection.x, 0, slopeDirection.z), slopeDirection);
+            if
+        }
+        else {
 
-            if (slopeAngle > controller.slopeLimit) {
-                slopeVelocity = slopeDirection * slideSpeed;
-            }
+        }
+        if (&& controller.slopeLimit < slopeAngle && slopeAngle < 80) {
+            Debug.Log($"slope angle : {slopeAngle}");
+            var normal = colliderHit.normal;
+            normal.y = 0f;
+            var dir = Vector3.ProjectOnPlane(normal.normalized, colliderHit.normal).normalized;
 
-
-            if (isGrounded <= groundMinDistance && GroundAngle() > slopeLimit) {
-                if (_slidingEnterTime <= 0f || isSliding) {
-                    var normal = groundHit.normal;
-                    normal.y = 0f;
-                    var dir = Vector3.ProjectOnPlane(normal.normalized, groundHit.normal).normalized;
-
-                    if (Physics.Raycast(transform.position + Vector3.up * groundMinDistance, dir, groundMaxDistance, groundLayer)) {
-                        isSliding = false;
-                    }
-                    else {
-                        isSliding = true;
-                        SlideMovementBehavior();
-                    }
-                }
-                else {
-                }
-            }
-            else {
+            if (Physics.Raycast(transform.position + Vector3.up * 0.1f, dir, groundMaxDist, groundLayer)) {
                 isSliding = false;
             }
-        }
-    }
-
-    private Vector3 ComputeSlopeVelocity() {
-
-        if (colliderHit == null)
-            return Vector3.zero;
-
-        Vector3 slopeVelocity = Vector3.zero;
-
-        RaycastHit slopeHit;
-        Ray raySlope = new Ray(colliderHit.point + colliderHit.normal * slopeSensorDist, Vector3.down);
-        if (Physics.Raycast(raySlope, out slopeHit, 5f)) {
-
-            Vector3 slopeDirection = (slopeHit.point - colliderHit.point).normalized;
-            float slopeAngle = Vector3.Angle(new Vector3(slopeDirection.x, 0, slopeDirection.z), slopeDirection);
-
-            if (slopeAngle > controller.slopeLimit) {
-                slopeVelocity = slopeDirection * slideSpeed;
+            else {
+                isSliding = true;
+                controller.Move(dir * slideSpeed * Time.deltaTime);
             }
-
-            #region DEBUG
-            //Debug.Log(slopeAngle);
-            //Debug.DrawLine(colliderHit.point, raySlope.origin, Color.red); //from first hit to second ray origin
-            //Debug.DrawLine(raySlope.origin, slopeHit.point, Color.blue); //from second ray origin to sencond hit
-            //Debug.DrawLine(colliderHit.point, slopeHit.point, Color.green);  // from first hit to second hit
-            #endregion
         }
-
-        return slopeVelocity;
+        else {
+            isSliding = false;
+        }
     }
 
-    private ControllerColliderHit colliderHit;
     private void OnControllerColliderHit(ControllerColliderHit hit) {
         if (groundLayer.value == 1 << hit.gameObject.layer) {
             colliderHit = hit;
