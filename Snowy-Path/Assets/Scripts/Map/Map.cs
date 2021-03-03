@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IScrollHandler
+public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IScrollHandler, ICancelHandler, ISubmitHandler
 {
     public float mapPinScale = 1f;
     public float zoomStep = 0.1f;
@@ -12,6 +12,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
     public float zoomMax = 5f;
     public float mouseDragSpeed = 100f;
     public MapPinPanel pinPanel;
+    public MapCompass mapCompass;
 
     private bool m_isDragging = false;
     private bool m_isPinModeEnabled = false;
@@ -29,11 +30,6 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
             pinPanel.gameObject.SetActive(false);
 
         m_rectTransform = GetComponent<RectTransform>();
-    }
-
-    void Update()
-    {
-        
     }
 
     public void OnPointerClick(PointerEventData data)
@@ -65,6 +61,22 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
     public void OnScroll(PointerEventData data)
     {
         Zoom(data);
+    }
+
+    public void OnCancel(BaseEventData data)
+    {
+        Debug.Log("cancel:" + data);
+        if (m_isPinModeEnabled)
+            ClosePinPanel();
+        else
+            mapCompass.CloseFullscreenMap();
+    }
+
+    public void OnSubmit(BaseEventData data)
+    {
+        Debug.Log("submit:" + data);
+        if (m_isPinModeEnabled)
+            PinConfirm();
     }
 
     public void PinConfirm()
@@ -107,7 +119,10 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
         m_lastPinPosition = pin.transform.position;
         m_lastPinPlaced = pin;
         m_lastPinColor = pin.GetComponent<Image>().color;
+
         OpenPinPanel();
+
+        GetComponent<Selectable>().Select();
     }
 
     public void OnPinTypeChanged()

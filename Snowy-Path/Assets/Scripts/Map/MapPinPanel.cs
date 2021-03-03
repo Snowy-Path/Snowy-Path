@@ -14,6 +14,9 @@ public class MapPinPanel : MonoBehaviour
 
     void Start()
     {
+        foreach (var button in GetComponentsInChildren<Button>())
+            button.onClick.AddListener(SelectMap);
+
         int i = 0;
         foreach (var pinColor in pinTypes) {
             // Initialize the object that will contain our map pin
@@ -32,6 +35,7 @@ public class MapPinPanel : MonoBehaviour
             int mapPinID = i;
             Button button = child.AddComponent<Button>();
             button.onClick.AddListener(() => OnButtonClick(mapPinID));
+            button.onClick.AddListener(SelectMap);
 
             ++i;
         }
@@ -41,5 +45,9 @@ public class MapPinPanel : MonoBehaviour
         m_currentPinType = i;
 
         map.OnPinTypeChanged();
+    }
+
+    void SelectMap() {
+        map.GetComponent<Selectable>().Select();
     }
 }
