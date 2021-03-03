@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Condition {
-    public abstract bool Test();
+public enum EStateType{
+    None,
+    Idle,
+    MoveToWaypoint
 }

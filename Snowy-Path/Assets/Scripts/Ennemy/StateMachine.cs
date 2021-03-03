@@ -1,25 +1,52 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class StateMachine : StateBase {
-    public override void OnEntry() {
-        throw new System.NotImplementedException();
+
+    public EStateType defaultState;
+    private StateBase m_currentState;
+    private Dictionary<EStateType, StateBase> m_states;
+
+    internal override EStateType StateType => EStateType.None;
+
+    public StateMachine(WolfController wolfController) : base(wolfController) {}
+
+    internal override void OnEntry() {
+        m_currentState = m_states[defaultState];
+        m_currentState.OnEntry();
     }
 
-    public override void OnExit() {
-        throw new System.NotImplementedException();
+    internal override void OnExit() {
+        m_currentState.OnExit();
     }
 
-    public override void OnFixedUpdate() {
-        throw new System.NotImplementedException();
+    internal override void OnUpdate() {
+        m_currentState.OnUpdate();
     }
 
-    public override void OnLateUpdate() {
-        throw new System.NotImplementedException();
+    internal void AddState(StateBase state) {
+        m_states.Add(state.StateType, state);
     }
 
-    public override void OnUpdate() {
-        throw new System.NotImplementedException();
+    internal void ChangeState(EStateType stateType) {
+        if (m_currentState.StateType == stateType) {
+            return;
+        }
+
+        m_currentState.OnExit();
+        m_currentState = m_states[stateType];
+        m_currentState.OnEntry();
     }
+
+    internal override void OnFixedUpdate() {
+        m_currentState.OnFixedUpdate();
+    }
+
+    internal override void OnLateUpdate() {
+        m_currentState.OnLateUpdate();
+    }
+
 }
