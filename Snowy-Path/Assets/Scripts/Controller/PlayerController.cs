@@ -59,17 +59,13 @@ public class PlayerController : MonoBehaviour {
     private bool isGrounded = true;
     public bool IsGrounded { get => isGrounded; }
 
+    private bool sprintCmd = false;
     private bool isRunning = false;
     public bool IsRunning { get => isRunning; }
 
     //Sprint
     private float sprintTimer = 0f;
     public float SprintTimer { get => sprintTimer; }
-
-    private float sprintRecoveryTimer = 0f;
-    public float SprintRecoveryTimer { get => sprintRecoveryTimer; }
-
-    private const float sprintTimeToRegen = 0f;
 
     //Velocity
     private float currentSpeed = 0f;
@@ -109,17 +105,19 @@ public class PlayerController : MonoBehaviour {
     public void OnHoldSprint(InputAction.CallbackContext context) {
         switch (context.phase) {
             case InputActionPhase.Started:
-                ToggleSprint(true);
+                if (sprintTimer <= 0)
+                    sprintCmd = true;
                 break;
             case InputActionPhase.Canceled:
-                ToggleSprint(false);
+                sprintCmd = false;
                 break;
         }
     }
 
     public void OnToggleSprint(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
-            ToggleSprint(!IsRunning);
+            if (sprintTimer <= 0)
+                sprintCmd = true;
         }
     }
 
@@ -159,23 +157,7 @@ public class PlayerController : MonoBehaviour {
         UpdateVelocity();
         Sliding();
         Look();
-
-        //Update stamina
-        if (isRunning) {
-            isRunning = isGrounded && sprintTimer <= maxSprintDuration && inputs.z >= inputThreshold;
-            if (inputs.z >= inputThreshold) {
-                sprintTimer += Time.deltaTime;
-                sprintRecoveryTimer = 0.0f;
-            }
-        }
-        else {
-            if (sprintRecoveryTimer >= sprintTimeToRegen) {
-                sprintTimer = Mathf.Clamp(sprintTimer - (sprintRecoveryRate * Time.deltaTime), 0.0f, maxSprintDuration);
-            }
-            else
-                sprintRecoveryTimer += Time.deltaTime;
-        }
-
+        Sprint();
 
         #region DEBUG
         Keyboard keyboard = Keyboard.current;
@@ -249,7 +231,7 @@ public class PlayerController : MonoBehaviour {
             float xSpeed = sprintInputs.x * currentSpeed;
             xzVelocity = Vector3.ClampMagnitude((forward * zSpeed) + (right * xSpeed), currentSpeed);
         }
-        else if (isSliding) {
+        else if (isSliding) {       //If is not grounded and is on slope
             float zSpeed = inputs.z * currentSpeed;
             float xSpeed = inputs.x * currentSpeed;
             xzVelocity = Vector3.ClampMagnitude((forward * zSpeed) + (right * xSpeed), currentSpeed * 0.5f);
@@ -283,21 +265,37 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void ToggleSprint(bool sprint) {
-        if (isGrounded && sprintTimer <= 0) {
-            isRunning = sprint;
+    private void Sprint() {
+
+        //canStartSprint = isGrounded && sprintTimer <= 0;
+
+        isRunning = sprintCmd && sprintTimer <= maxSprintDuration && inputs.z >= inputThreshold;
+
+        //Stop sprint if timer reached max sprint duration
+        if (sprintTimer >= maxSprintDuration)
+            sprintCmd = false;
+
+        //Update stamina
+        if (isRunning && inputs.z >= inputThreshold) {
+            sprintTimer += Time.deltaTime;
         }
-        else
-            isRunning = false;
+        else if (inputs.z < inputThreshold) { //if is not moving forward (and not running)
+            sprintTimer = Mathf.Clamp(sprintTimer - (sprintRecoveryRate * Time.deltaTime), 0.0f, maxSprintDuration);
+        }
+        else {
+            sprintCmd = false;
+            sprintTimer = Mathf.Clamp(sprintTimer - (sprintRecoveryRate * Time.deltaTime), 0.0f, maxSprintDuration);
+        }
     }
 
     private void Look() {
         if (canMove) {
-
+            //Orient camera thanks to mouse position
             yRotation += -lookPos.y * lookSpeed;
             yRotation = Mathf.Clamp(yRotation, -lookYLimit, lookYLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(yRotation, 0, 0);
 
+            //Rotate player 
             transform.rotation *= Quaternion.Euler(0, lookPos.x * lookSpeed, 0);
         }
     }
@@ -306,16 +304,21 @@ public class PlayerController : MonoBehaviour {
         if (colliderHit == null)
             return;
 
+        //Get angle of slope
         float slopeAngle = Vector3.Angle(colliderHit.normal, Vector3.up);
         bool slideAngle = controller.slopeLimit < slopeAngle && slopeAngle <= 90;
+        //Detect if player feet touch ground
         bool sphereCheck = Physics.CheckSphere(transform.position, slideDetectorRadius, groundLayer);
 
+        //If on ground and slope + if the Y velocity is not positive
         if (sphereCheck && slideAngle && yVelocity.y <= 0) {
 
+            //Detect slope direction
             var normal = colliderHit.normal;
             normal.y = 0f;
             var dir = Vector3.ProjectOnPlane(normal.normalized, colliderHit.normal).normalized;
 
+            //Make player slide
             isSliding = true;
             controller.Move(dir * slopeAngle / 90f * slideSpeed * Time.deltaTime);
         }
@@ -335,5 +338,7 @@ public class PlayerController : MonoBehaviour {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(groundChecker.position, groundCheckRadius);
     }
+
+
     #endregion
 }
