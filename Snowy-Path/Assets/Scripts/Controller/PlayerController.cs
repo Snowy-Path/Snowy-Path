@@ -40,8 +40,8 @@ public class PlayerController : MonoBehaviour {
 
     [Space]
     [Header("Slide")]
-    [SerializeField] float slideSpeed = 20f;
-    [SerializeField] float groundMaxDist = 0.5f;
+    [SerializeField] float slideSpeed = 5f;
+    [SerializeField] float slideDetectorRadius = 0.3f;
 
     [Space]
     [Header("Camera")]
@@ -93,10 +93,8 @@ public class PlayerController : MonoBehaviour {
     private float yRotation = 0f;
 
     //Parameters
-    private float startGroundCheckRadius;
     private float startStepOffset;
     private const float inputThreshold = 0.2f;
-    private const float slopeSensorDist = 0.1f;
 
 
     #region INPUTS SYSTEM EVENTS
@@ -142,7 +140,6 @@ public class PlayerController : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         startStepOffset = controller.stepOffset;
-        startGroundCheckRadius = groundCheckRadius;
         SpeedFactor = 1f;
     }
 
@@ -240,7 +237,8 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (isGrounded && !isSliding) {
+        if (isGrounded/* && !isSliding*/) { //Testing before remove
+
             //Compute x and z speed
             Vector3 sprintInputs = inputs;
             if (IsRunning) {
@@ -308,35 +306,21 @@ public class PlayerController : MonoBehaviour {
         if (colliderHit == null)
             return;
 
-        RaycastHit hit;
-        bool rayCheck = Physics.Raycast(transform.position, Vector3.down, out hit, 5f, groundLayer);
-        bool sphereCheck = Physics.CheckSphere(transform.position, 0.3f, groundLayer);
+        float slopeAngle = Vector3.Angle(colliderHit.normal, Vector3.up);
+        bool slideAngle = controller.slopeLimit < slopeAngle && slopeAngle <= 90;
+        bool sphereCheck = Physics.CheckSphere(transform.position, slideDetectorRadius, groundLayer);
 
-        if (rayCheck ) {
-            float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
+        if (sphereCheck && slideAngle && yVelocity.y <= 0) {
 
-            if
-        }
-        else {
-
-        }
-        if (&& controller.slopeLimit < slopeAngle && slopeAngle < 80) {
-            Debug.Log($"slope angle : {slopeAngle}");
             var normal = colliderHit.normal;
             normal.y = 0f;
             var dir = Vector3.ProjectOnPlane(normal.normalized, colliderHit.normal).normalized;
 
-            if (Physics.Raycast(transform.position + Vector3.up * 0.1f, dir, groundMaxDist, groundLayer)) {
-                isSliding = false;
-            }
-            else {
-                isSliding = true;
-                controller.Move(dir * slideSpeed * Time.deltaTime);
-            }
+            isSliding = true;
+            controller.Move(dir * slopeAngle / 90f * slideSpeed * Time.deltaTime);
         }
-        else {
+        else
             isSliding = false;
-        }
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit) {
@@ -350,8 +334,6 @@ public class PlayerController : MonoBehaviour {
     private void OnDrawGizmos() {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(groundChecker.position, groundCheckRadius);
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundMaxDist);
     }
-
     #endregion
 }
