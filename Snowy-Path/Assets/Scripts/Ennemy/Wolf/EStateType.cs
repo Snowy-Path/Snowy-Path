@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum EStateType{
     None,
+    Patrol,
     Idle,
     MoveToWaypoint
 }
