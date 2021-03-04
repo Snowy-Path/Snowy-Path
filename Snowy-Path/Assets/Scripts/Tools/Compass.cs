@@ -19,7 +19,7 @@ public class Compass : MonoBehaviour
 
     private void Start()
     {
-        jammingcollider = GetComponent<SphereCollider>();
+        jammingcollider = gameObject.AddComponent<SphereCollider>();
         jammingcollider.radius = JammingRange;
     }
     // Update is called once per frame
