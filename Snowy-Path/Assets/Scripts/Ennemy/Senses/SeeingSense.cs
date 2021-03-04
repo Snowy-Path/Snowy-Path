@@ -5,7 +5,7 @@ using UnityEngine;
 public class SeeingSense : MonoBehaviour {
 
     public string tagTarget = "Player";
-    public GameObject agent;
+    public WolfController agent;
 
     private void OnTriggerStay(Collider other) {
         
@@ -25,31 +25,23 @@ public class SeeingSense : MonoBehaviour {
 
         RaycastHit[] hits = Physics.RaycastAll(ray, length);
 
-        //Guard
-        if (hits.Length == 0) {
+        //Something is blocking the view
+        if (hits.Length != 0) {
             return;
         }
 
-        //Find closest
-        int closest = 0;
-        for (int i = 1; i < hits.Length; i++) {
-            if (hits[i].distance < hits[closest].distance) {
-                closest = i;
-            }
-        }
-
         //If closest if Player, then we see him
-        if (hits[closest].collider.CompareTag(tagTarget)) {
-            gameObject.GetComponent<WolfController>().isSeeingPlayer = true;
-            gameObject.GetComponent<WolfController>().target = hits[closest].collider.transform;
+        if (other.CompareTag(tagTarget)) {
+            agent.isSeeingPlayer = true;
+            agent.target = other.transform;
         }
         //Else, we do not see him
         else {
-            gameObject.GetComponent<WolfController>().isSeeingPlayer = false;
-            gameObject.GetComponent<WolfController>().target = null;
+            agent.isSeeingPlayer = false;
+            agent.target = null;
         }
 
-        Debug.DrawRay(ray.origin, ray.direction * length);
+        Debug.DrawRay(ray.origin, ray.direction * length, Color.green);
     }
 
 }

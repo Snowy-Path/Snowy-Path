@@ -64,13 +64,10 @@ public class WolfController : MonoBehaviour {
     private void HFSMInitialization() {
         m_fsm = new StateMachine(EStateType.None);
 
-        Idle_Init(m_fsm);
-        m_fsm.defaultState = EStateType.Idle;
+        Patrol_Init(m_fsm);
+        Combat_Init(m_fsm);
 
-        //Patrol_Init(m_fsm);
-        //Combat_Init(m_fsm);
-
-        //m_fsm.defaultState = EStateType.Patrol;
+        m_fsm.defaultState = EStateType.Patrol;
         m_fsm.OnEntry();
     }
 
@@ -106,7 +103,7 @@ public class WolfController : MonoBehaviour {
 
         idle.AddTransition(new Transition(
             EStateType.MoveToWaypoint,
-            (condition) => false//waitingTimer >= waitingTime
+            (condition) => waitingTimer >= waitingTime
         ));
 
         parent.AddState(idle);
