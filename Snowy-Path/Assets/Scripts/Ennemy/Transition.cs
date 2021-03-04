@@ -8,7 +8,7 @@ public class Transition {
     public EStateType State { get; private set; }
     private readonly Predicate<Transition> condition;
 
-    public Transition(EStateType to, Predicate<Transition> condition = null) {
+    public Transition(EStateType to, Predicate<Transition> condition) {
         this.State = to;
         this.condition = condition;
     }

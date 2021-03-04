@@ -43,6 +43,7 @@ public class StateMachine : State {
     internal override void OnExit() {
         base.OnExit();
         m_currentState.OnExit();
+        m_currentState = null;
     }
 
     internal override void OnUpdate() {
@@ -56,8 +57,8 @@ public class StateMachine : State {
     }
 
     internal override void OnLateUpdate() {
-        base.OnLateUpdate();
         m_currentState.OnLateUpdate();
+        base.OnLateUpdate();
     }
 
 }
