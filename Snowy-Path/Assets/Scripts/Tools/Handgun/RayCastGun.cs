@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class RayCastGun : Tool
+public class RayCastGun : Tool, IHandTool
 {
     public static bool endEnnemySet = false;
     public int damageDealt = 0;
@@ -34,6 +34,7 @@ public class RayCastGun : Tool
     public int maxMagazineCapacity = 1;
     public int projectilePerShot;
 
+    public EToolType ToolType => EToolType.Pistol;
 
     void Start()
     {
@@ -44,30 +45,6 @@ public class RayCastGun : Tool
         //Set ammo at full capacity
         ammo = maxMagazineCapacity;
         readyToShoot = true;
-    }
-
-
-    void Update()
-    {
-        Keyboard keyboard = Keyboard.current;
-
-        //If the Player press fire button, isn't shooting or reloading and have ammo left
-        if (keyboard.eKey.wasPressedThisFrame && Time.time > nextFire && !reloading && ammo > 0 && readyToShoot)
-        {
-            MainInteraction();
-            if (maxAmmo > 0)
-            {
-                //Start reloading method
-                SecondaryInteraction();
-            }
-        }
-        //If the Player press reload button
-        if (keyboard.fKey.wasPressedThisFrame && maxAmmo > 0)
-        {
-            //Start reloading method
-            SecondaryInteraction();
-        }
-
     }
 
     /// <summary>
@@ -185,14 +162,35 @@ public class RayCastGun : Tool
     /// </summary>
     /// 
 
-    private new void MainInteraction()
-    {
-        projectileShot = projectilePerShot;
-        Shot();
-        StartCoroutine("DammageApply");
-        ammo--;
+    public void StartPrimaryUse() {
+        if (Time.time > nextFire && !reloading && ammo > 0 && readyToShoot) {
+            projectileShot = projectilePerShot;
+            Shot();
+            StartCoroutine("DammageApply");
+            ammo--;
+
+            if (maxAmmo > 0) {
+                //Start reloading method
+                SecondaryInteraction();
+            }
+        }
+    }
+
+    public void CancelPrimaryUse() {
+        //Cancel is not possible on pistol
+
 
     }
+
+    public void SecondaryUse() {
+        Debug.Log("Nothing");
+
+    }
+
+    public void ToggleDisplay(bool display) {
+        gameObject.SetActive(display);
+    }
+
     private new void SecondaryInteraction()
     {
         if (maxAmmo >= 0)
@@ -251,4 +249,6 @@ public class RayCastGun : Tool
             }
         }
     }
+
+
 }
