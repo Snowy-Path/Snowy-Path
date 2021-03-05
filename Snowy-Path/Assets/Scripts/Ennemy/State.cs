@@ -31,12 +31,15 @@ public class State {
     internal virtual void OnEntry() {
         onEntry?.Invoke(this);
     }
+
     internal virtual void OnExit() {
         onExit?.Invoke(this);
     }
+
     internal virtual void OnUpdate() {
         onUpdate?.Invoke(this);
     }
+
     internal virtual void OnFixedUpdate() {
         onFixedUpdate?.Invoke(this);
     }

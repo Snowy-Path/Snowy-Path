@@ -8,6 +8,10 @@ public class WolfController : MonoBehaviour {
 
     #region Variables
 
+    #region Patrol
+    public float loosingTime;
+    #endregion
+
     #region Idle
     [Min(0)]
     public float waitingTime;
@@ -20,8 +24,23 @@ public class WolfController : MonoBehaviour {
     #endregion
 
     #region Seeing sense
-    public bool isSeeingPlayer = false;
-    public Transform target;
+    private Transform target;
+    private bool isSeeingPlayer = false;
+    public Transform Target {
+        get {
+            return target;
+        }
+        set {
+            target = value;
+            if (target) {
+                lastSaw = Time.time;
+                isSeeingPlayer = true;
+            } else {
+                isSeeingPlayer = false;
+            }
+        }
+    }
+    private float lastSaw = 0f;
     #endregion
 
     private StateMachine m_fsm;
@@ -38,10 +57,10 @@ public class WolfController : MonoBehaviour {
     private void Update() {
 
 #if DEBUG
-        Debug.DrawLine(transform.position, agent.destination, Color.yellow);
+        Debug.DrawLine(transform.position, agent.destination, Color.magenta);
         Vector3[] corners = agent.path.corners;
         for (int i = 1; i < corners.Length; i++) {
-            Debug.DrawLine(corners[i - 1], corners[i], new Color(0.5f, 0, 1));
+            Debug.DrawLine(corners[i - 1], corners[i], Color.yellow);
         }
 #endif
 
@@ -136,19 +155,26 @@ public class WolfController : MonoBehaviour {
 
         combat.AddTransition(new Transition(
             EStateType.Patrol,
-            (condition) => !isSeeingPlayer
+            (condition) => HasLostPlayer()
         ));
 
         Attack_Init(combat);
+        //TODO: Add states
 
         combat.defaultState = EStateType.Aggro;
         parent.AddState(combat);
     }
 
+    private bool HasLostPlayer() {
+        return (Time.time - lastSaw) >= loosingTime;
+    }
+
     private void Attack_Init(StateMachine parent) {
         State attack = new State(EStateType.Aggro, parent,
             onUpdate: (state) => {
-                agent.SetDestination(target.position);
+                if (target) {
+                    agent.SetDestination(target.position);
+                }
             }
         );
         parent.AddState(attack);

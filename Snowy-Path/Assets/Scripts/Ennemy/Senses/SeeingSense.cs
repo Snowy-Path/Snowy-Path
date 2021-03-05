@@ -6,42 +6,38 @@ public class SeeingSense : MonoBehaviour {
 
     public string tagTarget = "Player";
     public WolfController agent;
+    public LayerMask layers;
 
     private void OnTriggerStay(Collider other) {
-        
-        //Guard
-        if (!other.CompareTag(tagTarget)) {
-            return;
-        }
 
-        GameObject target = other.gameObject;
-        Vector3 agentPos = agent.transform.position;
-        Vector3 targetPos = target.transform.position;
-        Vector3 direction = targetPos - agentPos;
-
+        //No need to guard or to tag because the Layer Collision Matrix does everything for us IF AND ONLY IF the layers are used properly
+        Vector3 origin = transform.position;
+        Vector3 destination = other.transform.position;
+        Vector3 direction = destination - origin;
         float length = direction.magnitude;
         direction.Normalize();
-        Ray ray = new Ray(agentPos, direction);
 
-        RaycastHit[] hits = Physics.RaycastAll(ray, length);
+        Ray ray = new Ray(origin, direction);
 
-        //Something is blocking the view
-        if (hits.Length != 0) {
-            return;
+        RaycastHit[] hits = Physics.RaycastAll(ray, length, layers);
+
+        bool isSeeingPlayer = false;
+
+        if (hits.Length == 1) {
+            isSeeingPlayer = true;
         }
 
-        //If closest if Player, then we see him
-        if (other.CompareTag(tagTarget)) {
-            agent.isSeeingPlayer = true;
-            agent.target = other.transform;
-        }
-        //Else, we do not see him
-        else {
-            agent.isSeeingPlayer = false;
-            agent.target = null;
+        if (isSeeingPlayer) {
+            agent.Target = other.transform;
+        } else {
+            agent.Target = null;
         }
 
-        Debug.DrawRay(ray.origin, ray.direction * length, Color.green);
+        Debug.DrawRay(ray.origin, ray.direction * length, isSeeingPlayer ? Color.green : Color.red);
+    }
+
+    private void OnTriggerExit(Collider other) {
+        agent.Target = null;
     }
 
 }
