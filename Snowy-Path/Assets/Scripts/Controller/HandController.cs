@@ -98,7 +98,7 @@ public class HandController : MonoBehaviour {
     /// <param name="indexShift">Number of tools to shift</param>
     private void SwitchTool(int indexShift) {
         //Guard : if there is no tools, return
-        if (tools.Length == 0)
+        if (tools.Length == 0 || (CurrentTool != null && CurrentTool.IsBusy))
             return;
 
         //shift the current index

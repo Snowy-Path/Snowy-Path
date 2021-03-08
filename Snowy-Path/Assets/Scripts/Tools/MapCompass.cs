@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MapCompass : MonoBehaviour, IHandTool {
     public EToolType ToolType => EToolType.MapCompass;
+    public bool IsBusy { get; set; }
 
     public void CancelPrimaryUse() {
         
