@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Compass : MonoBehaviour
@@ -11,14 +12,19 @@ public class Compass : MonoBehaviour
     public float jammingspeed = 20.0f;
     public float JammingRange;
 
+
     private float jammingchangetime = 1f;
     private float jammingtimer = 0f;
     private bool isjamming;
     private float number;
+    [SerializeField]
+    private GameObject Player;
+
 
 
     private void Start()
     {
+        Player = FindObjectOfType<PlayerController>().gameObject;
         jammingcollider = GetComponent<SphereCollider>();
         jammingcollider.radius = JammingRange;
     }
@@ -53,13 +59,15 @@ public class Compass : MonoBehaviour
     /// </summary>
     public void ChangeNorthDirection()
     {
+        Vector3 NorthDirection = (NorthPole - Player.transform.position).normalized;
+        float angle=Vector3.SignedAngle(NorthDirection, Player.transform.forward,Player.transform.up);
 
-        {
-            Needle.LookAt(NorthPole);
-            //Disable rotation out of the compass housing
-            Needle.localEulerAngles = new Vector3(0, Needle.localEulerAngles.y, 0);
+        //Needle.LookAt(NorthPole);
 
-        }
+        //Disable rotation out of the compass housing
+        Needle.localEulerAngles = new Vector3(0, -angle, 0);
+
+
 
     }
 
@@ -87,10 +95,10 @@ public class Compass : MonoBehaviour
 
             isjamming = false;
             //Smoothing transition
-            Needle.localEulerAngles=Vector3.Slerp(Needle.localEulerAngles, new Vector3(0, Needle.localEulerAngles.y, 0), Time.deltaTime * jammingspeed);
+            Needle.localEulerAngles = Vector3.Slerp(Needle.localEulerAngles, new Vector3(0, Needle.localEulerAngles.y, 0), Time.deltaTime * jammingspeed);
 
         }
-        
+
 
     }
 
