@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class VRScope : MonoBehaviour, IHandTool {
+public class Telescope : MonoBehaviour, IHandTool {
     [Header("Set up")]
     [Tooltip("Hands animator. Allows this script to trigger the look animation.")]
     [SerializeField] Animator animator;
