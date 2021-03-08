@@ -6,7 +6,7 @@ using UnityEngine;
 public class Transition {
 
     public EStateType State { get; private set; }
-    private readonly Predicate<Transition> condition;
+    private Predicate<Transition> condition;
 
     public Transition(EStateType to, Predicate<Transition> condition) {
         this.State = to;

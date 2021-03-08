@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class StateMachine : State {
 
-    public EStateType defaultState = EStateType.None;
+    internal EStateType defaultState { get; private set; }
     private State m_currentState;
-    private readonly Dictionary<EStateType, State> m_states;
+    private Dictionary<EStateType, State> m_states;
 
-    public StateMachine(EStateType stateType, StateMachine parent = null, Action<State> onEntry = null, Action<State> onExit = null, Action<State> onUpdate = null, Action<State> onFixedUpdate = null)
+    public StateMachine(EStateType stateType, EStateType defaultState, StateMachine parent = null, Action<State> onEntry = null, Action<State> onExit = null, Action<State> onUpdate = null, Action<State> onFixedUpdate = null)
         : base(stateType, parent, onEntry, onExit, onUpdate, onFixedUpdate) {
+        this.defaultState = defaultState;
         m_states = new Dictionary<EStateType, State>();
     }
 

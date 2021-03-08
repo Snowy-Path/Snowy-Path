@@ -10,7 +10,10 @@ public class SeeingSense : MonoBehaviour {
 
     private void OnTriggerStay(Collider other) {
 
-        //No need to guard or to tag because the Layer Collision Matrix does everything for us IF AND ONLY IF the layers are used properly
+        if (!other.CompareTag(tagTarget)) {
+            return;
+        }
+
         Vector3 origin = transform.position;
         Vector3 destination = other.transform.position;
         Vector3 direction = destination - origin;

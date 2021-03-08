@@ -81,19 +81,18 @@ public class WolfController : MonoBehaviour {
 
     #region HFSM
     private void HFSMInitialization() {
-        m_fsm = new StateMachine(EStateType.None);
+        m_fsm = new StateMachine(EStateType.None, EStateType.Patrol);
 
         Patrol_Init(m_fsm);
         Combat_Init(m_fsm);
 
-        m_fsm.defaultState = EStateType.Patrol;
         m_fsm.OnEntry();
     }
 
-    #region Patrol
 
+    #region Patrol
     private void Patrol_Init(StateMachine parent) {
-        StateMachine patrol = new StateMachine(EStateType.Patrol, parent);
+        StateMachine patrol = new StateMachine(EStateType.Patrol, EStateType.MoveToWaypoint, parent);
 
         patrol.AddTransition(new Transition(
             EStateType.Combat,
@@ -103,7 +102,6 @@ public class WolfController : MonoBehaviour {
         Idle_Init(patrol);
         MoveToWaypoint_Init(patrol);
 
-        patrol.defaultState = EStateType.MoveToWaypoint;
         parent.AddState(patrol);
     }
 
@@ -149,9 +147,10 @@ public class WolfController : MonoBehaviour {
     }
     #endregion
 
+
     #region Combat
     private void Combat_Init(StateMachine parent) {
-        StateMachine combat = new StateMachine(EStateType.Combat, parent);
+        StateMachine combat = new StateMachine(EStateType.Combat, EStateType.Aggro, parent);
 
         combat.AddTransition(new Transition(
             EStateType.Patrol,
@@ -161,7 +160,6 @@ public class WolfController : MonoBehaviour {
         Attack_Init(combat);
         //TODO: Add states
 
-        combat.defaultState = EStateType.Aggro;
         parent.AddState(combat);
     }
 
@@ -180,6 +178,7 @@ public class WolfController : MonoBehaviour {
         parent.AddState(attack);
     }
     #endregion
+
 
     #endregion
 }

@@ -5,10 +5,19 @@ using UnityEngine;
 
 
 public class State {
+
+    #region Variables
     internal EStateType StateType { get; }
     private StateMachine Parent { get; }
-    private readonly List<Transition> m_transitions;
+    private List<Transition> m_transitions;
 
+    private Action<State> onEntry;
+    private Action<State> onExit;
+    private Action<State> onUpdate;
+    private Action<State> onFixedUpdate;
+    #endregion
+
+    #region Constructor
     public State(EStateType stateType, StateMachine parent = null, Action<State> onEntry = null, Action<State> onExit = null, Action<State> onUpdate = null, Action<State> onFixedUpdate = null) {
         this.StateType = stateType;
         this.Parent = parent;
@@ -18,16 +27,9 @@ public class State {
         this.onUpdate = onUpdate;
         this.onFixedUpdate = onFixedUpdate;
     }
+    #endregion
 
-    internal virtual void AddTransition(Transition transition) {
-        m_transitions.Add(transition);
-    }
-
-    private readonly Action<State> onEntry;
-    private readonly Action<State> onExit;
-    private readonly Action<State> onUpdate;
-    private readonly Action<State> onFixedUpdate;
-
+    #region State logic methods
     internal virtual void OnEntry() {
         onEntry?.Invoke(this);
     }
@@ -52,4 +54,11 @@ public class State {
             }
         }
     }
+    #endregion
+
+    #region Utility methods
+    internal virtual void AddTransition(Transition transition) {
+        m_transitions.Add(transition);
+    }
+    #endregion
 }
