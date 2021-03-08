@@ -125,18 +125,22 @@ MonoBehaviour:
   groundCheckRadius: 0.25
   groundLayer:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 1
   gravity: -18
   walkingSpeed: 5
   backwardSpeed: 4
   runningSpeed: 8
   maxSprintDuration: 4
-  sprintRecoveryRate: 0.66
+  sprintRecoveryRate: 2
+  sprintLateralFactor: 0.3
   jumpHeight: 1
+  airSpeedFactor: 0.7
   airSpeedX: 3
-  airSpeedZ: 1
+  airSpeedZ: 2
+  slideSpeed: 10
+  slideDetectorRadius: 0.3
   lookSpeed: 0.1
-  lookYLimit: 45
+  lookYLimit: 80
 --- !u!114 &2481539305689220675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -989,7 +993,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7079674330213730096}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.127, z: 0}
+  m_LocalPosition: {x: 0, y: 0.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 18293541002357375}
@@ -1102,7 +1106,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 244230143274304151, guid: 9359e3f963a212b429cf852ab811165d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9359e3f963a212b429cf852ab811165d, type: 3}
 --- !u!4 &1460830285025678616 stripped
 Transform:

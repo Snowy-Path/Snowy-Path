@@ -23,12 +23,6 @@ public class Telescope : MonoBehaviour, IHandTool {
         spriteMask.SetActive(false);
     }
 
-    private void Update() {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
-
-        }
-    }
-
     public void StartPrimaryUse() {
         IsBusy = true;
         scopeCamera.fieldOfView = defaultZoom;
