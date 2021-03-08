@@ -43,6 +43,22 @@ public class WolfController : MonoBehaviour {
     private float lastSaw = 0f;
     #endregion
 
+    #region Hearing sense
+    private Vector3 soundPosition;
+    public Vector3 SoundPosition {
+        get {
+            return soundPosition;
+        }
+        set {
+            soundPosition = value;
+            lastHeard = Time.time;
+        }
+    }
+    private float lastHeard = 0f;
+    public float lastHeardThreshold = 20f;
+    #endregion
+
+
     private StateMachine m_fsm;
     internal NavMeshAgent agent;
 
@@ -53,7 +69,7 @@ public class WolfController : MonoBehaviour {
         HFSMInitialization();
     }
 
-
+    #region Built-In Methodes
     private void Update() {
 
 #if DEBUG
@@ -78,6 +94,7 @@ public class WolfController : MonoBehaviour {
     private void OnDestroy() {
         m_fsm.OnExit();
     }
+    #endregion
 
     #region HFSM
     private void HFSMInitialization() {
@@ -96,13 +113,17 @@ public class WolfController : MonoBehaviour {
 
         patrol.AddTransition(new Transition(
             EStateType.Combat,
-            (condition) => isSeeingPlayer
+            (condition) => IsSensingPlayer()
         ));
 
         Idle_Init(patrol);
         MoveToWaypoint_Init(patrol);
 
         parent.AddState(patrol);
+    }
+
+    private bool IsSensingPlayer() {
+        return isSeeingPlayer/*|| (Time.time - lastHeard) <= lastHeardThreshold*/;
     }
 
     private void Idle_Init(StateMachine parent) {
@@ -164,7 +185,7 @@ public class WolfController : MonoBehaviour {
     }
 
     private bool HasLostPlayer() {
-        return (Time.time - lastSaw) >= loosingTime;
+        return ((Time.time - lastSaw) >= loosingTime)/*|| ((Time.time - lastHeard) > lastHeardThreshold)*/;
     }
 
     private void Attack_Init(StateMachine parent) {
@@ -181,4 +202,8 @@ public class WolfController : MonoBehaviour {
 
 
     #endregion
+
+    public EStateType GetCurrentState() {
+        return m_fsm.GetCurrentState();
+    }
 }

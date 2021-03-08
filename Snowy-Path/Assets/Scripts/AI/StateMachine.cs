@@ -30,8 +30,6 @@ public class StateMachine : State {
 
         m_currentState = m_states[stateType];
         m_currentState.OnEntry();
-
-        Debug.Log(m_currentState.StateType);
     }
 
 
@@ -60,6 +58,10 @@ public class StateMachine : State {
     internal override void OnLateUpdate() {
         m_currentState.OnLateUpdate();
         base.OnLateUpdate();
+    }
+
+    internal override EStateType GetCurrentState() {
+        return m_currentState.GetCurrentState();
     }
 
 }

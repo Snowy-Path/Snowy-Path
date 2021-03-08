@@ -34,6 +34,9 @@ public class RayCastGun : Tool, IHandTool
     public int maxMagazineCapacity = 1;
     public int projectilePerShot;
 
+    // AI script for the hearing sense
+    public HearingSenseEmitter emitter;
+
     public EToolType ToolType => EToolType.Pistol;
 
     void Start()
@@ -164,6 +167,7 @@ public class RayCastGun : Tool, IHandTool
 
     public void StartPrimaryUse() {
         if (Time.time > nextFire && !reloading && ammo > 0 && readyToShoot) {
+            emitter.Emit(); //Emit sound to allow ennemies to detect the point of origin
             projectileShot = projectilePerShot;
             Shot();
             StartCoroutine("DammageApply");

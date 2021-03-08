@@ -60,5 +60,9 @@ public class State {
     internal virtual void AddTransition(Transition transition) {
         m_transitions.Add(transition);
     }
+
+    internal virtual EStateType GetCurrentState() {
+        return StateType;
+    }
     #endregion
 }
