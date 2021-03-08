@@ -47,7 +47,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
         m_rectTransform = GetComponent<RectTransform>();
     }
 
-    // Note: Here we apply the movement/zoom using the velocities (Controller mode only)
+    // Note: Here we apply the movement/zoom using the velocities (Gamepad mode only)
     void Update()
     {
         cursor.anchoredPosition = cursor.anchoredPosition + m_cursorVelocity * Time.deltaTime;
@@ -65,7 +65,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
     public void OnPointerClick(PointerEventData data)
     {
         if (!m_isDragging)
-            PlacePin(data);
+            PlacePin(data.position);
     }
 
     public void OnBeginDrag(PointerEventData data)
@@ -106,12 +106,25 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
     {
         if (m_isPinModeEnabled)
             PinConfirm();
+        else {
+            PlacePin(RectTransformUtility.WorldToScreenPoint(Camera.main, cursor.transform.position));
+            pinPanel.SelectCurrentButton();
+        }
     }
 
     void OnNavigate(InputAction.CallbackContext context)
     {
-        var movement = context.ReadValue<Vector2>();
-        m_cursorVelocity = movement * cursorSpeed;
+        if (!m_isPinModeEnabled) {
+            var movement = context.ReadValue<Vector2>();
+            m_cursorVelocity = movement * cursorSpeed;
+        }
+        else {
+            m_cursorVelocity = Vector2.zero;
+
+            if (context.phase == InputActionPhase.Canceled) {
+                pinPanel.SelectNextButton();
+            }
+        }
     }
 
     void OnZoom(InputAction.CallbackContext context)
@@ -185,7 +198,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
         PinCancel();
     }
 
-    void PlacePin(PointerEventData data)
+    void PlacePin(Vector2 position)
     {
         if (m_lastPinPlaced != null) {
             Destroy(m_lastPinPlaced);
@@ -198,8 +211,6 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
             pinPanel.gameObject.SetActive(true);
         }
 
-        // FIXME: When m_isPinModeEnabled, and for all the duration of the mode, the same pin should be edited instead of creating new ones each time
-
         GameObject child = new GameObject("MapPin");
         child.transform.parent = transform;
 
@@ -210,11 +221,10 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
             mapPinScale / transform.localScale.z
         );
 
-        Vector2 mousePosition = data.position;
-        Vector2 relativeMousePosition;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(m_rectTransform, mousePosition, null, out relativeMousePosition);
+        Vector2 relativePosition;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(m_rectTransform, position, null, out relativePosition);
 
-        rectTransform.anchoredPosition = relativeMousePosition;
+        rectTransform.anchoredPosition = relativePosition;
 
         Image image = child.AddComponent<Image>();
         image.color = pinPanel.CurrentPinColor;
@@ -259,6 +269,9 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
 
             // Debug.Log((scroll > 0 ? "+" : "-") + relativeMousePosition * zoomStep + " | " + mousePosition + " | "  + m_rectTransform.position);
         }
+
+        if (isController)
+            m_rectTransform.anchoredPosition = -cursor.anchoredPosition * m_rectTransform.localScale;
 
         KeepMapCenteredInView();
 
