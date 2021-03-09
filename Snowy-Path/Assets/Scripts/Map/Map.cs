@@ -45,6 +45,8 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
             pinPanel.gameObject.SetActive(false);
 
         m_rectTransform = GetComponent<RectTransform>();
+
+        
     }
 
     // Note: Here we apply the movement/zoom using the velocities (Gamepad mode only)
@@ -104,10 +106,27 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
 
     void OnConfirm(InputAction.CallbackContext context)
     {
-        if (m_isPinModeEnabled)
+        if (m_isPinModeEnabled) { 
             PinConfirm();
+        }
         else {
-            PlacePin(RectTransformUtility.WorldToScreenPoint(Camera.main, cursor.transform.position));
+            // PlacePin(RectTransformUtility.WorldToScreenPoint(Camera.main, cursor.transform.position));
+
+            // To be able to select map pins with the controller, we need to simulate a click event
+            var eventData = new PointerEventData(EventSystem.current);
+            eventData.position = RectTransformUtility.WorldToScreenPoint(Camera.main, cursor.transform.position);
+
+            // Then, we send the event to the pins themselves
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, results);
+
+            foreach (RaycastResult result in results) {
+                if (result.gameObject.name == "FullMap" || result.gameObject.name == "MapPin") {
+                    ExecuteEvents.Execute(result.gameObject, eventData, ExecuteEvents.pointerClickHandler);
+                    break;
+                }
+            }
+
             pinPanel.SelectCurrentButton();
         }
     }
