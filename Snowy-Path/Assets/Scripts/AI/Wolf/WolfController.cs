@@ -40,7 +40,7 @@ public class WolfController : MonoBehaviour {
             }
         }
     }
-    private float lastSaw = 0f;
+    private float lastSaw = float.NegativeInfinity;
     #endregion
 
     #region Hearing sense
@@ -54,8 +54,8 @@ public class WolfController : MonoBehaviour {
             lastHeard = Time.time;
         }
     }
-    private float lastHeard = 0f;
-    public float lastHeardThreshold = 20f;
+    private float lastHeard = float.NegativeInfinity;
+    public float hearingThreshold;
     #endregion
 
 
@@ -78,6 +78,8 @@ public class WolfController : MonoBehaviour {
         for (int i = 1; i < corners.Length; i++) {
             Debug.DrawLine(corners[i - 1], corners[i], Color.yellow);
         }
+
+        Debug.Log(GetCurrentState());
 #endif
 
         m_fsm.OnUpdate();
@@ -101,6 +103,7 @@ public class WolfController : MonoBehaviour {
         m_fsm = new StateMachine(EStateType.None, EStateType.Patrol);
 
         Patrol_Init(m_fsm);
+        Inspecting_Init(m_fsm);
         Combat_Init(m_fsm);
 
         m_fsm.OnEntry();
@@ -113,17 +116,18 @@ public class WolfController : MonoBehaviour {
 
         patrol.AddTransition(new Transition(
             EStateType.Combat,
-            (condition) => IsSensingPlayer()
+            (condition) => isSeeingPlayer
+        ));
+
+        patrol.AddTransition(new Transition(
+            EStateType.Inspecting,
+            (condition) => (Time.time - lastHeard) < hearingThreshold
         ));
 
         Idle_Init(patrol);
         MoveToWaypoint_Init(patrol);
 
         parent.AddState(patrol);
-    }
-
-    private bool IsSensingPlayer() {
-        return isSeeingPlayer/*|| (Time.time - lastHeard) <= lastHeardThreshold*/;
     }
 
     private void Idle_Init(StateMachine parent) {
@@ -168,6 +172,27 @@ public class WolfController : MonoBehaviour {
     }
     #endregion
 
+    #region
+    private void Inspecting_Init(StateMachine parent) {
+        State inspecting = new State(EStateType.Inspecting, parent,
+            onEntry: (state) => {
+                agent.SetDestination(SoundPosition);
+            }    
+        );
+
+        inspecting.AddTransition(new Transition(
+            EStateType.Combat,
+            (condition) => isSeeingPlayer
+        ));
+
+        inspecting.AddTransition(new Transition(
+            EStateType.Patrol,
+            (condition) => (Time.time - lastHeard) >= hearingThreshold
+        ));
+
+        parent.AddState(inspecting);
+    }
+    #endregion
 
     #region Combat
     private void Combat_Init(StateMachine parent) {
@@ -175,17 +200,13 @@ public class WolfController : MonoBehaviour {
 
         combat.AddTransition(new Transition(
             EStateType.Patrol,
-            (condition) => HasLostPlayer()
+            (condition) => (Time.time - lastSaw) >= loosingTime
         ));
 
         Attack_Init(combat);
         //TODO: Add states
 
         parent.AddState(combat);
-    }
-
-    private bool HasLostPlayer() {
-        return ((Time.time - lastSaw) >= loosingTime)/*|| ((Time.time - lastHeard) > lastHeardThreshold)*/;
     }
 
     private void Attack_Init(StateMachine parent) {

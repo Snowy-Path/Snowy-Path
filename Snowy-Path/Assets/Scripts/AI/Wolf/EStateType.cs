@@ -7,6 +7,7 @@ public enum EStateType{
     Patrol,
     Idle,
     MoveToWaypoint,
+    Inspecting,
     Combat,
     Aggro,
 }
