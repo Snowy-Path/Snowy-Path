@@ -132,20 +132,18 @@ public class WolfController : MonoBehaviour {
 
     private void Idle_Init(StateMachine parent) {
         State idle = new State(EStateType.Idle, parent,
-            onEntry: (state) => waitingTimer = 0f,
+            onEntry: (state) => waitingTimer = Time.time + waitingTime,
             onExit: (state) => {
-                waitingTimer = 0f;
                 waypointIndex++;
                 if (waypointIndex >= waypoints.Count) {
                     waypointIndex = 0;
                 }
-            },
-            onUpdate: (state) => waitingTimer += Time.deltaTime
+            }
         );
 
         idle.AddTransition(new Transition(
             EStateType.MoveToWaypoint,
-            (condition) => waitingTimer >= waitingTime
+            (condition) => Time.time >= waitingTimer
         ));
 
         parent.AddState(idle);
