@@ -44,7 +44,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 15
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &514013920
 Rigidbody:
@@ -78,7 +78,7 @@ MonoBehaviour:
   agent: {fileID: 3835934616732625082}
   layers:
     serializedVersion: 2
-    m_Bits: 6145
+    m_Bits: 2049
 --- !u!1 &3656227983447665432
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +123,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 25
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &1032398156436104206
 Rigidbody:
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 1663993495675994578}
   - component: {fileID: 3936503887841953245}
   - component: {fileID: 6445943477643265821}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 3835934616732625082}
   - component: {fileID: 3835934616732625081}
   - component: {fileID: 3228026827354399249}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Wolf
   m_TagString: Ennemy
   m_Icon: {fileID: 0}
@@ -335,12 +335,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3228026827354399249}
   loosingTime: 2
-  waitingTime: 5
+  idleWaitingTime: 5
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   hearingThreshold: 10
+  lurkingDistance: 10
+  lurkingTime: 3
+  chargeSpeed: 6
 --- !u!195 &3835934616732625081
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -393,7 +396,7 @@ GameObject:
   - component: {fileID: 11774855212699520}
   - component: {fileID: 7322551763205121477}
   - component: {fileID: 8759059870829784629}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -472,7 +475,7 @@ GameObject:
   - component: {fileID: 4243238014795206630}
   - component: {fileID: 6192144290355153503}
   - component: {fileID: 1893517085765943568}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EarL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1964843880224511604}
   - component: {fileID: 4863387626065012286}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,7 +583,7 @@ BoxCollider:
   m_GameObject: {fileID: 6762089142377972355}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: -0.01, y: 0, z: 0.5}
@@ -595,7 +598,7 @@ GameObject:
   - component: {fileID: 8838538048790608437}
   - component: {fileID: 6301554276856282014}
   - component: {fileID: 8076288355587784925}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EarR
   m_TagString: Untagged
   m_Icon: {fileID: 0}

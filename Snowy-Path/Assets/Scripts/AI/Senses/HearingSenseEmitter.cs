@@ -6,8 +6,12 @@ public class HearingSenseEmitter : MonoBehaviour {
 
     private Dictionary<int, HearingSenseReceiver> m_receiverDic;
 
-    private void Start() {
+    private void Awake() {
         m_receiverDic = new Dictionary<int, HearingSenseReceiver>();
+    }
+
+    private void OnDisable() {
+        m_receiverDic.Clear(); //Clearing the dictionary when disabling the component. When reactivated, ensure we do not register AGAIN
     }
 
     private void OnTriggerEnter(Collider other) {
