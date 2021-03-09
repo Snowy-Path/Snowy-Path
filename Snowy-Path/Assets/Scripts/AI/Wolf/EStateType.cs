@@ -10,4 +10,10 @@ public enum EStateType{
     Inspecting,
     Combat,
     Aggro,
+    Lurking,
+    Charge,
+    Attack,
+    Recovery,
+    Escaping,
+    Stun
 }

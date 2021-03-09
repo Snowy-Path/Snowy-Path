@@ -8,6 +8,8 @@ public class WolfController : MonoBehaviour {
 
     #region Variables
 
+    public Animator animator;
+
     #region Patrol
     public float loosingTime;
     #endregion
@@ -58,18 +60,22 @@ public class WolfController : MonoBehaviour {
     public float hearingThreshold;
     #endregion
 
+    #region Aggro
+    
+    #endregion
+
 
     private StateMachine m_fsm;
     internal NavMeshAgent agent;
 
     #endregion
 
+    #region Built-In Methods
+
     private void Start() {
         agent = GetComponent<NavMeshAgent>();
         HFSMInitialization();
     }
-
-    #region Built-In Methodes
     private void Update() {
 
 #if DEBUG
@@ -78,8 +84,6 @@ public class WolfController : MonoBehaviour {
         for (int i = 1; i < corners.Length; i++) {
             Debug.DrawLine(corners[i - 1], corners[i], Color.yellow);
         }
-
-        Debug.Log(GetCurrentState());
 #endif
 
         m_fsm.OnUpdate();
@@ -201,21 +205,66 @@ public class WolfController : MonoBehaviour {
             (condition) => (Time.time - lastSaw) >= loosingTime
         ));
 
+        Aggro_Init(combat);
+        Lurking_Init(combat);
+        Charge_Init(combat);
         Attack_Init(combat);
-        //TODO: Add states
+        Recovery_Init(combat);
+        Escaping_Init(combat);
+        Stun_Init(combat);
 
         parent.AddState(combat);
     }
 
-    private void Attack_Init(StateMachine parent) {
-        State attack = new State(EStateType.Aggro, parent,
-            onUpdate: (state) => {
-                if (target) {
-                    agent.SetDestination(target.position);
-                }
+    private void Aggro_Init(StateMachine parent) {
+        State aggro = new State(EStateType.Aggro, parent,
+            onEntry: (state) => {
+                animator.SetTrigger("Aggro");
             }
         );
+
+        aggro.AddTransition(new Transition(
+            EStateType.Lurking,
+            (condition) => !animator.GetCurrentAnimatorStateInfo(0).IsName("Aggro")
+        ));
+
+        parent.AddState(aggro);
+    }
+
+    private void Lurking_Init(StateMachine parent) {
+        State lurking = new State(EStateType.Lurking, parent
+        );
+        parent.AddState(lurking);
+    }
+
+    private void Charge_Init(StateMachine parent) {
+        State charge = new State(EStateType.Charge, parent
+        );
+        parent.AddState(charge);
+    }
+
+    private void Attack_Init(StateMachine parent) {
+        State attack = new State(EStateType.Attack, parent
+        );
         parent.AddState(attack);
+    }
+
+    private void Recovery_Init(StateMachine parent) {
+        State recovery = new State(EStateType.Recovery, parent
+        );
+        parent.AddState(recovery);
+    }
+
+    private void Escaping_Init(StateMachine parent) {
+        State escaping = new State(EStateType.Escaping, parent
+        );
+        parent.AddState(escaping);
+    }
+
+    private void Stun_Init(StateMachine parent) {
+        State stun = new State(EStateType.Stun, parent
+        );
+        parent.AddState(stun);
     }
     #endregion
 
