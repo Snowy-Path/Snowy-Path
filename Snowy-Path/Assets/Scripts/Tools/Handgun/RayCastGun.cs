@@ -63,7 +63,7 @@ public class RayCastGun : Tool, IHandTool
     }
 
     /// <summary>
-    /// Apply dammage on wvery ennemy hit
+    /// Apply dammage on every ennemy hit
     /// </summary>
     /// <returns></returns>
     private IEnumerator DammageApply()
@@ -79,6 +79,11 @@ public class RayCastGun : Tool, IHandTool
             //apply dammage
             valu.transform.gameObject.GetComponent<GenericHealth>().Hit(damageDealt);
 
+            //Stun cannot be
+            WolfController wolfController = valu.gameObject.GetComponent<WolfController>();
+            if (wolfController) {
+                wolfController.SetStunState();
+            }
         }
         //Clear the hashsets
         EnnemyHashSet.Clear();

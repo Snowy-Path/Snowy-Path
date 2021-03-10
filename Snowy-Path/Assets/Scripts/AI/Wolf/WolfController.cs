@@ -388,7 +388,7 @@ public class WolfController : MonoBehaviour {
 
         stun.AddTransition(new Transition(
             EStateType.Combat,
-            (condition) => Time.time >= timer || recoveryHealth != m_genericHealth.GetCurrentHealth()
+            (condition) => Time.time >= timer
         ));
 
         parent.AddState(stun);
@@ -406,6 +406,10 @@ public class WolfController : MonoBehaviour {
         if (agent.hasPath) {
             agent.ResetPath();
         }
+    }
+
+    public void SetStunState() {
+        m_fsm.ChangeState(EStateType.Stun);
     }
     #endregion
 }
