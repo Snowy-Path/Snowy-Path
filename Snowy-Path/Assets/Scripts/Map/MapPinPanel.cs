@@ -74,14 +74,19 @@ public class MapPinPanel : MonoBehaviour
         map.OnPinTypeChanged();
     }
 
-    public void SelectCurrentButton() {
+    void UpdateCursorPosition() {
         m_cursor.anchoredPosition = new Vector3(m_currentPinType * 100f, 0f, 0f);
     }
 
-    public void SelectNextButton() {
-        m_currentPinType = (m_currentPinType + 1) % m_mapPins.Count;
-        SelectCurrentButton();
+    public void SelectPinType(int pinType) {
+        m_currentPinType = pinType;
+        UpdateCursorPosition();
+        map.OnPinTypeChanged();
+    }
 
+    public void SelectNextPinType() {
+        m_currentPinType = (m_currentPinType + 1) % m_mapPins.Count;
+        UpdateCursorPosition();
         map.OnPinTypeChanged();
     }
 }

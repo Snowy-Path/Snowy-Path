@@ -34,6 +34,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
     {
         inputActionAsset.FindAction("Map/Confirm").performed += OnConfirm;
         inputActionAsset.FindAction("Map/Cancel").performed += OnCancel;
+        inputActionAsset.FindAction("Map/Remove pin").performed += (InputAction.CallbackContext c) => PinRemove();
         inputActionAsset.FindAction("Map/Navigate").performed += OnNavigate;
         inputActionAsset.FindAction("Map/Navigate").canceled += OnNavigate;
         inputActionAsset.FindAction("Map/Zoom").performed += OnZoom;
@@ -110,8 +111,6 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
             PinConfirm();
         }
         else {
-            // PlacePin(RectTransformUtility.WorldToScreenPoint(Camera.main, cursor.transform.position));
-
             // To be able to select map pins with the controller, we need to simulate a click event
             var eventData = new PointerEventData(EventSystem.current);
             eventData.position = RectTransformUtility.WorldToScreenPoint(Camera.main, cursor.transform.position);
@@ -122,26 +121,32 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
 
             foreach (RaycastResult result in results) {
                 if (result.gameObject.name == "FullMap" || result.gameObject.name == "MapPin") {
+                    if (result.gameObject.name == "FullMap")
+                        pinPanel.SelectPinType(0);
+                    else
+                        pinPanel.SelectPinType(result.gameObject.GetComponent<MapPin>().pinType);
+
                     ExecuteEvents.Execute(result.gameObject, eventData, ExecuteEvents.pointerClickHandler);
+
                     break;
                 }
             }
-
-            pinPanel.SelectCurrentButton();
         }
     }
 
     void OnNavigate(InputAction.CallbackContext context)
     {
+        // If pin panel is disabled, move the cursor
         if (!m_isPinModeEnabled) {
             var movement = context.ReadValue<Vector2>();
             m_cursorVelocity = movement * cursorSpeed;
         }
+        // If pin panel is enabled, stop moving the cursor and change current pin type
         else {
             m_cursorVelocity = Vector2.zero;
 
             if (context.phase == InputActionPhase.Canceled) {
-                pinPanel.SelectNextButton();
+                pinPanel.SelectNextPinType();
             }
         }
     }
@@ -185,6 +190,7 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
         else {
             m_lastPinPlaced.transform.position = m_lastPinPosition;
             m_lastPinPlaced.GetComponent<Image>().color = m_lastPinColor;
+            m_lastPinPlaced = null;
         }
 
         m_isEditingPin = false;
@@ -202,8 +208,10 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
 
     public void OnPinTypeChanged()
     {
-        if (m_lastPinPlaced != null)
+        if (m_lastPinPlaced != null) {
             m_lastPinPlaced.GetComponent<Image>().color = pinPanel.CurrentPinColor;
+            m_lastPinPlaced.GetComponent<MapPin>().pinType = pinPanel.CurrentPinType;
+        }
     }
 
     public void OpenPinPanel()
@@ -251,7 +259,9 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
         Button button = child.AddComponent<Button>();
         button.onClick.AddListener(() => OnPinClick(child));
 
-        child.AddComponent<MapPin>().scale = mapPinScale;
+        MapPin pin = child.AddComponent<MapPin>();
+        pin.scale = mapPinScale;
+        pin.pinType = pinPanel.CurrentPinType;
 
         m_lastPinPlaced = child;
     }
