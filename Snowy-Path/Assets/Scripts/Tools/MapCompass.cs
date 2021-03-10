@@ -34,6 +34,8 @@ public class MapCompass : MonoBehaviour, IHandTool {
 
     public void SecondaryUse() {
         if (!m_isFullscreenMode) {
+            m_map.ToggleCursorVisibility();
+
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 
@@ -46,6 +48,7 @@ public class MapCompass : MonoBehaviour, IHandTool {
     public void CloseFullscreenMap() {
         if (m_isFullscreenMode) {
             m_map.ClosePinPanel();
+            m_map.ToggleCursorVisibility();
 
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;

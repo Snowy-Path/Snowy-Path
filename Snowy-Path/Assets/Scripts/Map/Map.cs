@@ -46,8 +46,6 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
             pinPanel.gameObject.SetActive(false);
 
         m_rectTransform = GetComponent<RectTransform>();
-
-        
     }
 
     // Note: Here we apply the movement/zoom using the velocities (Gamepad mode only)
@@ -59,6 +57,11 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
             Zoom(m_zoomVelocity, RectTransformUtility.WorldToScreenPoint(Camera.current, cursor.transform.position), true);
         else
             KeepMapCenteredInView();
+    }
+
+    public void ToggleCursorVisibility()
+    {
+        cursor.gameObject.SetActive(!cursor.gameObject.activeSelf);
     }
 
     //=========================================================================
