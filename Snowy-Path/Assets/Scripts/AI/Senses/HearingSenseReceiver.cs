@@ -7,7 +7,7 @@ public class HearingSenseReceiver : MonoBehaviour {
     public WolfController agent;
 
     public void Receive(Vector3 position) {
-        agent.SoundPosition = position;
+        agent.LastPosition = position;
     }
 
 }

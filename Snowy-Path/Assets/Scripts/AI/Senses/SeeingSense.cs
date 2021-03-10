@@ -24,23 +24,17 @@ public class SeeingSense : MonoBehaviour {
 
         RaycastHit[] hits = Physics.RaycastAll(ray, length, layers);
 
-        bool isSeeingPlayer = false;
+        agent.IsSeeingPlayer = (hits.Length == 1);
 
-        if (hits.Length == 1) {
-            isSeeingPlayer = true;
+        if (agent.IsSeeingPlayer) {
+            agent.LastPosition = other.transform.position;
         }
 
-        if (isSeeingPlayer) {
-            agent.Target = other.transform;
-        } else {
-            agent.Target = null;
-        }
-
-        Debug.DrawRay(ray.origin, ray.direction * length, isSeeingPlayer ? Color.green : Color.red);
+        Debug.DrawRay(ray.origin, ray.direction * length, agent.IsSeeingPlayer ? Color.green : Color.red);
     }
 
     private void OnTriggerExit(Collider other) {
-        agent.Target = null;
+        agent.IsSeeingPlayer = false;
     }
 
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class WolfController : MonoBehaviour {
 
@@ -12,19 +13,15 @@ public class WolfController : MonoBehaviour {
     private float timer;
 
     #region Seeing sense
-    private Transform target;
     private bool isSeeingPlayer = false;
-    public Transform Target {
+    public bool IsSeeingPlayer {
         get {
-            return target;
+            return isSeeingPlayer;
         }
-        set {
-            target = value;
-            if (target) {
+        internal set {
+            isSeeingPlayer = value;
+            if (isSeeingPlayer) {
                 lastSaw = Time.time;
-                isSeeingPlayer = true;
-            } else {
-                isSeeingPlayer = false;
             }
         }
     }
@@ -32,13 +29,13 @@ public class WolfController : MonoBehaviour {
     #endregion
 
     #region Hearing sense
-    private Vector3 soundPosition;
-    public Vector3 SoundPosition {
+    private Vector3 lastPosition;
+    public Vector3 LastPosition {
         get {
-            return soundPosition;
+            return lastPosition;
         }
-        set {
-            soundPosition = value;
+        internal set {
+            lastPosition = value;
             heardPlayer = true;
         }
     }
@@ -48,7 +45,6 @@ public class WolfController : MonoBehaviour {
 
 
     #region Patrol
-    public float loosingTime;
     #endregion
 
     #region Idle
@@ -62,6 +58,7 @@ public class WolfController : MonoBehaviour {
     #endregion
 
     #region Aggro
+    public float loosingAggroDuration = 10f;
     private bool aggroFinished = false;
     public void AggroAnimationFinished() {
         aggroFinished = true;
@@ -70,7 +67,10 @@ public class WolfController : MonoBehaviour {
 
     #region Lurk
     public float lurkingDistance = 10f;
-    public float lurkingTime = 5f;
+    public float lurkingTimeMin = 15f;
+    public float lurkingTimeMax = 45f;
+    private float lurkingTime;
+    public float safeDistance = 10f;
     #endregion
 
     #region Charge
@@ -79,6 +79,7 @@ public class WolfController : MonoBehaviour {
     #endregion
 
     #region Attack
+    public float attackTriggerRange = 1.5f;
     private bool attackFinished = false;
     public void AttackAnimationFinished() {
         attackFinished = true;
@@ -86,12 +87,12 @@ public class WolfController : MonoBehaviour {
     #endregion
 
     #region Recover
-    public float recoveryTime = 5f;
+    public float recoveryDuration = 4f;
     private int recoveryHealth = int.MinValue;
     #endregion
 
     #region Stun
-
+    public float stunDuration = 5f;
     #endregion
 
 
@@ -155,7 +156,7 @@ public class WolfController : MonoBehaviour {
 
         patrol.AddTransition(new Transition(
             EStateType.Aggro,
-            (condition) => isSeeingPlayer
+            (condition) => IsSeeingPlayer
         ));
 
         patrol.AddTransition(new Transition(
@@ -216,7 +217,7 @@ public class WolfController : MonoBehaviour {
     private void Inspect_Init(StateMachine parent) {
         State inspect = new State(EStateType.Inspect, parent,
             onEntry: (state) => { // To set a destination before transitions are checked
-                agent.SetDestination(SoundPosition);
+                agent.SetDestination(LastPosition);
             },
             //onUpdate: (state) => { // Can be removed for performance purposes
             //    agent.SetDestination(SoundPosition); // To compute a shorter path each frame
@@ -228,7 +229,7 @@ public class WolfController : MonoBehaviour {
 
         inspect.AddTransition(new Transition(
             EStateType.Aggro,
-            (condition) => isSeeingPlayer
+            (condition) => IsSeeingPlayer
         ));
 
         inspect.AddTransition(new Transition(
@@ -266,7 +267,7 @@ public class WolfController : MonoBehaviour {
 
         combat.AddTransition(new Transition(
             EStateType.Patrol,
-            (condition) => (Time.time - lastSaw) >= loosingTime
+            (condition) => (Time.time - lastSaw) >= loosingAggroDuration
         ));
 
         Lurk_Init(combat);
@@ -281,31 +282,32 @@ public class WolfController : MonoBehaviour {
     private void Lurk_Init(StateMachine parent) {
         State lurk = new State(EStateType.Lurk, parent,
             onEntry: (state) => {
-                //agent.stoppingDistance = 10f;
+                lurkingTime = Random.Range(lurkingTimeMin, lurkingTimeMax);
                 timer = Time.time + lurkingTime;
             },
             onUpdate: (state) => {
-                if (target) {
-                    //agent.SetDestination(target.position);
-                    //if (Vector3.Distance(transform.position, target.position) < lurkingDistance) {
-                    //    //TODO: Move avay
-                    //} else {
-                    //    //TODO : move in circle around the player
-                    //}
-                }
+                float distanceToTarget = Vector3.Distance(transform.position, lastPosition);
+                agent.SetDestination(PositionToLurk(lastPosition));
             },
             onExit: (state) => {
-                //agent.stoppingDistance = 0f;
                 timer = float.NegativeInfinity;
             }
         );
 
         lurk.AddTransition(new Transition(
             EStateType.Charge,
-            (condition) => Time.time >= timer
+            (condition) => Time.time >= timer && IsSeeingPlayer
         ));
 
         parent.AddState(lurk);
+    }
+
+    private Vector3 PositionToLurk(Vector3 targetPosition) {
+        Vector3 forward = transform.position - targetPosition;
+        forward.y = 0;
+        transform.rotation = Quaternion.LookRotation(forward);
+        Vector3 runToPosition = targetPosition + (transform.forward * safeDistance);
+        return runToPosition;
     }
 
     private void Charge_Init(StateMachine parent) {
@@ -313,10 +315,10 @@ public class WolfController : MonoBehaviour {
             onEntry: (state) => {
                 agent.speed = chargeSpeed;
                 agent.autoBraking = false;
-                agent.SetDestination(target.position);
+                agent.SetDestination(lastPosition); //NullPointerExecption
             },
             onUpdate: (state) => {
-                agent.SetDestination(target.position);
+                agent.SetDestination(lastPosition);
             },
             onExit: (state) => {
                 agent.speed = normalSpeed;
@@ -326,7 +328,7 @@ public class WolfController : MonoBehaviour {
 
         charge.AddTransition(new Transition(
             EStateType.Attack,
-            (condition) => agent.remainingDistance < 1f
+            (condition) => agent.remainingDistance < attackTriggerRange
         ));
 
         parent.AddState(charge);
@@ -353,7 +355,7 @@ public class WolfController : MonoBehaviour {
     private void Recover_Init(StateMachine parent) {
         State recover = new State(EStateType.Recover, parent,
             onEntry: (state) => {
-                timer = Time.time + lurkingTime;
+                timer = Time.time + recoveryDuration;
                 recoveryHealth = m_genericHealth.GetCurrentHealth();
             },
             onExit: (state) => {
@@ -372,14 +374,20 @@ public class WolfController : MonoBehaviour {
 
     #endregion
 
-    #region
+    #region Stun
     private void Stun_Init(StateMachine parent) {
-        State stun = new State(EStateType.Stun, parent
+        State stun = new State(EStateType.Stun, parent,
+            onEntry: (state) => {
+                timer = Time.time + stunDuration;
+            },
+            onExit: (state) => {
+                timer = float.NegativeInfinity;
+            }
         );
 
         stun.AddTransition(new Transition(
             EStateType.Combat,
-            (condition) => false //TODO: implement transition
+            (condition) => Time.time >= timer || recoveryHealth != m_genericHealth.GetCurrentHealth()
         ));
 
         parent.AddState(stun);
