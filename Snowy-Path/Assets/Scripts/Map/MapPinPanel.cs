@@ -84,8 +84,19 @@ public class MapPinPanel : MonoBehaviour
         map.OnPinTypeChanged();
     }
 
-    public void SelectNextPinType() {
-        m_currentPinType = (m_currentPinType + 1) % m_mapPins.Count;
+    public void SelectNextPinType(Vector2Int delta) {
+        // m_currentPinType += delta.x;
+        // m_currentPinType += delta.y * 5;
+
+        int width = 5;
+        int height = Mathf.CeilToInt(m_mapPins.Count / (float)width);
+
+        int x = m_currentPinType % width;
+        int y = m_currentPinType / width;
+
+        y = (y + delta.y + height) % height;
+
+        m_currentPinType = (x + y * width + delta.x + m_mapPins.Count) % m_mapPins.Count;
         m_cursor.anchoredPosition = GetPinPosition(m_currentPinType);
         map.OnPinTypeChanged();
     }

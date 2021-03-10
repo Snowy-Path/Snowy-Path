@@ -137,20 +137,31 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
         }
     }
 
+    private bool m_canMovePinCursor = false;
     void OnNavigate(InputAction.CallbackContext context)
     {
         // If pin panel is disabled, move the cursor
+        var value = context.ReadValue<Vector2>();
         if (!m_isPinModeEnabled) {
-            var movement = context.ReadValue<Vector2>();
-            m_cursorVelocity = movement * cursorSpeed;
+            m_cursorVelocity = value * cursorSpeed;
         }
         // If pin panel is enabled, stop moving the cursor and change current pin type
         else {
             m_cursorVelocity = Vector2.zero;
 
-            if (context.phase == InputActionPhase.Canceled) {
-                pinPanel.SelectNextPinType();
+            if (context.phase == InputActionPhase.Performed && m_canMovePinCursor) {
+                pinPanel.SelectNextPinType(new Vector2Int(
+                    value.x > 0 ? 1 : value.x < 0 ? -1 : 0,
+                    value.y > 0 ? 1 : value.y < 0 ? -1 : 0
+                ));
             }
+        }
+
+        if (context.phase == InputActionPhase.Canceled) {
+            m_canMovePinCursor = true;
+        }
+        else if (context.phase == InputActionPhase.Performed) {
+            m_canMovePinCursor = false;
         }
     }
 
