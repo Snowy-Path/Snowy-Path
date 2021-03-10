@@ -341,6 +341,7 @@ public class WolfController : MonoBehaviour {
             },
             onExit: (state) => {
                 attackFinished = false;
+                agent.autoBraking = true;
             }
         );
 
