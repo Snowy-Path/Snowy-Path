@@ -1205,7 +1205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1209096705
 Transform:
   m_ObjectHideFlags: 0
@@ -1268,7 +1268,7 @@ PrefabInstance:
     - target: {fileID: 1419045311392325748, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.41
+      value: 33.41
       objectReference: {fileID: 0}
     - target: {fileID: 1419045311392325748, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
@@ -1278,7 +1278,7 @@ PrefabInstance:
     - target: {fileID: 1419045311392325748, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.71
+      value: 17.27
       objectReference: {fileID: 0}
     - target: {fileID: 1419045311392325748, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
@@ -1319,6 +1319,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419045311392325752, guid: 10335cfd1ad372a47a05d871e6244960,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4014052053694163235, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
@@ -1879,10 +1884,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1209640112368158898, guid: 9385a64af639c4b49a1f71fb6c4950ab,
+        type: 3}
+      propertyPath: maxHealth
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3835934616732625081, guid: 9385a64af639c4b49a1f71fb6c4950ab,
+        type: 3}
+      propertyPath: m_Speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3835934616732625081, guid: 9385a64af639c4b49a1f71fb6c4950ab,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3835934616732625081, guid: 9385a64af639c4b49a1f71fb6c4950ab,
+        type: 3}
+      propertyPath: m_AngularSpeed
+      value: 240
+      objectReference: {fileID: 0}
     - target: {fileID: 3835934616732625082, guid: 9385a64af639c4b49a1f71fb6c4950ab,
         type: 3}
       propertyPath: chargeSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3835934616732625082, guid: 9385a64af639c4b49a1f71fb6c4950ab,
+        type: 3}
+      propertyPath: loosingTime
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3835934616732625082, guid: 9385a64af639c4b49a1f71fb6c4950ab,
         type: 3}

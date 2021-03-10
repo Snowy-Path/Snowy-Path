@@ -7,13 +7,12 @@ public enum EStateType{
     Patrol,
     Idle,
     MoveToWaypoint,
-    Inspecting,
-    Combat,
+    Inspect,
     Aggro,
-    Lurking,
+    Combat,
+    Lurk,
     Charge,
     Attack,
-    Recovery,
-    Escaping,
+    Recover,
     Stun
 }

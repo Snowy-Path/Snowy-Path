@@ -11,20 +11,6 @@ public class WolfController : MonoBehaviour {
     public Animator animator;
     private float timer;
 
-    #region Patrol
-    public float loosingTime;
-    #endregion
-
-    #region Idle
-    [Min(0)]
-    public float idleWaitingTime = 5f;
-    #endregion
-
-    #region MoveToWaypoint
-    public List<Transform> waypoints;
-    private int waypointIndex = 0;
-    #endregion
-
     #region Seeing sense
     private Transform target;
     private bool isSeeingPlayer = false;
@@ -53,12 +39,26 @@ public class WolfController : MonoBehaviour {
         }
         set {
             soundPosition = value;
-            lastHeard = Time.time;
+            heardPlayer = true;
         }
     }
 
-    private float lastHeard = float.NegativeInfinity;
-    public float hearingThreshold;
+    private bool heardPlayer;
+    #endregion
+
+
+    #region Patrol
+    public float loosingTime;
+    #endregion
+
+    #region Idle
+    [Min(0)]
+    public float idleWaitingTime = 5f;
+    #endregion
+
+    #region MoveToWaypoint
+    public List<Transform> waypoints;
+    private int waypointIndex = 0;
     #endregion
 
     #region Aggro
@@ -68,7 +68,7 @@ public class WolfController : MonoBehaviour {
     }
     #endregion
 
-    #region Lurking
+    #region Lurk
     public float lurkingDistance = 10f;
     public float lurkingTime = 5f;
     #endregion
@@ -76,7 +76,6 @@ public class WolfController : MonoBehaviour {
     #region Charge
     public float chargeSpeed;
     private float normalSpeed;
-    //private Vector3 chargePosition;
     #endregion
 
     #region Attack
@@ -86,13 +85,9 @@ public class WolfController : MonoBehaviour {
     }
     #endregion
 
-    #region Recovery
+    #region Recover
     public float recoveryTime = 5f;
     private int recoveryHealth = int.MinValue;
-    #endregion
-
-    #region Escaping
-
     #endregion
 
     #region Stun
@@ -145,8 +140,10 @@ public class WolfController : MonoBehaviour {
         m_fsm = new StateMachine(EStateType.None, EStateType.Patrol);
 
         Patrol_Init(m_fsm);
-        Inspecting_Init(m_fsm);
+        Inspect_Init(m_fsm);
+        Aggro_Init(m_fsm);
         Combat_Init(m_fsm);
+        Stun_Init(m_fsm);
 
         m_fsm.OnEntry();
     }
@@ -157,13 +154,13 @@ public class WolfController : MonoBehaviour {
         StateMachine patrol = new StateMachine(EStateType.Patrol, EStateType.MoveToWaypoint, parent);
 
         patrol.AddTransition(new Transition(
-            EStateType.Combat,
+            EStateType.Aggro,
             (condition) => isSeeingPlayer
         ));
 
         patrol.AddTransition(new Transition(
-            EStateType.Inspecting,
-            (condition) => (Time.time - lastHeard) < hearingThreshold
+            EStateType.Inspect,
+            (condition) => heardPlayer
         ));
 
         Idle_Init(patrol);
@@ -195,10 +192,11 @@ public class WolfController : MonoBehaviour {
     private void MoveToWaypoint_Init(StateMachine parent) {
         State moveToWaypoint = new State(EStateType.MoveToWaypoint, parent,
             onEntry: (state) => {
+                heardPlayer = false; // Reset
                 agent.SetDestination(waypoints[waypointIndex].position); // To set a destination before transitions are checked
             },
             //onUpdate: (state) => { // Can be removed for performance purposes
-            //    agent.SetDestination(waypoints[waypointIndex].position); // To compute a shorter path
+            //    agent.SetDestination(waypoints[waypointIndex].position); // To compute a shorter path each frame
             //},
             onExit: (state) => {
                 ResetAgentPath();
@@ -214,54 +212,35 @@ public class WolfController : MonoBehaviour {
     }
     #endregion
 
-    #region
-    private void Inspecting_Init(StateMachine parent) {
-        State inspecting = new State(EStateType.Inspecting, parent,
-            //onEntry: (state) => { // To set a destination before transitions are checked
-            //    agent.SetDestination(SoundPosition);
-            //},
-            onUpdate: (state) => { // Can be removed for performance purposes
+    #region Inspect
+    private void Inspect_Init(StateMachine parent) {
+        State inspect = new State(EStateType.Inspect, parent,
+            onEntry: (state) => { // To set a destination before transitions are checked
                 agent.SetDestination(SoundPosition);
             },
+            //onUpdate: (state) => { // Can be removed for performance purposes
+            //    agent.SetDestination(SoundPosition); // To compute a shorter path each frame
+            //},
             onExit: (state) => {
                 ResetAgentPath();
             }
         );
 
-        inspecting.AddTransition(new Transition(
-            EStateType.Combat,
+        inspect.AddTransition(new Transition(
+            EStateType.Aggro,
             (condition) => isSeeingPlayer
         ));
 
-        inspecting.AddTransition(new Transition(
+        inspect.AddTransition(new Transition(
             EStateType.Patrol,
-            (condition) => (Time.time - lastHeard) >= hearingThreshold
+            (condition) => agent.remainingDistance < 0.5f
         ));
 
-        parent.AddState(inspecting);
+        parent.AddState(inspect);
     }
     #endregion
 
-    #region Combat
-    private void Combat_Init(StateMachine parent) {
-        StateMachine combat = new StateMachine(EStateType.Combat, EStateType.Aggro, parent);
-
-        combat.AddTransition(new Transition(
-            EStateType.Patrol,
-            (condition) => (Time.time - lastSaw) >= loosingTime
-        ));
-
-        Aggro_Init(combat);
-        Lurking_Init(combat);
-        Charge_Init(combat);
-        Attack_Init(combat);
-        Recovery_Init(combat);
-        Escaping_Init(combat);
-        Stun_Init(combat);
-
-        parent.AddState(combat);
-    }
-
+    #region Aggro
     private void Aggro_Init(StateMachine parent) {
         State aggro = new State(EStateType.Aggro, parent,
             onEntry: (state) => {
@@ -273,15 +252,34 @@ public class WolfController : MonoBehaviour {
         );
 
         aggro.AddTransition(new Transition(
-            EStateType.Lurking,
+            EStateType.Combat,
             (condition) => aggroFinished
         ));
 
         parent.AddState(aggro);
     }
+    #endregion
 
-    private void Lurking_Init(StateMachine parent) {
-        State lurking = new State(EStateType.Lurking, parent,
+    #region Combat
+    private void Combat_Init(StateMachine parent) {
+        StateMachine combat = new StateMachine(EStateType.Combat, EStateType.Lurk, parent);
+
+        combat.AddTransition(new Transition(
+            EStateType.Patrol,
+            (condition) => (Time.time - lastSaw) >= loosingTime
+        ));
+
+        Lurk_Init(combat);
+        Charge_Init(combat);
+        Attack_Init(combat);
+        Recover_Init(combat);
+        Stun_Init(combat);
+
+        parent.AddState(combat);
+    }
+
+    private void Lurk_Init(StateMachine parent) {
+        State lurk = new State(EStateType.Lurk, parent,
             onEntry: (state) => {
                 //agent.stoppingDistance = 10f;
                 timer = Time.time + lurkingTime;
@@ -302,12 +300,12 @@ public class WolfController : MonoBehaviour {
             }
         );
 
-        lurking.AddTransition(new Transition(
+        lurk.AddTransition(new Transition(
             EStateType.Charge,
             (condition) => Time.time >= timer
         ));
 
-        parent.AddState(lurking);
+        parent.AddState(lurk);
     }
 
     private void Charge_Init(StateMachine parent) {
@@ -345,15 +343,15 @@ public class WolfController : MonoBehaviour {
         );
 
         attack.AddTransition(new Transition(
-            EStateType.Recovery,
+            EStateType.Recover,
             (condition) => attackFinished
         ));
 
         parent.AddState(attack);
     }
 
-    private void Recovery_Init(StateMachine parent) {
-        State recovery = new State(EStateType.Recovery, parent,
+    private void Recover_Init(StateMachine parent) {
+        State recover = new State(EStateType.Recover, parent,
             onEntry: (state) => {
                 timer = Time.time + lurkingTime;
                 recoveryHealth = m_genericHealth.GetCurrentHealth();
@@ -364,39 +362,29 @@ public class WolfController : MonoBehaviour {
             }
         );
 
-        recovery.AddTransition(new Transition(
-            EStateType.Escaping,
+        recover.AddTransition(new Transition(
+            EStateType.Lurk,
             (condition) => Time.time >= timer || recoveryHealth != m_genericHealth.GetCurrentHealth() // Timer ends OR took damage
         ));
 
-        parent.AddState(recovery);
+        parent.AddState(recover);
     }
 
-    private void Escaping_Init(StateMachine parent) {
-        State escaping = new State(EStateType.Escaping, parent
-        );
+    #endregion
 
-        escaping.AddTransition(new Transition(
-            EStateType.Lurking,
-            (condition) => false //TODO: implement transition
-        ));
-
-        parent.AddState(escaping);
-    }
-
+    #region
     private void Stun_Init(StateMachine parent) {
         State stun = new State(EStateType.Stun, parent
         );
 
         stun.AddTransition(new Transition(
-            EStateType.Escaping,
+            EStateType.Combat,
             (condition) => false //TODO: implement transition
         ));
 
         parent.AddState(stun);
     }
     #endregion
-
 
     #endregion
 
