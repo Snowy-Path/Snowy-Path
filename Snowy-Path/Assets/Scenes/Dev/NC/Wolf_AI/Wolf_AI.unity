@@ -493,6 +493,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 578379219}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &622211100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 622211102}
+  - component: {fileID: 622211101}
+  m_Layer: 0
+  m_Name: PlayerOverlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &622211101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622211100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b95557202e11da9459fe019b50bde808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 1239603423}
+  playerHealth: {fileID: 1239603419}
+  temperature: {fileID: 1239603421}
+  cloth: {fileID: 11400000, guid: a450f4b7ad806c94081b8f8429f87a9e, type: 2}
+--- !u!4 &622211102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622211100}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &626216218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,6 +1270,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1239603419 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1900730401729707196, guid: 10335cfd1ad372a47a05d871e6244960,
+    type: 3}
+  m_PrefabInstance: {fileID: 1344582306}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502104e5251299740ac5ebee7ac416e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1239603421 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2725421706790202146, guid: 10335cfd1ad372a47a05d871e6244960,
+    type: 3}
+  m_PrefabInstance: {fileID: 1344582306}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb90b847ca4147f48bc86c3977e99a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1239603423 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1764197962925359953, guid: 10335cfd1ad372a47a05d871e6244960,
+    type: 3}
+  m_PrefabInstance: {fileID: 1344582306}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568c5461809c06445b3dd6798fa63834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1323506591
 GameObject:
   m_ObjectHideFlags: 0
@@ -1884,30 +1967,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3835934616732625081, guid: 9385a64af639c4b49a1f71fb6c4950ab,
-        type: 3}
-      propertyPath: m_Speed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3835934616732625081, guid: 9385a64af639c4b49a1f71fb6c4950ab,
-        type: 3}
-      propertyPath: m_Acceleration
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 3835934616732625081, guid: 9385a64af639c4b49a1f71fb6c4950ab,
-        type: 3}
-      propertyPath: m_AngularSpeed
-      value: 360
-      objectReference: {fileID: 0}
     - target: {fileID: 3835934616732625082, guid: 9385a64af639c4b49a1f71fb6c4950ab,
         type: 3}
-      propertyPath: lurkingTimeMax
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3835934616732625082, guid: 9385a64af639c4b49a1f71fb6c4950ab,
-        type: 3}
-      propertyPath: lurkingTimeMin
-      value: 1
+      propertyPath: attackTriggerRange
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3835934616732625082, guid: 9385a64af639c4b49a1f71fb6c4950ab,
         type: 3}

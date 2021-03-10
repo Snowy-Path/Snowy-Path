@@ -22,4 +22,12 @@ public class Cloth : ScriptableObject
     public void Init() {
         m_currentDurability = maxDurability;
     }
+
+    public void ReduceDurabilityPercentage(float percentage) {
+        m_currentDurability -= m_currentDurability * percentage;
+    }
+
+    public float GetCurrentDurability() {
+        return m_currentDurability;
+    }
 }
