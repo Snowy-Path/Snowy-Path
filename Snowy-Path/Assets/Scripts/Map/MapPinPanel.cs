@@ -32,7 +32,7 @@ public class MapPinPanel : MonoBehaviour
             rectTransform.anchorMin = new Vector2(0f, 1f);
             rectTransform.anchorMax = new Vector2(0f, 1f);
             rectTransform.pivot = new Vector2(0f, 1f);
-            rectTransform.anchoredPosition = new Vector3(i * 100f, 0f, 0f);
+            rectTransform.anchoredPosition = GetPinPosition(i);
 
             Image image = child.AddComponent<Image>();
             image.color = pinColor;
@@ -74,19 +74,19 @@ public class MapPinPanel : MonoBehaviour
         map.OnPinTypeChanged();
     }
 
-    void UpdateCursorPosition() {
-        m_cursor.anchoredPosition = new Vector3(m_currentPinType * 100f, 0f, 0f);
+    Vector2 GetPinPosition(int pinType) {
+        return new Vector2((pinType % 5) * 100f, -(pinType / 5) * 100f);
     }
 
     public void SelectPinType(int pinType) {
         m_currentPinType = pinType;
-        UpdateCursorPosition();
+        m_cursor.anchoredPosition = GetPinPosition(m_currentPinType);
         map.OnPinTypeChanged();
     }
 
     public void SelectNextPinType() {
         m_currentPinType = (m_currentPinType + 1) % m_mapPins.Count;
-        UpdateCursorPosition();
+        m_cursor.anchoredPosition = GetPinPosition(m_currentPinType);
         map.OnPinTypeChanged();
     }
 }
