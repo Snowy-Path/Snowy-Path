@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 7187602291734885482}
   - component: {fileID: 6057523634143706063}
   - component: {fileID: 8355394396299710213}
-  - component: {fileID: 3102026335443716123}
+  - component: {fileID: 2857981110490646611}
+  - component: {fileID: 8603259828775671994}
   m_Layer: 0
   m_Name: Bramble_Solo_2
   m_TagString: Untagged
@@ -80,8 +81,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3102026335443716123
-BoxCollider:
+--- !u!136 &2857981110490646611
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,6 +91,21 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.8217103, y: 1.2976226, z: 0.9816037}
-  m_Center: {x: -0.33191052, y: 0.5427055, z: 0.042643875}
+  m_Radius: 1.341596
+  m_Height: 2.6846757
+  m_Direction: 1
+  m_Center: {x: -0.5648447, y: 2.9047153, z: 0}
+--- !u!64 &8603259828775671994
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7562861674115657424}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5229482523205000227, guid: d5fd7842289568642816903f7044f84f, type: 3}

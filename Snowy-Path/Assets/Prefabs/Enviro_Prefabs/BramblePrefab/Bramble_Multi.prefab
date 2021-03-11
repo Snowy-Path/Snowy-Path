@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 1328651651416445904}
   - component: {fileID: 2729051865737518197}
   - component: {fileID: 160860198749481151}
-  - component: {fileID: 3040979348167663387}
+  - component: {fileID: 4946102230182497047}
+  - component: {fileID: 3906656375957705406}
   m_Layer: 0
   m_Name: Bramble_Multi
   m_TagString: Untagged
@@ -80,8 +81,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3040979348167663387
-BoxCollider:
+--- !u!64 &4946102230182497047
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,6 +91,21 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.5947899, y: 1.2349339, z: 0.7353088}
-  m_Center: {x: 0.08427298, y: 0.5041406, z: 0.102781564}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2553891265212623550, guid: 18fb9be3bfaa1f24894aa0e1faac4ec6, type: 3}
+--- !u!136 &3906656375957705406
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818188778856614250}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.6302297
+  m_Height: 3.2604594
+  m_Direction: 1
+  m_Center: {x: 0.058538914, y: 3.0020528, z: -0.030786991}
