@@ -6,22 +6,23 @@ using UnityEngine.InputSystem;
 public class MapCompass : MonoBehaviour, IHandTool {
     public EToolType ToolType { get => EToolType.MapCompass; }
 
-    public GameObject mapObject;
-    public Camera inGameMapCamera;
+    private MapUI m_mapUI;
 
-    private Map m_map;
-    private Canvas m_mapCanvasComponent;
-    private RectTransform m_mapRectTransform;
     private PlayerInput m_playerInput;
-    private CanvasRenderer m_canvasRenderer;
-    private bool m_isFullscreenMode = false;
+    private Camera m_inGameMapCamera;
+
+    public Camera InGameMapCamera { get { return m_inGameMapCamera; } }
 
     void Start()
     {
-        m_map = mapObject.GetComponentInChildren<Map>();
-        m_mapRectTransform = m_map.GetComponent<RectTransform>();
+        m_mapUI = Utils.FindComponent<MapUI>("MapCanvas/Map");
+
+        m_inGameMapCamera = GetComponentInChildren<Camera>();
         m_playerInput = GetComponentInParent<PlayerInput>();
-        m_mapCanvasComponent = mapObject.GetComponentInParent<Canvas>();
+    }
+
+    public void SwitchCurrentActionMap(string name) {
+        m_playerInput.SwitchCurrentActionMap(name);
     }
 
     public void StartPrimaryUse() {
@@ -33,30 +34,7 @@ public class MapCompass : MonoBehaviour, IHandTool {
     }
 
     public void SecondaryUse() {
-        if (!m_isFullscreenMode) {
-            m_map.ToggleCursorVisibility();
-
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-
-            m_playerInput.SwitchCurrentActionMap("Map");
-            m_mapCanvasComponent.worldCamera = null;
-            m_isFullscreenMode = true;
-        }
-    }
-
-    public void CloseFullscreenMap() {
-        if (m_isFullscreenMode) {
-            m_map.ClosePinPanel();
-            m_map.ToggleCursorVisibility();
-
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-
-            m_playerInput.SwitchCurrentActionMap("Gameplay");
-            m_mapCanvasComponent.worldCamera = inGameMapCamera;
-            m_isFullscreenMode = false;
-        }
+        m_mapUI.OpenFullscreenMap();
     }
 
     public void ToggleDisplay(bool display) {

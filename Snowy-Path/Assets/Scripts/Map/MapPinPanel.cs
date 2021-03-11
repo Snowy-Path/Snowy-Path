@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class MapPinPanel : MonoBehaviour
 {
-    public Map map;
     public List<Color> pinTypes;
     public Sprite cursorTexture;
+    public float offsetY = 100;
 
     private int m_currentPinType = 0;
     public int CurrentPinType { get { return m_currentPinType; } }
@@ -17,9 +17,14 @@ public class MapPinPanel : MonoBehaviour
     public GameObject CurrentButton { get { return m_mapPins[m_currentPinType]; } } 
 
     private RectTransform m_cursor;
+    private MapUI m_mapUI;
+    private MapPinManager m_mapPinManager;
 
-    void Start()
+    public void Init()
     {
+        m_mapUI = GetComponentInParent<MapUI>();
+        m_mapPinManager = m_mapUI.GetComponentInChildren<MapPinManager>();
+
         int i = 0;
         foreach (var pinColor in pinTypes) {
             // Initialize the object that will contain our map pin
@@ -47,6 +52,11 @@ public class MapPinPanel : MonoBehaviour
         }
 
         CreateCursor();
+
+        if (!m_mapUI.isControllerModeEnabled)
+            m_cursor.gameObject.SetActive(false);
+
+        Debug.Log(m_cursor);
     }
 
     void CreateCursor() {
@@ -59,7 +69,7 @@ public class MapPinPanel : MonoBehaviour
         rectTransform.anchorMin = new Vector2(0f, 1f);
         rectTransform.anchorMax = new Vector2(0f, 1f);
         rectTransform.pivot = new Vector2(0f, 1f);
-        rectTransform.anchoredPosition = Vector3.zero;
+        rectTransform.anchoredPosition = GetPinPosition(m_currentPinType);
 
         Image img = cursor.AddComponent<Image>();
         img.color = new Color(1f, 0f, 1f, 0.5f);
@@ -71,23 +81,21 @@ public class MapPinPanel : MonoBehaviour
     void OnButtonClick(int i) {
         m_currentPinType = i;
 
-        map.OnPinTypeChanged();
+        m_mapPinManager.OnPinTypeChanged();
     }
 
     Vector2 GetPinPosition(int pinType) {
-        return new Vector2((pinType % 5) * 100f, -(pinType / 5) * 100f);
+        return new Vector2((pinType % 5) * 100f, -(pinType / 5) * 100f - offsetY);
     }
 
     public void SelectPinType(int pinType) {
         m_currentPinType = pinType;
         m_cursor.anchoredPosition = GetPinPosition(m_currentPinType);
-        map.OnPinTypeChanged();
+
+        m_mapPinManager.OnPinTypeChanged();
     }
 
     public void SelectNextPinType(Vector2Int delta) {
-        // m_currentPinType += delta.x;
-        // m_currentPinType += delta.y * 5;
-
         int width = 5;
         int height = Mathf.CeilToInt(m_mapPins.Count / (float)width);
 
@@ -98,6 +106,15 @@ public class MapPinPanel : MonoBehaviour
 
         m_currentPinType = (x + y * width + delta.x + m_mapPins.Count) % m_mapPins.Count;
         m_cursor.anchoredPosition = GetPinPosition(m_currentPinType);
-        map.OnPinTypeChanged();
+
+        m_mapPinManager.OnPinTypeChanged();
+    }
+
+    public void OpenPanel() {
+        gameObject.SetActive(true);
+    }
+
+    public void ClosePanel() {
+        gameObject.SetActive(false);
     }
 }
