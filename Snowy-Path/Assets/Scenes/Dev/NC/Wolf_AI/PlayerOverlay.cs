@@ -17,7 +17,7 @@ public class PlayerOverlay : MonoBehaviour {
 
     private void OnGUI() {
 
-        GUI.Box(new Rect(10, 10, 200, 130), "Test");
+        GUI.Box(new Rect(10, 10, 200, 130), "Player's data");
 
         Cloth test = inventory.GetCurrentCloth();
         if (test) {

@@ -23,6 +23,11 @@ public class Cloth : ScriptableObject
         m_currentDurability = maxDurability;
     }
 
+    /// <summary>
+    /// Reduce the current durability from a given percentage.
+    /// Primarly used when the player is attacked by an ennemy (Wolf for example).
+    /// </summary>
+    /// <param name="percentage">Percentage to deduce to the current durability</param>
     public void ReduceDurabilityPercentage(float percentage) {
         m_currentDurability -= m_currentDurability * percentage;
     }

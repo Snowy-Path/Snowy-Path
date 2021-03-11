@@ -168,7 +168,7 @@ public class Temperature : MonoBehaviour
     /// Reduce the current temperature from a given percentage.
     /// Primarly used when the player is attacked by an ennemy (Wolf for example).
     /// </summary>
-    /// <param name="percentage">Percentage to deduce to the current temperature</param>
+    /// <param name="percentage">Percentage to deduce to the current temperature.</param>
     public void ReduceCurrentTemperatureWithPercentage(float percentage) {
         m_currentTemperature -= m_currentTemperature * percentage;
     }

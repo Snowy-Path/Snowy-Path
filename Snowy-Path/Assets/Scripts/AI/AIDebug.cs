@@ -1,9 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Prints on screen the current state of every WolfController in the scene.
+/// </summary>
 public class AIDebug : MonoBehaviour {
 
+    /// <summary>
+    /// Retrieves every activated WolfController and prints their current state on screen using the GUI feature.
+    /// Called at each frame.
+    /// </summary>
     private void OnGUI() {
 
         WolfController[] wolwes = FindObjectsOfType<WolfController>();

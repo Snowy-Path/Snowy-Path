@@ -13,6 +13,10 @@ public class Inventory : MonoBehaviour {
         return m_cloth;
     }
 
+    /// <summary>
+    /// Call the method to reduce the durability on the current cloth.
+    /// </summary>
+    /// <param name="percentage">Percentage to deduce to the current durability.</param>
     public void ReduceClothDurabilityPercentage(float percentage) {
         if (m_cloth) {
             m_cloth.ReduceDurabilityPercentage(percentage);

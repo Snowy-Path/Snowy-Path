@@ -3,26 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine : State {
+public class StateMachine<TEnum> : State<TEnum> where TEnum : System.Enum {
 
-    internal EStateType defaultState { get; private set; }
-    private State m_currentState;
-    private Dictionary<EStateType, State> m_states;
+    internal TEnum defaultState { get; private set; }
+    private State<TEnum> m_currentState;
+    private Dictionary<TEnum, State<TEnum>> m_states;
 
-    public StateMachine(EStateType stateType, EStateType defaultState, StateMachine parent = null, Action<State> onEntry = null, Action<State> onExit = null, Action<State> onUpdate = null, Action<State> onFixedUpdate = null)
+    public StateMachine(TEnum stateType, TEnum defaultState, StateMachine<TEnum> parent = null, Action<State<TEnum>> onEntry = null, Action<State<TEnum>> onExit = null, Action<State<TEnum>> onUpdate = null, Action<State<TEnum>> onFixedUpdate = null)
         : base(stateType, parent, onEntry, onExit, onUpdate, onFixedUpdate) {
         this.defaultState = defaultState;
-        m_states = new Dictionary<EStateType, State>();
+        m_states = new Dictionary<TEnum, State<TEnum>>();
     }
 
-    internal void AddState(State state) {
+    internal void AddState(State<TEnum> state) {
         m_states.Add(state.StateType, state);
     }
 
-    internal void ChangeState(EStateType stateType) {
+    internal void SwitchState(TEnum stateType) {
 
         if (m_currentState != null) {
-            if (m_currentState.StateType == stateType) {
+            if (EqualityComparer<TEnum>.Default.Equals(m_currentState.StateType, stateType)) {
                 return;
             }
             m_currentState.OnExit();
@@ -36,7 +36,7 @@ public class StateMachine : State {
 
     internal override void OnEntry() {
         base.OnEntry();
-        ChangeState(defaultState);
+        SwitchState(defaultState);
     }
 
     internal override void OnExit() {
@@ -60,7 +60,7 @@ public class StateMachine : State {
         base.OnLateUpdate();
     }
 
-    internal override EStateType GetCurrentState() {
+    internal override TEnum GetCurrentState() {
         return m_currentState.GetCurrentState();
     }
 
