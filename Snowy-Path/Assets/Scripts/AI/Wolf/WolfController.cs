@@ -383,8 +383,7 @@ public class WolfController : MonoBehaviour {
                 m_timer = Time.time + m_lurkingTime;
             },
             onUpdate: (state) => {
-                float distanceToTarget = Vector3.Distance(transform.position, m_lastPosition);
-                m_agent.SetDestination(PositionToLurk(m_lastPosition));
+                m_agent.SetDestination(PositionToLurk());
             },
             onExit: (state) => {
                 m_timer = float.NegativeInfinity;
@@ -399,17 +398,34 @@ public class WolfController : MonoBehaviour {
         parent.AddState(lurk);
     }
 
+    public AnimationCurve curve;
+
     /// <summary>
     /// Computes the positions to lurk at <c>safeDistance</c> distance. 
     /// </summary>
     /// <param name="targetPosition">The position of the target. For example, target could be the Player.</param>
     /// <returns>The position to get and maintain safe distance.</returns>
-    private Vector3 PositionToLurk(Vector3 targetPosition) {
-        Vector3 forward = transform.position - targetPosition;
-        forward.y = 0;
-        transform.rotation = Quaternion.LookRotation(forward);
-        Vector3 runToPosition = targetPosition + (transform.forward * safeDistance);
-        return runToPosition;
+    private Vector3 PositionToLurk() {
+
+        // Circle direction
+        Vector3 toPlayer = m_lastPosition - transform.position;
+        toPlayer.Normalize();
+        Vector3 circleDirection = Vector3.Cross(toPlayer, transform.up);
+
+        // Safe distancing
+        Vector3 playerToAgent = transform.position - m_lastPosition;
+        playerToAgent.Normalize();
+        Vector3 safePosition = m_lastPosition + (playerToAgent * safeDistance);
+        Vector3 safeDirection = safePosition - transform.position;
+        safeDirection.Normalize();
+
+        // Safe factor
+        float safeFactor = Vector3.Distance(transform.position, m_lastPosition) / safeDistance;
+        Debug.Log(safeFactor);
+
+        // Next position
+        Vector3 nextPosition = transform.position + Vector3.Slerp(safeDirection, circleDirection, curve.Evaluate(safeFactor));
+        return nextPosition;
     }
 
     /// <summary>
