@@ -74,7 +74,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4985f3d6bcb6ca4dabc114536bafcfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagTarget: Player
   agent: {fileID: 3835934616732625082}
   layers:
     serializedVersion: 2
@@ -300,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502104e5251299740ac5ebee7ac416e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 8
+  maxHealth: 2
   onHit:
     m_PersistentCalls:
       m_Calls: []
@@ -333,19 +332,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5201cac3ea3e6447962bcc06e7726bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 3228026827354399249}
   idleWaitingTime: 5
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   loosingAggroDuration: 10
-  lurkingDistance: 10
-  lurkingTimeMin: 15
-  lurkingTimeMax: 45
   safeDistance: 10
+  lurkingDurationMin: 15
+  lurkingDurationMax: 45
   chargeSpeed: 10
-  attackTriggerRange: 3
+  attackDistanceTrigger: 1.5
   recoveryDuration: 4
   stunDuration: 5
 --- !u!195 &3835934616732625081
