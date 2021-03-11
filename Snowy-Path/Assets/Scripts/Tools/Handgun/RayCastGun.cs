@@ -79,7 +79,7 @@ public class RayCastGun : Tool, IHandTool
             //apply dammage
             valu.transform.gameObject.GetComponent<GenericHealth>().Hit(damageDealt);
 
-            //Stun cannot be
+            //Stun wolf
             WolfController wolfController = valu.gameObject.GetComponent<WolfController>();
             if (wolfController) {
                 wolfController.SetStunState();
