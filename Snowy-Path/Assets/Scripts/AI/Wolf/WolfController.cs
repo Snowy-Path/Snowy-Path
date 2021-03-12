@@ -411,6 +411,7 @@ public class WolfController : MonoBehaviour {
         Vector3 toPlayer = m_lastPosition - transform.position;
         toPlayer.Normalize();
         Vector3 circleDirection = Vector3.Cross(toPlayer, transform.up);
+        //Vector3 circleDirection = Vector3.Cross(toPlayer, -transform.up); //Other way :)
 
         // Safe distancing
         Vector3 playerToAgent = transform.position - m_lastPosition;
