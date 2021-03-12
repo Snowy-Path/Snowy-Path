@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 2732802927284909938}
   - component: {fileID: 2732802927284909937}
   - component: {fileID: 2732802927284909936}
-  m_Layer: 0
+  - component: {fileID: 1140570191}
+  - component: {fileID: 1140570192}
+  m_Layer: 12
   m_Name: Wendigo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,6 +97,40 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1140570191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2732802927284909934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b168ee380e2cd62459e6004fb1aa49e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!195 &1140570192
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2732802927284909934}
+  m_Enabled: 1
+  m_AgentTypeID: -334000983
+  m_Radius: 0.5
+  m_Speed: 2
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2732802927473378810
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,7 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2732802927473378811}
   - component: {fileID: 2732802927473378812}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: saas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
