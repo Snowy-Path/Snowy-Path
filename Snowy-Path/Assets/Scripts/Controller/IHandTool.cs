@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public interface IHandTool {
+
+    bool IsBusy { get; set; }
     EToolType ToolType { get;}
     void StartPrimaryUse();
     void CancelPrimaryUse();

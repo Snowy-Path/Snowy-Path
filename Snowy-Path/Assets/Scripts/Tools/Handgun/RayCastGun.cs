@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class RayCastGun : Tool, IHandTool
+public class RayCastGun : MonoBehaviour, IHandTool
 {
     public static bool endEnnemySet = false;
     public int damageDealt = 0;
@@ -38,6 +38,7 @@ public class RayCastGun : Tool, IHandTool
     public HearingSenseEmitter emitter;
 
     public EToolType ToolType => EToolType.Pistol;
+    public bool IsBusy { get; set; }
 
     void Start()
     {
