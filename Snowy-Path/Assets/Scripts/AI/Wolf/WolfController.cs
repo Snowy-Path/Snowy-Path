@@ -119,6 +119,7 @@ public class WolfController : MonoBehaviour {
     public float attackDistanceTrigger = 1.5f;
 
     private bool m_attackFinished = false;
+    private Vector3 attackDirection;
     #endregion
 
     #region Recover
@@ -473,9 +474,10 @@ public class WolfController : MonoBehaviour {
                 m_agent.speed = chargeSpeed;
                 m_agent.autoBraking = false;
                 m_animator.SetTrigger("Attack");
+                attackDirection = m_lastPosition - transform.position;
             },
             onUpdate: (state) => {
-                m_agent.SetDestination(m_lastPosition); // Ensure we are always going to the Player's position 
+                m_agent.SetDestination(transform.position + attackDirection); // Going straight in a single direction
             },
             onExit: (state) => {
                 m_agent.speed = m_normalSpeed;
