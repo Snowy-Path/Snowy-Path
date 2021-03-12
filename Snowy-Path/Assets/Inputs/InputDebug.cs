@@ -253,90 +253,6 @@ public class InputDebug : MonoBehaviour {
 
 
 
-    #region Map
-
-    // Map movement variables
-    private Vector2 mapMove;
-    private float mapZoom;
-
-    /// <summary>
-    /// BackToGame action callback.
-    /// </summary>
-    /// <param name="context">Contains input values.</param>
-    public void OnBackToGame(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnBackToGame");
-            ChangeActionMap(ActionMap.Gameplay);
-            //Insert action here
-        }
-    }
-
-    /// <summary>
-    /// ApplyStamp action callback.
-    /// </summary>
-    /// <param name="context">Contains input values.</param>
-    public void OnApplyStamp(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnApplyStamp");
-            ChangeActionMap(ActionMap.Stamp);
-            //Insert action here
-        }
-    }
-
-    /// <summary>
-    /// MapMove action callback.
-    /// </summary>
-    /// <param name="context">Contains input values.</param>
-    public void OnMapMove(InputAction.CallbackContext context) {
-        Debug.Log($"OnMapMove");
-        mapMove = context.ReadValue<Vector2>();
-        //Insert action here
-    }
-
-    /// <summary>
-    /// MapZoom action callback.
-    /// </summary>
-    /// <param name="context">Contains input values.</param>
-    public void OnMapZoom(InputAction.CallbackContext context) {
-        Debug.Log($"OnMapZoom");
-        mapZoom = context.ReadValue<float>();
-        //Insert action here
-    }
-
-
-    #endregion
-
-
-
-    #region Stamp
-
-    /// <summary>
-    /// DrawValidate action callback.
-    /// </summary>
-    /// <param name="context">Contains input values.</param>
-    public void OnDrawValidate(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnDrawValidate");
-            ChangeActionMap(ActionMap.Map);
-            //Insert action here
-        }
-    }
-
-    /// <summary>
-    /// Erase action callback.
-    /// </summary>
-    /// <param name="context">Contains input values.</param>
-    public void OnErase(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            Debug.Log($"OnErase");
-            ChangeActionMap(ActionMap.Map);
-            //Insert action here
-        }
-    }
-
-    #endregion
-
-
     /// <summary>
     /// Pause action callback.
     /// Must be bind to every Pause actions.
@@ -403,19 +319,6 @@ public class InputDebug : MonoBehaviour {
 
                 GUI.Label(new Rect(20, 300, 180, 30), $"Running : {playerControl.IsRunning}");
                 GUI.Label(new Rect(20, 320, 180, 30), $"Grounded : {playerControl.IsGrounded}");
-                break;
-
-            case ActionMap.Map:
-                GUI.Box(new Rect(10, 10, 200, 100), "Map");
-
-                GUI.Label(new Rect(20, 40, 180, 30), $"MapMove : {mapMove}");
-                GUI.Label(new Rect(20, 70, 180, 30), $"MapZoom : {mapZoom}");
-                break;
-
-            case ActionMap.Stamp:
-                GUI.Box(new Rect(10, 10, 200, 70), "Stamp");
-
-                GUI.Label(new Rect(20, 40, 180, 30), $"Nothing to show ...");
                 break;
         }
 
