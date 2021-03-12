@@ -66,9 +66,8 @@ public class WolfController : MonoBehaviour {
     [Header("Waypoints")]
 
     [Tooltip("List of waypoints in the order of patrol.")]
-    public List<Transform> waypoints;
-
-    private int m_waypointIndex = 0;
+    public Waypoint defaultWaypoint;
+    private Waypoint m_waypoint;
     #endregion
 
     #region Aggro
@@ -95,6 +94,9 @@ public class WolfController : MonoBehaviour {
     [Tooltip("Maximum lurking time.")]
     [Min(0)]
     public float lurkingDurationMax = 45f;
+
+    [Tooltip("Lurking factor.")]
+    public AnimationCurve curve;
 
     private float m_lurkingTime; // Random lurking time
     #endregion
@@ -145,7 +147,9 @@ public class WolfController : MonoBehaviour {
         m_agent = GetComponent<NavMeshAgent>();
         m_genericHealth = GetComponent<GenericHealth>();
         m_animator = GetComponent<Animator>();
+
         m_normalSpeed = m_agent.speed;
+        m_waypoint = defaultWaypoint;
 
         //After retrieving the NavMesh. Otherwise we'll get a NullPointerExcpetion when trying to access variable "agent"
         HFSMInitialization();
@@ -246,9 +250,9 @@ public class WolfController : MonoBehaviour {
         State<EWolfState> idle = new State<EWolfState>(EWolfState.Idle, parent,
             onEntry: (state) => m_timer = Time.time + idleWaitingTime,
             onExit: (state) => {
-                m_waypointIndex++;
-                if (m_waypointIndex >= waypoints.Count) {
-                    m_waypointIndex = 0;
+                m_waypoint = m_waypoint.GetNextWaypoint();
+                if (!m_waypoint) {
+                    m_waypoint = defaultWaypoint;
                 }
                 m_timer = float.NegativeInfinity;
             }
@@ -270,8 +274,7 @@ public class WolfController : MonoBehaviour {
     private void MoveToWaypoint_Init(StateMachine<EWolfState> parent) {
         State<EWolfState> moveToWaypoint = new State<EWolfState>(EWolfState.MoveToWaypoint, parent,
             onEntry: (state) => {
-                heardPlayer = false; // Reset
-                m_agent.SetDestination(waypoints[m_waypointIndex].position); // To set a destination before transitions are checked
+                m_agent.SetDestination(m_waypoint.transform.position); // To set a destination before transitions are checked
             },
             //onUpdate: (state) => { // Can be removed for performance purposes
             //    agent.SetDestination(waypoints[waypointIndex].position); // To compute a shorter path each frame
@@ -283,7 +286,7 @@ public class WolfController : MonoBehaviour {
 
         moveToWaypoint.AddTransition(new Transition<EWolfState>(
             EWolfState.Idle,
-            (condition) => m_agent.remainingDistance < 0.5f
+            (condition) => CheckRemainingDistance(0.5f)
         ));
 
         parent.AddState(moveToWaypoint);
@@ -305,6 +308,7 @@ public class WolfController : MonoBehaviour {
             //    agent.SetDestination(SoundPosition); // To compute a shorter path each frame
             //},
             onExit: (state) => {
+                heardPlayer = false; // Reset value
                 ResetAgentPath();
             }
         );
@@ -316,7 +320,7 @@ public class WolfController : MonoBehaviour {
 
         inspect.AddTransition(new Transition<EWolfState>(
             EWolfState.Patrol,
-            (condition) => m_agent.remainingDistance < 0.5f
+            (condition) => CheckRemainingDistance(0.5f)
         ));
 
         parent.AddState(inspect);
@@ -387,6 +391,7 @@ public class WolfController : MonoBehaviour {
             },
             onExit: (state) => {
                 m_timer = float.NegativeInfinity;
+                ResetAgentPath();
             }
         );
 
@@ -397,8 +402,6 @@ public class WolfController : MonoBehaviour {
 
         parent.AddState(lurk);
     }
-
-    public AnimationCurve curve;
 
     /// <summary>
     /// Computes the positions to lurk at <c>safeDistance</c> distance. 
@@ -453,7 +456,7 @@ public class WolfController : MonoBehaviour {
 
         charge.AddTransition(new Transition<EWolfState>(
             EWolfState.Attack,
-            (condition) => m_agent.remainingDistance < attackDistanceTrigger
+            (condition) => CheckRemainingDistance(attackDistanceTrigger)
         ));
 
         parent.AddState(charge);
@@ -478,6 +481,7 @@ public class WolfController : MonoBehaviour {
                 m_agent.speed = m_normalSpeed;
                 m_agent.autoBraking = true;
                 m_attackFinished = false;
+                ResetAgentPath();
             }
         );
 
@@ -580,6 +584,16 @@ public class WolfController : MonoBehaviour {
         if (m_agent.hasPath) {
             m_agent.ResetPath();
         }
+    }
+
+    /// <summary>
+    /// Check if the agent is close enough to the destination.
+    /// Does additionnal verifications since pathfinding can take multiple frames.
+    /// </summary>
+    /// <param name="distance"></param>
+    /// <returns>True if and only if the agent doesn't have a path pending and the agent have a path and the remaining distance is strictly inferior to <c>distance</c>.</returns>
+    private bool CheckRemainingDistance(float distance) {
+        return !m_agent.pathPending && m_agent.hasPath && m_agent.remainingDistance < distance;
     }
 
     /// <summary>

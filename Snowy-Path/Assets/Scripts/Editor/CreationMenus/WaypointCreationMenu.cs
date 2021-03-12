@@ -4,20 +4,20 @@ using UnityEditor;
 using UnityEngine;
 
 /// <summary>
-/// Represent the Campfire prefab creation menu under "GameObjects".
+/// Represent the Waypoint prefab creation menu under "GameObjects".
 /// It holds every pre-defined Campfire prefab instantiation methods.
 /// </summary>
-public class CampfireCreationMenu : EditorWindow {
+public class WaypointCreationMenu : EditorWindow {
 
     /// <summary>
-    /// Instantiate a Campfire Prefab with the Interactable script.
+    /// Instantiate a Waypoint Prefab with the Interactable script.
     /// </summary>
     /// <param name="menuCommand"></param>
-    [MenuItem("GameObject/Campfire", false, 10)]
-    public static void CreateCampfire(MenuCommand menuCommand) {
+    [MenuItem("GameObject/Waypoint", false, 10)]
+    public static void CreateWaypoint(MenuCommand menuCommand) {
 
         // LightCloth prefab
-        GameObject go = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Campfire/Campfire.prefab", typeof(GameObject)));
+        GameObject go = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Ennemies/Waypoint.prefab", typeof(GameObject)));
 
         // Position
         MenuUtility.PlaceInFrontOfCamera(go);

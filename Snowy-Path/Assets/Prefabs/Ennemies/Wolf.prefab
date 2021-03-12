@@ -214,7 +214,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 96f63657b307899468da5aff6b049541, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -333,16 +333,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idleWaitingTime: 5
-  waypoints:
-  - {fileID: 0}
+  defaultWaypoint: {fileID: 0}
   loosingAggroDuration: 10
   safeDistance: 10
   lurkingDurationMin: 15
   lurkingDurationMax: 45
-  chargeSpeed: 10
-  attackDistanceTrigger: 3
-  recoveryDuration: 4
-  stunDuration: 5
   curve:
     serializedVersion: 2
     m_Curve:
@@ -358,15 +353,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.6
       value: 0
-      inSlope: 0.015393462
-      outSlope: 0.015393462
+      inSlope: 0.0153784165
+      outSlope: 0.0153784165
       tangentMode: 136
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 1
+      time: 1.0009766
+      value: 1.6361799
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -385,6 +380,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  chargeSpeed: 10
+  attackDistanceTrigger: 3
+  recoveryDuration: 4
+  stunDuration: 5
 --- !u!195 &3835934616732625081
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -484,7 +483,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 46c0cd1e9d5e7d94d94b0469db1738dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -563,7 +562,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 950cbf1312641424e8c480508b8fcd8b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -719,7 +718,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 950cbf1312641424e8c480508b8fcd8b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
