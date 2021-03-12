@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class MapCompass : MonoBehaviour, IHandTool {
-    public EToolType ToolType { get => EToolType.MapCompass; }
+    public EToolType ToolType => EToolType.MapCompass;
+    public bool IsBusy { get; set; }
 
     private MapUI m_mapUI;
 
