@@ -426,7 +426,6 @@ public class WolfController : MonoBehaviour {
 
         // Safe factor
         float safeFactor = Vector3.Distance(transform.position, m_lastPosition) / safeDistance;
-        Debug.Log(safeFactor);
 
         // Next position
         Vector3 nextPosition = transform.position + Vector3.Slerp(safeDirection, circleDirection, curve.Evaluate(safeFactor));
