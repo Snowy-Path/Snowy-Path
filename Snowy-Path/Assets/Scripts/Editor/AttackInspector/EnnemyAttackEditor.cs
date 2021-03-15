@@ -2,9 +2,15 @@
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-
+/// <summary>
+/// Inspector Editor script to manage EnnemyAttack script parameters in inspector.
+/// </summary>
 [CustomEditor(typeof(EnnemyAttack))]
 public class EnnemyAttackEditor : Editor {
+
+    /// <summary>
+    /// Manage EnnemyAttack script parameters. If the <c>instantKill</c> parameter is enabled, this method hides the <c>attackDamage</c> parameter.
+    /// </summary>
     public override void OnInspectorGUI() {
 
         var myScript = target as EnnemyAttack;

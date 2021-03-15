@@ -7,23 +7,20 @@
 [RequireComponent(typeof(Collider))]
 public class EnnemyAttack : MonoBehaviour {
 
+    [Tooltip("Defines if the attack instantly kills the player.")]
+    public bool instantKill = false;
+
     [Tooltip("Damages dealt to player.")]
     [Min(0)]
-    [SerializeField]
     public int attackDamage = 1;
 
     [Tooltip("Percentage reduction to the current player's temperature.")]
     [Range(0, 1)]
-    [SerializeField]
     public float temperaturePercentageDamage = 0.1f;
 
     [Tooltip("Percentage reduction to the current player's durability.")]
     [Range(0, 1)]
-    [SerializeField]
     public float clothPercentageDamage = 0.1f;
-
-    [SerializeField]
-    public bool instantKill = false;
 
     /// <summary>
     /// When another colliders collides, it verifies if it is tagged "Player" and then apply damage to it.

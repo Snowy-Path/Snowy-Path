@@ -20,6 +20,8 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     private Animator m_animator;
     internal NavMeshAgent m_agent;
 
+    private float m_normalSpeed; //Normal speed retrieved from NavMeshAgent
+
     // Generic timer used when needed (in multiple cases)
     private float m_timer;
 
@@ -59,14 +61,16 @@ public class WolfController : MonoBehaviour, IEnnemyController {
 
     [Tooltip("Waiting time between 2 waypoints.")]
     [Min(0)]
-    public float idleWaitingTime = 5f;
+    [SerializeField]
+    private float idleWaitingTime = 5f;
     #endregion
 
     #region MoveToWaypoint
     [Header("Waypoints")]
 
     [Tooltip("List of waypoints in the order of patrol.")]
-    public Waypoint defaultWaypoint;
+    [SerializeField]
+    private Waypoint defaultWaypoint;
     private Waypoint m_waypoint;
     #endregion
 
@@ -75,7 +79,8 @@ public class WolfController : MonoBehaviour, IEnnemyController {
 
     [Tooltip("Duration to loose the player if he is not seen by the SeeingSense.")]
     [Min(0)]
-    public float loosingAggroDuration = 10f;
+    [SerializeField]
+    private float loosingAggroDuration = 10f;
 
     private bool m_aggroFinished = false;
     #endregion
@@ -85,18 +90,22 @@ public class WolfController : MonoBehaviour, IEnnemyController {
 
     [Tooltip("Safe distance to maintain while lurking the player.")]
     [Min(0)]
-    public float safeDistance = 10f;
+    [SerializeField]
+    private float safeDistance = 10f;
 
     [Tooltip("Minimum lurking time.")]
     [Min(0)]
-    public float lurkingDurationMin = 15f;
+    [SerializeField]
+    private float lurkingDurationMin = 15f;
 
     [Tooltip("Maximum lurking time.")]
     [Min(0)]
-    public float lurkingDurationMax = 45f;
+    [SerializeField]
+    private float lurkingDurationMax = 45f;
 
     [Tooltip("Lurking factor.")]
-    public AnimationCurve curve;
+    [SerializeField]
+    private AnimationCurve curve;
 
     private float m_lurkingTime; // Random lurking time
     #endregion
@@ -106,9 +115,8 @@ public class WolfController : MonoBehaviour, IEnnemyController {
 
     [Tooltip("Charge speed when rushing towards the player.")]
     [Min(0)]
-    public float chargeSpeed = 10f;
-
-    private float m_normalSpeed;
+    [SerializeField]
+    private float chargeSpeed = 10f;
     #endregion
 
     #region Attack
@@ -116,7 +124,8 @@ public class WolfController : MonoBehaviour, IEnnemyController {
 
     [Tooltip("Distance from which the Attack state and animation are triggered.")]
     [Min(0)]
-    public float attackDistanceTrigger = 1.5f;
+    [SerializeField]
+    private float attackDistanceTrigger = 1.5f;
 
     private bool m_attackFinished = false;
     private Vector3 attackDirection;
@@ -127,14 +136,16 @@ public class WolfController : MonoBehaviour, IEnnemyController {
 
     [Tooltip("Duration of the recovery state.")]
     [Min(0)]
-    public float recoveryDuration = 4f;
+    [SerializeField]
+    private float recoveryDuration = 4f;
 
     private int m_recoveryHealth = int.MinValue;
     #endregion
 
     #region Stun
     [Header("Duration of stun.")]
-    public float stunDuration = 5f;
+    [SerializeField]
+    private float stunDuration = 5f;
     #endregion
 
     #endregion
@@ -607,6 +618,12 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     #endregion
 
     #region IEnnemyController
+    /// <summary>
+    /// Reduce health of GenericHealth script.
+    /// If hit by a pistol, switch to stun state.
+    /// </summary>
+    /// <param name="toolType">The type of tool that called this method. Used to differentiate between Pistol and Torch weapons.</param>
+    /// <param name="attackDamage">The damage value to be dealt.</param>
     public void Hit(EToolType toolType, int attackDamage) {
         m_genericHealth.Hit(attackDamage);
         if (toolType == EToolType.Pistol) { // If Gun, stun wolf

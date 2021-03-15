@@ -79,13 +79,6 @@ public class RayCastGun : MonoBehaviour, IHandTool
         {
             //apply dammage
             valu.GetComponent<IEnnemyController>().Hit(EToolType.Pistol, damageDealt);
-            //valu.transform.gameObject.GetComponent<GenericHealth>().Hit(damageDealt);
-
-            ////Stun wolf
-            //WolfController wolfController = valu.gameObject.GetComponent<WolfController>();
-            //if (wolfController) {
-            //    wolfController.SetStunState();
-            //}
         }
         //Clear the hashsets
         EnnemyHashSet.Clear();
