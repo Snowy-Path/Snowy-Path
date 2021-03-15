@@ -7,8 +7,7 @@ using UnityEngine;
 /// Represent the Ammunition prefabs creation menu under "GameObjects > Ammunitions".
 /// It holds every pre-defined Ammunition prefabs instantiation methods.
 /// </summary>
-public class AmmunitionCreationMenu : MonoBehaviour
-{
+public class AmmunitionCreationMenu : EditorWindow {
     /// <summary>
     /// Instantiate a Ammunition Box Prefab with the Interactable script.
     /// An ammo box can be used an infinite amount of time and refills the player's ammunition to max every time.

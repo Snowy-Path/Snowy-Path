@@ -9,7 +9,7 @@ using UnityEngine.Events;
 /// Represent the Dynampic system prefabs creation menu under "GameObjects > DynamicSystem".
 /// It holds every dynamic tools prefabs instantiation methods.
 /// </summary>
-public class DynamicSystemCreationMenu {
+public class DynamicSystemCreationMenu : EditorWindow {
 
     /// <summary>
     /// Menu field. Makes all the selected gameobjects Dynamic.
