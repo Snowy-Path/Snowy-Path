@@ -28,6 +28,7 @@ public class WendigoPosCheck : MonoBehaviour {
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, teleportDistance);
         if (newWendigoPos)
             Gizmos.DrawSphere(newWendigoPos.position, 0.5f);
     }

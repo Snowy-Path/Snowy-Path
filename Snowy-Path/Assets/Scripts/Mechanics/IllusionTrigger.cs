@@ -12,8 +12,9 @@ public class IllusionTrigger : MonoBehaviour {
     private void OnTriggerStay(Collider other) {
         if (other.CompareTag("Player")) {
             float angle = Vector3.Angle(other.transform.forward, transform.right);
+            Debug.Log(angle);
             renderedObject.SetActive(angle <= activationAngle);
-            camera.gameObject.SetActive(true);
+            camera.gameObject.SetActive(angle <= activationAngle);
         }
     }
 
