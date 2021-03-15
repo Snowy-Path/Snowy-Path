@@ -6,6 +6,8 @@ public class MapPin : MonoBehaviour
 {
     public float scale = 1f;
 
+    public int pinType = -1;
+
     public void UpdateScale()
     {
         transform.localScale = new Vector3(
