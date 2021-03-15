@@ -13,7 +13,7 @@ public class WeatherZone : MonoBehaviour
     void Start()
     {
         // Initialize the object that will contain our trigger collider
-        GameObject child = new GameObject("range");
+        GameObject child = new GameObject("WeatherRange");
         child.tag = "WeatherZone";
         child.transform.parent = transform;
         child.transform.localPosition = Vector3.zero;
