@@ -1,177 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IScrollHandler
+public class Map : MonoBehaviour
 {
-    public float mapPinScale = 1f;
-    public float zoomStep = 0.1f;
-    public float zoomMin = 1f;
-    public float zoomMax = 5f;
-    public float mouseDragSpeed = 100f;
-    public MapPinPanel pinPanel;
-
-    private bool m_isDragging = false;
-    private bool m_isPinModeEnabled = false;
-    private bool m_isEditingPin = false;
+    private MapUI m_mapUI;
     private RectTransform m_rectTransform;
-    private GameObject m_lastPinPlaced;
-    private Vector3 m_lastPinPosition;
-    private Color m_lastPinColor;
+    private float m_zoomVelocity = 0f;
+    public float ZoomVelocity { set { m_zoomVelocity = value; } }
 
     void Start()
     {
-        if (pinPanel == null)
-            Debug.LogError("[MapUIController] Can't find map pin panel.");
-        else
-            pinPanel.gameObject.SetActive(false);
-
+        m_mapUI = GetComponentInParent<MapUI>();
         m_rectTransform = GetComponent<RectTransform>();
     }
 
+    // Note: Here we apply the movement/zoom using the velocities (Gamepad mode only)
     void Update()
     {
-        
-    }
+        if (m_mapUI.isControllerModeEnabled) {
+            m_mapUI.MapCursor.UpdatePosition();
 
-    public void OnPointerClick(PointerEventData data)
-    {
-        if (!m_isDragging)
-            PlacePin(data);
-    }
+            m_rectTransform.anchoredPosition = Vector2.Lerp(m_rectTransform.anchoredPosition, -m_mapUI.MapCursor.AnchoredPosition * m_rectTransform.localScale, Time.deltaTime * m_mapUI.cursorScrollSpeed);
 
-    public void OnBeginDrag(PointerEventData data)
-    {
-        // Debug.Log("begin drag:" + data);
-        m_isDragging = true;
-        DragMap(data);
-    }
-
-    public void OnDrag(PointerEventData data)
-    {
-        // Debug.Log("drag:" + data);
-        DragMap(data);
-    }
-
-    public void OnEndDrag(PointerEventData data)
-    {
-        // Debug.Log("end drag:" + data);
-        DragMap(data);
-        m_isDragging = false;
-    }
-
-    public void OnScroll(PointerEventData data)
-    {
-        Zoom(data);
-    }
-
-    public void PinConfirm()
-    {
-        m_isEditingPin = false;
-        m_isPinModeEnabled = false;
-        pinPanel.gameObject.SetActive(false);
-        m_lastPinPlaced = null;
-    }
-
-    public void PinRemove()
-    {
-        m_isEditingPin = false;
-        m_isPinModeEnabled = false;
-        pinPanel.gameObject.SetActive(false);
-        Destroy(m_lastPinPlaced);
-        m_lastPinPlaced = null;
-    }
-
-    public void PinCancel()
-    {
-        m_isPinModeEnabled = false;
-        pinPanel.gameObject.SetActive(false);
-
-        if (!m_isEditingPin) {
-            Destroy(m_lastPinPlaced);
-            m_lastPinPlaced = null;
+            if (m_zoomVelocity != 0)
+                Zoom(m_zoomVelocity, RectTransformUtility.WorldToScreenPoint(Camera.current, m_mapUI.MapCursor.transform.position), true);
+            else
+                KeepMapCenteredInView();
         }
-        else {
-            m_lastPinPlaced.transform.position = m_lastPinPosition;
-            m_lastPinPlaced.GetComponent<Image>().color = m_lastPinColor;
-        }
-
-        m_isEditingPin = false;
     }
 
-    void OnPinClick(GameObject pin)
+    public void Zoom(float scrollDelta, Vector2 position, bool isController = false)
     {
-        m_isEditingPin = true;
-        m_lastPinPosition = pin.transform.position;
-        m_lastPinPlaced = pin;
-        m_lastPinColor = pin.GetComponent<Image>().color;
-        OpenPinPanel();
-    }
-
-    public void OnPinTypeChanged()
-    {
-        if (m_lastPinPlaced != null)
-            m_lastPinPlaced.GetComponent<Image>().color = pinPanel.CurrentPinColor;
-    }
-
-    public void OpenPinPanel()
-    {
-        m_isPinModeEnabled = true;
-        pinPanel.gameObject.SetActive(true);
-    }
-
-    public void ClosePinPanel()
-    {
-        PinCancel();
-    }
-
-    void PlacePin(PointerEventData data)
-    {
-        if (m_lastPinPlaced != null) {
-            Destroy(m_lastPinPlaced);
-            m_lastPinPlaced = null;
-        }
-
-        int currentPinType = pinPanel.CurrentPinType;
-        if (!m_isPinModeEnabled) {
-            m_isPinModeEnabled = true;
-            pinPanel.gameObject.SetActive(true);
-        }
-
-        // FIXME: When m_isPinModeEnabled, and for all the duration of the mode, the same pin should be edited instead of creating new ones each time
-
-        GameObject child = new GameObject("MapPin");
-        child.transform.parent = transform;
-
-        RectTransform rectTransform = child.AddComponent<RectTransform>();
-        rectTransform.localScale = new Vector3(
-            mapPinScale / transform.localScale.x,
-            mapPinScale / transform.localScale.y,
-            mapPinScale / transform.localScale.z
-        );
-
-        Vector2 mousePosition = data.position;
-        Vector2 relativeMousePosition;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(m_rectTransform, mousePosition, null, out relativeMousePosition);
-
-        rectTransform.anchoredPosition = relativeMousePosition;
-
-        Image image = child.AddComponent<Image>();
-        image.color = pinPanel.CurrentPinColor;
-
-        Button button = child.AddComponent<Button>();
-        button.onClick.AddListener(() => OnPinClick(child));
-
-        child.AddComponent<MapPin>().scale = mapPinScale;
-
-        m_lastPinPlaced = child;
-    }
-
-    void Zoom(PointerEventData data)
-    {
-        float scroll = data.scrollDelta.y;
+        float scroll = scrollDelta;
+        float zoomStep = m_mapUI.zoomStep;
+        if (isController)
+            zoomStep *= m_mapUI.controllerZoomSpeed;
 
         Vector3 newScale = Vector3.zero;
         if (scroll > 0) {
@@ -181,30 +47,33 @@ public class Map : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDrag
             newScale = m_rectTransform.localScale - new Vector3(zoomStep, zoomStep, 0f);
         }
 
-        if (scroll != 0 && newScale.x >= zoomMin && newScale.x <= zoomMax) {
+        if (scroll != 0 && newScale.x >= m_mapUI.zoomMin && newScale.x <= m_mapUI.zoomMax) {
             m_rectTransform.localScale = newScale;
 
-            Vector2 mousePosition = data.position;
+            Vector2 mousePosition = position;
             Vector2 relativeMousePosition;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(m_rectTransform, mousePosition, null, out relativeMousePosition);
             if (scroll > 0)
                 m_rectTransform.anchoredPosition -= relativeMousePosition * zoomStep;
             else if (scroll < 0)
                 m_rectTransform.anchoredPosition += relativeMousePosition * zoomStep;
-
-            // Debug.Log((scroll > 0 ? "+" : "-") + relativeMousePosition * zoomStep + " | " + mousePosition + " | "  + m_rectTransform.position);
         }
+
+        if (isController)
+            m_rectTransform.anchoredPosition = -m_mapUI.MapCursor.AnchoredPosition * m_rectTransform.localScale;
 
         KeepMapCenteredInView();
 
         foreach (MapPin mapPin in GetComponentsInChildren<MapPin>())
             mapPin.UpdateScale();
+
+        m_mapUI.MapCursor.UpdateScale();
     }
 
-    void DragMap(PointerEventData data)
+    public void DragMap(Vector2 delta)
     {
-        var delta = data.delta * mouseDragSpeed;
-        m_rectTransform.anchoredPosition = Vector2.Lerp(m_rectTransform.anchoredPosition, m_rectTransform.anchoredPosition + delta, Time.deltaTime);
+        var movement = delta * m_mapUI.mouseDragSpeed;
+        m_rectTransform.anchoredPosition = Vector2.Lerp(m_rectTransform.anchoredPosition, m_rectTransform.anchoredPosition + movement, Time.deltaTime);
 
         KeepMapCenteredInView();
     }

@@ -7,7 +7,7 @@ using UnityEngine;
 /// Represent the Clothes prefabs creation menu under "GameObjects > Clothes".
 /// It holds every pre-defined Clothes prefab instantiation methods.
 /// </summary>
-public class ClothCreationMenu {
+public class ClothCreationMenu : EditorWindow {
 
     /// <summary>
     /// Instantiate a Light Cloth Prefab with the Interactable script.

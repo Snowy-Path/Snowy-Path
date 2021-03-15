@@ -7,7 +7,7 @@ using UnityEngine;
 /// Represent the Powder prefabs creation menu under "GameObjects > Powders".
 /// It holds every pre-defined Powder prefabs instantiation methods.
 /// </summary>
-public class PowderCreationMenu {
+public class PowderCreationMenu : EditorWindow {
 
     /// <summary>
     /// Instantiate a Powder Prefab with the Interactable script.

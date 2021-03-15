@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class FirecampLight : MonoBehaviour
 {
-    Light light;
+    Light campFireLight;
     float timer;
     bool shouldGrow;
 
     void Start()
     {
-        light = GetComponent<Light>();
+        campFireLight = GetComponent<Light>();
         timer = Random.Range(.2f, .6f);
         shouldGrow = Random.value > .5;
     }
@@ -26,17 +26,17 @@ public class FirecampLight : MonoBehaviour
 
         if(shouldGrow)
         {
-            light.range += Random.Range(-.1f * Time.deltaTime, .5f * Time.deltaTime) * 5;
-            light.intensity += Random.Range(-.1f * Time.deltaTime, .5f * Time.deltaTime) * 5;
+            campFireLight.range += Random.Range(-.1f * Time.deltaTime, .5f * Time.deltaTime) * 5;
+            campFireLight.intensity += Random.Range(-.1f * Time.deltaTime, .5f * Time.deltaTime) * 5;
         }
         else
         {
-            light.range -= Random.Range(-.1f * Time.deltaTime, .5f * Time.deltaTime) * 5;
-            light.intensity -= Random.Range(-.1f * Time.deltaTime, .5f * Time.deltaTime) * 5;
+            campFireLight.range -= Random.Range(-.1f * Time.deltaTime, .5f * Time.deltaTime) * 5;
+            campFireLight.intensity -= Random.Range(-.1f * Time.deltaTime, .5f * Time.deltaTime) * 5;
         }
 
-        Mathf.Clamp(light.range, 2, 12);
-        Mathf.Clamp(light.intensity, .8f, 1.8f);
+        Mathf.Clamp(campFireLight.range, 2, 12);
+        Mathf.Clamp(campFireLight.intensity, .8f, 1.8f);
     }
 }
 
