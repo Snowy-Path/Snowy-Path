@@ -9,7 +9,7 @@ using UnityEngine.Events;
 /// Represent the Interactable gameobject creation menu under "GameObjects > Interactable".
 /// It holds every pre-defined Interactable asset creation methods.
 /// </summary>
-public class InteractableCreationMenu {
+public class InteractableCreationMenu : EditorWindow {
 
     #region Make Interactable
 

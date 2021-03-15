@@ -34,6 +34,9 @@ public class RayCastGun : MonoBehaviour, IHandTool
     public int maxMagazineCapacity = 1;
     public int projectilePerShot;
 
+    // AI script for the hearing sense
+    public HearingSenseEmitter emitter;
+
     public EToolType ToolType => EToolType.Pistol;
     public bool IsBusy { get; set; }
 
@@ -61,7 +64,7 @@ public class RayCastGun : MonoBehaviour, IHandTool
     }
 
     /// <summary>
-    /// Apply dammage on wvery ennemy hit
+    /// Apply dammage on every ennemy hit
     /// </summary>
     /// <returns></returns>
     private IEnumerator DammageApply()
@@ -77,6 +80,11 @@ public class RayCastGun : MonoBehaviour, IHandTool
             //apply dammage
             valu.transform.gameObject.GetComponent<GenericHealth>().Hit(damageDealt);
 
+            //Stun wolf
+            WolfController wolfController = valu.gameObject.GetComponent<WolfController>();
+            if (wolfController) {
+                wolfController.SetStunState();
+            }
         }
         //Clear the hashsets
         EnnemyHashSet.Clear();
@@ -165,6 +173,7 @@ public class RayCastGun : MonoBehaviour, IHandTool
 
     public void StartPrimaryUse() {
         if (Time.time > nextFire && !reloading && ammo > 0 && readyToShoot) {
+            emitter.Emit(); //Emit sound to allow ennemies to detect the point of origin
             projectileShot = projectilePerShot;
             Shot();
             StartCoroutine("DammageApply");
