@@ -78,13 +78,14 @@ public class RayCastGun : MonoBehaviour, IHandTool
         foreach (var valu in EnnemySet)
         {
             //apply dammage
-            valu.transform.gameObject.GetComponent<GenericHealth>().Hit(damageDealt);
+            valu.GetComponent<IEnnemyController>().Hit(EToolType.Pistol, damageDealt);
+            //valu.transform.gameObject.GetComponent<GenericHealth>().Hit(damageDealt);
 
-            //Stun wolf
-            WolfController wolfController = valu.gameObject.GetComponent<WolfController>();
-            if (wolfController) {
-                wolfController.SetStunState();
-            }
+            ////Stun wolf
+            //WolfController wolfController = valu.gameObject.GetComponent<WolfController>();
+            //if (wolfController) {
+            //    wolfController.SetStunState();
+            //}
         }
         //Clear the hashsets
         EnnemyHashSet.Clear();

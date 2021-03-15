@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(GenericHealth))]
 [RequireComponent(typeof(Animator))]
-public class WolfController : MonoBehaviour {
+public class WolfController : MonoBehaviour, IEnnemyController {
 
     #region Variables
 
@@ -603,6 +603,15 @@ public class WolfController : MonoBehaviour {
     /// </summary>
     internal void SetStunState() {
         m_fsm.SwitchState(EWolfState.Stun);
+    }
+    #endregion
+
+    #region IEnnemyController
+    public void Hit(EToolType toolType, int attackDamage) {
+        m_genericHealth.Hit(attackDamage);
+        if (toolType == EToolType.Pistol) { // If Gun, stun wolf
+            SetStunState();
+        }
     }
     #endregion
 }
