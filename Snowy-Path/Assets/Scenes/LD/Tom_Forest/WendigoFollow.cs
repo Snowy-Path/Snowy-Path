@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class WendigoFollow : MonoBehaviour
-{
+public class WendigoFollow : MonoBehaviour {
+
     public Transform player;
     public float speed;
     bool startFollowing;
 
-    void Start()
-    {
+    void Start() {
         startFollowing = false;
     }
 
-    void Update()
-    {
-        transform.rotation = Quaternion.LookRotation(player.position - transform.position);
-        if(startFollowing)
-        {
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    void Update() {
+
+        Vector3 dir = player.position - transform.position;
+        transform.rotation = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
+
+        if (startFollowing && dir.magnitude > 3) {
+            transform.position += dir.normalized * speed * Time.deltaTime;
         }
 
-        if (Keyboard.current.tabKey.wasPressedThisFrame) startFollowing = true;
+        if (Keyboard.current.tabKey.wasPressedThisFrame)
+            startFollowing = !startFollowing;
     }
 }
