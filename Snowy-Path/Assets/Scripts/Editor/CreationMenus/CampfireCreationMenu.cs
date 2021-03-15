@@ -7,7 +7,7 @@ using UnityEngine;
 /// Represent the Campfire prefab creation menu under "GameObjects".
 /// It holds every pre-defined Campfire prefab instantiation methods.
 /// </summary>
-public class CampfireCreationMenu {
+public class CampfireCreationMenu : EditorWindow {
 
     /// <summary>
     /// Instantiate a Campfire Prefab with the Interactable script.
