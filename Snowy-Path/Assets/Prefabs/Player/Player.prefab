@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 1900730401729707196}
   - component: {fileID: 2235254285577281805}
   - component: {fileID: 7434007327740124970}
+  - component: {fileID: 3262963461385655655}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -285,9 +286,13 @@ MonoBehaviour:
   runningSpeed: 8
   maxSprintDuration: 4
   sprintRecoveryRate: 0.66
+  sprintLateralFactor: 0.5
   jumpHeight: 1
+  airSpeedFactor: 0.7
   airSpeedX: 3
   airSpeedZ: 1
+  slideSpeed: 5
+  slideDetectorRadius: 0.3
   lookSpeed: 0.1
   lookYLimit: 45
 --- !u!114 &3567335824391310408
@@ -674,6 +679,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: d9ca2b11-863b-454d-ba5b-a1f1e116677e
+--- !u!114 &3262963461385655655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419045311392325752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
+  ListenerNumber: -1
 --- !u!1 &1437083488058531580
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +702,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1437083488058531571}
-  - component: {fileID: 399756590}
   m_Layer: 13
   m_Name: Scope
   m_TagString: Untagged
@@ -707,23 +725,6 @@ Transform:
   m_Father: {fileID: 8256996042156590771}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &399756590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437083488058531580}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 549d031794b677b4eb73d4e35022ed59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scopeOverlay: {fileID: 2181766725532226513}
-  scopeCamera: {fileID: 1679038563}
-  MainCamera: {fileID: 410683821521478531}
-  magnification1: 4
-  magnification2: 8
 --- !u!1 &1437083488108091246
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,12 +1057,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6bc693cc8106f94fbd1b5802cd54407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMain:
-    m_PersistentCalls:
-      m_Calls: []
-  onSecondary:
-    m_PersistentCalls:
-      m_Calls: []
   damageDealt: 0
   fireRate: 0.25
   groupfire: 0.001
@@ -2467,12 +2462,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19bb071bd338064448eb4c77cddf5bad, type: 3}
---- !u!4 &3095920378267163964 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1302485302868222444, guid: 19bb071bd338064448eb4c77cddf5bad,
-    type: 3}
-  m_PrefabInstance: {fileID: 4099876915800800464}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4099876914923759676 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 905680108, guid: 19bb071bd338064448eb4c77cddf5bad,
@@ -2485,6 +2474,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584821da66d179b4280b66a841456d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &3095920378267163964 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1302485302868222444, guid: 19bb071bd338064448eb4c77cddf5bad,
+    type: 3}
+  m_PrefabInstance: {fileID: 4099876915800800464}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7949645792548299970
 PrefabInstance:
   m_ObjectHideFlags: 0
