@@ -19,7 +19,10 @@ public class LevelLoader : MonoBehaviour
 
             foreach (GameObject item in gameObjects)
             {
-                item.SetActive(true);
+                if (item.CompareTag("SceneWorld"))
+                {
+                    item.SetActive(true);
+                }
             }
         }
     }
@@ -34,7 +37,10 @@ public class LevelLoader : MonoBehaviour
 
             foreach (GameObject item in gameObjects)
             {
-                item.SetActive(false);
+                if (item.CompareTag("SceneWorld"))
+                {
+                    item.SetActive(false);
+                }
             }
         }
     }
