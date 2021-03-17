@@ -1,36 +1,46 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Checks if the Wendigo needs to be teleported closer to the player.
+/// </summary>
+[RequireComponent(typeof(Collider))]
 public class WendigoPosCheck : MonoBehaviour {
-    [SerializeField] Transform newWendigoPos;
-    [SerializeField] float teleportDistance = 10;
-    private bool triggered = false;
 
+    [Tooltip("Teleportation point.")]
+    [SerializeField] private Transform newWendigoPos;
+
+    [Tooltip("Distance to check. If the Wendigo of the Player than this distance, the Wendigo is teleported.")]
+    [Min(0)]
+    [SerializeField] private float distanceThreshold = 10;
+
+    /// <summary>
+    /// Triggered when another collider with Layer 'PlayerBody' enters this one.
+    /// Check the distance between the Player and the Wendigo. Teleport sthe Wendigo if needed.
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
-        WendigoFollow wendigo = FindObjectOfType<WendigoFollow>();
+
+        WendigoController wendigo = FindObjectOfType<WendigoController>();
+
         if (wendigo) {
-            if (other.CompareTag("Player") && !triggered) {
-                if ((wendigo.transform.position - other.transform.position).magnitude > teleportDistance) {
-                    Teleport(wendigo.transform, newWendigoPos.position);
-                    wendigo.transform.position = newWendigoPos.position;
+            if (other.CompareTag("Player")) { // Useful with the layer matrix ?
+
+                if (Vector3.Distance(wendigo.transform.position, other.transform.position) > distanceThreshold) {
+                    wendigo.Teleport(newWendigoPos);
                 }
-                triggered = true;
+                Destroy(gameObject);
             }
+        } else {
+            Debug.LogError("Can't find Wendigo to teleport.");
         }
-        else
-            Debug.LogError("Can't find Wendigo to teleport");
     }
 
-    private void Teleport(Transform transform, Vector3 point) {
-        transform.position = point;
-    }
-
+    /// <summary>
+    /// Draw the distance threshold as a yellow wire sphere.
+    /// </summary>
     private void OnDrawGizmos() {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, teleportDistance);
-        if (newWendigoPos)
-            Gizmos.DrawSphere(newWendigoPos.position, 0.5f);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, distanceThreshold);
     }
 }
 
