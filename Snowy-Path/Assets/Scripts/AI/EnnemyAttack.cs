@@ -7,6 +7,9 @@
 [RequireComponent(typeof(Collider))]
 public class EnnemyAttack : MonoBehaviour {
 
+    [Tooltip("Defines if the attack instantly kills the player.")]
+    public bool instantKill = false;
+
     [Tooltip("Damages dealt to player.")]
     [Min(0)]
     public int attackDamage = 1;
@@ -25,9 +28,14 @@ public class EnnemyAttack : MonoBehaviour {
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
-            other.GetComponent<GenericHealth>().Hit(attackDamage);
+            if (instantKill) {
+                other.GetComponent<GenericHealth>().Hit(other.GetComponent<GenericHealth>().maxHealth);
+            } else {
+                other.GetComponent<GenericHealth>().Hit(attackDamage);
+            }
             other.GetComponent<Temperature>().ReduceCurrentTemperatureWithPercentage(temperaturePercentageDamage);
             other.GetComponent<Inventory>().ReduceClothDurabilityPercentage(clothPercentageDamage);
         }
     }
+
 }
