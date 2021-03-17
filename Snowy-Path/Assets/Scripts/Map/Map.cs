@@ -20,7 +20,7 @@ public class Map : MonoBehaviour
     // Note: Here we apply the movement/zoom using the velocities (Gamepad mode only)
     void Update()
     {
-        if (m_mapUI.isControllerModeEnabled) {
+        if (m_mapUI.IsControllerModeEnabled) {
             m_mapUI.MapCursor.UpdatePosition();
 
             m_rectTransform.anchoredPosition = Vector2.Lerp(m_rectTransform.anchoredPosition, -m_mapUI.MapCursor.AnchoredPosition * m_rectTransform.localScale, Time.deltaTime * m_mapUI.cursorScrollSpeed);

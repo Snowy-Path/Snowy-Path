@@ -53,7 +53,7 @@ public class MapPinPanel : MonoBehaviour
 
         CreateCursor();
 
-        if (!m_mapUI.isControllerModeEnabled)
+        if (!m_mapUI.IsControllerModeEnabled)
             m_cursor.gameObject.SetActive(false);
 
         Debug.Log(m_cursor);

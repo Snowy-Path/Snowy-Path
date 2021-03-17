@@ -27,6 +27,19 @@ public class MapEventHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHa
         m_mapUI.inputActionAsset.FindAction("Map/Zoom").canceled += OnZoom;
     }
 
+    void SetControllerMode(bool isControllerModeEnabled)
+    {
+        if (isControllerModeEnabled && !m_mapUI.IsControllerModeEnabled) {
+            RectTransform rect = m_mapUI.MapCursor.GetComponent<RectTransform>();
+            Vector3 point = new Vector3();
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, Mouse.current.position.ReadValue(), Camera.current, out point);
+            m_mapUI.MapCursor.transform.position = point;
+        }
+
+        m_mapUI.IsControllerModeEnabled = isControllerModeEnabled;
+        m_mapUI.MapCursor.gameObject.SetActive(isControllerModeEnabled);
+    }
+
     //=========================================================================
     // Unity EventSystem callbacks
     //=========================================================================
@@ -39,6 +52,7 @@ public class MapEventHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHa
 
     public void OnBeginDrag(PointerEventData data)
     {
+        SetControllerMode(false);
         m_isDragging = true;
         m_map.DragMap(data.delta);
     }
@@ -56,6 +70,7 @@ public class MapEventHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHa
 
     public void OnScroll(PointerEventData data)
     {
+        SetControllerMode(false);
         m_map.Zoom(data.scrollDelta.y, data.position);
     }
 
@@ -65,6 +80,8 @@ public class MapEventHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHa
 
     void OnCancel(InputAction.CallbackContext context)
     {
+        SetControllerMode(true);
+
         if (m_mapUI.IsInEditMode)
             m_mapPinManager.PinCancel(); // Close pin panel
         else
@@ -73,6 +90,8 @@ public class MapEventHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHa
 
     void OnConfirm(InputAction.CallbackContext context)
     {
+        SetControllerMode(true);
+
         if (m_mapUI.IsInEditMode) { 
             m_mapPinManager.PinConfirm();
         }
@@ -103,6 +122,8 @@ public class MapEventHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHa
     private bool m_canMovePinCursor = false;
     void OnNavigate(InputAction.CallbackContext context)
     {
+        SetControllerMode(true);
+
         // If pin panel is disabled, move the cursor
         var value = context.ReadValue<Vector2>();
         if (!m_mapUI.IsInEditMode) {
@@ -130,6 +151,8 @@ public class MapEventHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHa
 
     void OnZoom(InputAction.CallbackContext context)
     {
+        SetControllerMode(true);
+
         var delta = context.ReadValue<float>();
         m_map.ZoomVelocity = delta;
     }
