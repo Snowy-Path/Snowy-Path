@@ -45,7 +45,7 @@ public class Torch : MonoBehaviour {
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Ennemy")) {
-            other.GetComponent<GenericHealth>().Hit(attackDamage);
+            other.GetComponent<IEnnemyController>().Hit(EToolType.Torch, attackDamage);
         }
     }
 
