@@ -13,7 +13,7 @@ public class Cloth : ScriptableObject
         Heavy = 75
     }
 
-    public EClothType type;
+    public EClothType type = EClothType.None;
 
     public float maxDurability = 1f;
 

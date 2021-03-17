@@ -3,7 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour {
+    public Cloth defaultCloth;
+
     private Cloth m_cloth;
+
+    void Start()
+    {
+        if (defaultCloth == null)
+            Debug.LogError("[Inventory] Default cloth is not set.");
+
+        m_cloth = defaultCloth;
+    }
 
     public void ChangeCloth(Cloth newCloth) {
         m_cloth = newCloth;
