@@ -21,10 +21,12 @@ public class Telescope : MonoBehaviour, IHandTool {
 
     private void Start() {
         spriteMask.SetActive(false);
+        scopeCamera.gameObject.SetActive(false);
     }
 
     public void StartPrimaryUse() {
         IsBusy = true;
+        scopeCamera.gameObject.SetActive(true);
         scopeCamera.fieldOfView = defaultZoom;
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
@@ -33,6 +35,7 @@ public class Telescope : MonoBehaviour, IHandTool {
     }
 
     public void CancelPrimaryUse() {
+        scopeCamera.gameObject.SetActive(false);
         IsBusy = false;
         animator.SetBool("LookInTelescope", false);
     }
