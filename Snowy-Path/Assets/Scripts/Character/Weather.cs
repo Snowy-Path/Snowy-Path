@@ -2,33 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weather : MonoBehaviour
-{
-    public WeatherPreset defaultWeather;
+public class Weather : MonoBehaviour {
+
+    [SerializeField]
+    private WeatherPreset defaultWeather;
+
+    [SerializeField]
+    private Animator animator;
 
     private Dictionary<int, WeatherZone> activeWeatherZones = new Dictionary<int, WeatherZone>();
-    private WeatherPreset currentWeather;
 
-    public WeatherPreset GetCurrentWeather() {
-        int id = 0;
-        float highestBlizzardStrength = 0;
-        bool hasFoundWeather = false;
-
-        // Try to find the weather zone with the highest blizzard strength
-        // Only that one will be considered as the current weather
-        foreach (var pair in activeWeatherZones) {
-            if (pair.Value.weatherPreset.blizzardStrength > highestBlizzardStrength) {
-                highestBlizzardStrength = pair.Value.weatherPreset.blizzardStrength;
-                id = pair.Key;
-                hasFoundWeather = true;
-            }
+    private WeatherPreset m_currentWeather;
+    public WeatherPreset CurrentWeather {
+        get {
+            return m_currentWeather;
         }
+        private set {
+            m_currentWeather = value;
+            animator.SetFloat("BlizzardStrength", m_currentWeather.blizzardStrength);
+            animator.SetTrigger("BlizzardChanged");
+        }
+    }
 
-        // If we found a weather zone then return it, else return the default weather
-        if (hasFoundWeather)
-            return activeWeatherZones[id].weatherPreset;
-        else
-            return defaultWeather;
+    private void Awake() {
+        CurrentWeather = defaultWeather;
     }
 
     void OnTriggerEnter(Collider other) {
@@ -36,6 +33,9 @@ public class Weather : MonoBehaviour
         if (other.tag == "WeatherZone") {
             var weatherZone = other.GetComponentInParent<WeatherZone>();
             activeWeatherZones.Add(weatherZone.GetInstanceID(), weatherZone);
+            if (weatherZone.weatherPreset.blizzardStrength > CurrentWeather.blizzardStrength) {
+                CurrentWeather = weatherZone.weatherPreset;
+            }
         }
     }
 
@@ -44,6 +44,34 @@ public class Weather : MonoBehaviour
         if (other.tag == "WeatherZone") {
             var weatherZone = other.GetComponentInParent<WeatherZone>();
             activeWeatherZones.Remove(weatherZone.GetInstanceID());
+            FindHighestWeatherZone();
         }
     }
+
+    private void FindHighestWeatherZone() {
+
+        // Guard
+        if (activeWeatherZones.Count == 0) {
+            CurrentWeather = defaultWeather;
+            return;
+        }
+
+        int id = 0;
+        float highestBlizzardStrength = 0;
+
+        foreach (var pair in activeWeatherZones) {
+            if (pair.Value.weatherPreset.blizzardStrength > highestBlizzardStrength) {
+                highestBlizzardStrength = pair.Value.weatherPreset.blizzardStrength;
+                id = pair.Key;
+            }
+        }
+
+        // Guard
+        if (CurrentWeather == activeWeatherZones[id].weatherPreset) {
+            return;
+        }
+
+        CurrentWeather = activeWeatherZones[id].weatherPreset;
+    }
+
 }
