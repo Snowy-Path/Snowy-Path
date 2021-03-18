@@ -191,6 +191,8 @@ public class PlayerController : MonoBehaviour {
         //Move
         if (canMove) {
             controller.Move(xzVelocity * SpeedFactor * Time.deltaTime);
+            if (!isSliding && IsGrounded)
+                handsAnimator.SetFloat("Speed", (xzVelocity.magnitude * SpeedFactor) / currentSpeed);
         }
         controller.Move(yVelocity * Time.deltaTime);
     }
