@@ -17,6 +17,7 @@ public class HandController : MonoBehaviour {
         }
     }
 
+    [SerializeField] Animator handsAnimator;
     private IHandTool[] tools;
     private int currentToolIndex = -1;
 
@@ -114,6 +115,7 @@ public class HandController : MonoBehaviour {
 
         HideTools();
         tools[currentToolIndex].ToggleDisplay(true);
+        handsAnimator.SetTrigger("SwitchTool");
     }
 
     /// <summary>
