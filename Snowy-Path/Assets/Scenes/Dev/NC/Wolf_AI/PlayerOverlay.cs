@@ -11,7 +11,6 @@ public class PlayerOverlay : MonoBehaviour {
     public Cloth cloth;
 
     private void Start() {
-        cloth.Init();
         inventory.ChangeCloth(cloth);
     }
 

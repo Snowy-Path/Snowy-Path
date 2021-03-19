@@ -128,7 +128,7 @@ public class Temperature : MonoBehaviour
         if (cloth != null)
             clothType = (float)cloth.type;
 
-        return (1 + m_weather.GetCurrentWeather().blizzardStrength) - ((1 + m_weather.GetCurrentWeather().blizzardStrength) * clothType / 100f);
+        return (1 + (float)m_weather.GetCurrentWeather().blizzardStrength / 100f) - ((1 + (float)m_weather.GetCurrentWeather().blizzardStrength / 100f) * clothType / 100f);
     }
 
     void OnTriggerEnter(Collider other)

@@ -12,11 +12,11 @@ public class Inventory : MonoBehaviour {
         if (defaultCloth == null)
             Debug.LogError("[Inventory] Default cloth is not set.");
 
-        m_cloth = defaultCloth;
+        m_cloth = Instantiate(defaultCloth);
     }
 
     public void ChangeCloth(Cloth newCloth) {
-        m_cloth = newCloth;
+        m_cloth = Instantiate(newCloth);
     }
 
     public Cloth GetCurrentCloth() {
@@ -30,6 +30,12 @@ public class Inventory : MonoBehaviour {
     public void ReduceClothDurabilityPercentage(float percentage) {
         if (m_cloth) {
             m_cloth.ReduceDurabilityPercentage(percentage);
+        }
+    }
+
+    public void ReduceClothDurability(WeatherPreset currentWeather) {
+        if (m_cloth) {
+            m_cloth.ReduceDurability(currentWeather);
         }
     }
 }

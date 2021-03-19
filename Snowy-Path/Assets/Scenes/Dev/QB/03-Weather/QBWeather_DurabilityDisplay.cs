@@ -16,11 +16,6 @@ public class QBWeather_DurabilityDisplay : MonoBehaviour
 
     void Update()
     {
-        var cloth = inventory.GetCurrentCloth();
-        if (cloth != null) {
-            var durability = cloth.GetCurrentDurability();
-            var maxDurability = cloth.maxDurability;
-            m_text.text = "Cloth durability: " + maxDurability + "/" + maxDurability;
-        }
+        m_text.text = "Cloth durability: " + inventory.GetCurrentCloth().GetCurrentDurability() + "/" + inventory.GetCurrentCloth().maxDurability;
     }
 }
