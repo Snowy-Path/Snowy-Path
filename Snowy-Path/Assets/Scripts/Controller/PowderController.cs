@@ -49,7 +49,10 @@ public class PowderController : MonoBehaviour {
         torchParticlesBaseGradient = colorModule.color.gradient;
 
         root = GameObject.Find("PowderEffectRoot");
-        root.SetActive(false);
+        if (root) {
+            root.SetActive(false);
+        }
+
     }
     #endregion
 
@@ -70,14 +73,18 @@ public class PowderController : MonoBehaviour {
     /// </summary>
     private IEnumerator ChangeColor() {
 
-        root.SetActive(true);
+        if (root) {
+            root.SetActive(true);
+        }
         torchLight.color = effectColor;
         foreverLight.color = effectColor;
         colorModule.color = particlesEffectGradient;
 
         yield return new WaitForSeconds(effectDuration);
 
-        root.SetActive(false);
+        if (root) {
+            root.SetActive(false);
+        }
         torchLight.color = torchLightBaseColor;
         foreverLight.color = foreverLightBaseColor;
         colorModule.color = torchParticlesBaseGradient;

@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float groundCheckRadius = 0.2f;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float gravity = -9.81f;
+    [SerializeField] Animator handsAnimator;
 
     [Space]
     [Header("Movement")]
@@ -158,6 +159,7 @@ public class PlayerController : MonoBehaviour {
         Sliding();
         Look();
         Sprint();
+        handsAnimator.SetBool("Grounded", isGrounded);
 
         #region DEBUG
         Keyboard keyboard = Keyboard.current;
@@ -189,6 +191,8 @@ public class PlayerController : MonoBehaviour {
         //Move
         if (canMove) {
             controller.Move(xzVelocity * SpeedFactor * Time.deltaTime);
+            if (!isSliding && IsGrounded)
+                handsAnimator.SetFloat("Speed", (xzVelocity.magnitude * SpeedFactor) / currentSpeed);
         }
         controller.Move(yVelocity * Time.deltaTime);
     }
@@ -286,6 +290,8 @@ public class PlayerController : MonoBehaviour {
             sprintCmd = false;
             sprintTimer = Mathf.Clamp(sprintTimer - (sprintRecoveryRate * Time.deltaTime), 0.0f, maxSprintDuration);
         }
+
+        handsAnimator.SetBool("Run", isRunning);
     }
 
     private void Look() {
