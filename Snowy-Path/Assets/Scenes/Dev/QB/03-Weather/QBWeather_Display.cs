@@ -16,12 +16,6 @@ public class QBWeather_Display : MonoBehaviour
 
     void Update()
     {
-        var weatherTypeNames = new Dictionary<WeatherPreset.EWeatherType, string>();
-        weatherTypeNames.Add(WeatherPreset.EWeatherType.Cloudy, "Cloudy");
-        weatherTypeNames.Add(WeatherPreset.EWeatherType.Rainy,  "Rainy");
-        weatherTypeNames.Add(WeatherPreset.EWeatherType.Snowy,  "Snowy");
-        weatherTypeNames.Add(WeatherPreset.EWeatherType.Sunny,  "Sunny");
-
-        m_text.text = "Weather type: " + weatherTypeNames[weather.GetCurrentWeather().type] + " | Blizzard: " + weather.GetCurrentWeather().blizzardStrength;
+        m_text.text = "Blizzard: " + weather.GetCurrentWeather().blizzardStrength;
     }
 }
