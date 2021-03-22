@@ -195,7 +195,7 @@ public class RayCastGun : MonoBehaviour, IHandTool
         gameObject.SetActive(display);
     }
 
-    private new void SecondaryInteraction()
+    private void SecondaryInteraction()
     {
         if (maxAmmo >= 0)
         {
