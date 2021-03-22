@@ -6,17 +6,6 @@ using UnityEngine;
 public class WeatherPreset : ScriptableObject
 {
     [System.Serializable]
-    public enum EWeatherType {
-        Sunny,
-        Cloudy,
-        Rainy,
-        Snowy
-    }
-
-    [Tooltip("Weather type (currently unused)")]
-    public EWeatherType type;
-
-    [System.Serializable]
     public enum EBlizzardStrength {
         None = 0,
         Low = 25,
