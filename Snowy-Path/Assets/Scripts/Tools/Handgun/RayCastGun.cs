@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class RayCastGun : Tool, IHandTool
+public class RayCastGun : MonoBehaviour, IHandTool
 {
     public static bool endEnnemySet = false;
     public int damageDealt = 0;
@@ -34,7 +34,11 @@ public class RayCastGun : Tool, IHandTool
     public int maxMagazineCapacity = 1;
     public int projectilePerShot;
 
+    // AI script for the hearing sense
+    public HearingSenseEmitter emitter;
+
     public EToolType ToolType => EToolType.Pistol;
+    public bool IsBusy { get; set; }
 
     void Start()
     {
@@ -60,7 +64,7 @@ public class RayCastGun : Tool, IHandTool
     }
 
     /// <summary>
-    /// Apply dammage on wvery ennemy hit
+    /// Apply dammage on every ennemy hit
     /// </summary>
     /// <returns></returns>
     private IEnumerator DammageApply()
@@ -74,8 +78,7 @@ public class RayCastGun : Tool, IHandTool
         foreach (var valu in EnnemySet)
         {
             //apply dammage
-            valu.transform.gameObject.GetComponent<GenericHealth>().Hit(damageDealt);
-
+            valu.GetComponent<IEnnemyController>().Hit(EToolType.Pistol, damageDealt);
         }
         //Clear the hashsets
         EnnemyHashSet.Clear();
@@ -164,6 +167,7 @@ public class RayCastGun : Tool, IHandTool
 
     public void StartPrimaryUse() {
         if (Time.time > nextFire && !reloading && ammo > 0 && readyToShoot) {
+            emitter.Emit(); //Emit sound to allow ennemies to detect the point of origin
             projectileShot = projectilePerShot;
             Shot();
             StartCoroutine("DammageApply");

@@ -1,85 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class Telescope : MonoBehaviour, IHandTool
-{
+public class Telescope : MonoBehaviour, IHandTool {
+    [Header("Set up")]
+    [Tooltip("Hands animator. Allows this script to trigger the look animation.")]
+    [SerializeField] Animator animator;
+    [SerializeField] Camera scopeCamera;
+    [SerializeField] GameObject spriteMask;
 
-    public GameObject scopeOverlay; //Overlay effect on UI
-    public GameObject scopeCamera;
-    public Camera MainCamera;
-    public float magnification1;
-    public float magnification2;
-    private float normalFOV; //Basic Camera FOV
-    private bool isScoped;
+    [Header("Zoom")]
+    [SerializeField] float defaultZoom = 4f;
+    [SerializeField] float secondaryZoom = 8f;
 
-    public EToolType ToolType =>EToolType.Scope;
+    public EToolType ToolType => EToolType.Scope;
 
-    private void Start()
-    {
-        scopeOverlay.SetActive(true);
-        scopeCamera.SetActive(false);
-        scopeOverlay.SetActive(false);
-        scopeCamera.SetActive(true);
-        //MainCamera.fieldOfView = normalFOV;
+    public bool IsBusy { get; set; }
 
+    private void Start() {
+        spriteMask.SetActive(false);
+        scopeCamera.gameObject.SetActive(false);
     }
 
     public void StartPrimaryUse() {
-        isScoped = !isScoped;
-        if (isScoped) {
-            StartCoroutine(OnScoped());
+        IsBusy = true;
+        scopeCamera.gameObject.SetActive(true);
+        scopeCamera.fieldOfView = defaultZoom;
 
-        }
-        else {
-            OnUnscoped();
-
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
+            animator.SetBool("LookInTelescope", true);
         }
     }
 
     public void CancelPrimaryUse() {
-        // Nothing
+        scopeCamera.gameObject.SetActive(false);
+        IsBusy = false;
+        animator.SetBool("LookInTelescope", false);
     }
 
     public void SecondaryUse() {
-        MainCamera.fieldOfView = magnification2;
+        if (scopeCamera.fieldOfView == defaultZoom)
+            scopeCamera.fieldOfView = secondaryZoom;
+        else
+            scopeCamera.fieldOfView = defaultZoom;
     }
 
     public void ToggleDisplay(bool display) {
         gameObject.SetActive(display);
+        spriteMask.SetActive(false);
     }
-
-    /// <summary>
-    /// Change FOV back to normal and disable Overlay
-    /// </summary>
-    void OnUnscoped()
-    {
-        //
-        scopeOverlay.SetActive(false);
-        scopeCamera.SetActive(true);
-        MainCamera.fieldOfView = normalFOV;
-
-    }
-
-    /// <summary>
-    /// Change
-    /// </summary>
-    /// <param name="maglevel"></param>
-    /// <returns></returns>
-    IEnumerator OnScoped()
-    {
-        yield return new WaitForSeconds(.15f);
-        //Activate overlay and "Vision" Layer objects
-        scopeOverlay.SetActive(true);
-        scopeCamera.SetActive(false);
-        //Change FOV
-        normalFOV = MainCamera.fieldOfView;
-        MainCamera.fieldOfView = magnification1;
-
-    }
-
-
 }
-
-
