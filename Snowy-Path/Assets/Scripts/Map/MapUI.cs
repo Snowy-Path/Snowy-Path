@@ -44,9 +44,6 @@ public class MapUI : MonoBehaviour
     [Tooltip("Speed at which the map will be zoomed when using a controller. See zoomStep for mouse zoom.")]
     public float controllerZoomSpeed = 0.25f;
 
-    [Tooltip("TEMPORARY VARIABLE")]
-    public bool isControllerModeEnabled = false;
-
     public MapPinPanel PinPanel { get { return m_mapPinPanel; } }
     public MapCursor MapCursor { get { return m_mapCursor; } }
 
@@ -66,6 +63,9 @@ public class MapUI : MonoBehaviour
     private State m_state = State.InGame;
 
     public bool IsInEditMode { get { return m_state == State.Edit; } }
+
+    private bool m_isControllerModeEnabled = true;
+    public bool IsControllerModeEnabled { get { return m_isControllerModeEnabled; } set { m_isControllerModeEnabled = value; } }
 
     void Awake()
     {
@@ -89,10 +89,6 @@ public class MapUI : MonoBehaviour
     public void OpenFullscreenMap()
     {
         if (m_state == State.InGame) {
-            // Show cursor if controller mode is enabled
-            if (isControllerModeEnabled)
-                m_mapCursor.gameObject.SetActive(true);
-
             // Unlock and show mouse
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
@@ -111,9 +107,8 @@ public class MapUI : MonoBehaviour
             // Cancel pin placement and close pin panel
             m_mapPinManager.PinCancel();
 
-            // Hide cursor if controller mode is enabled
-            if (isControllerModeEnabled)
-                m_mapCursor.gameObject.SetActive(false);
+            // Hide cursor
+            m_mapCursor.gameObject.SetActive(false);
 
             // Lock and hide mouse
             Cursor.visible = false;

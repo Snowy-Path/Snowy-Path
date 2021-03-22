@@ -40,8 +40,14 @@ public class HandController : MonoBehaviour {
     }
 
     public void OnSecondaryUseTool(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed)
+        if (context.phase == InputActionPhase.Performed) {
+            // NOTE: Could be used later if LDs decide that the cursor should be shown by default in when using a controller
+            // bool isKeyboard = context.control.device is Keyboard;
+            // bool isGamepad = context.control.device is Gamepad;
+            // Debug.Log($"Keyboard: {isKeyboard}, Gamepad: {isGamepad}");
+
             SecondaryUseCurrentTool();
+        }
     }
 
     public void OnScrollTool(InputAction.CallbackContext context) {

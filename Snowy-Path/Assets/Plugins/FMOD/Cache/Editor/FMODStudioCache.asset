@@ -40,7 +40,7 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 1058
-  Exists: 1
+  Exists: 0
 --- !u!114 &-7359282620851594568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,6 +57,25 @@ MonoBehaviour:
   Name: Master
   StudioPath: bank:/Master
   lastModified: 637514251568468389
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-7203623575241037389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Wolf.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Sounds/Banks/Wolf.bank
+  Name: Wolf
+  StudioPath: bank:/Wolf
+  lastModified: 637517496472690098
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -94,7 +113,7 @@ MonoBehaviour:
   Path: event:/Wolf/Wolf Damaged
   guid: 092cfec9e6fa064c821176fc79e30164
   Banks:
-  - {fileID: 5647024872889008480}
+  - {fileID: -7203623575241037389}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -102,6 +121,27 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 5.6
   Length: 1429
+--- !u!114 &-6519272094147632157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Sounds/Banks/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637517496471184121
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 1058
+  Exists: 1
 --- !u!114 &-5866880924537234929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +157,7 @@ MonoBehaviour:
   Path: event:/Wolf/Wolf Attack
   guid: 38864a62e8038c48a27b2fdbfe120ea9
   Banks:
-  - {fileID: 5647024872889008480}
+  - {fileID: -7203623575241037389}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -125,6 +165,25 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1801
+--- !u!114 &-2404818494632202158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Sounds/Banks/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637517496471144506
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-1923569157431902622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,7 +203,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-1666340455902556727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +222,7 @@ MonoBehaviour:
   lastModified: 637514251569675195
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-18820781574064800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,12 +238,12 @@ MonoBehaviour:
   Path: event:/Wolf/Wolf Mouvement
   guid: 68b273a5c77e3b4bb8c77249f4c8f8f8
   Banks:
-  - {fileID: 5647024872889008480}
+  - {fileID: -7203623575241037389}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -8407144779961981202}
+  - {fileID: 4600784874826324931}
   MinDistance: 1
   MaxDistance: 20
   Length: 1700
@@ -201,9 +260,9 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 385445274128742570}
-  - {fileID: -7158929145495289384}
-  - {fileID: 5647024872889008480}
+  - {fileID: -6519272094147632157}
+  - {fileID: -2404818494632202158}
+  - {fileID: -7203623575241037389}
   EditorEvents:
   - {fileID: 2340601249775857716}
   - {fileID: -6761377303726854665}
@@ -212,9 +271,9 @@ MonoBehaviour:
   - {fileID: -18820781574064800}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -7158929145495289384}
+  - {fileID: -2404818494632202158}
   StringsBanks:
-  - {fileID: 385445274128742570}
+  - {fileID: -6519272094147632157}
   stringsBankWriteTime: 637517496471184121
   cacheVersion: 6
 --- !u!114 &385445274128742570
@@ -253,7 +312,7 @@ MonoBehaviour:
   Path: event:/Tools/TorchAttack_Flesh
   guid: 6a9b2f293903f84f9047cc8d316912db
   Banks:
-  - {fileID: -7158929145495289384}
+  - {fileID: -2404818494632202158}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -276,7 +335,7 @@ MonoBehaviour:
   Path: event:/Wolf/WolfAggro
   guid: 600019f22d22b147b4d482967c6afff5
   Banks:
-  - {fileID: 5647024872889008480}
+  - {fileID: -7203623575241037389}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -284,7 +343,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 9.2
   Length: 15000
---- !u!114 &5647024872889008480
+--- !u!114 &4600784874826324931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -293,13 +352,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Wolf.bank
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wolf Mouvement/Kind of soil
   m_EditorClassIdentifier: 
-  Path: Assets/Sounds/Banks/Wolf.bank
-  Name: Wolf
-  StudioPath: bank:/Wolf
-  lastModified: 637517496472690098
-  LoadResult: 0
-  FileSizes: []
+  Name: Kind of soil
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
   Exists: 1

@@ -12,6 +12,8 @@ public class WeatherZone : MonoBehaviour
 
     void Start()
     {
+        weatherPreset = Instantiate(weatherPreset);
+
         // Initialize the object that will contain our trigger collider
         GameObject child = new GameObject("WeatherRange");
         child.tag = "WeatherZone";
