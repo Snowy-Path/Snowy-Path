@@ -9,6 +9,14 @@ using UnityEngine;
 public class PickableCloth : MonoBehaviour {
     
     public Cloth scriptableCloth;
+    private Inventory inventory;
+
+    /// <summary>
+    /// Retrieves the player Inventory script as a reference.
+    /// </summary>
+    private void Start() {
+        inventory = FindObjectOfType<Inventory>();
+    }
 
     /// <summary>
     /// It looks for the first Inventory object in scene and change the Cloth inside the Inventory script to the one stored here.
@@ -16,7 +24,6 @@ public class PickableCloth : MonoBehaviour {
     /// Must be used exclusively when interacting with this component's prefab/gameobject.
     /// </summary>
     public void ChangeClothInInventory() {
-        Inventory inventory = FindObjectOfType<Inventory>();
         inventory.ChangeCloth(scriptableCloth);
     }
 

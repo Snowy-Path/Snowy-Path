@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -67,6 +68,16 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
         if (toolType == EToolType.Pistol) { // If Gun
             StartCoroutine(ReduceSpeed());
         }
+    }
+    #endregion
+
+    #region Utility
+    /// <summary>
+    /// Teleports the Wendigo using the NavMeshAgent to the nearest point of <c>newWendigoPos</c> on the NavMesh.
+    /// </summary>
+    /// <param name="newWendigoPos">The new position to warp at.</param>
+    internal void Teleport(Transform newWendigoPos) {
+        m_agent.Warp(newWendigoPos.position);
     }
     #endregion
 }
