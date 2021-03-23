@@ -97,69 +97,69 @@ public class HQOptionsMenu : MonoBehaviour
 
 
 
-    void OnGUI()
-    {
-        /*keyEvent dictates what key our user presses
-		 * bt using Event.current to detect the current
-		 * event
-		 */
-        keyEvent = Event.current;
+  //  void OnGUI()
+  //  {
+  //      /*keyEvent dictates what key our user presses
+		// * bt using Event.current to detect the current
+		// * event
+		// */
+  //      keyEvent = Event.current;
 
-        //Executes if a button gets pressed and
-        //the user presses a key
-        if (keyEvent.isKey && waitingForKey)
-        {
-            newKey = keyEvent.keyCode; //Assigns newKey to the key user presses
-            waitingForKey = false;
-        }
-    }
+  //      //Executes if a button gets pressed and
+  //      //the user presses a key
+  //      if (keyEvent.isKey && waitingForKey)
+  //      {
+  //          newKey = keyEvent.keyCode; //Assigns newKey to the key user presses
+  //          waitingForKey = false;
+  //      }
+  //  }
 
-    /*Buttons cannot call on Coroutines via OnClick().
-	 * Instead, we have it call StartAssignment, which will
-	 * call a coroutine in this script instead, only if we
-	 * are not already waiting for a key to be pressed.
-	 */
-    public void StartAssignment(string keyName)
-    {
-        if (!waitingForKey)
-            StartCoroutine(AssignKey(keyName));
-    }
-
-
-    IEnumerator WaitForKey()
-    {
-        while (!keyEvent.isKey)
-            yield return null;
-    }
+  //  /*Buttons cannot call on Coroutines via OnClick().
+	 //* Instead, we have it call StartAssignment, which will
+	 //* call a coroutine in this script instead, only if we
+	 //* are not already waiting for a key to be pressed.
+	 //*/
+  //  public void StartAssignment(string keyName)
+  //  {
+  //      if (!waitingForKey)
+  //          StartCoroutine(AssignKey(keyName));
+  //  }
 
 
-    public IEnumerator AssignKey(string keyName)
-    {
-        waitingForKey = true;
+  //  IEnumerator WaitForKey()
+  //  {
+  //      while (!keyEvent.isKey)
+  //          yield return null;
+  //  }
 
-        yield return WaitForKey(); //Executes endlessly until user presses a key
 
-        switch (keyName)
-        {
-            case "forward":
+  //  public IEnumerator AssignKey(string keyName)
+  //  {
+  //      waitingForKey = true;
 
-                break;
-            case "backward":
+  //      yield return WaitForKey(); //Executes endlessly until user presses a key
 
-                break;
-            case "left":
+  //      switch (keyName)
+  //      {
+  //          case "forward":
 
-                break;
-            case "right":
+  //              break;
+  //          case "backward":
 
-                break;
-            case "jump":
+  //              break;
+  //          case "left":
 
-                break;
-        }
+  //              break;
+  //          case "right":
 
-        yield return null;
-    }
+  //              break;
+  //          case "jump":
+
+  //              break;
+  //      }
+
+  //      yield return null;
+  // }
 }
 
 

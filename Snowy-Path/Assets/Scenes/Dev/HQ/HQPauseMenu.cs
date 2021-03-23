@@ -98,7 +98,7 @@ public class HQPauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         ShowDefaultView();
         PauseMenu.SetActive(false);
-        //CameraLayerToggle();
+        CameraLayerToggle();
         gameIsPaused = false;
 
     }
@@ -108,7 +108,7 @@ public class HQPauseMenu : MonoBehaviour
         
         this.gameObject.SetActive(true);
         Time.timeScale = 0f;
-        //CameraLayerToggle();
+        CameraLayerToggle();
         SetFocus(PauseMenuFirstButton);
         gameIsPaused = true;
 
@@ -118,7 +118,7 @@ public class HQPauseMenu : MonoBehaviour
     public void CameraLayerToggle()
     {
         Camera cam = GameObject.Find("Camera").GetComponent<Camera>();
-        cam.cullingMask ^= 1 << LayerMask.NameToLayer("Vision");
+        //cam.cullingMask ^= 1 << LayerMask.NameToLayer("Vision");
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("PlayerBody");
     }
 
