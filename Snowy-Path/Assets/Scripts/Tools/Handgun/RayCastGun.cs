@@ -3,9 +3,12 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class RayCastGun : MonoBehaviour, IHandTool
 {
+    public UnityEvent OnFire;
+
     public static bool endEnnemySet = false;
     public int damageDealt = 0;
     public float fireRate = 0.25f;
@@ -167,7 +170,7 @@ public class RayCastGun : MonoBehaviour, IHandTool
 
     public void StartPrimaryUse() {
         if (Time.time > nextFire && !reloading && ammo > 0 && readyToShoot) {
-            emitter.Emit(); //Emit sound to allow ennemies to detect the point of origin
+            OnFire.Invoke();//Emit sound to allow ennemies to detect the point of origin && play muzzle effect VFX
             projectileShot = projectilePerShot;
             Shot();
             StartCoroutine("DammageApply");
