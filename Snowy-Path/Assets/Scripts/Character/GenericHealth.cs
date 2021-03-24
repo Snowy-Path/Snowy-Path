@@ -8,6 +8,8 @@ public class GenericHealth : MonoBehaviour
     public int maxHealth = 1;
     private int m_currentHealth = 0;
 
+    public int CurrentHealth { get => m_currentHealth; }
+
     [System.Serializable]
     public class OnHitEvent : UnityEvent<string, int> {}
     [System.Serializable]
