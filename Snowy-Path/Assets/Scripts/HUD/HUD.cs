@@ -11,6 +11,8 @@ public class HUD : MonoBehaviour {
     [SerializeField] Image breathOverlay;
     [SerializeField] Image blueOverlay;
 
+    [SerializeField] AnimationCurve staminaCurve;
+
     private GenericHealth playerHealth;
 
     private const float freezeThreshold = 0.3f;
@@ -42,7 +44,8 @@ public class HUD : MonoBehaviour {
 
     public void SetStamina(float amount) {
         Color color = staminaOverlay.color;
-        color.a = Mathf.Clamp(10 * amount, 0, 1);
+        color.a = Mathf.Clamp(staminaCurve.Evaluate(amount), 0, 1);
+        Debug.Log(color.a);
         staminaOverlay.color = color;
     }
 
