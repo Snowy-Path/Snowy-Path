@@ -45,7 +45,6 @@ public class HUD : MonoBehaviour {
     public void SetStamina(float amount) {
         Color color = staminaOverlay.color;
         color.a = Mathf.Clamp(staminaCurve.Evaluate(amount), 0, 1);
-        Debug.Log(color.a);
         staminaOverlay.color = color;
     }
 
