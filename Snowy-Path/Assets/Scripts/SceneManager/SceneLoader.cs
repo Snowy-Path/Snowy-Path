@@ -63,9 +63,12 @@ public class SceneLoader : MonoBehaviour
             {
                 // Add the scene to the async operation list
                 scenesToLoad.Add(SceneManager.LoadSceneAsync(scene.sceneName, LoadSceneMode.Additive));
+                //SceneManager.LoadScene(scene.sceneName, LoadSceneMode.Additive);
             }
         }
         StartCoroutine(LoadingScreen());
+        //SaveSystem.Instance.Load();
+
     }
     IEnumerator LoadingScreen()
     {
