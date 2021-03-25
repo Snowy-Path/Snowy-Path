@@ -6,17 +6,17 @@ public class Weather : MonoBehaviour
 {
     public WeatherPreset defaultWeather;
 
-    private Dictionary<int, WeatherZone> activeWeatherZones = new Dictionary<int, WeatherZone>();
+    private Dictionary<int, WeatherZone> m_activeWeatherZones = new Dictionary<int, WeatherZone>();
     private Inventory m_inventory;
 
     private WeatherPreset m_currentWeather;
     public WeatherPreset CurrentWeather {
         get { return m_currentWeather; }
         private set {
-            if (value.blizzardStrength != m_currentWeather.blizzardStrength) {
-                blizzardAnimator.SetFloat("BlizzardStrength", value.blizzardStrength);
-                blizzardAnimator.SetTrigger("BlizzardChanged");
-            }
+            //if (value.blizzardStrength != m_currentWeather.blizzardStrength) {
+            //    blizzardAnimator.SetFloat("BlizzardStrength", value.blizzardStrength);
+            //    blizzardAnimator.SetTrigger("BlizzardChanged");
+            //}
             m_currentWeather = value;
         }
     }
@@ -61,7 +61,7 @@ public class Weather : MonoBehaviour
         // If we enter a weather zone, add it to our dictionary
         if (other.tag == "WeatherZone") {
             var weatherZone = other.GetComponentInParent<WeatherZone>();
-            activeWeatherZones.Add(weatherZone.GetInstanceID(), weatherZone);
+            m_activeWeatherZones.Add(weatherZone.GetInstanceID(), weatherZone);
             CurrentWeather = GetCurrentWeather();
         }
     }
@@ -70,7 +70,7 @@ public class Weather : MonoBehaviour
         // If we exit a weather zone, remove it from our dictionary
         if (other.tag == "WeatherZone") {
             var weatherZone = other.GetComponentInParent<WeatherZone>();
-            activeWeatherZones.Remove(weatherZone.GetInstanceID());
+            m_activeWeatherZones.Remove(weatherZone.GetInstanceID());
             CurrentWeather = GetCurrentWeather();
         }
     }
