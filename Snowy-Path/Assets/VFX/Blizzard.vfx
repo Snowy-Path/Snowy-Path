@@ -56,7 +56,7 @@ MonoBehaviour:
   m_ParameterInfo:
   - name: SeeingsBounds
     path: 
-    tooltip: 
+    tooltip: The volume allowing the VFX to be seen.
     sheetType: 
     realType: AABox
     defaultValue:
@@ -94,7 +94,8 @@ MonoBehaviour:
     descendantCount: 0
   - name: SpawningAABox
     path: 
-    tooltip: 
+    tooltip: The volume to spawn particles. Particles can spawn inside it. (Try to
+      keep as flat as possible)
     sheetType: 
     realType: AABox
     defaultValue:
@@ -132,7 +133,7 @@ MonoBehaviour:
     descendantCount: 0
   - name: Lifetime
     path: Lifetime
-    tooltip: 
+    tooltip: Lifetime of a particle. You must ensure it will live long enough.
     sheetType: m_Float
     realType: Single
     defaultValue:
@@ -145,7 +146,7 @@ MonoBehaviour:
     descendantCount: 0
   - name: MinWind
     path: MinWind
-    tooltip: 
+    tooltip: Minimum wind force.
     sheetType: m_Vector3f
     realType: Vector3
     defaultValue:
@@ -158,7 +159,7 @@ MonoBehaviour:
     descendantCount: 0
   - name: MaxWind
     path: MaxWind
-    tooltip: 
+    tooltip: Maximum wind force.
     sheetType: m_Vector3f
     realType: Vector3
     defaultValue:
@@ -171,7 +172,7 @@ MonoBehaviour:
     descendantCount: 0
   - name: ColorGradientOverLife
     path: ColorGradientOverLife
-    tooltip: 
+    tooltip: Color gradient over life. Depends a lot of the Lifetime parameter.
     sheetType: m_Gradient
     realType: Gradient
     defaultValue:
@@ -184,7 +185,7 @@ MonoBehaviour:
     descendantCount: 0
   - name: Period
     path: Period
-    tooltip: 
+    tooltip: Period of time to spawn particles.
     sheetType: m_Float
     realType: Single
     defaultValue:
@@ -197,7 +198,7 @@ MonoBehaviour:
     descendantCount: 0
   - name: Min/MaxSpawningRange
     path: Min/MaxSpawningRange
-    tooltip: 
+    tooltip: Range number of spawned particles. Depends of the Period parameter above.
     sheetType: m_Vector2f
     realType: Vector2
     defaultValue:
@@ -3023,7 +3024,8 @@ MonoBehaviour:
       m_SerializableType: 
     m_SerializableObject: 
   m_IsOutput: 0
-  m_Tooltip: 
+  m_Tooltip: The volume to spawn particles. Particles can spawn inside it. (Try to
+    keep as flat as possible)
   m_Nodes:
   - m_Id: 0
     linkedSlots:
@@ -3628,7 +3630,7 @@ MonoBehaviour:
       m_SerializableType: 
     m_SerializableObject: 
   m_IsOutput: 0
-  m_Tooltip: 
+  m_Tooltip: Lifetime of a particle. You must ensure it will live long enough.
   m_Nodes:
   - m_Id: 0
     linkedSlots:
@@ -3705,7 +3707,7 @@ MonoBehaviour:
       m_SerializableType: 
     m_SerializableObject: 
   m_IsOutput: 0
-  m_Tooltip: 
+  m_Tooltip: Minimum wind force.
   m_Nodes:
   - m_Id: 0
     linkedSlots:
@@ -3884,7 +3886,7 @@ MonoBehaviour:
       m_SerializableType: 
     m_SerializableObject: 
   m_IsOutput: 0
-  m_Tooltip: 
+  m_Tooltip: Maximum wind force.
   m_Nodes:
   - m_Id: 0
     linkedSlots:
@@ -4063,7 +4065,7 @@ MonoBehaviour:
       m_SerializableType: 
     m_SerializableObject: 
   m_IsOutput: 0
-  m_Tooltip: 
+  m_Tooltip: The volume allowing the VFX to be seen.
   m_Nodes:
   - m_Id: 0
     linkedSlots:
@@ -4424,7 +4426,7 @@ MonoBehaviour:
       m_SerializableType: 
     m_SerializableObject: 
   m_IsOutput: 0
-  m_Tooltip: 
+  m_Tooltip: Color gradient over life. Depends a lot of the Lifetime parameter.
   m_Nodes:
   - m_Id: 0
     linkedSlots:
@@ -4720,7 +4722,7 @@ MonoBehaviour:
       m_SerializableType: 
     m_SerializableObject: 
   m_IsOutput: 0
-  m_Tooltip: 
+  m_Tooltip: Period of time to spawn particles.
   m_Nodes:
   - m_Id: 0
     linkedSlots:
@@ -4797,7 +4799,7 @@ MonoBehaviour:
       m_SerializableType: 
     m_SerializableObject: 
   m_IsOutput: 0
-  m_Tooltip: 
+  m_Tooltip: Range number of spawned particles. Depends of the Period parameter above.
   m_Nodes:
   - m_Id: 0
     linkedSlots:
