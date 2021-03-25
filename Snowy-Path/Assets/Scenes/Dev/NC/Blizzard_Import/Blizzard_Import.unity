@@ -16,7 +16,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogColor: {r: 1, g: 0.4575472, b: 0.4575472, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
@@ -99,7 +99,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6717,7 +6717,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
@@ -11684,7 +11684,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
@@ -15474,7 +15474,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
@@ -18291,6 +18291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1006762823}
+  - component: {fileID: 1006762824}
   m_Layer: 0
   m_Name: Chunks
   m_TagString: Untagged
@@ -18322,6 +18323,19 @@ Transform:
   m_Father: {fileID: 822462160}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1006762824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006762822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca34a6148db2d54493f84f379293f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroupID: 0
 --- !u!1 &1006831033
 GameObject:
   m_ObjectHideFlags: 0
@@ -19533,6 +19547,26 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4099876915841186206, guid: 10335cfd1ad372a47a05d871e6244960,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 0.0000000072227486
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099876915841186206, guid: 10335cfd1ad372a47a05d871e6244960,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 7.08e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099876915841186206, guid: 10335cfd1ad372a47a05d871e6244960,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 7.1e-44
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956198845757208931, guid: 10335cfd1ad372a47a05d871e6244960,
+        type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 513
+      objectReference: {fileID: 0}
     - target: {fileID: 8225597999148151143, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19551,22 +19585,22 @@ PrefabInstance:
     - target: {fileID: 8225597999148151143, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99993736
       objectReference: {fileID: 0}
     - target: {fileID: 8225597999148151143, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8225597999148151143, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.01119821
       objectReference: {fileID: 0}
     - target: {fileID: 8225597999148151143, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8225597999148151143, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
@@ -19576,7 +19610,7 @@ PrefabInstance:
     - target: {fileID: 8225597999148151143, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -1.2830001
       objectReference: {fileID: 0}
     - target: {fileID: 8225597999148151143, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
@@ -22689,7 +22723,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -55858,7 +55892,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
@@ -57362,7 +57396,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
@@ -58221,7 +58255,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
@@ -58305,11 +58339,41 @@ VisualEffect:
   m_ResetSeedOnPlay: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 12
+        m_Name: Period
+        m_Overridden: 1
     m_Vector2f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 3000, y: 3000}
+        m_Name: SpawningRange
+        m_Overridden: 1
+      - m_Value: {x: 30, y: 40}
+        m_Name: LifetimeRange
+        m_Overridden: 1
+      - m_Value: {x: 2, y: 12}
+        m_Name: Min/Max Turbulence
+        m_Overridden: 1
     m_Vector3f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 0, y: 0, z: 0}
+        m_Name: New OrientedBox_center
+        m_Overridden: 1
+      - m_Value: {x: 0, y: 346.90573, z: 0}
+        m_Name: New OrientedBox_angles
+        m_Overridden: 1
+      - m_Value: {x: 377.20093, y: 15.896675, z: 711.0136}
+        m_Name: SpawningAABox_size
+        m_Overridden: 1
+      - m_Value: {x: -22.932434, y: -7.4483414, z: -64.54013}
+        m_Name: SpawningAABox_center
+        m_Overridden: 1
+      - m_Value: {x: 451.04828, y: 125.00916, z: 622.3114}
+        m_Name: SeeingBounds_size
+        m_Overridden: 1
+      - m_Value: {x: 21.569916, y: -62.00458, z: 43.958008}
+        m_Name: SeeingBounds_center
+        m_Overridden: 1
     m_Vector4f:
       m_Array: []
     m_Uint:
@@ -58319,7 +58383,33 @@ VisualEffect:
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.5
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 0.5
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_Name: SizeOverLife
+        m_Overridden: 1
     m_Gradient:
       m_Array: []
     m_NamedObject:
@@ -58334,7 +58424,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1571817403}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 392, y: 70.4, z: 279}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59911,7 +60001,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
@@ -61919,7 +62009,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
@@ -67104,6 +67194,12 @@ VisualEffect:
       - m_Value: {x: 240.55814, y: 2.825964, z: 5.84478}
         m_Name: SeeingsBounds_center
         m_Overridden: 1
+      - m_Value: {x: 531.5083, y: 38.486366, z: 1}
+        m_Name: SeeingBounds_size
+        m_Overridden: 1
+      - m_Value: {x: 246.63275, y: -0.14879608, z: 67.71664}
+        m_Name: SeeingBounds_center
+        m_Overridden: 1
     m_Vector4f:
       m_Array: []
     m_Uint:
@@ -67798,7 +67894,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
@@ -68449,7 +68545,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
