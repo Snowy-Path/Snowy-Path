@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour {
     private float startStepOffset;
     private const float inputThreshold = 0.2f;
 
+    private HUD playerHud;
 
     #region INPUTS SYSTEM EVENTS
     public void OnMove(InputAction.CallbackContext context) {
@@ -134,6 +135,7 @@ public class PlayerController : MonoBehaviour {
 
     void Start() {
         controller = GetComponent<CharacterController>();
+        playerHud = GetComponent<HUD>();
 
         //Lock and hide cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -160,33 +162,6 @@ public class PlayerController : MonoBehaviour {
         Look();
         Sprint();
         handsAnimator.SetBool("Grounded", isGrounded);
-
-        #region DEBUG
-        Keyboard keyboard = Keyboard.current;
-        if (keyboard.kKey.wasPressedThisFrame) {
-            if (SpeedFactor != 1f)
-                SpeedFactor = 1f;
-            else
-                SpeedFactor = 0.5f;
-        }
-        //if (keyboard.wKey.wasPressedThisFrame) {
-        //    isMoving = true;
-        //    starPos = transform.position;
-        //}
-        //else if(keyboard.wKey.wasReleasedThisFrame) {
-        //    float dist = (transform.position - starPos).magnitude;
-        //    float speed = dist / moveTestTimer;
-        //    float factor = speed / runningSpeed;
-        //    Debug.Log($"Dist={dist}  Time={moveTestTimer}  Speed={speed}  CurrentSpeed={currentSpeed}  Factor={factor}");
-
-        //    isMoving = false;
-        //    moveTestTimer = 0;
-        //}
-
-        //if(isMoving) {
-        //    moveTestTimer += Time.deltaTime;
-        //}
-        #endregion
 
         //Move
         if (canMove) {
@@ -291,7 +266,9 @@ public class PlayerController : MonoBehaviour {
             sprintTimer = Mathf.Clamp(sprintTimer - (sprintRecoveryRate * Time.deltaTime), 0.0f, maxSprintDuration);
         }
 
+        //Update animator
         handsAnimator.SetBool("Run", isRunning);
+        playerHud.SetStamina(Mathf.Clamp(sprintTimer / maxSprintDuration, 0, 1));
     }
 
     private void Look() {
@@ -333,7 +310,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit) {
-        if (groundLayer.value == 1 << hit.gameObject.layer) {
+        if (groundLayer == (groundLayer | (1 << hit.gameObject.layer))) {
             colliderHit = hit;
         }
     }
