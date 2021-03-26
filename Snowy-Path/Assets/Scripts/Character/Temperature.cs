@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Temperature : MonoBehaviour
-{
+public class Temperature : MonoBehaviour {
     [Tooltip("Maximum internal temperature value")]
     public float maxTemperature;
 
@@ -51,18 +50,18 @@ public class Temperature : MonoBehaviour
     private GenericHealth m_health;
     private Inventory m_inventory;
     private Weather m_weather;
+    private HUD m_playerHUD;
 
-    void Start()
-    {
+    void Start() {
         m_currentTemperature = maxTemperature;
 
         m_health = GetComponent<GenericHealth>();
         m_inventory = GetComponent<Inventory>();
         m_weather = GetComponent<Weather>();
+        m_playerHUD = GetComponent<HUD>();
     }
 
-    void Update()
-    {
+    void Update() {
         // If the player is near at least one heat source, increase his temperature
         if (m_heatSources > 0) {
             // Increase our temperature regen timer
@@ -119,10 +118,10 @@ public class Temperature : MonoBehaviour
                 m_health.Hit(damageHypothermia);
             }
         }
+        m_playerHUD.SetFrozen(Mathf.Clamp(m_currentTemperature / maxTemperature, 0, 1));
     }
 
-    float GetTemperatureLossRate()
-    {
+    float GetTemperatureLossRate() {
         float clothType = 0f;
         Cloth cloth = m_inventory.GetCurrentCloth();
         if (cloth != null)
@@ -131,8 +130,7 @@ public class Temperature : MonoBehaviour
         return (1 + (float)m_weather.GetCurrentWeather().blizzardStrength / 100f) - ((1 + (float)m_weather.GetCurrentWeather().blizzardStrength / 100f) * clothType / 100f);
     }
 
-    void OnTriggerEnter(Collider other)
-    {
+    void OnTriggerEnter(Collider other) {
         if (other.tag == "HeatSource") {
             // If the player wasn't near an heat source, reset the timers
             if (m_heatSources < 1) {
@@ -146,8 +144,7 @@ public class Temperature : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
-    {
+    void OnTriggerExit(Collider other) {
         if (other.tag == "HeatSource") {
             // Decrease counter if we exit an heat source
             m_heatSources -= 1;
@@ -174,8 +171,7 @@ public class Temperature : MonoBehaviour
     }
 
     /// WARNING: For debug purpose only
-    public float GetCurrentTemperature()
-    {
+    public float GetCurrentTemperature() {
         return m_currentTemperature;
     }
 }
