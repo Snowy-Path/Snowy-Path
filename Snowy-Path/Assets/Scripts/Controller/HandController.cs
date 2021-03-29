@@ -9,7 +9,7 @@ public class HandController : MonoBehaviour {
 
     public IHandTool CurrentTool {
         get {
-            if (currentToolIndex > 0) {
+            if (currentToolIndex >= 0) {
                 return tools[currentToolIndex];
             }
             else
@@ -119,9 +119,7 @@ public class HandController : MonoBehaviour {
             currentToolIndex = tools.Length - 1;
         }
 
-        HideTools();
-        tools[currentToolIndex].ToggleDisplay(true);
-        handsAnimator.SetTrigger("SwitchTool");
+        ShowTool(currentToolIndex);
     }
 
     /// <summary>
@@ -139,16 +137,22 @@ public class HandController : MonoBehaviour {
     /// <param name="type">The type of tool to equip</param>
     /// <returns>Returns true if a tool was equiped, fase if not</returns>
     private bool EquipTool(EToolType type) {
-        if (TryGetToolIndex(type, out int index)) {
+        if (!CurrentTool.IsBusy && TryGetToolIndex(type, out int index) && currentToolIndex != index) {
             currentToolIndex = index;
 
-            //Update display
-            HideTools();
-            tools[currentToolIndex].ToggleDisplay(true);
+            ShowTool(currentToolIndex);
             return true;
         }
         else
             return false;
+    }
+
+    private void ShowTool(int index) {
+        //Update display
+        HideTools();
+        tools[currentToolIndex].ToggleDisplay(true);
+        tools[currentToolIndex].IsBusy = false;
+        handsAnimator.SetTrigger("SwitchTool");
     }
 
     /// <summary>
