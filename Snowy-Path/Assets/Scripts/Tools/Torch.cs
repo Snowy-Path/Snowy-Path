@@ -45,12 +45,9 @@ public class Torch : MonoBehaviour {
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
 
-        Debug.Log("HIT");
         if (other.CompareTag("Campfire")) {
-            Debug.Log("HIT CAMPFIRE");
             Campfire campfire = other.GetComponent<Campfire>();
             if (campfire && !campfire.IsFireActive) {
-                Debug.Log("START CAMPFIRE");
                 campfire.IgniteFire();
             }
         }
