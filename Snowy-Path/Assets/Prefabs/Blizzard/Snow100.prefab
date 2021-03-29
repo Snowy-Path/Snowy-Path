@@ -67,7 +67,7 @@ VisualEffect:
       - m_Value: {x: 250.22046, y: 0, z: -61.84558}
         m_Name: SpawningAABox_center
         m_Overridden: 1
-      - m_Value: {x: 15, y: -1, z: 3}
+      - m_Value: {x: 25, y: -1.5, z: 3}
         m_Name: MaxWind
         m_Overridden: 1
       - m_Value: {x: 520.57776, y: 36.73083, z: 124.612915}
@@ -76,7 +76,7 @@ VisualEffect:
       - m_Value: {x: 259.78888, y: -17.865416, z: -61.799347}
         m_Name: SeeingBounds_center
         m_Overridden: 1
-      - m_Value: {x: 10, y: -3, z: 1}
+      - m_Value: {x: 20, y: -6, z: 1}
         m_Name: MinWind
         m_Overridden: 1
     m_Vector4f:
@@ -88,9 +88,66 @@ VisualEffect:
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1.2018293
+            inSlope: -0.11555529
+            outSlope: -0.11555529
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 1.086274
+            inSlope: -0.11555529
+            outSlope: -0.11555529
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_Name: SizeOverLife
+        m_Overridden: 1
     m_Gradient:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          key0: {r: 1, g: 1, b: 1, a: 0}
+          key1: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}
+          key2: {r: 0, g: 0, b: 0, a: 0.8}
+          key3: {r: 0, g: 0, b: 0, a: 0}
+          key4: {r: 0, g: 0, b: 0, a: 0}
+          key5: {r: 0, g: 0, b: 0, a: 0}
+          key6: {r: 0, g: 0, b: 0, a: 0}
+          key7: {r: 0, g: 0, b: 0, a: 0}
+          ctime0: 0
+          ctime1: 65535
+          ctime2: 0
+          ctime3: 0
+          ctime4: 0
+          ctime5: 0
+          ctime6: 0
+          ctime7: 0
+          atime0: 0
+          atime1: 3084
+          atime2: 60331
+          atime3: 65535
+          atime4: 0
+          atime5: 0
+          atime6: 0
+          atime7: 0
+          m_Mode: 0
+          m_NumColorKeys: 2
+          m_NumAlphaKeys: 4
+        m_Name: ColorOverLife
+        m_Overridden: 1
     m_NamedObject:
       m_Array: []
     m_Bool:
@@ -221,11 +278,17 @@ VisualEffect:
       - m_Value: {x: 0, y: -18.86184, z: -45.574814}
         m_Name: SpawningAABox_center
         m_Overridden: 1
-      - m_Value: {x: 500.50824, y: 49.08221, z: 96.30249}
+      - m_Value: {x: 600, y: 60, z: 120}
         m_Name: SeeingBounds_size
         m_Overridden: 1
       - m_Value: {x: 249.75412, y: -24.021494, z: -47.651245}
         m_Name: SeeingBounds_center
+        m_Overridden: 1
+      - m_Value: {x: 20, y: 0, z: 0}
+        m_Name: MinWind
+        m_Overridden: 1
+      - m_Value: {x: 25, y: 0, z: 0}
+        m_Name: MaxWind
         m_Overridden: 1
     m_Vector4f:
       m_Array: []
@@ -238,7 +301,38 @@ VisualEffect:
     m_AnimationCurve:
       m_Array: []
     m_Gradient:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          key0: {r: 0.16460484, g: 0.254717, b: 0.24870951, a: 0}
+          key1: {r: 0.29659134, g: 0.39111787, b: 0.4056604, a: 1}
+          key2: {r: 0, g: 0, b: 0, a: 1}
+          key3: {r: 0, g: 0, b: 0, a: 0}
+          key4: {r: 0, g: 0, b: 0, a: 0}
+          key5: {r: 0, g: 0, b: 0, a: 0}
+          key6: {r: 0, g: 0, b: 0, a: 0}
+          key7: {r: 0, g: 0, b: 0, a: 0}
+          ctime0: 0
+          ctime1: 65535
+          ctime2: 0
+          ctime3: 0
+          ctime4: 0
+          ctime5: 0
+          ctime6: 0
+          ctime7: 0
+          atime0: 0
+          atime1: 1928
+          atime2: 60909
+          atime3: 65535
+          atime4: 65535
+          atime5: 0
+          atime6: 0
+          atime7: 0
+          m_Mode: 0
+          m_NumColorKeys: 2
+          m_NumAlphaKeys: 4
+        m_Name: ColorGradientOverLife
+        m_Overridden: 1
     m_NamedObject:
       m_Array: []
     m_Bool:
