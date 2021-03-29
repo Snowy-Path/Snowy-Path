@@ -12,25 +12,41 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] Camera playerCamera;
     [SerializeField] Transform groundChecker;
     [SerializeField] float groundCheckRadius = 0.2f;
-    [SerializeField] LayerMask groundLayer;             //Temp
+    [SerializeField] LayerMask groundLayer;
     [SerializeField] float gravity = -9.81f;
+    [SerializeField] Animator handsAnimator;
 
+    [Space]
     [Header("Movement")]
     [SerializeField] float walkingSpeed = 4f;
     [SerializeField] float backwardSpeed = 2f;
     [SerializeField] float runningSpeed = 8f;
 
+    [Space]
     [Header("Sprint")]
+    [Tooltip("Max sprint duration")]
     [SerializeField] float maxSprintDuration = 6f;
     [Tooltip("Recovery rate factor -> recovery = time * sprintRoveryRate")]
     [SerializeField] float sprintRecoveryRate = 0.5f;
+    [Tooltip("Mulitplier for lateral speed when sprinting")]
+    [SerializeField] private float sprintLateralFactor = 0.5f;
 
+
+    [Space]
     [Header("Jump")]
     [SerializeField] float jumpHeight = 1.5f;
+    [SerializeField] float airSpeedFactor = 0.7f;
     [SerializeField] float airSpeedX = 3f;
     [SerializeField] float airSpeedZ = 1f;
 
+    [Space]
+    [Header("Slide")]
+    [SerializeField] float slideSpeed = 5f;
+    [SerializeField] float slideDetectorRadius = 0.3f;
+
+    [Space]
     [Header("Camera")]
+    [Tooltip("Look sensitivity")]
     [SerializeField] float lookSpeed = 1.0f;
     [Tooltip("Look limit angle up and down")]
     [SerializeField] float lookYLimit = 45.0f;
@@ -38,21 +54,19 @@ public class PlayerController : MonoBehaviour {
     //Status
     private CharacterController controller;
     private bool canMove = true;
+    private bool isSliding = false;
+    private ControllerColliderHit colliderHit;
 
     private bool isGrounded = true;
     public bool IsGrounded { get => isGrounded; }
 
+    private bool sprintCmd = false;
     private bool isRunning = false;
     public bool IsRunning { get => isRunning; }
 
     //Sprint
     private float sprintTimer = 0f;
     public float SprintTimer { get => sprintTimer; }
-
-    private float sprintRecoveryTimer = 0f;
-    public float SprintRecoveryTimer { get => sprintRecoveryTimer; }
-
-    private const float sprintTimeToRegen = 0f;
 
     //Velocity
     private float currentSpeed = 0f;
@@ -66,26 +80,68 @@ public class PlayerController : MonoBehaviour {
     private Vector3 yVelocity = Vector3.zero;
     public Vector3 YVelocity { get => yVelocity; }
 
-    private Vector3 airVelocity = Vector3.zero;
-    public Vector3 AirVelocity { get => airVelocity; }
+    public Vector3 ActualVelocity { get => controller.velocity; }
+
+    //TODO : Replace by Stat ?
+    public float SpeedFactor { get; set; }
 
     //Look
     private Vector2 lookPos = Vector2.zero;
     private float yRotation = 0f;
 
     //Parameters
-    private const float inputThreshold = 0.2f;
     private float startStepOffset;
+    private const float inputThreshold = 0.2f;
+
+    private HUD playerHud;
+
+    #region INPUTS SYSTEM EVENTS
+    public void OnMove(InputAction.CallbackContext context) {
+        UpdateInputs(context.ReadValue<Vector2>());
+    }
+
+    public void OnLook(InputAction.CallbackContext context) {
+        lookPos = context.ReadValue<Vector2>();
+    }
+
+    public void OnHoldSprint(InputAction.CallbackContext context) {
+        switch (context.phase) {
+            case InputActionPhase.Started:
+                if (sprintTimer <= 0)
+                    sprintCmd = true;
+                break;
+            case InputActionPhase.Canceled:
+                sprintCmd = false;
+                break;
+        }
+    }
+
+    public void OnToggleSprint(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            if (sprintTimer <= 0)
+                sprintCmd = true;
+        }
+    }
+
+    public void OnJump(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            Jump();
+        }
+    }
+    #endregion
+
 
     #region MONOBEHAVIOUR METHODS
 
     void Start() {
         controller = GetComponent<CharacterController>();
+        playerHud = GetComponent<HUD>();
 
         //Lock and hide cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         startStepOffset = controller.stepOffset;
+        SpeedFactor = 1f;
     }
 
     void Update() {
@@ -100,63 +156,18 @@ public class PlayerController : MonoBehaviour {
         }
 
         //Process movement
-        UpdateVelocity();
         ApplyGravity();
+        UpdateVelocity();
+        Sliding();
         Look();
-
-        //Update stamina
-        if (isRunning && inputs.z >= inputThreshold) {
-            sprintTimer += Time.deltaTime;
-            sprintRecoveryTimer = 0.0f;
-
-            //Stop sprint if reached max sprint duration
-            if (sprintTimer >= maxSprintDuration)
-                isRunning = false;
-        }
-        else if (sprintTimer > 0) {     //If not running, start recovery
-            isRunning = false;
-
-            if (sprintRecoveryTimer >= sprintTimeToRegen) {
-                sprintTimer = Mathf.Clamp(sprintTimer - (sprintRecoveryRate * Time.deltaTime), 0.0f, maxSprintDuration);
-            }
-            else
-                sprintRecoveryTimer += Time.deltaTime;
-        }
-
-
-        #region DEBUG
-        Keyboard keyboard = Keyboard.current;
-        if (keyboard.kKey.wasPressedThisFrame) {
-            AlterateSpeed(0.5f);
-        }
-        if (keyboard.jKey.wasPressedThisFrame) {
-            AlterateSpeed(1f);
-        }
-        //if (keyboard.wKey.wasPressedThisFrame) {
-        //    isMoving = true;
-        //    starPos = transform.position;
-        //}
-        //else if(keyboard.wKey.wasReleasedThisFrame) {
-        //    float dist = (transform.position - starPos).magnitude;
-        //    float speed = dist / moveTestTimer;
-        //    float factor = speed / runningSpeed;
-        //    Debug.Log($"Dist={dist}  Time={moveTestTimer}  Speed={speed}  CurrentSpeed={currentSpeed}  Factor={factor}");
-
-        //    isMoving = false;
-        //    moveTestTimer = 0;
-        //}
-
-        //if(isMoving) {
-        //    moveTestTimer += Time.deltaTime;
-        //}
-        #endregion
+        Sprint();
+        handsAnimator.SetBool("Grounded", isGrounded);
 
         //Move
         if (canMove) {
-            controller.Move(xzVelocity * speedFactor * Time.deltaTime);
-            if (!isGrounded) {
-                controller.Move(airVelocity * Time.deltaTime);
-            }
+            controller.Move(xzVelocity * SpeedFactor * Time.deltaTime);
+            if (!isSliding && IsGrounded)
+                handsAnimator.SetFloat("Speed", (xzVelocity.magnitude * SpeedFactor) / currentSpeed);
         }
         controller.Move(yVelocity * Time.deltaTime);
     }
@@ -168,61 +179,15 @@ public class PlayerController : MonoBehaviour {
     //bool isMoving = false;
     #endregion
 
-    #region INPUTS SYSTEM EVENTS
-    public void OnMove(InputAction.CallbackContext context) {
-        UpdateInputs(context.ReadValue<Vector2>());
-    }
-
-    public void OnLook(InputAction.CallbackContext context) {
-        lookPos = context.ReadValue<Vector2>();
-    }
-
-    public void OnHoldSprint(InputAction.CallbackContext context) {
-        switch (context.phase) {
-            case InputActionPhase.Started:
-                ToggleRun(true);
-                break;
-            case InputActionPhase.Canceled:
-                ToggleRun(false);
-                break;
-        }
-        if (context.phase == InputActionPhase.Performed) {
-            ToggleRun(true);
-        }
-    }
-
-    public void OnToggleSprint(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            ToggleRun(!isRunning);
-        }
-    }
-
-    public void OnJump(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            Jump();
-        }
-    }
-    #endregion
-
-    #region PUBLIC METHODS
-    //TODO : Replace by Stat ?
-    private float speedFactor = 1f;
-
-    public void AlterateSpeed(float factor) {
-        speedFactor = factor;
-    }
-    #endregion
-
     #region PRIVATE METHODS
     private void UpdateVelocity() {
 
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
-
         //Check for speed change if player is on ground
         if (isGrounded) {
-            if (isRunning && inputs.z >= inputThreshold) {
+            if (isRunning) {
                 currentSpeed = runningSpeed;
             }
             else if (inputs.z <= -inputThreshold) {
@@ -231,18 +196,31 @@ public class PlayerController : MonoBehaviour {
             else {
                 currentSpeed = walkingSpeed;
             }
-            airVelocity = Vector3.zero;
+        }
+
+        if (isGrounded/* && !isSliding*/) { //Testing before remove
+
             //Compute x and z speed
+            Vector3 sprintInputs = inputs;
+            if (IsRunning) {
+                sprintInputs.x *= sprintLateralFactor;
+                sprintInputs.Normalize();
+            }
+            float zSpeed = sprintInputs.z * currentSpeed;
+            float xSpeed = sprintInputs.x * currentSpeed;
+            xzVelocity = Vector3.ClampMagnitude((forward * zSpeed) + (right * xSpeed), currentSpeed);
+        }
+        else if (isSliding) {       //If is not grounded and is on slope
             float zSpeed = inputs.z * currentSpeed;
             float xSpeed = inputs.x * currentSpeed;
-            xzVelocity = (forward * zSpeed) + (right * xSpeed);
+            xzVelocity = Vector3.ClampMagnitude((forward * zSpeed) + (right * xSpeed), currentSpeed * 0.5f);
         }
         else {
             float xSpeed = inputs.x * airSpeedX;
             float zSpeed = inputs.z * airSpeedZ;
-            airVelocity = ((forward * zSpeed) + (right * xSpeed));
+            Vector3 airVelocity = ((forward * zSpeed) + (right * xSpeed));
+            xzVelocity = Vector3.ClampMagnitude(Vector3.Lerp(xzVelocity, xzVelocity + airVelocity, 0.1f), currentSpeed * airSpeedFactor);
         }
-
     }
 
     private void UpdateInputs(Vector2 contextInputs) {
@@ -253,35 +231,87 @@ public class PlayerController : MonoBehaviour {
 
     private void ApplyGravity() {
         //Reduce gravity if grounded
-        if (isGrounded && yVelocity.y < 0)
+        if ((isGrounded && yVelocity.y < 0) || isSliding)
             yVelocity.y = -2f;
-
-        //Apply gravity
-        yVelocity.y += gravity * Time.deltaTime;
+        else
+            //Apply gravity
+            yVelocity.y += gravity * Time.deltaTime;
     }
 
     private void Jump() {
-        if (isGrounded) {
+        if (isGrounded && !isSliding) {
             yVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
     }
 
-    private void ToggleRun(bool run) {
-        if (sprintTimer <= 0) {
-            isRunning = run;
+    private void Sprint() {
+
+        //canStartSprint = isGrounded && sprintTimer <= 0;
+
+        isRunning = sprintCmd && sprintTimer <= maxSprintDuration && inputs.z >= inputThreshold;
+
+        //Stop sprint if timer reached max sprint duration
+        if (sprintTimer >= maxSprintDuration)
+            sprintCmd = false;
+
+        //Update stamina
+        if (isRunning && inputs.z >= inputThreshold) {
+            sprintTimer += Time.deltaTime;
         }
-        else
-            isRunning = false;
+        else if (inputs.z < inputThreshold) { //if is not moving forward (and not running)
+            sprintTimer = Mathf.Clamp(sprintTimer - (sprintRecoveryRate * Time.deltaTime), 0.0f, maxSprintDuration);
+        }
+        else {
+            sprintCmd = false;
+            sprintTimer = Mathf.Clamp(sprintTimer - (sprintRecoveryRate * Time.deltaTime), 0.0f, maxSprintDuration);
+        }
+
+        //Update animator
+        handsAnimator.SetBool("Run", isRunning);
+        playerHud.SetStamina(Mathf.Clamp(sprintTimer / maxSprintDuration, 0, 1));
     }
 
     private void Look() {
         if (canMove) {
-
+            //Orient camera thanks to mouse position
             yRotation += -lookPos.y * lookSpeed;
             yRotation = Mathf.Clamp(yRotation, -lookYLimit, lookYLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(yRotation, 0, 0);
 
+            //Rotate player 
             transform.rotation *= Quaternion.Euler(0, lookPos.x * lookSpeed, 0);
+        }
+    }
+
+    private void Sliding() {
+        if (colliderHit == null)
+            return;
+
+        //Get angle of slope
+        float slopeAngle = Vector3.Angle(colliderHit.normal, Vector3.up);
+        bool slideAngle = controller.slopeLimit < slopeAngle && slopeAngle <= 90;
+        //Detect if player feet touch ground
+        bool sphereCheck = Physics.CheckSphere(transform.position, slideDetectorRadius, groundLayer);
+
+        //If on ground and slope + if the Y velocity is not positive
+        if (sphereCheck && slideAngle && yVelocity.y <= 0) {
+
+            //Detect slope direction
+            var normal = colliderHit.normal;
+            normal.y = 0f;
+            var dir = Vector3.ProjectOnPlane(normal.normalized, colliderHit.normal).normalized;
+
+            //Make player slide
+            isSliding = true;
+            controller.Move(dir * slopeAngle / 90f * slideSpeed * Time.deltaTime);
+        }
+        else
+            isSliding = false;
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit) {
+        if (groundLayer == (groundLayer | (1 << hit.gameObject.layer))) {
+            colliderHit = hit;
         }
     }
     #endregion
@@ -292,10 +322,6 @@ public class PlayerController : MonoBehaviour {
         Gizmos.DrawWireSphere(groundChecker.position, groundCheckRadius);
     }
 
-    //private void OnGUI() {
-    //    GUI.Label(new Rect(50, 400, 400, 200), $"Sprint duration : {sprintTimer}");
-    //    GUI.Label(new Rect(50, 375, 400, 200), $"CurrentSpeed : {currentSpeed}");
-    //    GUI.Label(new Rect(50, 350, 400, 200), $"Velocity : {xzVelocity}");
-    //}
+
     #endregion
 }

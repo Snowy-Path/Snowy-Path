@@ -266,6 +266,9 @@ public sealed class SaveSystem : MonoBehaviour {
     /// Load the current save 
     /// </summary>
     public void Load() {
+        if (GetCurrentSave() == null) {
+            CreateNewSave(currentSave);
+        }
         // Path for the loading of the file
         string path = Application.persistentDataPath + "\\save_" + currentSave + ".dat";
         saveDataArray[currentSave] = LoadFile(path);

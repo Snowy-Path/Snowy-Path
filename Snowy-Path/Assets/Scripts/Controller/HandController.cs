@@ -17,6 +17,7 @@ public class HandController : MonoBehaviour {
         }
     }
 
+    [SerializeField] Animator handsAnimator;
     private IHandTool[] tools;
     private int currentToolIndex = -1;
 
@@ -39,8 +40,14 @@ public class HandController : MonoBehaviour {
     }
 
     public void OnSecondaryUseTool(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed)
+        if (context.phase == InputActionPhase.Performed) {
+            // NOTE: Could be used later if LDs decide that the cursor should be shown by default in when using a controller
+            // bool isKeyboard = context.control.device is Keyboard;
+            // bool isGamepad = context.control.device is Gamepad;
+            // Debug.Log($"Keyboard: {isKeyboard}, Gamepad: {isGamepad}");
+
             SecondaryUseCurrentTool();
+        }
     }
 
     public void OnScrollTool(InputAction.CallbackContext context) {
@@ -98,7 +105,7 @@ public class HandController : MonoBehaviour {
     /// <param name="indexShift">Number of tools to shift</param>
     private void SwitchTool(int indexShift) {
         //Guard : if there is no tools, return
-        if (tools.Length == 0)
+        if (tools.Length == 0 || (CurrentTool != null && CurrentTool.IsBusy))
             return;
 
         //shift the current index
@@ -114,6 +121,7 @@ public class HandController : MonoBehaviour {
 
         HideTools();
         tools[currentToolIndex].ToggleDisplay(true);
+        handsAnimator.SetTrigger("SwitchTool");
     }
 
     /// <summary>
