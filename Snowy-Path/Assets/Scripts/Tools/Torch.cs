@@ -46,9 +46,9 @@ public class Torch : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
 
         if (other.CompareTag("Campfire")) {
-            Campfire campfire = other.GetComponent<Campfire>();
-            if (campfire && !campfire.IsFireActive) {
-                campfire.IgniteFire();
+            Interactable inter = other.GetComponent<Interactable>();
+            if (inter) {
+                inter.Interact();
             }
         }
 
