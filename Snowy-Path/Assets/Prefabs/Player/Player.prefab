@@ -41,8 +41,8 @@ VisualEffect:
   m_GameObject: {fileID: 1073833152}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 0082a7f7862105e498175f1d5a151d49, type: 3}
-  m_InitialEventName: 
-  m_InitialEventNameOverriden: 1
+  m_InitialEventName: OnPlay
+  m_InitialEventNameOverriden: 0
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_PropertySheet:
@@ -52,6 +52,9 @@ VisualEffect:
       m_Array:
       - m_Value: {x: 20, y: 25}
         m_Name: Min/MaxScale
+        m_Overridden: 1
+      - m_Value: {x: 0.1, y: 0.15}
+        m_Name: Min/MaxLiftime
         m_Overridden: 1
     m_Vector3f:
       m_Array:
@@ -84,8 +87,8 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 25.358494, g: 9.957523, b: 0, a: 0}
-          key1: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+          key0: {r: 5.992157, g: 4.8627453, b: 0, a: 0}
+          key1: {r: 4, g: 3.1215687, b: 0, a: 1}
           key2: {r: 0, g: 0, b: 0, a: 0.8}
           key3: {r: 0, g: 0, b: 0, a: 0}
           key4: {r: 0, g: 0, b: 0, a: 0}
@@ -2508,11 +2511,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 44614990, guid: 19bb071bd338064448eb4c77cddf5bad, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 1.6897218e+22
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 44614990, guid: 19bb071bd338064448eb4c77cddf5bad, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 3.241e-42
       objectReference: {fileID: 0}
     - target: {fileID: 44614990, guid: 19bb071bd338064448eb4c77cddf5bad, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 1.1053e-41
+      value: 5.9e-44
       objectReference: {fileID: 0}
     - target: {fileID: 905680108, guid: 19bb071bd338064448eb4c77cddf5bad, type: 3}
       propertyPath: animator
