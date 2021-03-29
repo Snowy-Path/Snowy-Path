@@ -9,6 +9,24 @@ public class Weather : MonoBehaviour
     private Dictionary<int, WeatherZone> m_activeWeatherZones = new Dictionary<int, WeatherZone>();
     private Inventory m_inventory;
 
+    private WeatherPreset m_currentWeather;
+    public WeatherPreset CurrentWeather {
+        get { return m_currentWeather; }
+        private set {
+            //if (value.blizzardStrength != m_currentWeather.blizzardStrength) {
+            //    blizzardAnimator.SetFloat("BlizzardStrength", value.blizzardStrength);
+            //    blizzardAnimator.SetTrigger("BlizzardChanged");
+            //}
+            m_currentWeather = value;
+        }
+    }
+
+    public Animator blizzardAnimator;
+
+    private void Awake() {
+        m_currentWeather = defaultWeather;
+    }
+
     void Start() {
         m_inventory = GetComponent<Inventory>();
     }
@@ -44,6 +62,7 @@ public class Weather : MonoBehaviour
         if (other.tag == "WeatherZone") {
             var weatherZone = other.GetComponentInParent<WeatherZone>();
             m_activeWeatherZones.Add(weatherZone.GetInstanceID(), weatherZone);
+            CurrentWeather = GetCurrentWeather();
         }
     }
 
@@ -52,6 +71,7 @@ public class Weather : MonoBehaviour
         if (other.tag == "WeatherZone") {
             var weatherZone = other.GetComponentInParent<WeatherZone>();
             m_activeWeatherZones.Remove(weatherZone.GetInstanceID());
+            CurrentWeather = GetCurrentWeather();
         }
     }
 }
