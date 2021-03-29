@@ -36,7 +36,7 @@ public class Campfire : MonoBehaviour
     private float extinctionFireTimer = 0f;
 
     // Stopping timer when fire is not active
-    private bool isFireActive = false;
+    public bool IsFireActive { get; private set; }
 
     // The ID must be generated for it to be saved properly
     [ContextMenu("Generate Id")]
@@ -50,7 +50,7 @@ public class Campfire : MonoBehaviour
 
     private void Update() {
 
-        if (isFireActive) {
+        if (IsFireActive) {
             // Increase the extinction timer
             extinctionFireTimer += Time.deltaTime;
 
@@ -67,7 +67,7 @@ public class Campfire : MonoBehaviour
     /// Call every method necessary when interacting with the campfire
     /// </summary>
     public void IgniteFire() {
-        isFireActive = true;
+        IsFireActive = true;
         PlayerCampfireSave playerCampfireSave = FindObjectOfType<PlayerCampfireSave>();
         playerCampfireSave.LastCampfireId = this.id;
         heatSource.enabled = true;
@@ -79,7 +79,7 @@ public class Campfire : MonoBehaviour
     /// Call every method necessary when the campfire need to be extinguished
     /// </summary>
     internal void ExctinguishFire() {
-        isFireActive = false;
+        IsFireActive = false;
         onExtinguish.Invoke();
         heatSource.enabled = false;
     }
