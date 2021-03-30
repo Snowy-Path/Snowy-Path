@@ -20,7 +20,7 @@ public class PlayerCampfireSave : MonoBehaviour, ISaveable {
                     if (respawnTransform.gameObject.CompareTag("PlayerRespawnPoint")) {
                         CharacterController charController = GetComponent<CharacterController>();
                         charController.enabled = false;
-                        this.transform.SetPositionAndRotation(respawnTransform.position, respawnTransform.rotation);
+                        this.transform.position = respawnTransform.position;
                         charController.enabled = true;
 
                     }
