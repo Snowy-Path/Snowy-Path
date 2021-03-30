@@ -19,12 +19,21 @@ public class HandController : MonoBehaviour {
 
     [SerializeField] Animator handsAnimator;
     private IHandTool[] tools;
-    private int currentToolIndex = -1;
+    private int currentToolIndex = 0;
+    private float changeToolTimer = 0f;
+    private const float changeToolDuration = 0.5f;
 
     // Start is called before the first frame update
     void Start() {
-        tools = GetComponentsInChildren<IHandTool>();
-        SwitchTool(1);
+        tools = GetComponentsInChildren<IHandTool>(true);
+        HideTools();
+        tools[currentToolIndex].ToggleDisplay(true);
+    }
+
+    private void Update() {
+        if (changeToolTimer > 0)
+            changeToolTimer -= Time.deltaTime;
+        Debug.Log(changeToolTimer);
     }
 
     #region INPUT SYSTEM EVENTS
@@ -104,7 +113,7 @@ public class HandController : MonoBehaviour {
     /// </summary>
     /// <param name="indexShift">Number of tools to shift</param>
     private void SwitchTool(int indexShift) {
-        //Guard : if there is no tools, return
+        //Guard : if timer is not reset OR there is no tools, return
         if (tools.Length == 0 || (CurrentTool != null && CurrentTool.IsBusy))
             return;
 
@@ -137,6 +146,9 @@ public class HandController : MonoBehaviour {
     /// <param name="type">The type of tool to equip</param>
     /// <returns>Returns true if a tool was equiped, fase if not</returns>
     private bool EquipTool(EToolType type) {
+        if (handsAnimator.GetCurrentAnimatorStateInfo(0).IsName("SwitchLeftTool")) {
+            return false;
+        }
         if (!CurrentTool.IsBusy && TryGetToolIndex(type, out int index) && currentToolIndex != index) {
             currentToolIndex = index;
 
@@ -150,9 +162,10 @@ public class HandController : MonoBehaviour {
     private void ShowTool(int index) {
         //Update display
         HideTools();
-        tools[currentToolIndex].ToggleDisplay(true);
         tools[currentToolIndex].IsBusy = false;
+        tools[currentToolIndex].ToggleDisplay(true);
         handsAnimator.SetTrigger("SwitchTool");
+        changeToolTimer = changeToolDuration;
     }
 
     /// <summary>
