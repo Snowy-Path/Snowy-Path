@@ -896,7 +896,15 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: c4601585-0836-4190-80e4-ca278c1f0a64
-    m_ActionName: Map/Navigation[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+    m_ActionName: Map/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 024c3453-170f-4149-9429-001c6d304f1a
+    m_ActionName: Map/Zoom
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b46a578a-fd56-491e-82de-9586d54bc693
+    m_ActionName: Map/Remove pin[/Keyboard/delete]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: f70e5ee7-0341-4af3-b573-a8e53b5f5080
@@ -912,11 +920,11 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 8d2cfe2b-44c9-45c9-9666-a51db179ec41
-    m_ActionName: UI/Point[/Mouse/position,/Pen/position]
+    m_ActionName: UI/Point[/Mouse/position]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: cbf119ad-ecdc-4abb-bc30-b6600cfd4737
-    m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip]
+    m_ActionName: UI/Click[/Mouse/leftButton]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: fa7ee8ee-39b6-47ea-bde3-219e7fcb007d
@@ -985,7 +993,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5568b4fb0168e946a5569d289f6c21b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultWeather: {fileID: 11400000, guid: af9c75657dbd1174598c6b18ed865532, type: 2}
+  defaultWeather: {fileID: 11400000, guid: 61a8b083a0fc25f4a95f6d231729c735, type: 2}
+  blizzardAnimator: {fileID: 0}
 --- !u!114 &1900730401729707196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1387,13 +1396,16 @@ MonoBehaviour:
   groupfire: 0.001
   range: 1000
   reloadingTime: 4
-  projectileDispersion: 0
+  projectileDispersion: 10
   projectileShot: 0
   ammo: 0
+  layers:
+    serializedVersion: 2
+    m_Bits: 4609
   gunEnd: {fileID: 1435671785324202266}
-  maxAmmo: 10
+  maxAmmo: 5
   maxMagazineCapacity: 1
-  projectilePerShot: 1
+  projectilePerShot: 15
   emitter: {fileID: 4702712927437806650}
 --- !u!120 &1027967347773432188
 LineRenderer:
@@ -2560,7 +2572,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 5687
+    m_Bits: 5943
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2992,6 +3004,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 244230143274304150, guid: 9359e3f963a212b429cf852ab811165d,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 5687
+      objectReference: {fileID: 0}
     - target: {fileID: 1126682573234353864, guid: 9359e3f963a212b429cf852ab811165d,
         type: 3}
       propertyPath: m_Layer
@@ -3048,11 +3065,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 44614990, guid: 19bb071bd338064448eb4c77cddf5bad, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 272
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 44614990, guid: 19bb071bd338064448eb4c77cddf5bad, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 8.1606e-41
+      value: 2.2443e-41
       objectReference: {fileID: 0}
     - target: {fileID: 905680108, guid: 19bb071bd338064448eb4c77cddf5bad, type: 3}
       propertyPath: animator

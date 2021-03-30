@@ -310,7 +310,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit) {
-        if (groundLayer.value == 1 << hit.gameObject.layer) {
+        if (groundLayer == (groundLayer | (1 << hit.gameObject.layer))) {
             colliderHit = hit;
         }
     }
