@@ -475,6 +475,7 @@ VFXRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -530,6 +531,18 @@ VisualEffect:
       - m_Value: {x: 0, y: 0, z: 0}
         m_Name: MaCouille_center
         m_Overridden: 0
+      - m_Value: {x: -0, y: 0, z: 48.99135}
+        m_Name: New OrientedBox_angles
+        m_Overridden: 1
+      - m_Value: {x: 0, y: 1.5642748, z: 0}
+        m_Name: New OrientedBox_center
+        m_Overridden: 1
+      - m_Value: {x: 5, y: 0.2, z: 5}
+        m_Name: SpawningAABox_size
+        m_Overridden: 1
+      - m_Value: {x: 0, y: 6.472198, z: 0}
+        m_Name: SpawningAABox_center
+        m_Overridden: 1
     m_Vector4f:
       m_Array: []
     m_Uint:
@@ -539,7 +552,33 @@ VisualEffect:
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 100
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 100
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_Name: New AnimationCurve
+        m_Overridden: 1
     m_Gradient:
       m_Array: []
     m_NamedObject:
@@ -554,7 +593,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2044932530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -48.79, y: 10.21, z: 74.6}
+  m_LocalPosition: {x: -48.79, y: 5.93, z: 74.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
