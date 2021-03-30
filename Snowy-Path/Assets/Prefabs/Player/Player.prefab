@@ -471,7 +471,7 @@ MonoBehaviour:
   groundCheckRadius: 0.25
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 513
   gravity: -18
   handsAnimator: {fileID: 7900053022104568126}
   walkingSpeed: 5
@@ -856,7 +856,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5568b4fb0168e946a5569d289f6c21b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultWeather: {fileID: 11400000, guid: af9c75657dbd1174598c6b18ed865532, type: 2}
+  defaultWeather: {fileID: 11400000, guid: 61a8b083a0fc25f4a95f6d231729c735, type: 2}
+  blizzardAnimator: {fileID: 0}
 --- !u!114 &1900730401729707196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1166,13 +1167,13 @@ MonoBehaviour:
   groupfire: 0.001
   range: 1000
   reloadingTime: 4
-  projectileDispersion: 0
+  projectileDispersion: 10
   projectileShot: 0
   ammo: 0
   gunEnd: {fileID: 1435671785324202266}
-  maxAmmo: 10
+  maxAmmo: 5
   maxMagazineCapacity: 1
-  projectilePerShot: 1
+  projectilePerShot: 15
   emitter: {fileID: 4702712927437806650}
 --- !u!120 &1027967347773432188
 LineRenderer:
@@ -2664,6 +2665,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 244230143274304150, guid: 9359e3f963a212b429cf852ab811165d,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 5687
+      objectReference: {fileID: 0}
     - target: {fileID: 1126682573234353864, guid: 9359e3f963a212b429cf852ab811165d,
         type: 3}
       propertyPath: m_Layer
@@ -2720,11 +2726,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 44614990, guid: 19bb071bd338064448eb4c77cddf5bad, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 272
+      value: 0.00000010011718
       objectReference: {fileID: 0}
     - target: {fileID: 44614990, guid: 19bb071bd338064448eb4c77cddf5bad, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 8.1606e-41
+      value: 4.9415e-41
       objectReference: {fileID: 0}
     - target: {fileID: 905680108, guid: 19bb071bd338064448eb4c77cddf5bad, type: 3}
       propertyPath: animator
