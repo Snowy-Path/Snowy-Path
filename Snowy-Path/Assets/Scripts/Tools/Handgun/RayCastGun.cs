@@ -15,6 +15,7 @@ public class RayCastGun : MonoBehaviour, IHandTool {
     public int ammo;
     [SerializeField] private int projectileShot;
     [SerializeField] Animator animator;
+    public LayerMask layers;
 
     public Transform gunEnd; //Reference to the gun end object, marking the muzzle location of the gun   
     private Camera fpsCam; //Reference to camera                                                
@@ -120,12 +121,12 @@ public class RayCastGun : MonoBehaviour, IHandTool {
 
 
         //If the ray hit something
-        if (Physics.Raycast(rayOrigin, forwardVector, out hit, range)) {
+        if (Physics.Raycast(rayOrigin, forwardVector, out hit, range, layers))
+        {
             //Set the corresponding endline point
             laserLine.SetPosition(1, hit.point);
             if (hit.transform.CompareTag("Ennemy")) {
                 EnnemyHashSet.Add(hit.transform.gameObject);
-
             }
         }
         else {

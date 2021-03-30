@@ -55,10 +55,10 @@ public class LevelLoader : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            ShowScene();
-        }
+        //if (other.CompareTag("Player"))
+        //{
+        //    ShowScene();
+        //}
     }
 
     private void OnTriggerExit(Collider other)
