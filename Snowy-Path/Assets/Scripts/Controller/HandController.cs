@@ -20,8 +20,6 @@ public class HandController : MonoBehaviour {
     [SerializeField] Animator handsAnimator;
     private IHandTool[] tools;
     private int currentToolIndex = 0;
-    private float changeToolTimer = 0f;
-    private const float changeToolDuration = 0.5f;
 
     // Start is called before the first frame update
     void Start() {
@@ -30,11 +28,6 @@ public class HandController : MonoBehaviour {
         tools[currentToolIndex].ToggleDisplay(true);
     }
 
-    private void Update() {
-        if (changeToolTimer > 0)
-            changeToolTimer -= Time.deltaTime;
-        Debug.Log(changeToolTimer);
-    }
 
     #region INPUT SYSTEM EVENTS
     public void OnPrimaryUseTool(InputAction.CallbackContext context) {
@@ -165,7 +158,6 @@ public class HandController : MonoBehaviour {
         tools[currentToolIndex].IsBusy = false;
         tools[currentToolIndex].ToggleDisplay(true);
         handsAnimator.SetTrigger("SwitchTool");
-        changeToolTimer = changeToolDuration;
     }
 
     /// <summary>
