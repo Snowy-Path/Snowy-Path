@@ -4645,9 +4645,9 @@ ParticleSystemRenderer:
   m_ApplyActiveColorSpace: 0
   m_AllowRoll: 1
   m_VertexStreams: 0001030405
-  m_Mesh: {fileID: 4300006, guid: a7ca52bcb825d7044a8afdfd569507c9, type: 3}
-  m_Mesh1: {fileID: 0}
-  m_Mesh2: {fileID: 0}
+  m_Mesh: {fileID: 6318912540383010555, guid: a7ca52bcb825d7044a8afdfd569507c9, type: 3}
+  m_Mesh1: {fileID: 3628858373927737303, guid: a7ca52bcb825d7044a8afdfd569507c9, type: 3}
+  m_Mesh2: {fileID: 6014231240206619330, guid: a7ca52bcb825d7044a8afdfd569507c9, type: 3}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
 --- !u!1 &1820680284854294
@@ -4938,7 +4938,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 30
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5203,8 +5203,8 @@ ParticleSystem:
     startRotation:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0
-      minScalar: 0
+      scalar: -1.5707963
+      minScalar: -1.5707963
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -8383,7 +8383,7 @@ ParticleSystem:
         m_RotationOrder: 4
     minKillSpeed: 0
     maxKillSpeed: 10000
-    radiusScale: 0.2
+    radiusScale: 0.0001
     collidesWith:
       serializedVersion: 2
       m_Bits: 2561
@@ -9413,7 +9413,7 @@ ParticleSystemRenderer:
   m_ApplyActiveColorSpace: 0
   m_AllowRoll: 1
   m_VertexStreams: 0001030405
-  m_Mesh: {fileID: 4300000, guid: 735d1d1e5a1d1934589aa44da6a7ea75, type: 3}
+  m_Mesh: {fileID: -1000119697767725739, guid: 009a5ee50b8d5eb4c8deba063302e1bc, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -9430,7 +9430,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a68cb6c78295494e97f5ffd622d666e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  attackDamage: 1
+  temperaturePercentageDamage: 0.1
+  clothPercentageDamage: 0
 --- !u!1 &1877868098342330
 GameObject:
   m_ObjectHideFlags: 0
