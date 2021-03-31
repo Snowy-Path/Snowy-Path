@@ -4,8 +4,7 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class RayCastGun : MonoBehaviour, IHandTool
-{
+public class RayCastGun : MonoBehaviour, IHandTool {
     public static bool endEnnemySet = false;
     public int damageDealt = 0;
     public float fireRate = 0.25f;
@@ -13,19 +12,16 @@ public class RayCastGun : MonoBehaviour, IHandTool
     public float range = 50f;
     public float reloadingTime;
     public float projectileDispersion;
-    [SerializeField]
-    private int projectileShot;
     public int ammo;
-
+    [SerializeField] private int projectileShot;
+    [SerializeField] Animator animator;
     public LayerMask layers;
-
 
     public Transform gunEnd; //Reference to the gun end object, marking the muzzle location of the gun   
     private Camera fpsCam; //Reference to camera                                                
     private WaitForSeconds shotDuration = new WaitForSeconds(0.07f);// Determines how long time line will remain visible    
     private LineRenderer laserLine; //Visual effect                                        
     private float nextFire; //time between shooting
-    private float timeBetweenShooting = 0.07f;
     private Vector3 forwardVector;
     private bool reloading, readyToShoot;
     private HashSet<GameObject> EnnemyHashSet = new HashSet<GameObject>();
@@ -36,14 +32,14 @@ public class RayCastGun : MonoBehaviour, IHandTool
     public int maxMagazineCapacity = 1;
     public int projectilePerShot;
 
+
     // AI script for the hearing sense
     public HearingSenseEmitter emitter;
 
     public EToolType ToolType => EToolType.Pistol;
     public bool IsBusy { get; set; }
 
-    void Start()
-    {
+    void Start() {
         //Get references of components linerenderer and camera
         laserLine = GetComponent<LineRenderer>();
         fpsCam = GetComponentInParent<Camera>();
@@ -51,14 +47,16 @@ public class RayCastGun : MonoBehaviour, IHandTool
         //Set ammo at full capacity
         ammo = maxMagazineCapacity;
         readyToShoot = true;
+
+        //Init reload Time
+        animator.SetFloat("ReloadTime", 1 / reloadingTime);
     }
 
     /// <summary>
     /// Visual effect of a laser line
     /// </summary>
     /// <returns></returns>
-    private IEnumerator ShotEffect()
-    {
+    private IEnumerator ShotEffect() {
         //Enable laserline effect during shotDuration
         laserLine.enabled = true;
         yield return shotDuration;
@@ -69,16 +67,14 @@ public class RayCastGun : MonoBehaviour, IHandTool
     /// Apply dammage on every ennemy hit
     /// </summary>
     /// <returns></returns>
-    private IEnumerator DammageApply()
-    {
+    private IEnumerator DammageApply() {
         //waiting for every projectile to be cast
         float waitingtime = (projectilePerShot - 1) * groupfire;
         yield return new WaitForSeconds(waitingtime);
 
         //copy the hashset of ennemy hit
         HashSet<GameObject> EnnemySet = EnnemyHashSet;
-        foreach (var valu in EnnemySet)
-        {
+        foreach (var valu in EnnemySet) {
             //apply dammage
             valu.GetComponent<IEnnemyController>().Hit(EToolType.Pistol, damageDealt);
         }
@@ -91,12 +87,10 @@ public class RayCastGun : MonoBehaviour, IHandTool
     /// <summary>
     /// Shooting method using Raycast, invoked as many times as there are projectiles per shot
     /// </summary>
-    private void Shot()
-    {
+    private void Shot() {
 
         //Spread effective if several projectiles
-        if (projectileShot > 1)
-        {
+        if (projectileShot > 1) {
 
             //calculate random angle within unity circle for dispersion
             forwardVector = Vector3.forward;
@@ -107,8 +101,7 @@ public class RayCastGun : MonoBehaviour, IHandTool
             forwardVector = fpsCam.transform.rotation * forwardVector;
         }
 
-        else
-        {
+        else {
             forwardVector = fpsCam.transform.forward;
 
         }
@@ -132,13 +125,11 @@ public class RayCastGun : MonoBehaviour, IHandTool
         {
             //Set the corresponding endline point
             laserLine.SetPosition(1, hit.point);
-            if (hit.transform.CompareTag("Ennemy"))
-            {
+            if (hit.transform.CompareTag("Ennemy")) {
                 EnnemyHashSet.Add(hit.transform.gameObject);
             }
         }
-        else
-        {
+        else {
             //If we did not hit anything, set the end of the line to a position directly in front of the camera at the distance of weaponRange
             laserLine.SetPosition(1, rayOrigin + ((forwardVector) * range));
         }
@@ -146,12 +137,11 @@ public class RayCastGun : MonoBehaviour, IHandTool
         //Counting projectiles
         projectileShot--;
         //Set player reaady to shot during time between shooting
-        Invoke("ResetShot", timeBetweenShooting);
+        readyToShoot = true;
 
 
         //Shoot again if multiple projectiles
-        if (projectileShot > 1 && maxAmmo > 0)
-        {
+        if (projectileShot > 1 && maxAmmo > 0) {
             Invoke("Shot", groupfire);
 
         }
@@ -167,67 +157,59 @@ public class RayCastGun : MonoBehaviour, IHandTool
     /// 
 
     public void StartPrimaryUse() {
-        if (Time.time > nextFire && !reloading && ammo > 0 && readyToShoot) {
-            emitter.Emit(); //Emit sound to allow ennemies to detect the point of origin
-            projectileShot = projectilePerShot;
-            Shot();
-            StartCoroutine("DammageApply");
-            ammo--;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
+            if (Time.time > nextFire && !reloading && ammo > 0 && readyToShoot) {
+                emitter.Emit(); //Emit sound to allow ennemies to detect the point of origin
+                projectileShot = projectilePerShot;
+                Shot();
+                StartCoroutine("DammageApply");
+                ammo--;
 
-            if (maxAmmo > 0) {
-                //Start reloading method
-                SecondaryInteraction();
+                if (maxAmmo > 0) {
+                    //Start reloading method
+                    SecondaryInteraction();
+                }
             }
         }
     }
 
     public void CancelPrimaryUse() {
         //Cancel is not possible on pistol
-
-
     }
 
     public void SecondaryUse() {
-        Debug.Log("Nothing");
-
+        Reload();
     }
 
     public void ToggleDisplay(bool display) {
         gameObject.SetActive(display);
     }
 
-    private void SecondaryInteraction()
-    {
-        if (maxAmmo >= 0)
-        {
+    private void SecondaryInteraction() {
+        Reload();
+    }
+
+    private void Reload() {
+        if (maxAmmo >= 0 && currentMagazineCapacity < maxMagazineCapacity) {
             reloading = true;
+            animator.SetTrigger("Reload");
+
             //Reload weapon during reloadingTime
+            IsBusy = true;
             Invoke("ReloadFinished", reloadingTime);
             currentMagazineCapacity = maxMagazineCapacity - ammo;
         }
-
-    }
-
-    /// <summary>
-    /// Set Player ready to shot again
-    /// </summary>
-    private void ResetShot()
-    {
-        readyToShoot = true;
-
     }
 
     /// <summary>
     /// Reload the weapon at max magazine capacity if enough max ammo
     /// </summary>
-    private void ReloadFinished()
-    {
+    private void ReloadFinished() {
         //Calculate cuurentMagazineCapacity
         currentMagazineCapacity = maxMagazineCapacity - ammo;
-
+        IsBusy = false;
         //If the player have more ammo than the size of magazine
-        if (maxAmmo >= maxMagazineCapacity)
-        {
+        if (maxAmmo >= maxMagazineCapacity) {
             //Full reload
             maxAmmo -= currentMagazineCapacity;
             ammo = maxMagazineCapacity;
@@ -235,18 +217,15 @@ public class RayCastGun : MonoBehaviour, IHandTool
             currentMagazineCapacity = 0;
         }
 
-        if (maxAmmo < maxMagazineCapacity)
-        {
+        if (maxAmmo < maxMagazineCapacity) {
             //Else, it depends on the current magazine capacity
-            if (maxAmmo > currentMagazineCapacity)
-            {
+            if (maxAmmo > currentMagazineCapacity) {
                 ammo = maxMagazineCapacity;
                 maxAmmo -= currentMagazineCapacity;
                 reloading = false;
             }
 
-            else
-            {
+            else {
                 ammo = currentMagazineCapacity + maxAmmo;
                 maxAmmo = 0;
                 reloading = false;
