@@ -144,6 +144,7 @@ public class PlayerController : MonoBehaviour {
         SpeedFactor = 1f;
     }
 
+    private float speed = 0;
     void Update() {
 
         //Update ground status
@@ -167,7 +168,8 @@ public class PlayerController : MonoBehaviour {
         if (canMove) {
             controller.Move(xzVelocity * SpeedFactor * Time.deltaTime);
             if (!isSliding && IsGrounded)
-                handsAnimator.SetFloat("Speed", (xzVelocity.magnitude * SpeedFactor) / currentSpeed);
+                speed = Mathf.Lerp(speed, (xzVelocity.magnitude * SpeedFactor) / currentSpeed, 0.1f);
+            handsAnimator.SetFloat("Speed", speed);
         }
         controller.Move(yVelocity * Time.deltaTime);
     }
@@ -310,7 +312,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit) {
-        if (groundLayer.value == 1 << hit.gameObject.layer) {
+        if (groundLayer == (groundLayer | (1 << hit.gameObject.layer))) {
             colliderHit = hit;
         }
     }
