@@ -58,7 +58,45 @@ public class HQOptionsMenu : MonoBehaviour
     public void SetAntiAliasing(int aaIndex)
     {
         QualitySettings.antiAliasing = aaIndex;
+        aaDropdown.value = 6;
 
+    }
+
+
+    public void SetQuality(int qualityIndex)
+    {
+        if (qualityIndex != 6) // if the user is not using 
+                               //any of the presets
+            QualitySettings.SetQualityLevel(qualityIndex);
+        switch (qualityIndex)
+        {
+            case 0: // quality level - very low
+                //textureDropdown.value = 3;
+                aaDropdown.value = 0;
+                break;
+            case 1: // quality level - low
+                //textureDropdown.value = 2;
+                aaDropdown.value = 0;
+                break;
+            case 2: // quality level - medium
+                //textureDropdown.value = 1;
+                aaDropdown.value = 0;
+                break;
+            case 3: // quality level - high
+                //textureDropdown.value = 0;
+                aaDropdown.value = 0;
+                break;
+            case 4: // quality level - very high
+               // textureDropdown.value = 0;
+                aaDropdown.value = 1;
+                break;
+            case 5: // quality level - ultra
+                //textureDropdown.value = 0;
+                aaDropdown.value = 2;
+                break;
+        }
+
+        //qualityDropdown.value = qualityIndex;
     }
 
     public void SaveSettings()
@@ -97,69 +135,6 @@ public class HQOptionsMenu : MonoBehaviour
 
 
 
-  //  void OnGUI()
-  //  {
-  //      /*keyEvent dictates what key our user presses
-		// * bt using Event.current to detect the current
-		// * event
-		// */
-  //      keyEvent = Event.current;
-
-  //      //Executes if a button gets pressed and
-  //      //the user presses a key
-  //      if (keyEvent.isKey && waitingForKey)
-  //      {
-  //          newKey = keyEvent.keyCode; //Assigns newKey to the key user presses
-  //          waitingForKey = false;
-  //      }
-  //  }
-
-  //  /*Buttons cannot call on Coroutines via OnClick().
-	 //* Instead, we have it call StartAssignment, which will
-	 //* call a coroutine in this script instead, only if we
-	 //* are not already waiting for a key to be pressed.
-	 //*/
-  //  public void StartAssignment(string keyName)
-  //  {
-  //      if (!waitingForKey)
-  //          StartCoroutine(AssignKey(keyName));
-  //  }
-
-
-  //  IEnumerator WaitForKey()
-  //  {
-  //      while (!keyEvent.isKey)
-  //          yield return null;
-  //  }
-
-
-  //  public IEnumerator AssignKey(string keyName)
-  //  {
-  //      waitingForKey = true;
-
-  //      yield return WaitForKey(); //Executes endlessly until user presses a key
-
-  //      switch (keyName)
-  //      {
-  //          case "forward":
-
-  //              break;
-  //          case "backward":
-
-  //              break;
-  //          case "left":
-
-  //              break;
-  //          case "right":
-
-  //              break;
-  //          case "jump":
-
-  //              break;
-  //      }
-
-  //      yield return null;
-  // }
 }
 
 

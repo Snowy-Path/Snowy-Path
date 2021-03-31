@@ -58,6 +58,6 @@ public class HQBindingDisplay : MonoBehaviour
         startRebindObject.SetActive(true);
         waitingForInputObjct.SetActive(false);
 
-        playerInput.SwitchCurrentActionMap("Rebindingkeys");
+        playerInput.SwitchCurrentActionMap("Gameplay");
     }
 }
