@@ -325,7 +325,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &142772432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,9 +531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1361865ce66198945b3554364aa45f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5
   weatherPreset: {fileID: 11400000, guid: f6a01f2a4d1e63747b123671a3d6e801, type: 2}
-  showDebug: 1
 --- !u!23 &426480652
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -688,7 +686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1092933011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -940,6 +938,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1658193652}
   m_CullTransparentMesh: 0
+--- !u!95 &1928264595 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9102667168747834165, guid: 09b0ed7b7c900134fb0d83e546b913fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1940515090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1940515090
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -947,6 +951,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1244149388, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
+      propertyPath: handsAnimator
+      value: 
+      objectReference: {fileID: 1928264595}
     - target: {fileID: 1648512249, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
       propertyPath: m_ActionEvents.Array.size
       value: 32
@@ -1104,6 +1112,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 18293541002357363, guid: 09b0ed7b7c900134fb0d83e546b913fd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 18293541002357375, guid: 09b0ed7b7c900134fb0d83e546b913fd,
         type: 3}
       propertyPath: m_RootOrder
@@ -1170,6 +1183,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8320657801043981160, guid: 09b0ed7b7c900134fb0d83e546b913fd,
+        type: 3}
+      propertyPath: handsAnimator
+      value: 
+      objectReference: {fileID: 1928264595}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09b0ed7b7c900134fb0d83e546b913fd, type: 3}
 --- !u!1 &1940515091 stripped
@@ -1264,6 +1282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultWeather: {fileID: 11400000, guid: af9c75657dbd1174598c6b18ed865532, type: 2}
+  blizzardAnimator: {fileID: 0}
 --- !u!114 &1940515099 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 831542377209022810, guid: 09b0ed7b7c900134fb0d83e546b913fd,

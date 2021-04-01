@@ -34,6 +34,7 @@ public class MapPinPanel : MonoBehaviour
             RectTransform rectTransform = child.AddComponent<RectTransform>();
             rectTransform.localScale = Vector3.one;
             rectTransform.localPosition = Vector3.zero;
+            rectTransform.localRotation = Quaternion.identity;
             rectTransform.anchorMin = new Vector2(0f, 1f);
             rectTransform.anchorMax = new Vector2(0f, 1f);
             rectTransform.pivot = new Vector2(0f, 1f);
@@ -66,6 +67,7 @@ public class MapPinPanel : MonoBehaviour
         RectTransform rectTransform = cursor.AddComponent<RectTransform>();
         rectTransform.localScale = Vector3.one / 2f;
         rectTransform.localPosition = Vector3.zero;
+        rectTransform.localRotation = Quaternion.identity;
         rectTransform.anchorMin = new Vector2(0f, 1f);
         rectTransform.anchorMax = new Vector2(0f, 1f);
         rectTransform.pivot = new Vector2(0f, 1f);
