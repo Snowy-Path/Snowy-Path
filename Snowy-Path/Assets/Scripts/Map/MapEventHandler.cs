@@ -20,6 +20,7 @@ public class MapEventHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHa
 
         m_mapUI.inputActionAsset.FindAction("Map/Confirm").performed += OnConfirm;
         m_mapUI.inputActionAsset.FindAction("Map/Cancel").performed += OnCancel;
+        m_mapUI.inputActionAsset.FindAction("Map/Exit").performed += OnExit;
         m_mapUI.inputActionAsset.FindAction("Map/Remove pin").performed += (InputAction.CallbackContext c) => m_mapPinManager.PinRemove();
         m_mapUI.inputActionAsset.FindAction("Map/Navigate").performed += OnNavigate;
         m_mapUI.inputActionAsset.FindAction("Map/Navigate").canceled += OnNavigate;
@@ -46,8 +47,10 @@ public class MapEventHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHa
 
     public void OnPointerClick(PointerEventData data)
     {
-        if (!m_isDragging)
-            m_mapPinManager.PlacePin(data.position);
+        if (data.button == PointerEventData.InputButton.Left) {
+            if (!m_isDragging)
+                m_mapPinManager.PlacePin(data.position);
+        }
     }
 
     public void OnBeginDrag(PointerEventData data)
@@ -86,6 +89,12 @@ public class MapEventHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHa
             m_mapPinManager.PinCancel(); // Close pin panel
         else
             m_mapUI.CloseFullscreenMap();
+    }
+
+    void OnExit(InputAction.CallbackContext context) {
+        if (m_mapUI.IsInEditMode)
+            m_mapPinManager.PinCancel();
+        m_mapUI.CloseFullscreenMap();
     }
 
     void OnConfirm(InputAction.CallbackContext context)
