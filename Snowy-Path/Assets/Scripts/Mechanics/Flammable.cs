@@ -28,20 +28,19 @@ public class Flammable : MonoBehaviour {
     }
 
     IEnumerator StartFire() {
-        ParticleSystem[] particles = new ParticleSystem[ignitePoints.Count]; 
+        ParticleSystem[] particles = new ParticleSystem[ignitePoints.Count];
 
         for (int i = 0; i < ignitePoints.Count; i++) {
             GameObject go = Instantiate(fireFX, ignitePoints[i].position, Quaternion.identity);
             ParticleSystem particle = go.GetComponent<ParticleSystem>();
             particles[i] = particle;
-            yield return new WaitForSeconds(fireDuration/ignitePoints.Count);
+            yield return new WaitForSeconds(fireDuration / ignitePoints.Count);
         }
 
         for (int i = 0; i < particles.Length; i++) {
             particles[i].Stop();
         }
         Destroy(this.gameObject);
-   
     }
 
     private List<Transform> ReorderPoints(Vector3 start) {
