@@ -10,8 +10,7 @@ public class HQPauseManager : MonoBehaviour
 
     private void Start()
     {
-        //pauseMenu = Instantiate(pauseMenuprefab, transform.position, Quaternion.identity).GetComponent<HQPauseMenu>();
-        //pauseMenu.gameObject.SetActive(false);
+
     }
 
     void Update()
@@ -22,7 +21,9 @@ public class HQPauseManager : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Instantiate the Pause Menu prefab in front of player and toggle pause when pressed
+    /// </summary>
     public void Pause()
     {
         if (pauseMenu == null)

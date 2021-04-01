@@ -6,30 +6,22 @@ using UnityEngine.InputSystem;
 
 public class HQBindingDisplay : MonoBehaviour
 {
+
     [SerializeField] private InputActionReference Action;
-    [SerializeField] private PlayerInput playerInput = null;
+    private PlayerInput playerInput;
     [SerializeField] private TMP_Text bindingDisplayNameText = null;
     [SerializeField] private GameObject startRebindObject = null;
     [SerializeField] private GameObject waitingForInputObjct = null;
 
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
+    private void Start()
+    {
+        playerInput = FindObjectOfType<PlayerInput>();
+    }
 
-    private const string RebindsKey = "rebinds";
-    //private void Start()
-    //{
-    //    string rebinds = PlayerPrefs.GetString(RebindsKey, string.Empty);
-
-    //    if (string.IsNullOrEmpty(rebinds)) { return; }
-
-    //    //playerInput.actions.LoadBindingOverridesFromJson(rebinds); 
-    //}
-    //public void Save()
-    //{
-    //    //string rebinds = playerInput.actions.SaveBindingOverridesAsJson();
-
-    //    PlayerPrefs.SetString("rebinds", rebinds);
-    //}
-
+    /// <summary>
+    /// Rebinding method, switch Action map 
+    /// </summary>
     public void StartRebinding()
     {
         startRebindObject.SetActive(false);
@@ -38,7 +30,6 @@ public class HQBindingDisplay : MonoBehaviour
         playerInput.SwitchCurrentActionMap("Rebindingkeys");
 
         rebindingOperation = Action.action.PerformInteractiveRebinding()
-             .WithControlsExcluding("Mouse")
              .OnMatchWaitForAnother(0.1f)
              .OnComplete(operation => RebindComplete())
              .Start();

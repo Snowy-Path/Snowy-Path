@@ -26,14 +26,19 @@ public class HQPauseMenu : MonoBehaviour
         ShowDefaultView();
     }
 
+    #region OPEN MENUS
+    //Set active the opened menu and desactivate the previous one
 
+    /// <summary>
+    /// Load The Menu scene
+    /// </summary>
     public void MainMenu()
     {
         gameIsPaused = false;
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("SceneMainMenu");
 
     }
-
+    
     public void OpenOptions()
     {
         OptionsMenu.SetActive(true);
@@ -54,8 +59,10 @@ public class HQPauseMenu : MonoBehaviour
         PauseMenu.SetActive(false);
         SetFocus(GalleryFirstButton);
     }
+    #endregion
 
-
+    #region CLOSE MENUS
+    //Set unactive the closed menu and reactivate the pause menu
     public void ExitOptions()
     {
         OptionsMenu.SetActive(false);
@@ -76,12 +83,23 @@ public class HQPauseMenu : MonoBehaviour
         PauseMenu.SetActive(true);
         SetFocus(GalleryButton);
     }
+    #endregion
 
+    #region NAVIGATION METHODS
+
+    /// <summary>
+    /// Set the selsection focus on the button go
+    /// </summary>
+    /// <param name="go"></param>
     private void SetFocus(GameObject go)
     {
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(go);
     }
+
+    /// <summary>
+    /// Default PauseMenu view
+    /// </summary>
     private void ShowDefaultView()
     {
         CreditsMenu.SetActive(false);
@@ -90,7 +108,9 @@ public class HQPauseMenu : MonoBehaviour
         PauseMenu.SetActive(true);
     }
 
-
+    /// <summary>
+    /// Resume the game, timescale at 1
+    /// </summary>
     public void ResumeGame()
     {
         
@@ -102,7 +122,9 @@ public class HQPauseMenu : MonoBehaviour
         gameIsPaused = false;
 
     }
-
+    /// <summary>
+    /// Pause the game, timescale at 0
+    /// </summary>
     public void PauseGame()
     {
         
@@ -114,7 +136,9 @@ public class HQPauseMenu : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// Change the culling mask to hide Player Body during Pause
+    /// </summary>
     public void CameraLayerToggle()
     {
         Camera cam = GameObject.Find("Camera").GetComponent<Camera>();
@@ -122,6 +146,9 @@ public class HQPauseMenu : MonoBehaviour
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("PlayerBody");
     }
 
+    /// <summary>
+    /// Toggle between pause and resume game
+    /// </summary>
     public void Toggle()
     {
         if (!gameIsPaused)
@@ -134,6 +161,6 @@ public class HQPauseMenu : MonoBehaviour
             ResumeGame();
         }
 
-
     }
+    #endregion
 }

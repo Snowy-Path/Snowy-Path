@@ -18,8 +18,9 @@ public class HQMainMenu : MonoBehaviour
     }
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneLoader.Instance.LoadWorld();
         
+
     }
 
     public void QuitGame()
@@ -28,6 +29,9 @@ public class HQMainMenu : MonoBehaviour
         Application.Quit();
     }
 
+
+    #region OPEN MENUS
+        //Set active the opened menu and desactivate the previous one
     public void OpenOptions()
     {
         OptionsMenu.SetActive(true);
@@ -48,8 +52,10 @@ public class HQMainMenu : MonoBehaviour
         MainMenu.SetActive(false);
         SetFocus(GalleryFirstButton);
     }
+#endregion
 
-
+    #region CLOSE MENUS
+    //Set unactive the closed menu and reactivate the pause menu
     public void ExitOptions()
     {
         OptionsMenu.SetActive(false);
@@ -70,13 +76,31 @@ public class HQMainMenu : MonoBehaviour
         MainMenu.SetActive(true);
         SetFocus(GalleryButton);
     }
+    #endregion
 
+    #region NAVIGATION METHODS
+
+    /// <summary>
+    /// Set the selsection focus on the button go
+    /// </summary>
+    /// <param name="go"></param>
     private void SetFocus(GameObject go)
     {
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(go);
     }
 
+    /// <summary>
+    /// Default MainMenu view
+    /// </summary>
+    private void ShowDefaultView()
+    {
+        CreditsMenu.SetActive(false);
+        OptionsMenu.SetActive(false);
+        GalleryMenu.SetActive(false);
+        MainMenu.SetActive(true);
+    }
+    #endregion
 }
 
 

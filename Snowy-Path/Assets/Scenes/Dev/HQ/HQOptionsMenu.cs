@@ -58,7 +58,6 @@ public class HQOptionsMenu : MonoBehaviour
     public void SetAntiAliasing(int aaIndex)
     {
         QualitySettings.antiAliasing = aaIndex;
-        aaDropdown.value = 6;
 
     }
 
