@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class HQPauseMenu : MonoBehaviour
@@ -24,6 +25,11 @@ public class HQPauseMenu : MonoBehaviour
     private void OnEnable()
     {
         ShowDefaultView();
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        this.Toggle();
     }
 
     #region OPEN MENUS
@@ -113,13 +119,15 @@ public class HQPauseMenu : MonoBehaviour
     /// </summary>
     public void ResumeGame()
     {
-        
+        //GetComponentInChildren<Canvas>().gameObject.SetActive(false);
         this.gameObject.SetActive(false);
         Time.timeScale = 1f;
         ShowDefaultView();
         PauseMenu.SetActive(false);
         CameraLayerToggle();
         gameIsPaused = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
     }
     /// <summary>
@@ -127,13 +135,14 @@ public class HQPauseMenu : MonoBehaviour
     /// </summary>
     public void PauseGame()
     {
-        
+        //GetComponentInChildren<Canvas>().gameObject.SetActive(true);
         this.gameObject.SetActive(true);
         Time.timeScale = 0f;
         CameraLayerToggle();
         SetFocus(PauseMenuFirstButton);
         gameIsPaused = true;
-
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     /// <summary>
