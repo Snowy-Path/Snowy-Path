@@ -9,7 +9,7 @@ public class HandController : MonoBehaviour {
 
     public IHandTool CurrentTool {
         get {
-            if (currentToolIndex > 0) {
+            if (currentToolIndex >= 0) {
                 return tools[currentToolIndex];
             }
             else
@@ -19,13 +19,15 @@ public class HandController : MonoBehaviour {
 
     [SerializeField] Animator handsAnimator;
     private IHandTool[] tools;
-    private int currentToolIndex = -1;
+    private int currentToolIndex = 0;
 
     // Start is called before the first frame update
     void Start() {
-        tools = GetComponentsInChildren<IHandTool>();
-        SwitchTool(1);
+        tools = GetComponentsInChildren<IHandTool>(true);
+        HideTools();
+        tools[currentToolIndex].ToggleDisplay(true);
     }
+
 
     #region INPUT SYSTEM EVENTS
     public void OnPrimaryUseTool(InputAction.CallbackContext context) {
@@ -104,7 +106,7 @@ public class HandController : MonoBehaviour {
     /// </summary>
     /// <param name="indexShift">Number of tools to shift</param>
     private void SwitchTool(int indexShift) {
-        //Guard : if there is no tools, return
+        //Guard : if timer is not reset OR there is no tools, return
         if (tools.Length == 0 || (CurrentTool != null && CurrentTool.IsBusy))
             return;
 
@@ -119,9 +121,7 @@ public class HandController : MonoBehaviour {
             currentToolIndex = tools.Length - 1;
         }
 
-        HideTools();
-        tools[currentToolIndex].ToggleDisplay(true);
-        handsAnimator.SetTrigger("SwitchTool");
+        ShowTool(currentToolIndex);
     }
 
     /// <summary>
@@ -139,16 +139,25 @@ public class HandController : MonoBehaviour {
     /// <param name="type">The type of tool to equip</param>
     /// <returns>Returns true if a tool was equiped, fase if not</returns>
     private bool EquipTool(EToolType type) {
-        if (TryGetToolIndex(type, out int index)) {
+        if (handsAnimator.GetCurrentAnimatorStateInfo(0).IsName("SwitchLeftTool")) {
+            return false;
+        }
+        if (!CurrentTool.IsBusy && TryGetToolIndex(type, out int index) && currentToolIndex != index) {
             currentToolIndex = index;
 
-            //Update display
-            HideTools();
-            tools[currentToolIndex].ToggleDisplay(true);
+            ShowTool(currentToolIndex);
             return true;
         }
         else
             return false;
+    }
+
+    private void ShowTool(int index) {
+        //Update display
+        HideTools();
+        tools[currentToolIndex].IsBusy = false;
+        tools[currentToolIndex].ToggleDisplay(true);
+        handsAnimator.SetTrigger("SwitchTool");
     }
 
     /// <summary>
