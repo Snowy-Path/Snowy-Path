@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(GenericHealth))]
-[RequireComponent(typeof(Animator))]
+//[RequireComponent(typeof(Animator))]
 public class WolfController : MonoBehaviour, IEnnemyController {
 
     #region Variables
@@ -17,6 +17,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     // Components retrieved in Awake method.
     private StateMachine<EWolfState> m_fsm;
     private GenericHealth m_genericHealth;
+    [SerializeField]
     private Animator m_animator;
     internal NavMeshAgent m_agent;
 
@@ -158,7 +159,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     private void Awake() {
         m_agent = GetComponent<NavMeshAgent>();
         m_genericHealth = GetComponent<GenericHealth>();
-        m_animator = GetComponent<Animator>();
+        //m_animator = GetComponent<Animator>();
 
         m_normalSpeed = m_agent.speed;
         m_waypoint = defaultWaypoint;
