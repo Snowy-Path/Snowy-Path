@@ -35,9 +35,14 @@ public class Telescope : MonoBehaviour, IHandTool {
     }
 
     public void CancelPrimaryUse() {
-        scopeCamera.gameObject.SetActive(false);
         IsBusy = false;
         animator.SetBool("LookInTelescope", false);
+        DisableCamera(.5f);
+    }
+
+    public IEnumerator DisableCamera(float waitTime) {
+        yield return new WaitForSeconds(waitTime);
+        scopeCamera.gameObject.SetActive(false);
     }
 
     public void SecondaryUse() {

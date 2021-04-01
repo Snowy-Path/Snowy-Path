@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
     public Cloth defaultCloth;
+    public bool isClothDurabilityEnabled = false;
 
     private Cloth m_cloth;
 
@@ -28,13 +29,13 @@ public class Inventory : MonoBehaviour {
     /// </summary>
     /// <param name="percentage">Percentage to deduce to the current durability.</param>
     public void ReduceClothDurabilityPercentage(float percentage) {
-        if (m_cloth) {
+        if (m_cloth && isClothDurabilityEnabled) {
             m_cloth.ReduceDurabilityPercentage(percentage);
         }
     }
 
     public void ReduceClothDurability(WeatherPreset currentWeather) {
-        if (m_cloth) {
+        if (m_cloth && isClothDurabilityEnabled) {
             m_cloth.ReduceDurability(currentWeather);
         }
     }
