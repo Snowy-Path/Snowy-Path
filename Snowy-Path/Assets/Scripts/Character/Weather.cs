@@ -60,7 +60,7 @@ public class Weather : MonoBehaviour
     void OnTriggerEnter(Collider other) {
         // If we enter a weather zone, add it to our dictionary
         if (other.tag == "WeatherZone") {
-            var weatherZone = other.GetComponentInParent<WeatherZone>();
+            var weatherZone = other.GetComponent<WeatherZone>();
             m_activeWeatherZones.Add(weatherZone.GetInstanceID(), weatherZone);
             CurrentWeather = GetCurrentWeather();
         }
@@ -69,7 +69,7 @@ public class Weather : MonoBehaviour
     void OnTriggerExit(Collider other) {
         // If we exit a weather zone, remove it from our dictionary
         if (other.tag == "WeatherZone") {
-            var weatherZone = other.GetComponentInParent<WeatherZone>();
+            var weatherZone = other.GetComponent<WeatherZone>();
             m_activeWeatherZones.Remove(weatherZone.GetInstanceID());
             CurrentWeather = GetCurrentWeather();
         }
