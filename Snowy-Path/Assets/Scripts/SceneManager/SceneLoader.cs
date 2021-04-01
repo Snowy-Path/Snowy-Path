@@ -40,6 +40,16 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        //// We unload the world scene and load the main menu
+        //foreach (GameScene scene in sceneDataBase.worldScenes)
+        //{
+        //    // Check if the scene already loaded
+        //    if (SceneManager.GetSceneByName(scene.sceneName).IsValid())
+        //    {
+        //        SceneManager.UnloadSceneAsync(scene.sceneName);
+        //    }
+        //}
+
         foreach (GameScene scene in sceneDataBase.mainMenuScenes)
         {
             // Check if the scene already loaded
@@ -68,6 +78,16 @@ public class SceneLoader : MonoBehaviour
         }
         StartCoroutine(LoadingScreen());
         //SaveSystem.Instance.Load();
+
+        //// We unload the main menu scene
+        //foreach (GameScene scene in sceneDataBase.mainMenuScenes)
+        //{
+        //    // Check if the scene already loaded
+        //    if (SceneManager.GetSceneByName(scene.sceneName).IsValid())
+        //    {
+        //        SceneManager.UnloadSceneAsync(scene.sceneName);
+        //    }
+        //}
 
     }
     IEnumerator LoadingScreen()

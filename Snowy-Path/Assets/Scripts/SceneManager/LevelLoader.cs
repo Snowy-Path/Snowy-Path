@@ -22,6 +22,7 @@ public class LevelLoader : MonoBehaviour
                 if (item.CompareTag("SceneWorld"))
                 {
                     item.SetActive(true);
+                    SceneManager.SetActiveScene(s);
                 }
             }
         }
@@ -40,6 +41,7 @@ public class LevelLoader : MonoBehaviour
                 if (item.CompareTag("SceneWorld"))
                 {
                     item.SetActive(false);
+                    SceneManager.SetActiveScene(SceneManager.GetSceneByName("PlayerScene"));
                 }
             }
         }
