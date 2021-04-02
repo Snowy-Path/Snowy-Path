@@ -27,11 +27,10 @@ public class MapCompass : MonoBehaviour, IHandTool {
     }
 
     public void StartPrimaryUse() {
-        Locate();
+        m_mapUI.OpenFullscreenMap();
     } 
-    
+
     public void CancelPrimaryUse() {
-        Debug.Log("Stop using map and compass");
     }
 
     public void SecondaryUse() {
@@ -40,9 +39,5 @@ public class MapCompass : MonoBehaviour, IHandTool {
 
     public void ToggleDisplay(bool display) {
         gameObject.SetActive(display);
-    }
-
-    private void Locate() {
-        Debug.Log("Youre here !");
     }
 }

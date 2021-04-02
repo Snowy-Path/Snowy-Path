@@ -101,7 +101,7 @@ public class Temperature : MonoBehaviour {
             m_healthRegenerationCooldownTimer += Time.deltaTime;
 
             // Process regen and reset timer if its value is higher than cooldown
-            if (m_healthRegenerationCooldownTimer > healthRegeneration) {
+            if (m_healthRegenerationCooldownTimer > healthRegenerationCooldown) {
                 m_healthRegenerationCooldownTimer = 0;
 
                 m_health.Heal(healthRegeneration);
@@ -127,7 +127,7 @@ public class Temperature : MonoBehaviour {
         if (cloth != null)
             clothType = (float)cloth.type;
 
-        return (1 + (float)m_weather.CurrentWeather.blizzardStrength) - ((1 + (float)m_weather.CurrentWeather.blizzardStrength) * clothType / 100f);
+        return (1 + (float)m_weather.CurrentWeather.blizzardStrength / 100f) - ((1 + (float)m_weather.CurrentWeather.blizzardStrength / 100f) * clothType / 100f);
     }
 
     void OnTriggerEnter(Collider other) {
