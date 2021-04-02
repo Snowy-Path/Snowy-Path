@@ -20,6 +20,8 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     [SerializeField]
     private Animator m_animator;
     internal NavMeshAgent m_agent;
+    [SerializeField]
+    private GameObject m_attackGO;
 
     private float m_normalSpeed; //Normal speed retrieved from NavMeshAgent
 
@@ -57,6 +59,11 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     #endregion
 
 
+    #region Patrol
+    //TODO: faire des vitesses mdr
+    private float m_patrolSpeed;
+    #endregion
+
     #region Idle
     [Header("Idle")]
 
@@ -83,7 +90,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     [SerializeField]
     private float loosingAggroDuration = 10f;
 
-    private bool m_aggroFinished = false;
+    public bool AggroFinished { get; set; }
     #endregion
 
     #region Lurk
@@ -128,7 +135,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     [SerializeField]
     private float attackDistanceTrigger = 1.5f;
 
-    private bool m_attackFinished = false;
+    public bool AttackFinished { get; set; }
     private Vector3 attackDirection;
     #endregion
 
@@ -183,6 +190,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
         //Debug.Log(GetCurrentState());
 #endif
         m_fsm.OnUpdate();
+        m_animator.SetFloat("Speed", m_agent.velocity.magnitude);
     }
 
     /// <summary>
@@ -223,6 +231,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
         Aggro_Init(m_fsm);
         Combat_Init(m_fsm);
         Stun_Init(m_fsm);
+        Death_Init(m_fsm);
 
         m_fsm.OnEntry();
     }
@@ -261,7 +270,10 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     /// <param name="parent">The Idle state's parent</param>
     private void Idle_Init(StateMachine<EWolfState> parent) {
         State<EWolfState> idle = new State<EWolfState>(EWolfState.Idle, parent,
-            onEntry: (state) => m_timer = Time.time + idleWaitingTime,
+            onEntry: (state) => {
+                m_timer = Time.time + idleWaitingTime;
+                m_animator.SetTrigger("Inspect");
+            },
             onExit: (state) => {
                 m_waypoint = m_waypoint.GetNextWaypoint();
                 if (!m_waypoint) {
@@ -317,9 +329,12 @@ public class WolfController : MonoBehaviour, IEnnemyController {
             onEntry: (state) => { // To set a destination before transitions are checked
                 m_agent.SetDestination(LastPosition);
             },
-            //onUpdate: (state) => { // Can be removed for performance purposes
-            //    agent.SetDestination(SoundPosition); // To compute a shorter path each frame
-            //},
+            onUpdate: (state) => { // Can be removed for performance purposes
+                //agent.SetDestination(SoundPosition); // To compute a shorter path each frame
+                if (CheckRemainingDistance(0.5f)) {
+                    m_animator.SetTrigger("Inspect");
+                }
+            },
             onExit: (state) => {
                 heardPlayer = false; // Reset value
                 ResetAgentPath();
@@ -352,13 +367,13 @@ public class WolfController : MonoBehaviour, IEnnemyController {
                 m_animator.SetTrigger("Aggro");
             },
             onExit: (state) => {
-                m_aggroFinished = false;
+                AggroFinished = false;
             }
         );
 
         aggro.AddTransition(new Transition<EWolfState>(
             EWolfState.Combat,
-            (condition) => m_aggroFinished
+            (condition) => AggroFinished
         ));
 
         parent.AddState(aggro);
@@ -440,7 +455,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
         float safeFactor = Vector3.Distance(transform.position, m_lastPosition) / safeDistance;
 
         // Next position
-        Vector3 nextPosition = transform.position + Vector3.Slerp(safeDirection, circleDirection, curve.Evaluate(safeFactor));
+        Vector3 nextPosition = transform.position + (Vector3.Slerp(safeDirection, circleDirection, curve.Evaluate(safeFactor)) * 5f);
         return nextPosition;
     }
 
@@ -493,14 +508,14 @@ public class WolfController : MonoBehaviour, IEnnemyController {
             onExit: (state) => {
                 m_agent.speed = m_normalSpeed;
                 m_agent.autoBraking = true;
-                m_attackFinished = false;
+                AttackFinished = false;
                 ResetAgentPath();
             }
         );
 
         attack.AddTransition(new Transition<EWolfState>(
             EWolfState.Recover,
-            (condition) => m_attackFinished
+            (condition) => AttackFinished
         ));
 
         parent.AddState(attack);
@@ -516,6 +531,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
             onEntry: (state) => {
                 m_timer = Time.time + recoveryDuration;
                 m_recoveryHealth = m_genericHealth.GetCurrentHealth();
+                m_animator.SetTrigger("TookDamage");
             },
             onExit: (state) => {
                 m_timer = float.NegativeInfinity;
@@ -543,6 +559,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
         State<EWolfState> stun = new State<EWolfState>(EWolfState.Stun, parent,
             onEntry: (state) => {
                 m_timer = Time.time + stunDuration;
+                m_animator.SetTrigger("TookDamage");
             },
             onExit: (state) => {
                 m_timer = float.NegativeInfinity;
@@ -553,6 +570,21 @@ public class WolfController : MonoBehaviour, IEnnemyController {
             EWolfState.Combat,
             (condition) => Time.time >= m_timer
         ));
+
+        parent.AddState(stun);
+    }
+
+    /// <summary>
+    /// Creates and add to <c>parent</c> the Death state.
+    /// All logic and transitions of the Death state are created.
+    /// </summary>
+    /// <param name="parent">The Death state's parent</param>
+    private void Death_Init(StateMachine<EWolfState> parent) {
+        State<EWolfState> stun = new State<EWolfState>(EWolfState.Death, parent,
+            onEntry: (state) => {
+                m_animator.SetTrigger("Death");
+            }
+        );
 
         parent.AddState(stun);
     }
@@ -569,7 +601,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     /// Switch <c>aggroFinished</c> to true. Allows the Aggro state to transition to the next state.
     /// </summary>
     public void AggroAnimationFinished() {
-        m_aggroFinished = true;
+        AggroFinished = true;
     }
 
     /// <summary>
@@ -577,7 +609,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     /// Switch <c>attackFinished</c> to true. Allows the Attack state to transition to the next state.
     /// </summary>
     public void AttackAnimationFinished() {
-        m_attackFinished = true;
+        AttackFinished = true;
     }
     #endregion
 
@@ -615,6 +647,26 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     /// </summary>
     internal void SetStunState() {
         m_fsm.SwitchState(EWolfState.Stun);
+    }
+
+    /// <summary>
+    /// Directly set the Death state.
+    /// Used when the health is at 0. Called directly from the GenericHealth script.
+    /// </summary>
+    public void SetDeathState() {
+        m_fsm.SwitchState(EWolfState.Death);
+    }
+
+    public void StartAttack() {
+        m_attackGO.SetActive(true);
+    }
+
+    public void StopAttack() {
+        m_attackGO.SetActive(false);
+    }
+
+    public void Dead() {
+        Destroy(this.gameObject);
     }
     #endregion
 

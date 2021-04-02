@@ -197,8 +197,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.39999998, z: 0.54514533}
-  m_Center: {x: 0, y: 0.5, z: 0.97742736}
+  m_Size: {x: 0.6637749, y: 0.65889287, z: 0.60086733}
+  m_Center: {x: -0.015948474, y: 0.5871464, z: 1.0052747}
 --- !u!114 &710376345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 1106345536022599549}
   - component: {fileID: 1632385785342224908}
   - component: {fileID: 5580642924379406412}
+  - component: {fileID: 923004724}
   m_Layer: 0
   m_Name: GFX
   m_TagString: Untagged
@@ -258,7 +259,7 @@ Transform:
   m_GameObject: {fileID: 56652724592108098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 7189022306030240753}
   m_RootOrder: 0
@@ -311,8 +312,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: -0.14614516, y: -0.009479582, z: 0.30333796}
-    m_Extent: {x: 0.3958915, y: 0.27020752, z: 0.67772937}
+    m_Center: {x: 0.014719009, y: 0.3403458, z: 0.30333793}
+    m_Extent: {x: 0.266932, y: 0.3818801, z: 0.67772937}
   m_DirtyAABB: 0
 --- !u!95 &5580642924379406412
 Animator:
@@ -324,7 +325,7 @@ Animator:
   m_GameObject: {fileID: 56652724592108098}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 78f66fb425f4d904fb52d51e07fed4ed, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4095f5582102de1419474a5d3d4edfa1, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -333,6 +334,19 @@ Animator:
   m_HasTransformHierarchy: 0
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &923004724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56652724592108098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d29a0483397814799aa435b694715a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_wolfController: {fileID: 919132149522359267}
 --- !u!1 &7534338688541169995
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,8 +396,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4350106, y: 0.6996212, z: 1.1626823}
-  m_Center: {x: 0.011619002, y: 0.3498106, z: 0.38134125}
+  m_Size: {x: 1.037866, y: 1.4576294, z: 2.2945561}
+  m_Center: {x: 0.009010196, y: 0.7288147, z: 0.79389304}
 --- !u!114 &919132149522359269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,9 +420,9 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7534338688541169995}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 919132149522359267}
+        m_MethodName: SetDeathState
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -427,8 +441,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 1479372276
   m_Radius: 0.5
-  m_Speed: 8
-  m_Acceleration: 36
+  m_Speed: 16
+  m_Acceleration: 64
   avoidancePriority: 50
   m_AngularSpeed: 360
   m_StoppingDistance: 0
@@ -436,7 +450,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6
-  m_BaseOffset: 0
+  m_BaseOffset: -0.05
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &919132149522359267
@@ -452,12 +466,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_animator: {fileID: 5580642924379406412}
-  idleWaitingTime: 5
+  m_attackGO: {fileID: 710376342}
+  idleWaitingTime: 6
   defaultWaypoint: {fileID: 0}
   loosingAggroDuration: 10
   safeDistance: 10
-  lurkingDurationMin: 15
-  lurkingDurationMax: 45
+  lurkingDurationMin: 1
+  lurkingDurationMax: 4
   curve:
     serializedVersion: 2
     m_Curve:
@@ -500,7 +515,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  chargeSpeed: 10
-  attackDistanceTrigger: 3
+  chargeSpeed: 20
+  attackDistanceTrigger: 2
   recoveryDuration: 4
   stunDuration: 5
