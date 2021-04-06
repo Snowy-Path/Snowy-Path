@@ -211,7 +211,6 @@ public class WolfController : MonoBehaviour, IEnnemyController {
         for (int i = 1; i < corners.Length; i++) {
             Debug.DrawLine(corners[i - 1], corners[i], Color.yellow);
         }
-        //Debug.Log(GetCurrentState());
 #endif
         m_fsm.OnUpdate();
         m_animator.SetFloat("Speed", m_agent.velocity.magnitude);
@@ -477,6 +476,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
 
         // Safe distancing
         Vector3 playerToAgent = transform.position - m_lastPosition;
+        playerToAgent.y = 0f;
         playerToAgent.Normalize();
         Vector3 safePosition = m_lastPosition + (playerToAgent * safeDistance);
         Vector3 safeDirection = safePosition - transform.position;
