@@ -11,15 +11,16 @@ public class HQPauseMenu : MonoBehaviour
     public GameObject OptionsMenu, GalleryMenu, CreditsMenu, PauseMenu;
     public GameObject OptionsButton, GalleryButton, CreditsButton;
     public GameObject PauseMenuFirstButton, OptionsFirstButton, GalleryFirstButton, CreditsFirstButton;
-
-
+    public PlayerInput playerInput;
+ 
 
     public void Start()
     {
-        //gameIsPaused = true;
+        //gameIsPaused = false;
         //CameraLayerToggle();
         ShowDefaultView();
         SetFocus(PauseMenuFirstButton);
+        //ResumeGame();
         
     }
     private void OnEnable()
@@ -29,7 +30,17 @@ public class HQPauseMenu : MonoBehaviour
 
     public void OnPause(InputAction.CallbackContext context)
     {
-        this.Toggle();
+        if (context.phase == InputActionPhase.Performed)
+        {
+            PauseGame();
+        }
+    }
+    public void OnResume(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            ResumeGame();
+        }
     }
 
     #region OPEN MENUS
@@ -128,6 +139,9 @@ public class HQPauseMenu : MonoBehaviour
         gameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        playerInput.SwitchCurrentActionMap("Gameplay");
+
+
 
     }
     /// <summary>
@@ -143,6 +157,8 @@ public class HQPauseMenu : MonoBehaviour
         gameIsPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        playerInput.SwitchCurrentActionMap("PauseMenu");
+
     }
 
     /// <summary>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
@@ -13,6 +14,10 @@ public class SceneLoader : MonoBehaviour
     public Text loadingProgressText;
     public static SceneLoader Instance;
     private List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
+    bool worldHasLoaded = false;
+    bool isPlayerLoaded = false;
+    bool isLoadingCompleted = false;
+
 
     private void Awake()
     {
@@ -38,6 +43,21 @@ public class SceneLoader : MonoBehaviour
         LoadMainMenu();
     }
 
+    private void Update()
+    {
+        if (isPlayerLoaded && !isLoadingCompleted)
+            Spawn();
+
+        if (worldHasLoaded)
+        {
+            if (!SceneManager.GetSceneByName("PlayerScene").IsValid())
+            {
+                SceneManager.LoadScene("PlayerScene", LoadSceneMode.Additive);
+                isPlayerLoaded = true;
+            }
+        }
+    }
+
     public void LoadMainMenu()
     {
         // We unload the world scene and load the main menu
@@ -50,6 +70,16 @@ public class SceneLoader : MonoBehaviour
             }
         }
 
+        // Check if the scene already loaded
+        if (SceneManager.GetSceneByName("PlayerScene").IsValid())
+        {
+            SceneManager.UnloadSceneAsync("PlayerScene");
+        }
+
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         foreach (GameScene scene in sceneDataBase.mainMenuScenes)
         {
             // Check if the scene already loaded
@@ -58,6 +88,8 @@ public class SceneLoader : MonoBehaviour
                 SceneManager.LoadScene(scene.sceneName, LoadSceneMode.Additive);
             }
         }
+
+
     }
 
     public void LoadWorld()
@@ -107,8 +139,7 @@ public class SceneLoader : MonoBehaviour
         }
 
         // Hide loading screen
-        loadingScreen.SetActive(false);
-        SaveSystem.Instance.Load();
+        worldHasLoaded = true;
     }
 
     // called second
@@ -127,6 +158,19 @@ public class SceneLoader : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void Spawn()
+    {
+        SpawnScript sc = FindObjectOfType<SpawnScript>();
+        if (sc != null)
+        {
+            SaveSystem.Instance.Load();
+            sc.Spawn();
+
+            loadingScreen.SetActive(false);
+            isLoadingCompleted = true;
+        }
     }
 
 }
