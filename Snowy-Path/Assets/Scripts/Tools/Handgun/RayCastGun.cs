@@ -24,7 +24,7 @@ public class RayCastGun : MonoBehaviour, IHandTool
     public Transform gunEnd; //Reference to the gun end object, marking the muzzle location of the gun   
     private Camera fpsCam; //Reference to camera                                                
     private WaitForSeconds shotDuration = new WaitForSeconds(0.07f);// Determines how long time line will remain visible    
-    private LineRenderer laserLine; //Visual effect                                        
+    //private LineRenderer laserLine; //Visual effect                                        
     private float nextFire; //time between shooting
     private Vector3 forwardVector;
     private bool reloading, readyToShoot;
@@ -45,7 +45,7 @@ public class RayCastGun : MonoBehaviour, IHandTool
 
     void Start() {
         //Get references of components linerenderer and camera
-        laserLine = GetComponent<LineRenderer>();
+        //laserLine = GetComponent<LineRenderer>();
         fpsCam = GetComponentInParent<Camera>();
 
         //Set ammo at full capacity
@@ -62,9 +62,9 @@ public class RayCastGun : MonoBehaviour, IHandTool
     /// <returns></returns>
     private IEnumerator ShotEffect() {
         //Enable laserline effect during shotDuration
-        laserLine.enabled = true;
+        //laserLine.enabled = true;
         yield return shotDuration;
-        laserLine.enabled = false;
+        //laserLine.enabled = false;
     }
 
     /// <summary>
@@ -121,22 +121,22 @@ public class RayCastGun : MonoBehaviour, IHandTool
         RaycastHit hit;
 
         //Set the start position for visual effect to the position of gunEnd
-        laserLine.SetPosition(0, gunEnd.position);
+        //laserLine.SetPosition(0, gunEnd.position);
 
 
         //If the ray hit something
         if (Physics.Raycast(rayOrigin, forwardVector, out hit, range, layers))
         {
             //Set the corresponding endline point
-            laserLine.SetPosition(1, hit.point);
+            //laserLine.SetPosition(1, hit.point);
             if (hit.transform.CompareTag("Ennemy")) {
                 EnnemyHashSet.Add(hit.transform.gameObject);
             }
         }
-        else {
-            //If we did not hit anything, set the end of the line to a position directly in front of the camera at the distance of weaponRange
-            laserLine.SetPosition(1, rayOrigin + ((forwardVector) * range));
-        }
+        //else {
+        //    //If we did not hit anything, set the end of the line to a position directly in front of the camera at the distance of weaponRange
+        //    laserLine.SetPosition(1, rayOrigin + ((forwardVector) * range));
+        //}
 
         //Counting projectiles
         projectileShot--;
