@@ -231,7 +231,6 @@ public class PlayerController : MonoBehaviour {
         inputs.z = contextInputs.y;
     }
 
-    public bool test = false;
     private void ApplyGravity() {
         yVelocity.y += gravity * Time.deltaTime;
     }
