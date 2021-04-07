@@ -8,6 +8,7 @@ public class Gallery : MonoBehaviour
     GalleryWindow m_galleryWindow;
     GameObject m_galleryContent;
     Object[] m_galleryElements;
+    int m_currentElementID = -1;
 
     void Start()
     {
@@ -43,18 +44,39 @@ public class Gallery : MonoBehaviour
     void OnImageClick(int elementID)
     {
         if (!m_galleryWindow.gameObject.activeSelf) {
-            var galleryElement = (GalleryElement)m_galleryElements[elementID];
-            m_galleryWindow.title.text = galleryElement.title;
-            m_galleryWindow.description.text = galleryElement.description;
-            m_galleryWindow.image.texture = galleryElement.texture;
-
+            SetupWindowForElement(elementID);
+    
             m_galleryWindow.gameObject.SetActive(true);
         }
     }
 
+    void SetupWindowForElement(int elementID)
+    {
+        var galleryElement = (GalleryElement)m_galleryElements[elementID];
+        m_galleryWindow.title.text = galleryElement.title;
+        m_galleryWindow.description.text = galleryElement.description;
+        m_galleryWindow.image.texture = galleryElement.texture;
+
+        m_currentElementID = elementID;
+    }
+
+    public void OnPrevClick()
+    {
+        int newID = (m_currentElementID - 1 + m_galleryElements.Length) % m_galleryElements.Length;
+        SetupWindowForElement(newID);
+    }
+
+    public void OnNextClick()
+    {
+        int newID = (m_currentElementID + 1) % m_galleryElements.Length;
+        SetupWindowForElement(newID);
+    }
+
     public void OnBackButtonClicked() {
-        if (m_galleryWindow.gameObject.activeSelf)
+        if (m_galleryWindow.gameObject.activeSelf) {
             m_galleryWindow.gameObject.SetActive(false);
+            m_currentElementID = -1;
+        }
         else
             gameObject.SetActive(false);
     }
