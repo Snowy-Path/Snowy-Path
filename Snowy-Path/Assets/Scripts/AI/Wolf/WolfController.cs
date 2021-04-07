@@ -93,6 +93,8 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     [Tooltip("Inspect speed of the Wolf.")]
     private float m_inspectSpeed;
 
+    private bool m_hasInspected = false;
+
     public bool InspectAnimationFinished { get; set; }
     #endregion
 
@@ -359,13 +361,15 @@ public class WolfController : MonoBehaviour, IEnnemyController {
             },
             onUpdate: (state) => {
                 //agent.SetDestination(SoundPosition); // To compute a shorter path each frame
-                if (CheckRemainingDistance(0.5f)) {
+                if (CheckRemainingDistance(0.5f) && !m_hasInspected) {
                     m_animator.SetTrigger("Inspect");
+                    m_hasInspected = true;
                 }
             },
             onExit: (state) => {
                 heardPlayer = false; // Reset value
                 InspectAnimationFinished = false;
+                m_hasInspected = false;
                 ResetAgentPath();
             }
         );
@@ -476,7 +480,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
 
         // Safe distancing
         Vector3 playerToAgent = transform.position - m_lastPosition;
-        playerToAgent.y = 0f;
+        playerToAgent.y = 0f; // This fix a bug where the wolf won't move if the player is very close to the root position of the Wolf.
         playerToAgent.Normalize();
         Vector3 safePosition = m_lastPosition + (playerToAgent * safeDistance);
         Vector3 safeDirection = safePosition - transform.position;
@@ -574,6 +578,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
             onExit: (state) => {
                 m_timer = float.NegativeInfinity;
                 m_recoveryHealth = int.MinValue;
+                m_animator.CrossFade("MovementBlendTree", 0.1f);
             }
         );
 

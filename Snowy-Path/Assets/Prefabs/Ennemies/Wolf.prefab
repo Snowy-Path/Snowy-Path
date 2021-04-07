@@ -44,7 +44,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 25
+  m_Radius: 100
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &326657942
 Rigidbody:
@@ -101,13 +101,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396708974}
-  m_LocalRotation: {x: 0.18351535, y: -0.6830162, z: 0.18250675, w: 0.68300974}
-  m_LocalPosition: {x: 5, y: 4.75, z: 0.74}
+  m_LocalRotation: {x: 0.09254886, y: -0.70106125, z: 0.0920405, w: 0.70105386}
+  m_LocalPosition: {x: 5, y: 2, z: 0.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7189022306030240753}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 30.000002, y: -90.025, z: -0.091000006}
+  m_LocalEulerAnglesHint: {x: 15.000001, y: -90.006004, z: -0.042000003}
 --- !u!20 &396708978
 Camera:
   m_ObjectHideFlags: 0
@@ -234,7 +234,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 25
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &569149328
 Rigidbody:
@@ -462,6 +462,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_wolfController: {fileID: 919132149522359267}
+  m_terrainMask:
+    serializedVersion: 2
+    m_Bits: 513
 --- !u!1 &7534338688541169995
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,21 +586,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_animator: {fileID: 5580642924379406412}
   m_attackGO: {fileID: 710376342}
-  m_patrolSpeed: 6
+  m_patrolSpeed: 2
   idleWaitingTime: 6
   defaultWaypoint: {fileID: 0}
   m_inspectSpeed: 4
   loosingAggroDuration: 10
-  m_lurkSpeed: 8
+  m_lurkSpeed: 10
   safeDistance: 12
-  lurkingDurationMin: 15
-  lurkingDurationMax: 45
+  lurkingDurationMin: 5
+  lurkingDurationMax: 15
   curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.0018564314
-      value: -0.0038412213
+      time: 0
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -607,15 +610,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.6
       value: 0
-      inSlope: 0.0153784165
-      outSlope: 0.0153784165
+      inSlope: 0
+      outSlope: 0
       tangentMode: 136
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.0009766
-      value: 1.6361799
+      time: 1
+      value: 1.6
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -634,7 +637,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_chargeSpeed: 12
+  m_chargeSpeed: 15
   attackDistanceTrigger: 3
   m_attackTime: 0.1
   recoveryDuration: 4
