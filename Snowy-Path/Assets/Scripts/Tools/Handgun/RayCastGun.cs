@@ -254,9 +254,16 @@ public class RayCastGun : MonoBehaviour, IHandTool
         }
     }
 
-    public void GetAmmunitions()
+    public void GetMaxAmmunitions()
     {
         maxAmmo = 5;
+    }
+
+    public void GetAmmunitions()
+    {
+        if (maxAmmo < 5)
+            maxAmmo+=1;
+
     }
 
 
