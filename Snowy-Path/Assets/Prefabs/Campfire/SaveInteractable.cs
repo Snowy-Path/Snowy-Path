@@ -15,7 +15,10 @@ public class SaveInteractable : MonoBehaviour
         playableWakeup.stopped += OnPlayableDirectorStopped;
     }
     public void LaunchSave() {
-        SaveSystem.Instance.Save();
+        if (SaveSystem.Instance)
+            SaveSystem.Instance.Save();
+        else
+            Debug.LogError("Can't find SaveSystem in scene");
     }
 
     void OnPlayableDirectorStopped(PlayableDirector aDirector)
