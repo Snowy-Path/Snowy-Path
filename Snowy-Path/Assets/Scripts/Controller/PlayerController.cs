@@ -231,13 +231,9 @@ public class PlayerController : MonoBehaviour {
         inputs.z = contextInputs.y;
     }
 
+    public bool test = false;
     private void ApplyGravity() {
-        //Reduce gravity if grounded
-        if ((isGrounded && yVelocity.y < 0) || isSliding)
-            yVelocity.y = -2f;
-        else
-            //Apply gravity
-            yVelocity.y += gravity * Time.deltaTime;
+        yVelocity.y += gravity * Time.deltaTime;
     }
 
     private void Jump() {

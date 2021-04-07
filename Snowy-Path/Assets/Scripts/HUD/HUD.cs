@@ -5,11 +5,24 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour {
 
+    [Header("HUD parameters")]
+    [SerializeField] float startFreeze1 = 0.3f;
+    [SerializeField] float startFreeze2 = 0.3f;
+    [SerializeField] float startBlood1 = 0.3f;
+    [SerializeField] float startBlood2 = 0.3f;
+    [SerializeField] float startBlueOverlay = 0.4f;
+    [SerializeField] float startBreath = 0.5f;
+    [SerializeField] float blueColorMaxAlpha = 0.3f;
+
+    [Header("Set up")]
     [SerializeField] Image staminaOverlay;
-    [SerializeField] Image bloodOverlay;
-    [SerializeField] Image freezeOverlay;
-    [SerializeField] Image breathOverlay;
+    [SerializeField] Image bloodOverlay1;
+    [SerializeField] Image bloodOverlay2;
+    [SerializeField] Image bloodVein;
+    [SerializeField] Image freeze1Overlay;
+    [SerializeField] Image freeze2Overlay;
     [SerializeField] Image blueOverlay;
+    [SerializeField] Image breathOverlay;
 
     [SerializeField] AnimationCurve staminaCurve;
     [SerializeField] AnimationCurve breathCurve;
@@ -18,14 +31,11 @@ public class HUD : MonoBehaviour {
     private PlayerController controller;
     private bool coldBreath = false;
     private float breathTimer;
+    private int breathDiv = 6;
 
-    private const int breathDiv = 6;
-    private const float freezeThreshold = 0.3f;
-    private const float blueColorThreshold = 0.4f;
-    private const float breathThreshold = 0.5f;
+ 
 
-    private const float freezeMaxAlpha = 0.2f;
-    private const float blueColorMaxAlpha = 0.3f;
+    //private const float freezeMaxAlpha = 0.2f;
 
     private void Start() {
         ResetOverlays();
@@ -78,19 +88,19 @@ public class HUD : MonoBehaviour {
         Color freezeColor = freezeOverlay.color;
         Color blueColor = blueOverlay.color;
 
-        if (amount < freezeThreshold) {
-            freezeColor.a = (freezeThreshold - amount) * freezeMaxAlpha / freezeThreshold;
+        if (amount < startFreeze) {
+            freezeColor.a = (startFreeze - amount) * freezeMaxAlpha / startFreeze;
         }
         else
             freezeColor.a = 0;
 
-        if (amount < blueColorThreshold) {
-            blueColor.a = (blueColorThreshold - amount) * blueColorMaxAlpha / blueColorThreshold;
+        if (amount < startBlueOverlay) {
+            blueColor.a = (startBlueOverlay - amount) * blueColorMaxAlpha / startBlueOverlay;
         }
         else
             blueColor.a = 0;
 
-        coldBreath = amount < breathThreshold;
+        coldBreath = amount < startBreath;
 
         freezeOverlay.color = freezeColor;
         blueOverlay.color = blueColor;
