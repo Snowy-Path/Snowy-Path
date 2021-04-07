@@ -19,12 +19,6 @@ public class HUD : MonoBehaviour {
     [Range(0, 1)] [SerializeField] float startBlueOverlay = 0.4f;
     [Range(0, 1)] [SerializeField] float blueColorMaxAlpha = 0.3f;
 
-    [Header("Debug")]
-    [SerializeField] bool debugMode;
-    [Range(0, 1)] [SerializeField] float health;
-    [Range(0, 1)] [SerializeField] float temperature;
-    [Range(0, 1)] [SerializeField] float stamina;
-
     [Header("Set up")]
     [SerializeField] Image staminaOverlay;
     [SerializeField] Image bloodVignette;
@@ -52,15 +46,7 @@ public class HUD : MonoBehaviour {
     }
 
     private void Update() {
-     
-        if (debugMode) {
-            SetBlood(health);
-            SetFrozen(temperature);
-            SetStamina(stamina);
-            return;
-        }
-
-        SetBlood(1 - Mathf.Clamp(playerHealth.CurrentHealth / (float)playerHealth.maxHealth, 0, 1));
+        SetBlood(Mathf.Clamp(playerHealth.CurrentHealth / (float)playerHealth.maxHealth, 0, 1));
         ColdBreath();
     }
 
@@ -94,7 +80,6 @@ public class HUD : MonoBehaviour {
     }
 
     public void SetBlood(float healthRatio) {
-        healthRatio = 1 - healthRatio;
         CalculateAlpha(ref bloodVignette, healthRatio, startBloodVignette);
         CalculateAlpha(ref bloodOverlay1, healthRatio, startBloodVignette);
         CalculateAlpha(ref bloodOverlay2, healthRatio, startBloodVignette);
@@ -103,13 +88,24 @@ public class HUD : MonoBehaviour {
 
     public void SetFrozen(float temperatureRatio) {
         coldBreath = temperatureRatio < startBreath;
-        temperatureRatio = 1 - temperatureRatio;
         CalculateAlpha(ref freeze1Overlay, temperatureRatio, startFreeze1);
+        CalculateAlpha(ref freeze2Overlay, temperatureRatio, startFreeze2);
+
+        if (temperatureRatio < startBlueOverlay) {
+            float factor = blueColorMaxAlpha / startBlueOverlay;
+            blueOverlay.SetAlpha(blueColorMaxAlpha - factor * temperatureRatio);
+        }
+        else
+            blueOverlay.SetAlpha(0);
     }
 
-    public void CalculateAlpha(ref Image img, float amount, float startThreshold) {
-        float k = 1 / startThreshold;
-        img.SetAlpha(k * amount);
+    public void CalculateAlpha(ref Image img, float ratio, float startThreshold) {
+        if (ratio < startThreshold) {
+            float factor = 1 / startThreshold;
+            img.SetAlpha(1 - factor * ratio);
+        }
+        else
+            img.SetAlpha(0);
     }
 }
 
