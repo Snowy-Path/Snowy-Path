@@ -32,7 +32,7 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     /// Call at gameobject creation.
     /// Find and fill fields.
     /// </summary>
-    void Awake() {
+    void Start() {
         m_player = FindObjectOfType<PlayerController>().transform;
         m_agent = GetComponent<NavMeshAgent>();
         m_normalSpeed = m_agent.speed;
