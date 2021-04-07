@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 244230141766611006}
   - component: {fileID: 1668099201069038412}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Telescope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 244230141766611007}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.71, y: 0.012, z: 0.09}
-  m_LocalScale: {x: 2.9538, y: 2.9538, z: 2.9538}
+  m_LocalScale: {x: 0.34082302, y: 0.34082308, z: 0.34082305}
   m_Children:
   - {fileID: 244230143274304145}
   - {fileID: 244230141963973867}
@@ -61,7 +61,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 244230141963973867}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 244230143274304145}
   - component: {fileID: 244230143274304150}
   - component: {fileID: 244230143274304144}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ScopeCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,9 +146,9 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 5687
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 2439cc45414304b42ac0042b35b2c158, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -198,7 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1668099200681898248}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Overlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1668099200681898251}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: -0.54}
+  m_LocalPosition: {x: 0, y: -0, z: -0.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1668099202443568782}
@@ -230,7 +230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1668099202443568782}
   - component: {fileID: 1668099202443568783}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4e447fd904b36584e8fa33fe0152ae96, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.8862745}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.98039216}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -312,9 +312,9 @@ GameObject:
   - component: {fileID: 8125855419691534049}
   - component: {fileID: 8125855419690130637}
   - component: {fileID: 8125855419689531029}
-  m_Layer: 2
+  m_Layer: 13
   m_Name: Lens
-  m_TagString: Weapon
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -326,8 +326,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8125855419691211833}
-  m_LocalRotation: {x: -4.8196164e-10, y: 0.000000012630434, z: -1, w: 0.0000013262032}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5299}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.526}
   m_LocalScale: {x: 0.18, y: 0.18, z: 1}
   m_Children: []
   m_Father: {fileID: 244230141766611006}
@@ -461,6 +461,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Telescope
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6231c8585ef624343bf8f5f6ed900041,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6231c8585ef624343bf8f5f6ed900041,
         type: 3}

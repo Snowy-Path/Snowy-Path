@@ -201,6 +201,10 @@ public class WolfController : MonoBehaviour, IEnnemyController {
         HFSMInitialization();
     }
 
+    private void OnEnable() {
+        HFSMInitialization();
+    }
+
     /// <summary>
     /// Called at each frame.
     /// Do needed frame update of the Finite State Machine.
