@@ -29,9 +29,7 @@ public class Telescope : MonoBehaviour, IHandTool {
         scopeCamera.gameObject.SetActive(true);
         scopeCamera.fieldOfView = defaultZoom;
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
-            animator.SetBool("LookInTelescope", true);
-        }
+        animator.SetBool("LookInTelescope", true);
     }
 
     public void CancelPrimaryUse() {
