@@ -19,7 +19,7 @@ public class HQMainMenu : MonoBehaviour
     public void PlayGame()
     {
         SceneLoader.Instance.LoadWorld();
-        
+        SaveSystem.Instance.SetCurrentSave(0);
 
     }
 

@@ -13,13 +13,7 @@ public class HQPauseManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        if (Keyboard.current.pKey.wasPressedThisFrame)
-        {
-            Pause();
-        }
-    }
+
 
     /// <summary>
     /// Instantiate the Pause Menu prefab in front of player and toggle pause when pressed
