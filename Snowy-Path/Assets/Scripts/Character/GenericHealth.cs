@@ -55,6 +55,11 @@ public class GenericHealth : MonoBehaviour
             onHit.Invoke(gameObject.tag, value);
     }
 
+    public void FullHeal()
+    {
+        m_currentHealth = maxHealth;
+    }
+
     /// WARNING: For debug purpose only
     public int GetCurrentHealth()
     {
