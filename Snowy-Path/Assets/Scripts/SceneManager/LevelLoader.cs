@@ -7,7 +7,20 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     public GameScene level;
+    bool isSceneNeedToBeShowned = false;
+    bool isSceneNeedToBeHided = false;
 
+    private void Update()
+    {
+        if (isSceneNeedToBeShowned)
+        {
+            ShowScene();
+        }
+        if (isSceneNeedToBeHided )
+        {
+            HideScene();
+        }
+    }
 
     void ShowScene()
     {
@@ -21,7 +34,10 @@ public class LevelLoader : MonoBehaviour
             {
                 if (item.CompareTag("SceneWorld"))
                 {
+                    SceneManager.SetActiveScene(s);
                     item.SetActive(true);
+                    isSceneNeedToBeShowned = false;
+
                 }
             }
         }
@@ -40,6 +56,7 @@ public class LevelLoader : MonoBehaviour
                 if (item.CompareTag("SceneWorld"))
                 {
                     item.SetActive(false);
+                    isSceneNeedToBeHided = false;
                 }
             }
         }
@@ -49,7 +66,7 @@ public class LevelLoader : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            ShowScene();
+            isSceneNeedToBeShowned = true;
         }
     }
 
@@ -65,7 +82,7 @@ public class LevelLoader : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            HideScene();
+            isSceneNeedToBeHided = true;
         }
     }
 }
