@@ -12,14 +12,15 @@ public class HQMainMenu : MonoBehaviour
 
     public void Start()
     {
+        Cursor.visible = true;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(MainMenuFirstButton);
 
     }
     public void PlayGame()
     {
-        SceneLoader.Instance.LoadWorld();
-        
+        //SceneLoader.Instance.LoadWorld();
+        SceneManager.LoadScene("HQ");
 
     }
 

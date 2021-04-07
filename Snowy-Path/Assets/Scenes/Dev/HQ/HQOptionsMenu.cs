@@ -39,7 +39,7 @@ public class HQOptionsMenu : MonoBehaviour
         }
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.RefreshShownValue();
-        LoadSettings(currentResolutionIndex);
+        //LoadSettings(currentResolutionIndex);
     }
 
     public void SetVolume(float volume)
@@ -52,7 +52,7 @@ public class HQOptionsMenu : MonoBehaviour
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width,
-                  resolution.height, Screen.fullScreen);
+                  resolution.height, true);
     }
 
     public void SetAntiAliasing(int aaIndex)
