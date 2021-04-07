@@ -13,5 +13,6 @@ public enum EWolfState{
     Charge,
     Attack,
     Recover,
-    Stun
+    Stun,
+    Death
 }
