@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class HUD : MonoBehaviour {
 
@@ -11,13 +12,16 @@ public class HUD : MonoBehaviour {
     [Range(0, 1)] [SerializeField] float startFreeze1 = 0.5f;
     [Range(0, 1)] [SerializeField] float startFreeze2 = 0.3f;
 
-    [Range(0, 1)] [SerializeField] float startBloodVignette = 1f;
-    [Range(0, 1)] [SerializeField] float startBlood1 = 0.3f;
-    [Range(0, 1)] [SerializeField] float startBlood2 = 0.3f;
-    [Range(0, 1)] [SerializeField] float startBloodVein = 0.3f;
+    [Range(0, 10)] [SerializeField] int startBloodVignette = 2;
+    [Range(0, 10)] [SerializeField] int startBlood1 = 1;
+    [Range(0, 10)] [SerializeField] int startBlood2 = 1;
+    [Range(0, 10)] [SerializeField] int startBloodVein = 2;
 
     [Range(0, 1)] [SerializeField] float startBlueOverlay = 0.4f;
     [Range(0, 1)] [SerializeField] float blueColorMaxAlpha = 0.3f;
+
+    [Range(0, 1)] [SerializeField] float bloodHitStep = 0.1f;
+    [Range(0, 1)] [SerializeField] float bloodHealStep = 0.1f;
 
     [Header("Set up")]
     [SerializeField] Image staminaOverlay;
@@ -38,6 +42,7 @@ public class HUD : MonoBehaviour {
     private bool coldBreath = false;
     private float breathTimer;
     private int breathDiv = 6;
+ 
 
     private void Start() {
         ResetOverlays();
@@ -46,8 +51,11 @@ public class HUD : MonoBehaviour {
     }
 
     private void Update() {
-        SetBlood(Mathf.Clamp(playerHealth.CurrentHealth / (float)playerHealth.maxHealth, 0, 1));
         ColdBreath();
+        if (Keyboard.current.kKey.wasPressedThisFrame)
+            playerHealth.Hit(1);
+        if (Keyboard.current.jKey.wasPressedThisFrame)
+            playerHealth.Heal(1);
     }
 
     public void ResetOverlays() {
@@ -79,17 +87,52 @@ public class HUD : MonoBehaviour {
         staminaOverlay.SetAlpha(staminaCurve.Evaluate(staminaRatio));
     }
 
-    public void SetBlood(float healthRatio) {
-        CalculateAlpha(ref bloodVignette, healthRatio, startBloodVignette);
-        CalculateAlpha(ref bloodOverlay1, healthRatio, startBloodVignette);
-        CalculateAlpha(ref bloodOverlay2, healthRatio, startBloodVignette);
-        CalculateAlpha(ref bloodVein, healthRatio, startBloodVein);
+    /// <summary>
+    /// Update blood overlays alpha, called on player hit
+    /// </summary>
+    /// <param name="tag"></param>
+    /// <param name="value"></param>
+    public void SetBloodOverlays(string tag, int value) {
+        int health = playerHealth.GetCurrentHealth();
+        CalculateBloodAlpha(ref bloodVignette, health, startBloodVignette);
+        CalculateBloodAlpha(ref bloodOverlay1, health, startBlood1);
+        CalculateBloodAlpha(ref bloodOverlay2, health, startBlood2);
+        CalculateBloodAlpha(ref bloodVein, health, startBloodVein);
     }
 
-    public void SetFrozen(float temperatureRatio) {
+    private void CalculateBloodAlpha(ref Image image, int healthValue, int start) {
+        if (healthValue <= start) {
+            StartCoroutine(FadeAlpha(image, 1, bloodHitStep));
+        }
+        else
+            StartCoroutine(FadeAlpha(image, 0, -bloodHealStep));
+    }
+
+    private IEnumerator FadeAlpha(Image image, float targetAlpha, float step) {
+        targetAlpha = Mathf.Clamp(targetAlpha, 0, 1);
+
+        if (step > 0) {
+            while (image.color.a < targetAlpha) {
+                image.SetAlpha(image.color.a + step);
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
+        else if (step < 0) {
+            while (image.color.a > targetAlpha) {
+                image.SetAlpha(image.color.a + step);
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
+        else
+            Debug.LogError("HUD blood fade step can't be 0");
+
+    }
+
+
+    public void SetFreezeOverlays(float temperatureRatio) {
         coldBreath = temperatureRatio < startBreath;
-        CalculateAlpha(ref freeze1Overlay, temperatureRatio, startFreeze1);
-        CalculateAlpha(ref freeze2Overlay, temperatureRatio, startFreeze2);
+        CalculateFreezeAlpha(ref freeze1Overlay, temperatureRatio, startFreeze1);
+        CalculateFreezeAlpha(ref freeze2Overlay, temperatureRatio, startFreeze2);
 
         if (temperatureRatio < startBlueOverlay) {
             float factor = blueColorMaxAlpha / startBlueOverlay;
@@ -99,7 +142,7 @@ public class HUD : MonoBehaviour {
             blueOverlay.SetAlpha(0);
     }
 
-    public void CalculateAlpha(ref Image img, float ratio, float startThreshold) {
+    public void CalculateFreezeAlpha(ref Image img, float ratio, float startThreshold) {
         if (ratio < startThreshold) {
             float factor = 1 / startThreshold;
             img.SetAlpha(1 - factor * ratio);

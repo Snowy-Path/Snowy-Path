@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1462264, g: 0.71408516, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1203,10 +1203,32 @@ MonoBehaviour:
   maxHealth: 3
   onHit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 971233362}
+        m_MethodName: SetBloodOverlays
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onHeal:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 971233362}
+        m_MethodName: SetBloodOverlays
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -1263,12 +1285,14 @@ MonoBehaviour:
   startBreath: 0.5
   startFreeze1: 0.5
   startFreeze2: 0.5
-  startBloodVignette: 0.5
-  startBlood1: 0.5
-  startBlood2: 0.5
-  startBloodVein: 0.5
-  startBlueOverlay: 0.5
+  startBloodVignette: 2
+  startBlood1: 1
+  startBlood2: 1
+  startBloodVein: 2
+  startBlueOverlay: 0.2
   blueColorMaxAlpha: 0.2
+  bloodHitStep: 0.3
+  bloodHealStep: 0.1
   staminaOverlay: {fileID: 2798506374356359361}
   bloodVignette: {fileID: 1878485232081204085}
   bloodOverlay1: {fileID: 242389907320569675}
