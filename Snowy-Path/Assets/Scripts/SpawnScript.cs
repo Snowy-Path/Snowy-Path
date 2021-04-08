@@ -22,6 +22,8 @@ public class SpawnScript : MonoBehaviour
         else
         {
             GetComponent<PlayerCampfireSave>().RestorePlayerAtCampfire();
+            wakeUp.Play();
+
         }
     }
 
