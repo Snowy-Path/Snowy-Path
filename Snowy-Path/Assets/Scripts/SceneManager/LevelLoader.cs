@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     public GameScene level;
-    bool isSceneNeedToBeShowned = false;
-    bool isSceneNeedToBeHided = false;
+    internal bool isSceneNeedToBeShowned = false;
+    internal bool isSceneNeedToBeHided = false;
 
     private void Update()
     {
