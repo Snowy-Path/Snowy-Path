@@ -25,9 +25,7 @@ public class Interactable : MonoBehaviour {
                 return;
             }
             isActive = value;
-            if (isActive) {
-                onShowFeedback.Invoke();
-            } else {
+            if (!isActive) {
                 onHideFeedback.Invoke();
             }
         }
