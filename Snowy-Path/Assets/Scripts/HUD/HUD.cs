@@ -6,19 +6,20 @@ using UnityEngine.InputSystem;
 
 public class HUD : MonoBehaviour {
 
-    [Header("HUD parameters")]
+    [Header("Breath")]
     [Range(0, 1)] [SerializeField] float startBreath = 0.5f;
 
+    [Header("Freeze")]
     [Range(0, 1)] [SerializeField] float startFreeze1 = 0.5f;
     [Range(0, 1)] [SerializeField] float startFreeze2 = 0.3f;
+    [Range(0, 1)] [SerializeField] float startBlueOverlay = 0.4f;
+    [Range(0, 1)] [SerializeField] float blueColorMaxAlpha = 0.3f;
 
+    [Header("Blood")]
     [Range(0, 10)] [SerializeField] int startBloodVignette = 2;
     [Range(0, 10)] [SerializeField] int startBlood1 = 1;
     [Range(0, 10)] [SerializeField] int startBlood2 = 1;
     [Range(0, 10)] [SerializeField] int startBloodVein = 2;
-
-    [Range(0, 1)] [SerializeField] float startBlueOverlay = 0.4f;
-    [Range(0, 1)] [SerializeField] float blueColorMaxAlpha = 0.3f;
 
     [Range(0, 1)] [SerializeField] float bloodHitStep = 0.1f;
     [Range(0, 1)] [SerializeField] float bloodHealStep = 0.1f;
@@ -52,10 +53,10 @@ public class HUD : MonoBehaviour {
 
     private void Update() {
         ColdBreath();
-        if (Keyboard.current.kKey.wasPressedThisFrame)
-            playerHealth.Hit(1);
-        if (Keyboard.current.jKey.wasPressedThisFrame)
-            playerHealth.Heal(1);
+        //if (Keyboard.current.kKey.wasPressedThisFrame)
+        //    playerHealth.Hit(1);
+        //if (Keyboard.current.jKey.wasPressedThisFrame)
+        //    playerHealth.Heal(1);
     }
 
     public void ResetOverlays() {
