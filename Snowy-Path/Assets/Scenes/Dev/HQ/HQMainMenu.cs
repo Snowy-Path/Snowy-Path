@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class HQMainMenu : MonoBehaviour
@@ -9,15 +10,20 @@ public class HQMainMenu : MonoBehaviour
     public GameObject OptionsMenu, CreditsMenu, MainMenu;
     public GameObject OptionsButton, CreditsButton;
     public GameObject MainMenuFirstButton, OptionsFirstButton, CreditsFirstButton;
-
+    public PlayerInput playerInput;
     public void Start()
     {
+
+        ////playerInput = FindObjectOfType<PlayerInput>();
+        //playerInput.SwitchCurrentActionMap("PauseMenu");
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(MainMenuFirstButton);
+
 
     }
     public void PlayGame()
     {
+        //playerInput.SwitchCurrentActionMap("Gameplay");
         SceneLoader.Instance.LoadWorld();
         SaveSystem.Instance.SetCurrentSave(0);
 
