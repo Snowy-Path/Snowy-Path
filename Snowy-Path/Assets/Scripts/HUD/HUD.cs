@@ -6,8 +6,12 @@ using UnityEngine.InputSystem;
 
 public class HUD : MonoBehaviour {
 
+    [Header("Stamina")]
+    [SerializeField] AnimationCurve staminaCurve;
+
     [Header("Breath")]
     [Range(0, 1)] [SerializeField] float startBreath = 0.5f;
+    [SerializeField] AnimationCurve breathCurve;
 
     [Header("Freeze")]
     [Range(0, 1)] [SerializeField] float startFreeze1 = 0.5f;
@@ -35,8 +39,6 @@ public class HUD : MonoBehaviour {
     [SerializeField] Image blueOverlay;
     [SerializeField] Image breathOverlay;
 
-    [SerializeField] AnimationCurve staminaCurve;
-    [SerializeField] AnimationCurve breathCurve;
 
     private GenericHealth playerHealth;
     private PlayerController controller;
