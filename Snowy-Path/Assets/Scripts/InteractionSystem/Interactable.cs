@@ -136,19 +136,28 @@ public class Interactable : MonoBehaviour {
         // Searching for ACTIVE components
         Renderer[] rendererList = GetComponentsInChildren<Renderer>(false);
 
+        //Sort ParticleSystemRenderer
+        List<Renderer> realRendererList = new List<Renderer>();
+        for (int i = 0; i < rendererList.Length; i++) {
+            if (rendererList[i] is ParticleSystemRenderer) {
+                continue;
+            }
+            realRendererList.Add(rendererList[i]);
+        }
+
         // Warning if no renderer was found
-        if (rendererList.Length == 0) {
+        if (realRendererList.Count == 0) {
             Debug.LogError("Interactable : No active Renderer was found !");
             return null;
         }
 
         // Warning if multiple active renderer found
-        if (rendererList.Length > 1) {
+        if (realRendererList.Count > 1) {
             Debug.LogWarning("Interactable : Multiple active Renderer found !");
         }
 
         // Return the first in list
-        return rendererList[0];
+        return realRendererList[0];
     }
 
     /// <summary>
