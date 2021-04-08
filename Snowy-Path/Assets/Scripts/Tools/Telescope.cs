@@ -44,10 +44,15 @@ public class Telescope : MonoBehaviour, IHandTool {
     }
 
     public void SecondaryUse() {
-        if (scopeCamera.fieldOfView == defaultZoom)
-            scopeCamera.fieldOfView = secondaryZoom;
-        else
-            scopeCamera.fieldOfView = defaultZoom;
+    }
+
+    public void SwitchZoom() {
+        if (IsBusy && gameObject.activeSelf) {
+            if (scopeCamera.fieldOfView == defaultZoom)
+                scopeCamera.fieldOfView = secondaryZoom;
+            else
+                scopeCamera.fieldOfView = defaultZoom;
+        }
     }
 
     public void ToggleDisplay(bool display) {
