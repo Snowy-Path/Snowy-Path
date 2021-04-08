@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6491765249518799272}
   - component: {fileID: 7008234720556941797}
   - component: {fileID: 4562727860617841199}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Boussole 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3618921503951303771}
-  m_Layer: 0
+  - component: {fileID: 4455912107418114132}
+  m_Layer: 13
   m_Name: Boussole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,15 +103,31 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4139702250479709921}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.0000000047683715, y: -0.000010948181, z: -0.00028360367}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 8336000668804314966}
   - {fileID: 6491765249518799272}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4455912107418114132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4139702250479709921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dad7c30c7b33404d802d68c1ea743d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NorthPole: {x: 0, y: 0, z: 10000000}
+  Needle: {fileID: 8336000668804314966}
+  jammingspeed: 20
+  JammingRange: 0
 --- !u!1 &5928643430599237222
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +139,7 @@ GameObject:
   - component: {fileID: 8336000668804314966}
   - component: {fileID: 3388948837518748728}
   - component: {fileID: 3088158722688984504}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Aiguille
   m_TagString: Untagged
   m_Icon: {fileID: 0}
