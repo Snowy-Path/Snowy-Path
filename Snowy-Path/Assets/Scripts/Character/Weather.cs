@@ -21,7 +21,7 @@ public class Weather : MonoBehaviour
         }
     }
 
-    public Animator blizzardAnimator;
+    //public Animator blizzardAnimator;
 
     private void Awake() {
         m_currentWeather = defaultWeather;
