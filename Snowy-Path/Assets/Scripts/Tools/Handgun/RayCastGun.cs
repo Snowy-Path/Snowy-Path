@@ -47,7 +47,7 @@ public class RayCastGun : MonoBehaviour, IHandTool
         fpsCam = GetComponentInParent<Camera>();
 
         //Set ammo at full capacity
-        ammo = maxMagazineCapacity;
+        ammo = 0;
         readyToShoot = true;
     }
 
