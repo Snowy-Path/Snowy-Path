@@ -7,10 +7,14 @@ public class WendigoDespawner : MonoBehaviour {
     [SerializeField]
     private GameObject wendigo;
 
+    [SerializeField]
+    private GameObject wendigoSpawner;
+
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
             wendigo.SetActive(false);
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
+            wendigoSpawner.SetActive(false);
         }
     }
 
