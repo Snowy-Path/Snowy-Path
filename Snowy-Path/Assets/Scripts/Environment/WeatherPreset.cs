@@ -10,7 +10,7 @@ public class WeatherPreset : ScriptableObject
         None = 0,
         Low = 25,
         Medium = 60,
-        High = 100
+        High = 200
     };
 
     public EBlizzardStrength blizzardStrength = EBlizzardStrength.None;
