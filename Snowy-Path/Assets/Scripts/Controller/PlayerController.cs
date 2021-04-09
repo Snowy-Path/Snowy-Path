@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour {
     private const float inputThreshold = 0.2f;
 
     private HUD playerHud;
+    private HandController handController;
 
     #region INPUTS SYSTEM EVENTS
     public void OnMove(InputAction.CallbackContext context) {
@@ -136,6 +137,7 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         controller = GetComponent<CharacterController>();
         playerHud = GetComponent<HUD>();
+        handController = GetComponentInChildren<HandController>();
 
         //Lock and hide cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -232,12 +234,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void ApplyGravity() {
-        //Reduce gravity if grounded
-        if ((isGrounded && yVelocity.y < 0) || isSliding)
-            yVelocity.y = -2f;
-        else
-            //Apply gravity
-            yVelocity.y += gravity * Time.deltaTime;
+        yVelocity.y += gravity * Time.deltaTime;
     }
 
     private void Jump() {
@@ -250,7 +247,8 @@ public class PlayerController : MonoBehaviour {
 
         //canStartSprint = isGrounded && sprintTimer <= 0;
 
-        isRunning = sprintCmd && sprintTimer <= maxSprintDuration && inputs.z >= inputThreshold;
+        isRunning = sprintCmd && sprintTimer <= maxSprintDuration && inputs.z >= inputThreshold &&
+           (handController.CurrentTool.GetType() == typeof(Telescope) && handController.CurrentTool.IsBusy) == false;
 
         //Stop sprint if timer reached max sprint duration
         if (sprintTimer >= maxSprintDuration)
