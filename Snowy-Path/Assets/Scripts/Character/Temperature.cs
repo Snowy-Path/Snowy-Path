@@ -118,7 +118,7 @@ public class Temperature : MonoBehaviour {
                 m_health.Hit(damageHypothermia);
             }
         }
-        m_playerHUD.SetFrozen(Mathf.Clamp(m_currentTemperature / maxTemperature, 0, 1));
+        m_playerHUD.SetFreezeOverlays(Mathf.Clamp(m_currentTemperature / maxTemperature, 0, 1));
     }
 
     float GetTemperatureLossRate() {
