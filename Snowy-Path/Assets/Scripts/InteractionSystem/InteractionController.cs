@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
@@ -65,7 +62,12 @@ public class InteractionController : MonoBehaviour {
 
             if (_interHit != null) { // We really did hit an interactable object
 
-                if (m_interactable != _interHit) { //If previous object is different from current object
+                if (!_interHit.IsActive) {
+                    if (m_interactable != null) { // Hide previous object if it was a real object
+                        m_interactable.HideInteractionFeedback();
+                        m_interactable = null;
+                    }
+                }else if (m_interactable != _interHit) { //If previous object is different from current object
 
                     if (m_interactable != null) { // Hide previous object if it was a real object
                         m_interactable.HideInteractionFeedback();

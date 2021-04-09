@@ -15,6 +15,7 @@ public class HeatSource : MonoBehaviour
         child.tag = "HeatSource";
         child.transform.parent = transform;
         child.transform.localPosition = Vector3.zero;
+        child.layer = 2;
 
         // Initialize the collider
         SphereCollider sphereCollider = child.AddComponent<SphereCollider>();
