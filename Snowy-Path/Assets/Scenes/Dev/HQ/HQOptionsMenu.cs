@@ -24,6 +24,7 @@ public class HQOptionsMenu : MonoBehaviour
 
     private void Start()
     {
+        
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
         resolutions = Screen.resolutions;
@@ -39,7 +40,7 @@ public class HQOptionsMenu : MonoBehaviour
         }
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.RefreshShownValue();
-        
+        //LoadSettings(currentResolutionIndex);
     }
 
     public void SetVolume(float volume)
