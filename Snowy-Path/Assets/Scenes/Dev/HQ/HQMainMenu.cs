@@ -29,6 +29,15 @@ public class HQMainMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void DeleteSave()
+    {
+        if(SaveSystem.Instance != null)
+        {
+            SaveSystem.Instance.DeleteSave(0);
+            SaveSystem.Instance.CreateNewSave(0);
+        }
+    }
+
 
     #region OPEN MENUS
         //Set active the opened menu and desactivate the previous one
