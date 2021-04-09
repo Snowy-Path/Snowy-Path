@@ -52,7 +52,8 @@ public class HQPauseMenu : MonoBehaviour
     public void MainMenu()
     {
         gameIsPaused = false;
-        SceneManager.LoadScene("SceneMainMenu");
+        ResumeGame();
+        SceneLoader.Instance.LoadMainMenu();
 
     }
     

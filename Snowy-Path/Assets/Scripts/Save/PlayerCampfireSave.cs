@@ -31,8 +31,10 @@ public class PlayerCampfireSave : MonoBehaviour, ISaveable {
             {
                 if (item.CompareTag("SceneWorld"))
                 {
+                    SceneManager.SetActiveScene(scene);
                     item.SetActive(true);
                 }
+
             }
 
             // We go through all campfire in scene
@@ -50,6 +52,7 @@ public class PlayerCampfireSave : MonoBehaviour, ISaveable {
                             CharacterController charController = GetComponent<CharacterController>();
                             charController.enabled = false;
                             this.transform.position = respawnTransform.position;
+                            this.transform.eulerAngles = new Vector3(14, -104, -83);
                             charController.enabled = true;
 
                         }
