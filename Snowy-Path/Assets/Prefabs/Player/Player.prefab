@@ -700,6 +700,8 @@ GameObject:
   - component: {fileID: 3285272303609797703}
   - component: {fileID: 4332464178990953502}
   - component: {fileID: 1785841322}
+  - component: {fileID: 630075970967409871}
+  - component: {fileID: 1193125888}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -1556,6 +1558,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wakeUp: {fileID: 9117313888805475487}
+--- !u!114 &630075970967409871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419045311392325752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7beae13292b8fa46959fd1e04ce0681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundStepFactor: 2.6
+  stepPath: event:/Wolf/Wolf Mouvement
+--- !u!114 &1193125888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419045311392325752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
+  ListenerNumber: -1
 --- !u!1 &1437083488589697643
 GameObject:
   m_ObjectHideFlags: 0
@@ -1566,6 +1596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1437083488589697642}
   - component: {fileID: 7900053022104568126}
+  - component: {fileID: 1517979622}
   m_Layer: 13
   m_Name: Hands
   m_TagString: Untagged
@@ -1608,6 +1639,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1517979622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437083488589697643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3fb36ed95a94d42b3b8df901ed1dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  torchAttackPath: event:/Tools/TorchAttack_Flesh
+  stepPath: event:/Wolf/Wolf Mouvement
 --- !u!1 &1437083488951513502
 GameObject:
   m_ObjectHideFlags: 0
@@ -2581,7 +2626,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8225597999148151143}
   - component: {fileID: 410683821521478531}
-  - component: {fileID: 1437348241768580849}
   - component: {fileID: 2369845488065866319}
   m_Layer: 0
   m_Name: Camera
@@ -2650,14 +2694,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &1437348241768580849
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6103431294691062051}
-  m_Enabled: 1
 --- !u!114 &2369845488065866319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3648,15 +3684,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba9d9a285ec01ac42901567307947131, type: 3}
---- !u!4 &2455747783616537331 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ba9d9a285ec01ac42901567307947131,
-    type: 3}
-  m_PrefabInstance: {fileID: 2710648987099579672}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2981173176494127177 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ba9d9a285ec01ac42901567307947131,
+    type: 3}
+  m_PrefabInstance: {fileID: 2710648987099579672}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2455747783616537331 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ba9d9a285ec01ac42901567307947131,
     type: 3}
   m_PrefabInstance: {fileID: 2710648987099579672}
   m_PrefabAsset: {fileID: 0}
@@ -4120,15 +4156,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fba9b2a79f5db74d9bc1cb6dfd14c74, type: 3}
---- !u!4 &244781210777698373 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8336000668804314966, guid: 3fba9b2a79f5db74d9bc1cb6dfd14c74,
-    type: 3}
-  m_PrefabInstance: {fileID: 8127536385342551827}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4823973852070380360 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3618921503951303771, guid: 3fba9b2a79f5db74d9bc1cb6dfd14c74,
+    type: 3}
+  m_PrefabInstance: {fileID: 8127536385342551827}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &244781210777698373 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8336000668804314966, guid: 3fba9b2a79f5db74d9bc1cb6dfd14c74,
     type: 3}
   m_PrefabInstance: {fileID: 8127536385342551827}
   m_PrefabAsset: {fileID: 0}
