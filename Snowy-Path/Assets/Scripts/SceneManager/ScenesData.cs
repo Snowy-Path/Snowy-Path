@@ -8,4 +8,6 @@ public class ScenesData : ScriptableObject
 {
     public List<GameScene> worldScenes = new List<GameScene>();
     public List<GameScene> mainMenuScenes = new List<GameScene>();
+    public GameScene playerScene;
+    public GameScene SystemScene;
 }
