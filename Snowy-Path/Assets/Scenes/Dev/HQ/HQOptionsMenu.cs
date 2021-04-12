@@ -39,7 +39,7 @@ public class HQOptionsMenu : MonoBehaviour
         }
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.RefreshShownValue();
-        LoadSettings(currentResolutionIndex);
+        
     }
 
     public void SetVolume(float volume)
@@ -106,6 +106,7 @@ public class HQOptionsMenu : MonoBehaviour
                    aaDropdown.value);
         PlayerPrefs.SetFloat("VolumePreference",
                    currentVolume);
+        SetResolution(resolutionDropdown.value);
     }
 
 
