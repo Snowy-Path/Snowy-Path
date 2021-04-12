@@ -745,7 +745,7 @@ CharacterController:
   m_Height: 1.6
   m_Radius: 0.3
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.35
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.8, z: 0}
@@ -763,7 +763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 410683821521478531}
   groundChecker: {fileID: 5406974196566107804}
-  groundCheckRadius: 0.3
+  groundCheckRadius: 0.25
   groundLayer:
     serializedVersion: 2
     m_Bits: 513
@@ -779,8 +779,8 @@ MonoBehaviour:
   airSpeedFactor: 0.7
   airSpeedX: 3
   airSpeedZ: 2
-  slideSpeed: 10
-  slideDetectorRadius: 0.3
+  slideFactor: 0.4
+  slideDetectorRadius: 0.2
   lookSpeed: 0.1
   lookYLimit: 80
 --- !u!114 &3567335824391310408
@@ -1303,24 +1303,24 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1.22885
-      outSlope: 1.22885
+      inSlope: 0.4184788
+      outSlope: 0.4184788
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.13551924
+      outWeight: 0.7189183
     - serializedVersion: 3
-      time: 0.5510469
-      value: 0.15640688
-      inSlope: 0.21031025
-      outSlope: -0.09449316
-      tangentMode: 1
+      time: 0.5798765
+      value: 0.1075207
+      inSlope: 0.3310152
+      outSlope: 0.3310152
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.2794678
-      outWeight: 0.7140862
+      inWeight: 0.33333334
+      outWeight: 0.17999907
     - serializedVersion: 3
-      time: 0.99733067
-      value: 0.33648133
+      time: 0.9956217
+      value: 0.25164247
       inSlope: 0.6723197
       outSlope: 0.6723197
       tangentMode: 0
@@ -2546,7 +2546,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5566260884993206076}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.85, z: 0}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 0.47620803, y: 0.8, z: 0.320982}
   m_Children: []
   m_Father: {fileID: 1419045311392325748}
@@ -2919,7 +2919,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8192476097884933435}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.127, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1419045311392325748}
