@@ -18,6 +18,8 @@ public class SceneLoader : MonoBehaviour
     bool isPlayerLoaded = false;
     bool isLoadingCompleted = false;
 
+    public List<LevelLoader> levelLoadersActive;
+
 
     private void Awake()
     {
@@ -34,6 +36,7 @@ public class SceneLoader : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
+        levelLoadersActive = new List<LevelLoader>();
 
     }
 
