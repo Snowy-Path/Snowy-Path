@@ -25,6 +25,17 @@ public class HQOptionsMenu : MonoBehaviour
     private void Start()
     {
         
+
+    }
+
+    public void SetVolume(float volume)
+    {
+        //audioMixer.SetFloat("Volume", volume);
+        currentVolume = volume;
+    }
+
+    public void SetResolution(int resolutionIndex)
+    {
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
         resolutions = Screen.resolutions;
@@ -41,16 +52,6 @@ public class HQOptionsMenu : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.RefreshShownValue();
         //LoadSettings(currentResolutionIndex);
-    }
-
-    public void SetVolume(float volume)
-    {
-        //audioMixer.SetFloat("Volume", volume);
-        currentVolume = volume;
-    }
-
-    public void SetResolution(int resolutionIndex)
-    {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width,
                   resolution.height, Screen.fullScreen);
