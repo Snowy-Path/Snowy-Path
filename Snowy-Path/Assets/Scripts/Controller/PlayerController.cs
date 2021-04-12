@@ -234,7 +234,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void ApplyGravity() {
-        yVelocity.y += gravity * Time.deltaTime;
+        if (IsGrounded && yVelocity.y < 0) {
+            yVelocity.y = gravity * Time.deltaTime;
+        }
+        else
+            yVelocity.y += gravity * Time.deltaTime;
     }
 
     private void Jump() {
@@ -289,7 +293,7 @@ public class PlayerController : MonoBehaviour {
 
         //Get angle of slope
         float slopeAngle = Vector3.Angle(colliderHit.normal, Vector3.up);
-        bool slideAngle = controller.slopeLimit < slopeAngle && slopeAngle <= 90;
+        bool slideAngle = controller.slopeLimit < slopeAngle && slopeAngle <= 80;
         //Detect if player feet touch ground
         bool sphereCheck = Physics.CheckSphere(transform.position, slideDetectorRadius, groundLayer);
 
