@@ -277,6 +277,11 @@ public class WolfController : MonoBehaviour, IEnnemyController {
         StateMachine<EWolfState> patrol = new StateMachine<EWolfState>(EWolfState.Patrol, EWolfState.MoveToWaypoint, parent,
             onEntry: (state) => {
                 m_agent.speed = m_patrolSpeed;
+            },
+            onExit: (state) => {
+                if (!m_animator.IsInTransition(0) && IsInInspectAnimation()) {
+                    m_animator.SetTrigger("HeardPlayer");
+                }
             }
         );
 
@@ -708,6 +713,14 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     /// <returns>True if in the Aggro animation, false otherwise.</returns>
     private bool IsInAggroAnimation() {
         return m_animator.GetCurrentAnimatorStateInfo(0).IsName("Aggro");
+    }
+
+    /// <summary>
+    /// Check if the animator is in the Inspect animation.
+    /// </summary>
+    /// <returns>True if in the Inspect animation, false otherwise.</returns>
+    private bool IsInInspectAnimation() {
+        return m_animator.GetCurrentAnimatorStateInfo(0).IsName("Inspect");
     }
     #endregion
 
