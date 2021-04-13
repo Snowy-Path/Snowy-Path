@@ -4,14 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using System.IO;
 
 public class HQOptionsMenu : MonoBehaviour
 {
     //public AudioMixer audioMixer;
     public TMPro.TMP_Dropdown resolutionDropdown;
     public TMPro.TMP_Dropdown aaDropdown;
-    public Slider volumeSlider;
-    float currentVolume;
+    public Slider generalSlider;
+    public Slider musicSlider;
+    public Slider soundsSlider;
+    public AudioSettings audioSettings;
     Resolution[] resolutions;
 
     Transform menuPanel;
@@ -23,18 +26,6 @@ public class HQOptionsMenu : MonoBehaviour
     bool waitingForKey;
 
     private void Start()
-    {
-        
-
-    }
-
-    public void SetVolume(float volume)
-    {
-        //audioMixer.SetFloat("Volume", volume);
-        currentVolume = volume;
-    }
-
-    public void SetResolution(int resolutionIndex)
     {
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
@@ -51,6 +42,13 @@ public class HQOptionsMenu : MonoBehaviour
         }
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.RefreshShownValue();
+
+    }
+
+
+    public void SetResolution(int resolutionIndex)
+    {
+
         //LoadSettings(currentResolutionIndex);
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width,
@@ -88,7 +86,7 @@ public class HQOptionsMenu : MonoBehaviour
                 aaDropdown.value = 0;
                 break;
             case 4: // quality level - very high
-               // textureDropdown.value = 0;
+                    // textureDropdown.value = 0;
                 aaDropdown.value = 1;
                 break;
             case 5: // quality level - ultra
@@ -100,44 +98,74 @@ public class HQOptionsMenu : MonoBehaviour
         //qualityDropdown.value = qualityIndex;
     }
 
-    public void SaveSettings()
-    {
-        PlayerPrefs.SetInt("ResolutionPreference",
-                   resolutionDropdown.value);
-        PlayerPrefs.SetInt("AntiAliasingPreference",
-                   aaDropdown.value);
-        PlayerPrefs.SetFloat("VolumePreference",
-                   currentVolume);
-        SetResolution(resolutionDropdown.value);
-    }
 
 
     public void LoadSettings(int currentResolutionIndex)
     {
 
-        if (PlayerPrefs.HasKey("ResolutionPreference"))
-            resolutionDropdown.value =
-                         PlayerPrefs.GetInt("ResolutionPreference");
-        else
-            resolutionDropdown.value = currentResolutionIndex;
 
-        if (PlayerPrefs.HasKey("AntiAliasingPreference"))
-            aaDropdown.value =
-                         PlayerPrefs.GetInt("AntiAliasingPreference");
-        else
-            aaDropdown.value = 1;
 
-        if (PlayerPrefs.HasKey("VolumePreference"))
-            volumeSlider.value =
-                        PlayerPrefs.GetFloat("VolumePreference");
-        else
-            volumeSlider.value =
-                        PlayerPrefs.GetFloat("VolumePreference");
     }
 
+    public void SaveSettings()
+    {
+        string serializedsettings =
+        "Resolution, " + resolutionDropdown.value.ToString() + "\n" +
+        "Antialiasing, " + aaDropdown.value.ToString() + "\n" +
+        "Master Volume, " + audioSettings.MasterVolume.ToString() + "\n" +
+        "Music Volume, " + audioSettings.MusicVolume.ToString() + "\n" +
+        "Sounds Effect Volume, " + audioSettings.SFXVolume.ToString() + "\n";
 
+        string destination = Application.persistentDataPath + "/savesettings.txt";
+
+        if (File.Exists(destination))
+            File.WriteAllText(destination, serializedsettings);
+        else
+            File.Create(destination).Dispose();
+            File.WriteAllText(destination, serializedsettings);
+
+
+        // Read
+        //StreamReader reader = new StreamReader("savesettings.txt");
+        //string lineA = reader.ReadLine();
+        //string[] splitA = lineA.Split(',');
+        //scoreA = int.Parse(splitA[1]);
+
+        //string lineB = reader.ReadLine();
+        //string[] splitB = lineB.Split(',');
+        //scoreB = int.Parse(splitB[1]);
+
+
+
+    }
+
+    public void LoadFile()
+    {
+        string destination = Application.persistentDataPath + "/savesettings.txt";
+        FileStream file;
+
+        if (File.Exists(destination)) file = File.OpenRead(destination);
+        else
+        {
+            Debug.LogError("File not found");
+            return;
+        }
+
+        //BinaryFormatter bf = new BinaryFormatter();
+        //GameData data = (GameData)bf.Deserialize(file);
+        //file.Close();
+
+        //currentScore = data.score;
+        //currentName = data.name;
+        //currentTimePlayed = data.timePlayed;
+
+        //Debug.Log(data.name);
+        //Debug.Log(data.score);
+        //Debug.Log(data.timePlayed);
+    }
 
 }
+
 
 
 
