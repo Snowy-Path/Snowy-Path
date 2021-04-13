@@ -18,13 +18,33 @@ public enum OffMeshLinkMoveMethod {
 [RequireComponent(typeof(NavMeshAgent))]
 public class AgentLinkMover : MonoBehaviour {
     public OffMeshLinkMoveMethod m_Method = OffMeshLinkMoveMethod.NormalSpeed;
-    public AnimationCurve m_Curve = new AnimationCurve();
+    //public AnimationCurve m_Curve = new AnimationCurve();
 
-    IEnumerator Start() {
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+    private NavMeshAgent agent;
+
+    /// <summary>
+    /// Retrieves the NavMeshAgent and disable auto traverse link.
+    /// </summary>
+    void Start() {
+        agent = GetComponent<NavMeshAgent>();
         agent.autoTraverseOffMeshLink = false;
+    }
+
+    /// <summary>
+    /// Start the OffMeshLink navigation coroutine.
+    /// </summary>
+    void OnEnable() {
+        StartCoroutine(TraverseLink());
+    }
+
+
+    /// <summary>
+    /// The OffMeshLink navigation coroutine. It determines the correct way to move the agent on a link.
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator TraverseLink() {
         while (true) {
-            if (agent.isOnOffMeshLink) {
+            if (agent != null && agent.isOnOffMeshLink) {
                 if (m_Method == OffMeshLinkMoveMethod.NormalSpeed)
                     yield return StartCoroutine(NormalSpeed(agent));
                 //else if (m_Method == OffMeshLinkMoveMethod.Parabola)
@@ -93,7 +113,14 @@ public class AgentLinkMover : MonoBehaviour {
     /// <param name="endPos">Position to look at.</param>
     private void RotateAgent(NavMeshAgent agent, Vector3 endPos) {
         Quaternion rotate = Quaternion.LookRotation(endPos - agent.transform.position);
+
+        //Debug.Log(Quaternion.Dot(rotate, agent.transform.rotation));
+        if (Quaternion.Dot(rotate, agent.transform.rotation) >= 0.95f) {
+            return;
+        }
+
         agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotate, Time.deltaTime * Mathf.Deg2Rad * agent.angularSpeed);
+
     }
 
 }
