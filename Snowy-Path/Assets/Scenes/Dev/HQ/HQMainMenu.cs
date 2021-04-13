@@ -2,22 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class HQMainMenu : MonoBehaviour
 {
-    public GameObject OptionsMenu, GalleryMenu, CreditsMenu, MainMenu;
-    public GameObject OptionsButton, GalleryButton, CreditsButton;
-    public GameObject MainMenuFirstButton, OptionsFirstButton, GalleryFirstButton, CreditsFirstButton;
-
+    public GameObject OptionsMenu, CreditsMenu, MainMenu;
+    public GameObject OptionsButton, CreditsButton;
+    public GameObject MainMenuFirstButton, OptionsFirstButton, CreditsFirstButton;
+    public PlayerInput playerInput;
     public void Start()
     {
+
+        ////playerInput = FindObjectOfType<PlayerInput>();
+        //playerInput.SwitchCurrentActionMap("PauseMenu");
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(MainMenuFirstButton);
+
 
     }
     public void PlayGame()
     {
+        //playerInput.SwitchCurrentActionMap("Gameplay");
         SceneLoader.Instance.LoadWorld();
         SaveSystem.Instance.SetCurrentSave(0);
 
@@ -27,6 +33,15 @@ public class HQMainMenu : MonoBehaviour
     {
         Debug.Log("Quit");
         Application.Quit();
+    }
+
+    public void DeleteSave()
+    {
+        if(SaveSystem.Instance != null)
+        {
+            SaveSystem.Instance.DeleteSave(0);
+            SaveSystem.Instance.CreateNewSave(0);
+        }
     }
 
 
@@ -46,12 +61,7 @@ public class HQMainMenu : MonoBehaviour
         SetFocus(CreditsFirstButton);
     }
 
-    public void OpenGallery()
-    {
-        GalleryMenu.SetActive(true);
-        MainMenu.SetActive(false);
-        SetFocus(GalleryFirstButton);
-    }
+
 #endregion
 
     #region CLOSE MENUS
@@ -70,12 +80,6 @@ public class HQMainMenu : MonoBehaviour
         SetFocus(CreditsButton);
     }
 
-    public void ExitGallery()
-    {
-        GalleryMenu.SetActive(false);
-        MainMenu.SetActive(true);
-        SetFocus(GalleryButton);
-    }
     #endregion
 
     #region NAVIGATION METHODS
@@ -97,7 +101,6 @@ public class HQMainMenu : MonoBehaviour
     {
         CreditsMenu.SetActive(false);
         OptionsMenu.SetActive(false);
-        GalleryMenu.SetActive(false);
         MainMenu.SetActive(true);
     }
     #endregion

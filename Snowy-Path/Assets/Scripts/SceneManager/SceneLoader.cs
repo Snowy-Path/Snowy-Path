@@ -18,6 +18,8 @@ public class SceneLoader : MonoBehaviour
     bool isPlayerLoaded = false;
     bool isLoadingCompleted = false;
 
+    public List<LevelLoader> levelLoadersActive;
+
 
     private void Awake()
     {
@@ -34,6 +36,7 @@ public class SceneLoader : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
+        levelLoadersActive = new List<LevelLoader>();
 
     }
 
@@ -43,16 +46,16 @@ public class SceneLoader : MonoBehaviour
         LoadMainMenu();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (isPlayerLoaded && !isLoadingCompleted)
             Spawn();
 
-        if (worldHasLoaded)
+        if (worldHasLoaded && !isPlayerLoaded)
         {
-            if (!SceneManager.GetSceneByName("PlayerScene").IsValid())
+            if (!SceneManager.GetSceneByName(sceneDataBase.playerScene.sceneName).IsValid())
             {
-                SceneManager.LoadScene("PlayerScene", LoadSceneMode.Additive);
+                SceneManager.LoadScene(sceneDataBase.playerScene.sceneName, LoadSceneMode.Additive);
                 isPlayerLoaded = true;
             }
         }
@@ -60,22 +63,7 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        // We unload the world scene and load the main menu
-        foreach (GameScene scene in sceneDataBase.worldScenes)
-        {
-            // Check if the scene already loaded
-            if (SceneManager.GetSceneByName(scene.sceneName).IsValid())
-            {
-                SceneManager.UnloadSceneAsync(scene.sceneName);
-            }
-        }
-
-        // Check if the scene already loaded
-        if (SceneManager.GetSceneByName("PlayerScene").IsValid())
-        {
-            SceneManager.UnloadSceneAsync("PlayerScene");
-        }
-
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneDataBase.SystemScene.sceneName));
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -90,6 +78,27 @@ public class SceneLoader : MonoBehaviour
         }
 
 
+        // Check if the scene already loaded
+        if (SceneManager.GetSceneByName(sceneDataBase.playerScene.sceneName).IsValid())
+        {
+            SceneManager.UnloadSceneAsync(sceneDataBase.playerScene.sceneName);
+        }
+
+
+
+        // We unload the world scene and load the main menu
+        foreach (GameScene scene in sceneDataBase.worldScenes)
+        {
+            // Check if the scene already loaded
+            if (SceneManager.GetSceneByName(scene.sceneName).IsValid())
+            {
+                SceneManager.UnloadSceneAsync(scene.sceneName);
+            }
+        }
+
+        isLoadingCompleted = false;
+        isPlayerLoaded = false;
+        worldHasLoaded = false;
     }
 
     public void LoadWorld()
@@ -97,6 +106,8 @@ public class SceneLoader : MonoBehaviour
         // Hide menu
         //Show Loading Screen
         loadingScreen.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         foreach (GameScene scene in sceneDataBase.worldScenes)
         {
@@ -105,7 +116,6 @@ public class SceneLoader : MonoBehaviour
             {
                 // Add the scene to the async operation list
                 scenesToLoad.Add(SceneManager.LoadSceneAsync(scene.sceneName, LoadSceneMode.Additive));
-                //SceneManager.LoadScene(scene.sceneName, LoadSceneMode.Additive);
             }
         }
         StartCoroutine(LoadingScreen());
@@ -121,6 +131,7 @@ public class SceneLoader : MonoBehaviour
             }
         }
 
+
     }
     IEnumerator LoadingScreen()
     {
@@ -130,9 +141,11 @@ public class SceneLoader : MonoBehaviour
         {
             while (!scenesToLoad[i].isDone)
             {
-                totalProgress += scenesToLoad[i].progress;
-                slider.value = totalProgress / scenesToLoad.Count;
-                loadingProgressText.text = totalProgress * 100f + "%";
+                totalProgress += scenesToLoad[i].progress / 2;
+                Debug.Log(totalProgress + "/" + scenesToLoad.Count);
+                Debug.Log((totalProgress / scenesToLoad.Count));
+                slider.value = (totalProgress / scenesToLoad.Count);
+                loadingProgressText.text = (int)(totalProgress * 100f / scenesToLoad.Count) + "%";
 
                 yield return null;
             }
