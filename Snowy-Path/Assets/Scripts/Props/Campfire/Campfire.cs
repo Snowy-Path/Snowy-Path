@@ -57,7 +57,6 @@ public class Campfire : MonoBehaviour
             // Process exctinction and reset timer if its value is higher than cooldown
             if (extinctionFireTimer > extinctionTime) {
                 extinctionFireTimer = 0;
-
                 ExctinguishFire();
             }
         }
@@ -81,6 +80,7 @@ public class Campfire : MonoBehaviour
     /// </summary>
     internal void ExctinguishFire() {
         isFireActive = false;
+        extinctionFireTimer = 0;
         onExtinguish.Invoke();
         heatSource.enabled = false;
     }

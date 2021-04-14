@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour {
 
     [Space]
     [Header("Slide")]
-    [SerializeField] float slideSpeed = 5f;
+    [SerializeField] float slideFactor = 5f;
     [SerializeField] float slideDetectorRadius = 0.3f;
 
     [Space]
@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour {
     private CharacterController controller;
     private bool canMove = true;
     private bool isSliding = false;
+    private float slideSpeed = 0;
     private ControllerColliderHit colliderHit;
 
     private bool isGrounded = true;
@@ -95,6 +96,7 @@ public class PlayerController : MonoBehaviour {
 
     private HUD playerHud;
     private HandController handController;
+    private FootStepsAudio playerAudio;
 
     #region INPUTS SYSTEM EVENTS
     public void OnMove(InputAction.CallbackContext context) {
@@ -138,6 +140,7 @@ public class PlayerController : MonoBehaviour {
         controller = GetComponent<CharacterController>();
         playerHud = GetComponent<HUD>();
         handController = GetComponentInChildren<HandController>();
+        playerAudio = GetComponent<FootStepsAudio>();
 
         //Lock and hide cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -172,6 +175,11 @@ public class PlayerController : MonoBehaviour {
             if (!isSliding && IsGrounded)
                 speed = Mathf.Lerp(speed, (xzVelocity.magnitude * SpeedFactor) / currentSpeed, 0.1f);
             handsAnimator.SetFloat("Speed", speed);
+            playerAudio.SetParam(xzVelocity.magnitude * SpeedFactor);
+        }
+        else {
+            handsAnimator.SetFloat("Speed", 0);
+            playerAudio.SetParam(0);
         }
         controller.Move(yVelocity * Time.deltaTime);
     }
@@ -202,7 +210,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (isGrounded/* && !isSliding*/) { //Testing before remove
+        if (isGrounded && !isSliding) {
 
             //Compute x and z speed
             Vector3 sprintInputs = inputs;
@@ -234,7 +242,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void ApplyGravity() {
-        yVelocity.y += gravity * Time.deltaTime;
+        if (IsGrounded && yVelocity.y < 0) {
+            yVelocity.y = gravity;
+        }
+        else
+            yVelocity.y += gravity * Time.deltaTime;
     }
 
     private void Jump() {
@@ -287,6 +299,10 @@ public class PlayerController : MonoBehaviour {
         if (colliderHit == null)
             return;
 
+        //Reset slideSpeed
+        if (!isSliding)
+            slideSpeed = 0;
+
         //Get angle of slope
         float slopeAngle = Vector3.Angle(colliderHit.normal, Vector3.up);
         bool slideAngle = controller.slopeLimit < slopeAngle && slopeAngle <= 90;
@@ -295,6 +311,7 @@ public class PlayerController : MonoBehaviour {
 
         //If on ground and slope + if the Y velocity is not positive
         if (sphereCheck && slideAngle && yVelocity.y <= 0) {
+            isSliding = true;
 
             //Detect slope direction
             var normal = colliderHit.normal;
@@ -302,8 +319,8 @@ public class PlayerController : MonoBehaviour {
             var dir = Vector3.ProjectOnPlane(normal.normalized, colliderHit.normal).normalized;
 
             //Make player slide
-            isSliding = true;
-            controller.Move(dir * slopeAngle / 90f * slideSpeed * Time.deltaTime);
+            slideSpeed += slopeAngle / 90f * slideFactor;
+            controller.Move(dir * slideSpeed * Time.deltaTime);
         }
         else
             isSliding = false;
@@ -320,6 +337,8 @@ public class PlayerController : MonoBehaviour {
     private void OnDrawGizmos() {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(groundChecker.position, groundCheckRadius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, slideDetectorRadius);
     }
 
 

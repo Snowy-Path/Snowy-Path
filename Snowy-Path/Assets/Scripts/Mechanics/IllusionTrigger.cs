@@ -7,20 +7,20 @@ public class IllusionTrigger : MonoBehaviour {
     [Range(1, 90)]
     [SerializeField] float activationAngle;
     [SerializeField] GameObject renderedObject;
-    [SerializeField] Camera camera;
+    //[SerializeField] Camera camera;
 
     private void OnTriggerStay(Collider other) {
         if (other.CompareTag("Player")) {
             float angle = Vector3.Angle(other.transform.forward, transform.right);
             Debug.Log(angle);
             renderedObject.SetActive(angle <= activationAngle);
-            camera.gameObject.SetActive(angle <= activationAngle);
+            //camera.gameObject.SetActive(angle <= activationAngle);
         }
     }
 
     private void OnTriggerExit(Collider other) {
         renderedObject.SetActive(false);
-        camera.gameObject.SetActive(false);
+        //camera.gameObject.SetActive(false);
     }
 
 

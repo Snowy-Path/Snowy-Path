@@ -38,6 +38,9 @@ public class Temperature : MonoBehaviour {
     [Tooltip("[WIP] Blizzard loss rate (should be replaced by weather class)")]
     public float blizzardLossRate = 1f; // FIXME: Replace this once weather system is implemented
 
+    [Tooltip("Sprint loss rate")]
+    public float sprintLossRate = 0.5f; 
+
     private float m_currentTemperature = 0;
     private float m_healthRegenerationCooldownTimer = 0;
     private float m_damageHypothermiaCooldownTimer = 0;
@@ -51,6 +54,7 @@ public class Temperature : MonoBehaviour {
     private Inventory m_inventory;
     private Weather m_weather;
     private HUD m_playerHUD;
+    private PlayerController m_controller;
 
     void Start() {
         m_currentTemperature = maxTemperature;
@@ -59,6 +63,7 @@ public class Temperature : MonoBehaviour {
         m_inventory = GetComponent<Inventory>();
         m_weather = GetComponent<Weather>();
         m_playerHUD = GetComponent<HUD>();
+        m_controller = GetComponent<PlayerController>();
     }
 
     void Update() {
@@ -127,7 +132,9 @@ public class Temperature : MonoBehaviour {
         if (cloth != null)
             clothType = (float)cloth.type;
 
-        return (1 + (float)m_weather.CurrentWeather.blizzardStrength / 100f) - ((1 + (float)m_weather.CurrentWeather.blizzardStrength / 100f) * clothType / 100f);
+        float blizzardRate = 1 + (float)m_weather.CurrentWeather.blizzardStrength / 100f;
+        float sprintRate = (m_controller.IsRunning) ? sprintLossRate : 0f;
+        return blizzardRate - (blizzardRate * clothType / 100f) + sprintRate;
     }
 
     void OnTriggerEnter(Collider other) {
