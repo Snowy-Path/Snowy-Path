@@ -9,7 +9,7 @@ public class MeshDestroy : MonoBehaviour {
     [SerializeField] int cuts = 6;
     [SerializeField] float explosionForce = 100;
     [SerializeField] float explosionRadius = 15;
-    [SerializeField] Vector3 boundExpansion = Vector3.zero;
+    [SerializeField] Vector3 boundExpansion = new Vector3(0.5f, 0.5f, 0.5f);
 
     [Header("Fade out")]
     [SerializeField] float fadeOutCooldown = 2f;
