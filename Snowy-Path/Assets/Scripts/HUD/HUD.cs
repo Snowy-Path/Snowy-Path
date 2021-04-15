@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 public class HUD : MonoBehaviour {
 
@@ -11,7 +12,7 @@ public class HUD : MonoBehaviour {
 
     [Header("Breath")]
     [Range(0, 1)] [SerializeField] float startBreath = 0.5f;
-    [SerializeField] AnimationCurve breathCurve;
+    //[SerializeField] AnimationCurve breathCurve;
 
     [Header("Freeze")]
     [Range(0, 1)] [SerializeField] float startFreeze1 = 0.5f;
@@ -37,24 +38,25 @@ public class HUD : MonoBehaviour {
     [SerializeField] Image freeze1Overlay;
     [SerializeField] Image freeze2Overlay;
     [SerializeField] Image blueOverlay;
-    [SerializeField] Image breathOverlay;
+    //[SerializeField] Image breathOverlay;
+    [SerializeField] private VisualEffect breathEffect;
 
 
     private GenericHealth playerHealth;
-    private PlayerController controller;
+    //private PlayerController controller;
     private bool coldBreath = false;
-    private float breathTimer;
-    private int breathDiv = 6;
+    //private float breathTimer;
+    //private int breathDiv = 6;
  
 
     private void Start() {
         ResetOverlays();
         playerHealth = GetComponent<GenericHealth>();
-        controller = GetComponent<PlayerController>();
+        //controller = GetComponent<PlayerController>();
     }
 
     private void Update() {
-        ColdBreath();
+        //ColdBreath();
         //if (Keyboard.current.kKey.wasPressedThisFrame)
         //    playerHealth.Hit(1);
         //if (Keyboard.current.jKey.wasPressedThisFrame)
@@ -70,21 +72,20 @@ public class HUD : MonoBehaviour {
         freeze1Overlay.SetAlpha(0);
         freeze2Overlay.SetAlpha(0);
         blueOverlay.SetAlpha(0);
-        breathOverlay.SetAlpha(0);
+        //breathOverlay.SetAlpha(0);
     }
 
-    public void ColdBreath() {
-        float breathSpeed = controller.CurrentSpeed / breathDiv;
+    //public void ColdBreath() {
+    //    float breathSpeed = controller.CurrentSpeed / breathDiv;
 
-        breathTimer += Time.deltaTime * breathSpeed;
-        if (breathTimer > breathCurve.keys[breathCurve.keys.Length - 1].time)
-            breathTimer = 0;
-        if (coldBreath) {
-            breathOverlay.SetAlpha(breathCurve.Evaluate(breathTimer));
-        }
-        else
-            breathOverlay.SetAlpha(0);
-    }
+    //    breathTimer += Time.deltaTime * breathSpeed;
+    //    if (breathTimer > breathCurve.keys[breathCurve.keys.Length - 1].time)
+    //        breathTimer = 0;
+    //    if (coldBreath) {
+    //        breathOverlay.SetAlpha(breathCurve.Evaluate(breathTimer));
+    //    } else
+    //        breathOverlay.SetAlpha(0);
+    //}
 
     public void SetStamina(float staminaRatio) {
         staminaOverlay.SetAlpha(staminaCurve.Evaluate(staminaRatio));
@@ -133,7 +134,11 @@ public class HUD : MonoBehaviour {
 
 
     public void SetFreezeOverlays(float temperatureRatio) {
-        coldBreath = temperatureRatio < startBreath;
+        if (temperatureRatio < startBreath) {
+            breathEffect.enabled = true;
+        } else {
+            breathEffect.enabled = false;
+        }
         CalculateFreezeAlpha(ref freeze1Overlay, temperatureRatio, startFreeze1);
         CalculateFreezeAlpha(ref freeze2Overlay, temperatureRatio, startFreeze2);
 
