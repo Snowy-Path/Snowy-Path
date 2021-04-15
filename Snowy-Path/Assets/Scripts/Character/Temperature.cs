@@ -181,4 +181,8 @@ public class Temperature : MonoBehaviour {
     public float GetCurrentTemperature() {
         return m_currentTemperature;
     }
+    public void FullTemperature()
+    {
+        m_currentTemperature = maxTemperature;
+    }
 }
