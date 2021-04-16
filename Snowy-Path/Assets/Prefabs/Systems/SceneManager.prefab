@@ -88,6 +88,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5056028579978527349}
   - component: {fileID: 5056028579978527348}
+  - component: {fileID: 2435893820679381738}
+  - component: {fileID: 4879718686847270513}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -126,6 +128,33 @@ MonoBehaviour:
   loadingScreen: {fileID: 6360499829192089996}
   slider: {fileID: 5056028580705017060}
   loadingProgressText: {fileID: 1454946695087300658}
+  levelLoadersActive: []
+--- !u!114 &2435893820679381738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5056028579978527243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f612ae444019a1b48b49ec5bcc477fe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: 
+--- !u!114 &4879718686847270513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5056028579978527243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d866cc2769fd3a3499a1a8e9c14fbe5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 8d54a8d2-ee41-4a68-b5b2-cac9450f9a7f
 --- !u!1 &5056028580127192806
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,7 +425,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -2.5, y: 0}
   m_SizeDelta: {x: 5, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -26,7 +26,6 @@ public class HQMainMenu : MonoBehaviour
         //playerInput.SwitchCurrentActionMap("Gameplay");
         SceneLoader.Instance.LoadWorld();
         SaveSystem.Instance.SetCurrentSave(0);
-
     }
 
     public void QuitGame()
