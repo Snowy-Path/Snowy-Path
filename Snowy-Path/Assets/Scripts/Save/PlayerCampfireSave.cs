@@ -13,8 +13,6 @@ public class PlayerCampfireSave : MonoBehaviour, ISaveable {
     public string SceneName { get => sceneName; set => sceneName = value; }
 
     public void RestorePlayerAtCampfire() {
-
-
         if(lastCampfireId == "")
         {
             CharacterController charController = GetComponent<CharacterController>();
@@ -26,17 +24,6 @@ public class PlayerCampfireSave : MonoBehaviour, ISaveable {
         }
         else
         {
-            Scene scene = SceneManager.GetSceneByName(sceneName);
-            foreach (GameObject item in scene.GetRootGameObjects())
-            {
-                if (item.CompareTag("SceneWorld"))
-                {
-                    SceneManager.SetActiveScene(scene);
-                    item.SetActive(true);
-                }
-
-            }
-
             // We go through all campfire in scene
             foreach (Campfire item in FindObjectsOfType<Campfire>())
             {
@@ -54,7 +41,6 @@ public class PlayerCampfireSave : MonoBehaviour, ISaveable {
                             this.transform.position = respawnTransform.position;
                             this.transform.eulerAngles = new Vector3(14, -104, -83);
                             charController.enabled = true;
-
                         }
                     }
                 }

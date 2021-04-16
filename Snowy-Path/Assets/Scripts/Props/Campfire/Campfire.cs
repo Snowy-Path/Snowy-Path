@@ -69,7 +69,8 @@ public class Campfire : MonoBehaviour
         isFireActive = true;
         PlayerCampfireSave playerCampfireSave = FindObjectOfType<PlayerCampfireSave>();
         playerCampfireSave.LastCampfireId = this.id;
-        playerCampfireSave.SceneName = this.gameObject.scene.name;
+        SceneSave sceneSave = FindObjectOfType<SceneSave>();
+        sceneSave.SceneName = this.gameObject.scene.name;
         heatSource.enabled = true;
         onIgnite.Invoke();
 
