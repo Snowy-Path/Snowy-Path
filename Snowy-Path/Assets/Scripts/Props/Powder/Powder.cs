@@ -20,7 +20,10 @@ public class Powder : MonoBehaviour {
     /// Call the PowderController in order to activate the effect.
     /// </summary>
     public void ActivatePowderEffects() {
-        powderController.ActivatePowderEffects();
+        if(powderController != null)
+        {
+            powderController.ActivatePowderEffects();
+        }
     }
 
 }
