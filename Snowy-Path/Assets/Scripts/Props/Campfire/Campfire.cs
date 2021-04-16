@@ -72,6 +72,11 @@ public class Campfire : MonoBehaviour
         SceneSave sceneSave = FindObjectOfType<SceneSave>();
         sceneSave.SceneName = this.gameObject.scene.name;
         heatSource.enabled = true;
+        GenericHealth playerHealth = playerCampfireSave.gameObject.GetComponent<GenericHealth>();
+        if(playerHealth != null)
+        {
+            playerHealth.FullHeal();
+        }
         onIgnite.Invoke();
 
     }

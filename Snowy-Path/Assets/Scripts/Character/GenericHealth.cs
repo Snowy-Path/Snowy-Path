@@ -65,4 +65,12 @@ public class GenericHealth : MonoBehaviour
     {
         return m_currentHealth;
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "HeatSource")
+        {
+            FullHeal();
+        }
+    }
 }
