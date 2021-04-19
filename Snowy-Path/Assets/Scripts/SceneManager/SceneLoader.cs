@@ -298,6 +298,7 @@ public class SceneLoader : MonoBehaviour
             Debug.LogError("SpawnPlayerPosition not found, character will be put at (0,0,0)");
             charController.transform.position = new Vector3(0,0,0);
         }
+
         charController.transform.eulerAngles = new Vector3(14, -104, -83);
         charController.enabled = true;
 
