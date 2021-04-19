@@ -57,7 +57,6 @@ public class Campfire : MonoBehaviour
             // Process exctinction and reset timer if its value is higher than cooldown
             if (extinctionFireTimer > extinctionTime) {
                 extinctionFireTimer = 0;
-
                 ExctinguishFire();
             }
         }
@@ -70,8 +69,14 @@ public class Campfire : MonoBehaviour
         isFireActive = true;
         PlayerCampfireSave playerCampfireSave = FindObjectOfType<PlayerCampfireSave>();
         playerCampfireSave.LastCampfireId = this.id;
-        playerCampfireSave.SceneName = this.gameObject.scene.name;
+        SceneSave sceneSave = FindObjectOfType<SceneSave>();
+        sceneSave.SceneName = this.gameObject.scene.name;
         heatSource.enabled = true;
+        GenericHealth playerHealth = playerCampfireSave.gameObject.GetComponent<GenericHealth>();
+        if(playerHealth != null)
+        {
+            playerHealth.FullHeal();
+        }
         onIgnite.Invoke();
 
     }
@@ -81,6 +86,7 @@ public class Campfire : MonoBehaviour
     /// </summary>
     internal void ExctinguishFire() {
         isFireActive = false;
+        extinctionFireTimer = 0;
         onExtinguish.Invoke();
         heatSource.enabled = false;
     }

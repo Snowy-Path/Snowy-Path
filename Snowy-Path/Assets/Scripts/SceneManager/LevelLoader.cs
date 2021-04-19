@@ -13,14 +13,14 @@ public class LevelLoader : MonoBehaviour
 
     private void Update()
     {
-        if (isSceneNeedToBeShowned)
-        {
-            ShowScene();
-        }
-        if (isSceneNeedToBeHided )
-        {
-            HideScene();
-        }
+        //if (isSceneNeedToBeShowned)
+        //{
+        //    ShowScene();
+        //}
+        //if (isSceneNeedToBeHided )
+        //{
+        //    HideScene();
+        //}
     }
 
     LevelLoader GetLevelLoaderHighestPriority()
