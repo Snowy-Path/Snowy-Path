@@ -182,6 +182,39 @@ public class SceneLoader : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Load the world via to a specific level
+    /// This method was made just for a debug build not for release
+    /// </summary>
+    /// <param name="sceneToLoad"></param>
+    public void LoadWorld(GameScene sceneToLoad)
+    {
+        // Hide menu
+        //Show Loading Screen
+        loadingScreen.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        SaveSystem.Instance.Load();
+
+        // Check if the scene already loaded
+        if (!SceneManager.GetSceneByName(sceneToLoad.sceneName).IsValid())
+        {
+            // Add the scene to the async operation list
+            scenesToLoad.Add(SceneManager.LoadSceneAsync(sceneToLoad.sceneName, LoadSceneMode.Additive));
+        }
+
+        StartCoroutine(LoadingScreen());
+
+        // We unload the main menu scene
+
+        // Check if the scene already loaded
+        if (SceneManager.GetSceneByName(sceneDataBase.mainMenuScenes.sceneName).IsValid())
+        {
+            SceneManager.UnloadSceneAsync(sceneDataBase.mainMenuScenes.sceneName);
+        }
+    }
+
 
     //public void LoadWorld()
     //{
