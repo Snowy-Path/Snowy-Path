@@ -11,6 +11,12 @@ public class DynamicSet : MonoBehaviour {
     void Start() {
         UpdateDisplay();
         DynamicSystem.onEventRegistered += UpdateDisplay; //Bind display change with DynamicSystem
+
+        foreach (DynamicSystem.DynamicCondition condition in conditions) {
+            if (condition.dynamicEvent == null) {
+                Debug.LogError($"Dynamic set in {gameObject.name} condition has no event linked !");
+            }
+        }
     }
 
     /// <summary>
@@ -21,6 +27,9 @@ public class DynamicSet : MonoBehaviour {
 
         //Evaluate all conditions, if at least one is not validated, then result is false
         foreach (DynamicSystem.DynamicCondition condition in conditions) {
+            if (condition.dynamicEvent == null)
+                break;
+
             if (!DynamicSystem.CheckEvent(condition)) {
                 result = false;
                 break;
@@ -34,3 +43,4 @@ public class DynamicSet : MonoBehaviour {
             alternativeSet.gameObject.SetActive(result);
     }
 }
+
