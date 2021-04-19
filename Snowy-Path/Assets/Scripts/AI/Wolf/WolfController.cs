@@ -737,9 +737,9 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     /// <param name="attackDamage">The damage value to be dealt.</param>
     public void Hit(EToolType toolType, int attackDamage) {
         m_genericHealth.Hit(attackDamage);
-        m_effectAnimator.SetTrigger("TookDamage");
         if (toolType == EToolType.Pistol) { // If Gun, stun wolf
             SetStunState();
+            m_effectAnimator.SetTrigger("TookDamage");
         }
     }
     #endregion

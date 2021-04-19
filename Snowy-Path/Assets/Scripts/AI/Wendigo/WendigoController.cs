@@ -67,9 +67,9 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     /// <param name="toolType">The type of tool that called this method. Used to differentiate between Pistol and Torch weapons.</param>
     /// <param name="attackDamage">The damage value to be dealt.</param>
     public void Hit(EToolType toolType, int attackDamage) {
-        m_effectAnimator.SetTrigger("TookDamage");
         if (toolType == EToolType.Pistol) { // If Gun
             StartCoroutine(ReduceSpeed());
+            m_effectAnimator.SetTrigger("TookDamage");
         }
     }
     #endregion
