@@ -12,10 +12,13 @@ public class TeleportPlayer : MonoBehaviour
 
     public void Start()
     {
-        text = GetComponentInChildren<TextMeshProUGUI>();
         if (sceneToLoad != null)
         {
-            text.text = sceneToLoad.sceneName;
+            text = GetComponentInChildren<TextMeshProUGUI>();
+            if(text != null)
+            {
+                text.text = sceneToLoad.sceneName;
+            }
         }
     }
 
