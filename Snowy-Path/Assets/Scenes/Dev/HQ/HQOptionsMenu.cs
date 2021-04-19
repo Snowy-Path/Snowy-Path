@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using System.IO;
+using System.Linq;
 
 public class HQOptionsMenu : MonoBehaviour
 {
@@ -14,16 +15,14 @@ public class HQOptionsMenu : MonoBehaviour
     public Slider generalSlider;
     public Slider musicSlider;
     public Slider soundsSlider;
+    public Slider gammaSlider;
     public AudioSettings audioSettings;
+    private float GammaCorrection;
     Resolution[] resolutions;
 
-    Transform menuPanel;
-    Event keyEvent;
-    Text buttonText;
-    KeyCode newKey;
+    List<string> stringList = new List<string>();
+    List<string[]> parsedList = new List<string[]>();
 
-
-    bool waitingForKey;
 
     private void Start()
     {
@@ -42,17 +41,26 @@ public class HQOptionsMenu : MonoBehaviour
         }
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.RefreshShownValue();
+        LoadSettings();
 
+    }
+
+    private void OnEnable()
+    {
+        stringList = new List<string>();
+        parsedList = new List<string[]>();
+        LoadSettings();
     }
 
 
     public void SetResolution(int resolutionIndex)
     {
-
+        resolutionDropdown.value = resolutionIndex;
         //LoadSettings(currentResolutionIndex);
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width,
                   resolution.height, Screen.fullScreen);
+
     }
 
     public void SetAntiAliasing(int aaIndex)
@@ -100,8 +108,49 @@ public class HQOptionsMenu : MonoBehaviour
 
 
 
-    public void LoadSettings(int currentResolutionIndex)
+    void Update()
     {
+
+        RenderSettings.ambientLight = new Color(GammaCorrection, GammaCorrection, GammaCorrection, 1.0f);
+
+    }
+
+    public void SetGamma(float gammavalue)
+    {
+
+        GammaCorrection = gammavalue;
+
+    }
+
+
+
+
+    public void LoadSettings()
+    {
+
+        string destination = Application.persistentDataPath + "/savesettings.txt";
+        if (File.Exists(destination))
+        {
+            readTextFiled(destination);
+            parseList();
+            //Debug.Log(parsedList[0][1]);
+            //Debug.Log();
+            SetResolution(int.Parse(parsedList[0][1]));
+            SetQuality(int.Parse(parsedList[1][1]));
+            audioSettings.MasterVolumeLevel(float.Parse(parsedList[2][1]));
+            audioSettings.MusicVolumeLevel(float.Parse(parsedList[3][1]));
+            audioSettings.SFXVolumeLevel(float.Parse(parsedList[4][1]));
+            generalSlider.value = float.Parse(parsedList[2][1]);
+            musicSlider.value = float.Parse(parsedList[3][1]);
+            soundsSlider.value = float.Parse(parsedList[4][1]);
+            gammaSlider.value = float.Parse(parsedList[5][1]);
+        }
+
+        else
+        {
+            Debug.LogError("File not found");
+            return;
+        }
 
 
 
@@ -114,7 +163,8 @@ public class HQOptionsMenu : MonoBehaviour
         "Antialiasing, " + aaDropdown.value.ToString() + "\n" +
         "Master Volume, " + audioSettings.MasterVolume.ToString() + "\n" +
         "Music Volume, " + audioSettings.MusicVolume.ToString() + "\n" +
-        "Sounds Effect Volume, " + audioSettings.SFXVolume.ToString() + "\n";
+        "Sounds Effect Volume, " + audioSettings.SFXVolume.ToString() + "\n" +
+        "Gamma, " + gammaSlider.value.ToString() + "\n";
 
         string destination = Application.persistentDataPath + "/savesettings.txt";
 
@@ -122,48 +172,45 @@ public class HQOptionsMenu : MonoBehaviour
             File.WriteAllText(destination, serializedsettings);
         else
             File.Create(destination).Dispose();
-            File.WriteAllText(destination, serializedsettings);
-
-
-        // Read
-        //StreamReader reader = new StreamReader("savesettings.txt");
-        //string lineA = reader.ReadLine();
-        //string[] splitA = lineA.Split(',');
-        //scoreA = int.Parse(splitA[1]);
-
-        //string lineB = reader.ReadLine();
-        //string[] splitB = lineB.Split(',');
-        //scoreB = int.Parse(splitB[1]);
+        File.WriteAllText(destination, serializedsettings);
 
 
 
     }
 
-    public void LoadFile()
-    {
-        string destination = Application.persistentDataPath + "/savesettings.txt";
-        FileStream file;
 
-        if (File.Exists(destination)) file = File.OpenRead(destination);
-        else
+
+    void readTextFiled(string path)
+    {
+        StreamReader inp_stm = new StreamReader(path);
+
+        while (!inp_stm.EndOfStream)
         {
-            Debug.LogError("File not found");
-            return;
+            string inp_ln = inp_stm.ReadLine();
+
+            stringList.Add(inp_ln);
         }
 
-        //BinaryFormatter bf = new BinaryFormatter();
-        //GameData data = (GameData)bf.Deserialize(file);
-        //file.Close();
+        inp_stm.Close();
 
-        //currentScore = data.score;
-        //currentName = data.name;
-        //currentTimePlayed = data.timePlayed;
 
-        //Debug.Log(data.name);
-        //Debug.Log(data.score);
-        //Debug.Log(data.timePlayed);
     }
 
+    void parseList()
+    {
+        for (int i = 0; i < stringList.Count; i++)
+        {
+            string[] temp = stringList[i].Split(","[0]);
+            for (int j = 0; j < temp.Length; j++)
+            {
+                temp[j] = temp[j].Trim();  //removed the blank spaces
+            }
+            parsedList.Add(temp);
+
+
+        }
+
+    }
 }
 
 
