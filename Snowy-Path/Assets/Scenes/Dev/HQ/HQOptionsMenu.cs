@@ -21,6 +21,10 @@ public class HQOptionsMenu : MonoBehaviour
     public Resolution[] resolutions;
 
 
+    private void Awake()
+    {
+        resolutions = Screen.resolutions;
+    }
 
 
 

@@ -96,7 +96,6 @@ public class PlayerController : MonoBehaviour {
 
     private HUD playerHud;
     private HandController handController;
-    private FootStepsAudio playerAudio;
 
     #region INPUTS SYSTEM EVENTS
     public void OnMove(InputAction.CallbackContext context) {
@@ -140,7 +139,6 @@ public class PlayerController : MonoBehaviour {
         controller = GetComponent<CharacterController>();
         playerHud = GetComponent<HUD>();
         handController = GetComponentInChildren<HandController>();
-        playerAudio = GetComponent<FootStepsAudio>();
 
         //Lock and hide cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -174,11 +172,9 @@ public class PlayerController : MonoBehaviour {
             if (!isSliding && IsGrounded)
                 speed = Mathf.Lerp(speed, (xzVelocity.magnitude * SpeedFactor) / currentSpeed, 0.1f);
             handsAnimator.SetFloat("Speed", speed);
-            playerAudio.SetParam(xzVelocity.magnitude * SpeedFactor);
         }
         else {
             handsAnimator.SetFloat("Speed", 0);
-            playerAudio.SetParam(0);
         }
         controller.Move(yVelocity * Time.deltaTime);
     }

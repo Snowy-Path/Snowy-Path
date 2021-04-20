@@ -47,9 +47,6 @@ public class RayCastGun : MonoBehaviour, IHandTool
         //Get references of components linerenderer and camera
         //laserLine = GetComponent<LineRenderer>();
         fpsCam = GetComponentInParent<Camera>();
-
-        //Set ammo at full capacity
-        ammo = maxMagazineCapacity;
         readyToShoot = true;
 
         //Init reload Time
@@ -210,31 +207,19 @@ public class RayCastGun : MonoBehaviour, IHandTool
         //Calculate cuurentMagazineCapacity
         currentMagazineCapacity = maxMagazineCapacity - ammo;
         IsBusy = false;
-        //If the player have more ammo than the size of magazine
-        if (maxAmmo >= maxMagazineCapacity) {
-            //Full reload
-            maxAmmo -= currentMagazineCapacity;
-            ammo = maxMagazineCapacity;
-            reloading = false;
-            currentMagazineCapacity = 0;
-        }
-
-        if (maxAmmo < maxMagazineCapacity) {
-            //Else, it depends on the current magazine capacity
-            if (maxAmmo > currentMagazineCapacity) {
-                ammo = maxMagazineCapacity;
-                maxAmmo -= currentMagazineCapacity;
-                reloading = false;
-            }
-
-            else {
-                ammo = currentMagazineCapacity + maxAmmo;
-                maxAmmo = 0;
-                reloading = false;
-
-            }
-        }
+        reloading = false;
     }
 
+    public void Ammobox()
+    {
+        if (ammo < maxAmmo)
+            ammo += 1;
+        
+    }
+
+    public void Ammopile()
+    {
+        ammo = maxAmmo;
+    }
 
 }
