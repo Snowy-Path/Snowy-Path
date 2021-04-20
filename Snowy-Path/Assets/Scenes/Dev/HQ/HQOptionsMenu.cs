@@ -25,17 +25,7 @@ public class HQOptionsMenu : MonoBehaviour
 
     private void Awake()
     {
-        string serializedsettings =
-        "Resolution, 1" + "\n" +
-        "Antialiasing, 1" + "\n" +
-        "Master Volume, 1" + "\n" +
-        "Music Volume, 1" + "\n" +
-        "Sounds Effect Volume, 1" + "\n" +
-        "Gamma, 0.5" + "\n";
 
-        string destination = Application.persistentDataPath + "/savesettings.txt";
-        File.Create(destination).Dispose();
-        File.WriteAllText(destination, serializedsettings);
 
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
@@ -52,14 +42,23 @@ public class HQOptionsMenu : MonoBehaviour
         }
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.RefreshShownValue();
+
+        string serializedsettings =
+        "Resolution, "+ currentResolutionIndex.ToString() + "\n" +
+        "Antialiasing, 1" + "\n" +
+        "Master Volume, 1" + "\n" +
+        "Music Volume, 1" + "\n" +
+        "Sounds Effect Volume, 1" + "\n" +
+        "Gamma, 0.5" + "\n";
+
+        string destination = Application.persistentDataPath + "/savesettings.txt";
+        File.Create(destination).Dispose();
+        File.WriteAllText(destination, serializedsettings);
+
+
         LoadSettings();
     }
 
-    private void Start()
-    {
-
-
-    }
 
     private void OnEnable()
     {
