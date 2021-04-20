@@ -5,27 +5,10 @@ using UnityEngine.Playables;
 
 public class SaveInteractable : MonoBehaviour
 {
-
-    public PlayableDirector playableDeath;
-    public PlayableDirector playableWakeup;
-
-    public void Start()
-    {
-        playableDeath.stopped += OnPlayableDirectorStopped;
-        playableWakeup.stopped += OnPlayableDirectorStopped;
-    }
     public void LaunchSave() {
         if (SaveSystem.Instance)
             SaveSystem.Instance.Save();
         else
             Debug.LogError("Can't find SaveSystem in scene");
-    }
-
-    void OnPlayableDirectorStopped(PlayableDirector aDirector)
-    {
-        if (playableWakeup == aDirector)
-        {
-            this.transform.eulerAngles = new Vector3(0, 0, this.transform.rotation.z);
-        }
     }
 }

@@ -4,23 +4,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using System.IO;
+using System.Linq;
 
 public class HQOptionsMenu : MonoBehaviour
 {
     //public AudioMixer audioMixer;
     public TMPro.TMP_Dropdown resolutionDropdown;
     public TMPro.TMP_Dropdown aaDropdown;
-    public Slider volumeSlider;
-    float currentVolume;
+    public Slider generalSlider;
+    public Slider musicSlider;
+    public Slider soundsSlider;
+    public Slider gammaSlider;
+    public AudioSettings audioSettings;
+    private float GammaCorrection;
     Resolution[] resolutions;
 
-    Transform menuPanel;
-    Event keyEvent;
-    Text buttonText;
-    KeyCode newKey;
+    List<string> stringList = new List<string>();
+    List<string[]> parsedList = new List<string[]>();
 
-
-    bool waitingForKey;
+    private void Awake()
+    {
+        resolutions = Screen.resolutions;
+    }
 
     private void Start()
     {
@@ -39,20 +45,26 @@ public class HQOptionsMenu : MonoBehaviour
         }
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.RefreshShownValue();
-        
+        LoadSettings();
+
     }
 
-    public void SetVolume(float volume)
+    private void OnEnable()
     {
-        //audioMixer.SetFloat("Volume", volume);
-        currentVolume = volume;
+        stringList = new List<string>();
+        parsedList = new List<string[]>();
+        LoadSettings();
     }
+
 
     public void SetResolution(int resolutionIndex)
     {
+        resolutionDropdown.value = resolutionIndex;
+        //LoadSettings(currentResolutionIndex);
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width,
                   resolution.height, Screen.fullScreen);
+
     }
 
     public void SetAntiAliasing(int aaIndex)
@@ -86,7 +98,7 @@ public class HQOptionsMenu : MonoBehaviour
                 aaDropdown.value = 0;
                 break;
             case 4: // quality level - very high
-               // textureDropdown.value = 0;
+                    // textureDropdown.value = 0;
                 aaDropdown.value = 1;
                 break;
             case 5: // quality level - ultra
@@ -98,44 +110,113 @@ public class HQOptionsMenu : MonoBehaviour
         //qualityDropdown.value = qualityIndex;
     }
 
+
+
+    void Update()
+    {
+
+        RenderSettings.ambientLight = new Color(GammaCorrection, GammaCorrection, GammaCorrection, 1.0f);
+
+    }
+
+    public void SetGamma(float gammavalue)
+    {
+
+        GammaCorrection = gammavalue;
+
+    }
+
+
+
+
+    public void LoadSettings()
+    {
+
+        string destination = Application.persistentDataPath + "/savesettings.txt";
+        if (File.Exists(destination))
+        {
+            readTextFiled(destination);
+            parseList();
+            //Debug.Log(parsedList[0][1]);
+            //Debug.Log();
+            SetResolution(int.Parse(parsedList[0][1]));
+            SetQuality(int.Parse(parsedList[1][1]));
+            //audioSettings.MasterVolumeLevel(float.Parse(parsedList[2][1]));
+            //audioSettings.MusicVolumeLevel(float.Parse(parsedList[3][1]));
+            //audioSettings.SFXVolumeLevel(float.Parse(parsedList[4][1]));
+            generalSlider.value = float.Parse(parsedList[2][1]);
+            musicSlider.value = float.Parse(parsedList[3][1]);
+            soundsSlider.value = float.Parse(parsedList[4][1]);
+            gammaSlider.value = float.Parse(parsedList[5][1]);
+        }
+
+        else
+        {
+            Debug.LogError("File not found");
+            return;
+        }
+
+
+
+    }
+
     public void SaveSettings()
     {
-        PlayerPrefs.SetInt("ResolutionPreference",
-                   resolutionDropdown.value);
-        PlayerPrefs.SetInt("AntiAliasingPreference",
-                   aaDropdown.value);
-        PlayerPrefs.SetFloat("VolumePreference",
-                   currentVolume);
-        SetResolution(resolutionDropdown.value);
+        string serializedsettings =
+        "Resolution, " + resolutionDropdown.value.ToString() + "\n" +
+        "Antialiasing, " + aaDropdown.value.ToString() + "\n" +
+        //"Master Volume, " + audioSettings.MasterVolume.ToString() + "\n" +
+        //"Music Volume, " + audioSettings.MusicVolume.ToString() + "\n" +
+        //"Sounds Effect Volume, " + audioSettings.SFXVolume.ToString() + "\n" +
+        "Gamma, " + gammaSlider.value.ToString() + "\n";
+
+        string destination = Application.persistentDataPath + "/savesettings.txt";
+
+        if (File.Exists(destination))
+            File.WriteAllText(destination, serializedsettings);
+        else
+            File.Create(destination).Dispose();
+        File.WriteAllText(destination, serializedsettings);
+
+
+
     }
 
 
-    public void LoadSettings(int currentResolutionIndex)
+
+    void readTextFiled(string path)
     {
+        StreamReader inp_stm = new StreamReader(path);
 
-        if (PlayerPrefs.HasKey("ResolutionPreference"))
-            resolutionDropdown.value =
-                         PlayerPrefs.GetInt("ResolutionPreference");
-        else
-            resolutionDropdown.value = currentResolutionIndex;
+        while (!inp_stm.EndOfStream)
+        {
+            string inp_ln = inp_stm.ReadLine();
 
-        if (PlayerPrefs.HasKey("AntiAliasingPreference"))
-            aaDropdown.value =
-                         PlayerPrefs.GetInt("AntiAliasingPreference");
-        else
-            aaDropdown.value = 1;
+            stringList.Add(inp_ln);
+        }
 
-        if (PlayerPrefs.HasKey("VolumePreference"))
-            volumeSlider.value =
-                        PlayerPrefs.GetFloat("VolumePreference");
-        else
-            volumeSlider.value =
-                        PlayerPrefs.GetFloat("VolumePreference");
+        inp_stm.Close();
+
+
     }
 
+    void parseList()
+    {
+        for (int i = 0; i < stringList.Count; i++)
+        {
+            string[] temp = stringList[i].Split(","[0]);
+            for (int j = 0; j < temp.Length; j++)
+            {
+                temp[j] = temp[j].Trim();  //removed the blank spaces
+            }
+            parsedList.Add(temp);
 
 
+        }
+
+    }
 }
+
 
 
 

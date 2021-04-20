@@ -57,12 +57,20 @@ public class GenericHealth : MonoBehaviour
 
     public void FullHeal()
     {
-        m_currentHealth = maxHealth;
+        Heal(maxHealth);
     }
 
     /// WARNING: For debug purpose only
     public int GetCurrentHealth()
     {
         return m_currentHealth;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "HeatSource")
+        {
+            FullHeal();
+        }
     }
 }

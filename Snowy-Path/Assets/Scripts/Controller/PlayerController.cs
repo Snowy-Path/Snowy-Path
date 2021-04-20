@@ -96,7 +96,6 @@ public class PlayerController : MonoBehaviour {
 
     private HUD playerHud;
     private HandController handController;
-    private FootStepsAudio playerAudio;
 
     #region INPUTS SYSTEM EVENTS
     public void OnMove(InputAction.CallbackContext context) {
@@ -140,7 +139,6 @@ public class PlayerController : MonoBehaviour {
         controller = GetComponent<CharacterController>();
         playerHud = GetComponent<HUD>();
         handController = GetComponentInChildren<HandController>();
-        playerAudio = GetComponent<FootStepsAudio>();
 
         //Lock and hide cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -160,7 +158,6 @@ public class PlayerController : MonoBehaviour {
         else {
             controller.stepOffset = 0;
         }
-
         //Process movement
         ApplyGravity();
         UpdateVelocity();
@@ -175,11 +172,9 @@ public class PlayerController : MonoBehaviour {
             if (!isSliding && IsGrounded)
                 speed = Mathf.Lerp(speed, (xzVelocity.magnitude * SpeedFactor) / currentSpeed, 0.1f);
             handsAnimator.SetFloat("Speed", speed);
-            playerAudio.SetParam(xzVelocity.magnitude * SpeedFactor);
         }
         else {
             handsAnimator.SetFloat("Speed", 0);
-            playerAudio.SetParam(0);
         }
         controller.Move(yVelocity * Time.deltaTime);
     }
@@ -241,12 +236,18 @@ public class PlayerController : MonoBehaviour {
         inputs.z = contextInputs.y;
     }
 
+    bool groundedLastFrame = false;
     private void ApplyGravity() {
-        if (IsGrounded && yVelocity.y < 0) {
+        if (isGrounded && yVelocity.y <= 0) {
             yVelocity.y = gravity;
         }
-        else
+        else {
+            if (groundedLastFrame && yVelocity.y <= 0)
+                yVelocity.y = 0;
+
             yVelocity.y += gravity * Time.deltaTime;
+        }
+        groundedLastFrame = isGrounded;
     }
 
     private void Jump() {
