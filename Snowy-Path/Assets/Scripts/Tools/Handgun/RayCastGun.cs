@@ -6,8 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 
-public class RayCastGun : MonoBehaviour, IHandTool
-{
+public class RayCastGun : MonoBehaviour, IHandTool {
     public UnityEvent OnFire;
     public static bool endEnnemySet = false;
     public int damageDealt = 0;
@@ -36,9 +35,9 @@ public class RayCastGun : MonoBehaviour, IHandTool
     public int maxMagazineCapacity = 1;
     public int projectilePerShot;
 
-
     // AI script for the hearing sense
     public HearingSenseEmitter emitter;
+    public UnityEvent onEquip;
 
     public EToolType ToolType => EToolType.Pistol;
     public bool IsBusy { get; set; }
@@ -125,8 +124,7 @@ public class RayCastGun : MonoBehaviour, IHandTool
 
 
         //If the ray hit something
-        if (Physics.Raycast(rayOrigin, forwardVector, out hit, range, layers))
-        {
+        if (Physics.Raycast(rayOrigin, forwardVector, out hit, range, layers)) {
             //Set the corresponding endline point
             //laserLine.SetPosition(1, hit.point);
             if (hit.transform.CompareTag("Ennemy")) {
@@ -147,7 +145,6 @@ public class RayCastGun : MonoBehaviour, IHandTool
         //Shoot again if multiple projectiles
         if (projectileShot > 1 && maxAmmo > 0) {
             Invoke("Shot", groupfire);
-
         }
 
         //Update currentmagazinecapacity
@@ -185,6 +182,9 @@ public class RayCastGun : MonoBehaviour, IHandTool
 
     public void ToggleDisplay(bool display) {
         gameObject.SetActive(display);
+        if (display) {
+            onEquip.Invoke();
+        }
     }
 
     private void SecondaryInteraction() {
