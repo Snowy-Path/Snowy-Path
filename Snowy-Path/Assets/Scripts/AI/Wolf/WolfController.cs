@@ -23,6 +23,10 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     private Animator m_animator;
 
     [SerializeField]
+    [Tooltip("Effect animator.")]
+    private Animator m_effectAnimator;
+
+    [SerializeField]
     [Tooltip("The attack gameobject to active and deactivate while attacking the player.")]
     private GameObject m_attackGO;
 
@@ -735,6 +739,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
         m_genericHealth.Hit(attackDamage);
         if (toolType == EToolType.Pistol) { // If Gun, stun wolf
             SetStunState();
+            m_effectAnimator.SetTrigger("TookDamage");
         }
     }
     #endregion
