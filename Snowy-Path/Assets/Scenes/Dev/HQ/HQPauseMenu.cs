@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class HQPauseMenu : MonoBehaviour
 {
+    public OptionSettings inputDevice;
     public static bool gameIsPaused;
     public GameObject OptionsMenu, GalleryMenu, CreditsMenu, PauseMenu;
     public GameObject OptionsButton, GalleryButton, CreditsButton;
@@ -111,8 +112,12 @@ public class HQPauseMenu : MonoBehaviour
     /// <param name="go"></param>
     private void SetFocus(GameObject go)
     {
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(go);
+        if (inputDevice.gamepadconnected)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(go);
+        }
+
     }
 
     /// <summary>

@@ -16,55 +16,20 @@ public class HQOptionsMenu : MonoBehaviour
     public Slider musicSlider;
     public Slider soundsSlider;
     public Slider gammaSlider;
-    public AudioSettings audioSettings;
+    public OptionSettings option;
     private float GammaCorrection;
-    Resolution[] resolutions;
-
-    List<string> stringList = new List<string>();
-    List<string[]> parsedList = new List<string[]>();
-
-    private void Awake()
-    {
+    public Resolution[] resolutions;
 
 
-        resolutionDropdown.ClearOptions();
-        List<string> options = new List<string>();
-        resolutions = Screen.resolutions;
-        int currentResolutionIndex = 0;
-        for (int i = 0; i < resolutions.Length; i++)
-        {
-            string option = resolutions[i].width + " x " +
-                     resolutions[i].height;
-            options.Add(option);
-            if (resolutions[i].width == Screen.currentResolution.width
-                  && resolutions[i].height == Screen.currentResolution.height)
-                currentResolutionIndex = i;
-        }
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.RefreshShownValue();
-
-        string serializedsettings =
-        "Resolution, "+ currentResolutionIndex.ToString() + "\n" +
-        "Antialiasing, 1" + "\n" +
-        "Master Volume, 1" + "\n" +
-        "Music Volume, 1" + "\n" +
-        "Sounds Effect Volume, 1" + "\n" +
-        "Gamma, 0.5" + "\n";
-
-        string destination = Application.persistentDataPath + "/savesettings.txt";
-        File.Create(destination).Dispose();
-        File.WriteAllText(destination, serializedsettings);
 
 
-        LoadSettings();
-    }
 
 
     private void OnEnable()
     {
-        stringList = new List<string>();
-        parsedList = new List<string[]>();
-        LoadSettings();
+        //stringList = new List<string>();
+        //parsedList = new List<string[]>();
+        //LoadSettings();
     }
 
 
@@ -137,95 +102,37 @@ public class HQOptionsMenu : MonoBehaviour
 
     }
 
-
-
-
-    public void LoadSettings()
+    public int StartResolution()
     {
-
-        string destination = Application.persistentDataPath + "/savesettings.txt";
-        if (File.Exists(destination))
+        resolutionDropdown.ClearOptions();
+        List<string> options = new List<string>();
+        resolutions = Screen.resolutions;
+        int currentResolutionIndex = 0;
+        for (int i = 0; i < resolutions.Length; i++)
         {
-            readTextFiled(destination);
-            parseList();
-            //Debug.Log(parsedList[0][1]);
-            //Debug.Log();
-            SetResolution(int.Parse(parsedList[0][1]));
-            SetQuality(int.Parse(parsedList[1][1]));
-            audioSettings.MasterVolumeLevel(float.Parse(parsedList[2][1]));
-            audioSettings.MusicVolumeLevel(float.Parse(parsedList[3][1]));
-            audioSettings.SFXVolumeLevel(float.Parse(parsedList[4][1]));
-            generalSlider.value = float.Parse(parsedList[2][1]);
-            musicSlider.value = float.Parse(parsedList[3][1]);
-            soundsSlider.value = float.Parse(parsedList[4][1]);
-            gammaSlider.value = float.Parse(parsedList[5][1]);
+            string option = resolutions[i].width + " x " +
+                     resolutions[i].height;
+            options.Add(option);
+            if (resolutions[i].width == Screen.currentResolution.width
+                  && resolutions[i].height == Screen.currentResolution.height)
+                currentResolutionIndex = i;
         }
+        resolutionDropdown.AddOptions(options);
+        resolutionDropdown.RefreshShownValue();
+        return currentResolutionIndex;
+    }
 
-        else
-        {
-            Debug.LogError("File not found");
-            return;
-        }
-
-
+    public void ApplySettings()
+    {
+        option.SaveSettings();
 
     }
 
-    public void SaveSettings()
+    public void BackSettings()
     {
-        string serializedsettings =
-        "Resolution, " + resolutionDropdown.value.ToString() + "\n" +
-        "Antialiasing, " + aaDropdown.value.ToString() + "\n" +
-        "Master Volume, " + audioSettings.MasterVolume.ToString() + "\n" +
-        "Music Volume, " + audioSettings.MusicVolume.ToString() + "\n" +
-        "Sounds Effect Volume, " + audioSettings.SFXVolume.ToString() + "\n" +
-        "Gamma, " + gammaSlider.value.ToString() + "\n";
-
-        string destination = Application.persistentDataPath + "/savesettings.txt";
-
-        if (File.Exists(destination))
-            File.WriteAllText(destination, serializedsettings);
-        else
-            File.Create(destination).Dispose();
-        File.WriteAllText(destination, serializedsettings);
-
-
-
+        option.LoadSettings();
     }
 
-
-
-    void readTextFiled(string path)
-    {
-        StreamReader inp_stm = new StreamReader(path);
-
-        while (!inp_stm.EndOfStream)
-        {
-            string inp_ln = inp_stm.ReadLine();
-
-            stringList.Add(inp_ln);
-        }
-
-        inp_stm.Close();
-
-
-    }
-
-    void parseList()
-    {
-        for (int i = 0; i < stringList.Count; i++)
-        {
-            string[] temp = stringList[i].Split(","[0]);
-            for (int j = 0; j < temp.Length; j++)
-            {
-                temp[j] = temp[j].Trim();  //removed the blank spaces
-            }
-            parsedList.Add(temp);
-
-
-        }
-
-    }
 }
 
 
