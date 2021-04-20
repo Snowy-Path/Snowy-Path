@@ -164,7 +164,7 @@ public class RayCastGun : MonoBehaviour, IHandTool {
 
             if (maxAmmo > 0) {
                 //Start reloading method
-                SecondaryInteraction();
+                Reload();
             }
         }
     }
@@ -185,7 +185,7 @@ public class RayCastGun : MonoBehaviour, IHandTool {
     }
 
     private void SecondaryInteraction() {
-        Reload();
+        //Reload();
     }
 
     private void Reload() {
@@ -210,14 +210,14 @@ public class RayCastGun : MonoBehaviour, IHandTool {
         reloading = false;
     }
 
-    public void Ammobox()
+    public void ReloadOneAmmo()
     {
         if (ammo < maxAmmo)
             ammo += 1;
         
     }
 
-    public void Ammopile()
+    public void ReloadMax()
     {
         ammo = maxAmmo;
     }
