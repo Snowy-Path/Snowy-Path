@@ -57,7 +57,7 @@ public class GenericHealth : MonoBehaviour
 
     public void FullHeal()
     {
-        Heal(maxHealth);
+        m_currentHealth = maxHealth;
     }
 
     /// WARNING: For debug purpose only
