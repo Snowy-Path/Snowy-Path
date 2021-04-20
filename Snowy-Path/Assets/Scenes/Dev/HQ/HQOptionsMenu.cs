@@ -23,9 +23,20 @@ public class HQOptionsMenu : MonoBehaviour
     List<string> stringList = new List<string>();
     List<string[]> parsedList = new List<string[]>();
 
-
-    private void Start()
+    private void Awake()
     {
+        string serializedsettings =
+        "Resolution, 1" + "\n" +
+        "Antialiasing, 1" + "\n" +
+        "Master Volume, 1" + "\n" +
+        "Music Volume, 1" + "\n" +
+        "Sounds Effect Volume, 1" + "\n" +
+        "Gamma, 0.5" + "\n";
+
+        string destination = Application.persistentDataPath + "/savesettings.txt";
+        File.Create(destination).Dispose();
+        File.WriteAllText(destination, serializedsettings);
+
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
         resolutions = Screen.resolutions;
@@ -42,6 +53,11 @@ public class HQOptionsMenu : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.RefreshShownValue();
         LoadSettings();
+    }
+
+    private void Start()
+    {
+
 
     }
 
