@@ -37,6 +37,10 @@ public class PlayerCampfireSave : MonoBehaviour, ISaveable {
                         // If found the player transform is set as the last campfire respawn point
                         if (respawnTransform.gameObject.CompareTag("PlayerRespawnPoint"))
                         {
+                            if (item.lightForThisCampfire != null)
+                            {
+                                LightTransition.LightTransitionTo(item.lightForThisCampfire);
+                            }
                             CharacterController charController = GetComponent<CharacterController>();
                             PlayerController playerController = GetComponent<PlayerController>();
                             charController.enabled = false;
