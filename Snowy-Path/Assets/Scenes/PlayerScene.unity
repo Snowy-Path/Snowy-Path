@@ -167,8 +167,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 1771162520}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1735695832
 MonoBehaviour:
@@ -186,9 +186,19 @@ MonoBehaviour:
   fovMax: 65
   fovTransitionTime: 3
   dofMin: 10
-  dofMax: 13
+  dofMax: 12
   dofRecoveryTime: 2
   dofSpeed: 6
+  progressiveDof: 0
+  progressiveThreshold: 0.5
+  vignetteMin: 0.2
+  vignetteMax: 0.4
+--- !u!4 &1771162520 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1419045311392325748, guid: 10335cfd1ad372a47a05d871e6244960,
+    type: 3}
+  m_PrefabInstance: {fileID: 1785841319}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1785841319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -271,6 +281,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437083488951513502, guid: 10335cfd1ad372a47a05d871e6244960,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2109411006224006718, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}

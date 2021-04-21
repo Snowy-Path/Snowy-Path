@@ -21,12 +21,18 @@ public class PostProcessHandler : MonoBehaviour {
     public float dofSpeed = 5;
     //public AnimationCurve dofTransitionCurve;
 
+    public bool progressiveDof = false;
+    public float progressiveThreshold = 0.6f;
+
+    [Header("Vignette")]
+    public float vignetteMin = 0.2f;
+    public float vignetteMax = 0.35f;
+
     private PlayerController controller;
     private DepthOfField dofComponent;
     private Vignette vignetteComponent;
     private Camera playerCamera;
 
-    private float dofAxis;
     private bool inRecovery = false;
     private float targetDof;
 
@@ -42,16 +48,29 @@ public class PostProcessHandler : MonoBehaviour {
     }
 
 
-
     void Update() {
         float fovStep = (fovMax - fovMin) / fovTransitionTime * Time.deltaTime;
         float dofStep = dofMax / dofRecoveryTime * Time.deltaTime;
+        float vignetteStep = (vignetteMax - vignetteMin) / fovTransitionTime * Time.deltaTime;
+
         if (controller.IsRunning) {
             //FOV
-            playerCamera.fieldOfView = Mathf.Clamp(playerCamera.fieldOfView + fovStep*2, fovMin, fovMax);
+            playerCamera.fieldOfView = Mathf.Clamp(playerCamera.fieldOfView + fovStep * 2, fovMin, fovMax);
+
+            //DOF
             dofComponent.active = false;
-            dofAxis = 0;
             targetDof = dofMax;
+            if (progressiveDof && controller.SprintTimer / controller.maxSprintDuration > progressiveThreshold) {
+                dofComponent.active = true;
+                dofComponent.focalLength.value = Mathf.Clamp(dofComponent.focalLength.value + dofStep / 2, 1, dofMax);
+
+            }
+            else
+                dofComponent.active = true;
+
+            //VIGNETTE
+            vignetteComponent.intensity.value = Mathf.Clamp(vignetteComponent.intensity.value + vignetteStep, vignetteMin, vignetteMax);
+
         }
         else {
             inRecovery = !controller.IsRunning && controller.SprintTimer > 0;
@@ -65,11 +84,17 @@ public class PostProcessHandler : MonoBehaviour {
                 if (Mathf.Abs(dofComponent.focalLength.value - targetDof) < 0.1f)
                     targetDof = Random.Range(dofMin, dofMax);
                 dofComponent.focalLength.value = Mathf.Lerp(dofComponent.focalLength.value, targetDof, Time.deltaTime * dofSpeed);
-                Debug.Log(dofComponent.focalLength.value);
             }
             else {
                 dofComponent.focalLength.value = Mathf.Clamp(dofComponent.focalLength.value - dofStep, 1, dofMax);
             }
+
+            //VIGNETTE
+            vignetteComponent.intensity.value = Mathf.Clamp(vignetteComponent.intensity.value - vignetteStep, vignetteMin, vignetteMax);
         }
+
+        //Debug.Log(dofComponent.focalLength.value);
+        Debug.Log(vignetteComponent.intensity.value);
+
     }
 }

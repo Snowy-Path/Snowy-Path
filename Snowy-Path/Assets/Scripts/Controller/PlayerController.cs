@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
     [Space]
     [Header("Sprint")]
     [Tooltip("Max sprint duration")]
-    [SerializeField] float maxSprintDuration = 6f;
+    public float maxSprintDuration = 6f;
     [Tooltip("Recovery rate factor -> recovery = time * sprintRoveryRate")]
     [SerializeField] float sprintRecoveryRate = 0.5f;
     [Tooltip("Mulitplier for lateral speed when sprinting")]
