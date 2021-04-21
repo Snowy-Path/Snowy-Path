@@ -30,6 +30,8 @@ public class Campfire : MonoBehaviour {
 
     public bool showDebug = false;
 
+    public LightAndFogAsset lightForThisCampfire;
+
     private HeatSource heatSource;
 
     private float extinctionFireTimer = 0f;
