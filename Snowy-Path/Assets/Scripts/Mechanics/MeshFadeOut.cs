@@ -23,13 +23,13 @@ public class MeshFadeOut : MonoBehaviour {
             timer -= Time.deltaTime;
         }
         else{
-            if (mat.color.a > 0) {
-                Color newColor = mat.color;
-                newColor.a -= fadeOutRate * Time.deltaTime;
-                mat.color = newColor;
-                renderer.material = mat;
-            }
-            else
+            //if (mat.color.a > 0) {
+                //Color newColor = mat.color;
+                //newColor.a -= fadeOutRate * Time.deltaTime;
+                //mat.color = newColor;
+                //renderer.material = mat;
+            //}
+            //else
                 Destroy(gameObject);
         }
         

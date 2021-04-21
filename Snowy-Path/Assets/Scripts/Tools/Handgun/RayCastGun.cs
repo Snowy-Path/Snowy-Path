@@ -6,8 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 
-public class RayCastGun : MonoBehaviour, IHandTool
-{
+public class RayCastGun : MonoBehaviour, IHandTool {
     public UnityEvent OnFire;
     public static bool endEnnemySet = false;
     public int damageDealt = 0;
@@ -36,9 +35,9 @@ public class RayCastGun : MonoBehaviour, IHandTool
     public int maxMagazineCapacity = 1;
     public int projectilePerShot;
 
-
     // AI script for the hearing sense
     public HearingSenseEmitter emitter;
+    public UnityEvent onEquip;
 
     public EToolType ToolType => EToolType.Pistol;
     public bool IsBusy { get; set; }
@@ -47,9 +46,6 @@ public class RayCastGun : MonoBehaviour, IHandTool
         //Get references of components linerenderer and camera
         //laserLine = GetComponent<LineRenderer>();
         fpsCam = GetComponentInParent<Camera>();
-
-        //Set ammo at full capacity
-        ammo = maxMagazineCapacity;
         readyToShoot = true;
 
         //Init reload Time
@@ -125,8 +121,7 @@ public class RayCastGun : MonoBehaviour, IHandTool
 
 
         //If the ray hit something
-        if (Physics.Raycast(rayOrigin, forwardVector, out hit, range, layers))
-        {
+        if (Physics.Raycast(rayOrigin, forwardVector, out hit, range, layers)) {
             //Set the corresponding endline point
             //laserLine.SetPosition(1, hit.point);
             if (hit.transform.CompareTag("Ennemy")) {
@@ -147,7 +142,6 @@ public class RayCastGun : MonoBehaviour, IHandTool
         //Shoot again if multiple projectiles
         if (projectileShot > 1 && maxAmmo > 0) {
             Invoke("Shot", groupfire);
-
         }
 
         //Update currentmagazinecapacity
@@ -170,7 +164,7 @@ public class RayCastGun : MonoBehaviour, IHandTool
 
             if (maxAmmo > 0) {
                 //Start reloading method
-                SecondaryInteraction();
+                Reload();
             }
         }
     }
@@ -185,10 +179,13 @@ public class RayCastGun : MonoBehaviour, IHandTool
 
     public void ToggleDisplay(bool display) {
         gameObject.SetActive(display);
+        if (display) {
+            onEquip.Invoke();
+        }
     }
 
     private void SecondaryInteraction() {
-        Reload();
+        //Reload();
     }
 
     private void Reload() {
@@ -210,31 +207,19 @@ public class RayCastGun : MonoBehaviour, IHandTool
         //Calculate cuurentMagazineCapacity
         currentMagazineCapacity = maxMagazineCapacity - ammo;
         IsBusy = false;
-        //If the player have more ammo than the size of magazine
-        if (maxAmmo >= maxMagazineCapacity) {
-            //Full reload
-            maxAmmo -= currentMagazineCapacity;
-            ammo = maxMagazineCapacity;
-            reloading = false;
-            currentMagazineCapacity = 0;
-        }
-
-        if (maxAmmo < maxMagazineCapacity) {
-            //Else, it depends on the current magazine capacity
-            if (maxAmmo > currentMagazineCapacity) {
-                ammo = maxMagazineCapacity;
-                maxAmmo -= currentMagazineCapacity;
-                reloading = false;
-            }
-
-            else {
-                ammo = currentMagazineCapacity + maxAmmo;
-                maxAmmo = 0;
-                reloading = false;
-
-            }
-        }
+        reloading = false;
     }
 
+    public void ReloadOneAmmo()
+    {
+        if (ammo < maxAmmo)
+            ammo += 1;
+        
+    }
+
+    public void ReloadMax()
+    {
+        ammo = maxAmmo;
+    }
 
 }
