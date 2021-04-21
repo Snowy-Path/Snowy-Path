@@ -39,8 +39,9 @@ public class Temperature : MonoBehaviour {
     public float blizzardLossRate = 1f; // FIXME: Replace this once weather system is implemented
 
     [Tooltip("Sprint loss rate")]
-    public float sprintLossRate = 0.5f; 
+    public float sprintLossRate = 0.5f;
 
+    public float CurrentTemperature { get => m_currentTemperature; }
     private float m_currentTemperature = 0;
     private float m_healthRegenerationCooldownTimer = 0;
     private float m_damageHypothermiaCooldownTimer = 0;
@@ -53,7 +54,6 @@ public class Temperature : MonoBehaviour {
     private GenericHealth m_health;
     private Inventory m_inventory;
     private Weather m_weather;
-    private HUD m_playerHUD;
     private PlayerController m_controller;
 
     void Start() {
@@ -62,9 +62,10 @@ public class Temperature : MonoBehaviour {
         m_health = GetComponent<GenericHealth>();
         m_inventory = GetComponent<Inventory>();
         m_weather = GetComponent<Weather>();
-        m_playerHUD = GetComponent<HUD>();
         m_controller = GetComponent<PlayerController>();
     }
+
+    public void DebugTemperature(float t) { m_currentTemperature += t; }
 
     void Update() {
         // If the player is near at least one heat source, increase his temperature
@@ -123,7 +124,6 @@ public class Temperature : MonoBehaviour {
                 m_health.Hit(damageHypothermia);
             }
         }
-        m_playerHUD.SetFreezeOverlays(Mathf.Clamp(m_currentTemperature / maxTemperature, 0, 1));
     }
 
     float GetTemperatureLossRate() {
