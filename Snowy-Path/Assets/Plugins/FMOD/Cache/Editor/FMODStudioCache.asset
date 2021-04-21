@@ -23,6 +23,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 9.2
   Length: 15000
+--- !u!114 &-8560492643732078401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WaterCaveDrop/WaterCaveDropEnd
+  m_EditorClassIdentifier: 
+  Name: WaterCaveDropEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-8492132493119318880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38,10 +58,104 @@ MonoBehaviour:
   Path: Assets/Sounds/Banks/Wolf.bank
   Name: Wolf
   StudioPath: bank:/Wolf
-  lastModified: 637521790682394448
+  lastModified: 637545993309859346
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-8170385728497006225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambiance-Environnement/Blizzard A REVOIR !!!!!
+  m_EditorClassIdentifier: 
+  Path: event:/Ambiance-Environnement/Blizzard A REVOIR !!!!!
+  guid: 77de7e5cc32fcb42a8d41084d7d33655
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -6223532841117624153}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 857000
+--- !u!114 &-8128906443707740560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambiance-Environnement/WindPlains
+  m_EditorClassIdentifier: 
+  Path: event:/Ambiance-Environnement/WindPlains
+  guid: a4e05bf31590a34291e138e254f290ff
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -4677298756803282113}
+  MinDistance: 0.5
+  MaxDistance: 20
+  Length: 127000
+--- !u!114 &-7881216895211598588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Map Equipped Mode Stamp Validation
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Map Equipped Mode Stamp Validation
+  guid: 813645248111da40aca0411c9d895977
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
+--- !u!114 &-7253046091031309037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Key Item Pick Up
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Key Item Pick Up
+  guid: ebdce1150a85fa45b333df6976b1a270
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4000
 --- !u!114 &-7025831672429665221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,10 +171,146 @@ MonoBehaviour:
   Path: Assets/Sounds/Banks/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637521790682204442
+  lastModified: 637545993312811874
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-6588539194277344278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Gun Reload
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Gun Reload
+  guid: ae9cfbd6064027449897dc8261c45288
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3000
+--- !u!114 &-6451782559160066259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Oneira/Oneira Death
+  m_EditorClassIdentifier: 
+  Path: event:/Oneira/Oneira Death
+  guid: 6dc286dc5a4bcf4e8048b0b5071b9deb
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 16000
+--- !u!114 &-6223532841117624153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Blizzard A REVOIR !!!!!/Blizzard Changed
+  m_EditorClassIdentifier: 
+  Name: Blizzard Changed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-5924956773522506446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/TorchAll
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/TorchAll
+  guid: 657fe53610dc324f8d2187758d5007cc
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 1506685606422408775}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 36000
+--- !u!114 &-5665726671829717673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Clothes Damaged
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Clothes Damaged
+  guid: 3c825c688867a145a7148f8589f38c3e
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1730
+--- !u!114 &-5645028335480900222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Spyglass Equipped
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Spyglass Equipped
+  guid: ae1523630b61c44eb2afc40d344f050b
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1875
 --- !u!114 &-4988747338026073010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,12 +350,121 @@ MonoBehaviour:
   Path: Assets/Sounds/Banks/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637521790682214435
+  lastModified: 637545993309739239
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 1058
+    Value: 3346
   Exists: 1
+--- !u!114 &-4677298756803282113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WindPlains/EndWindPlain
+  m_EditorClassIdentifier: 
+  Name: EndWindPlain
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4674224730021336862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Map Equipped Mode Stamp Cancel
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Map Equipped Mode Stamp Cancel
+  guid: 8168726182f6de4abfcc1f622b4c1aa4
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
+--- !u!114 &-4479232453415039945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CampfireAll/Campfire End
+  m_EditorClassIdentifier: 
+  Name: Campfire End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4209818585679131384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Powder Extinguished
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Powder Extinguished
+  guid: 2c6246ab8ef8d940a86721261211db50
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5705
+--- !u!114 &-3608453211105005026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Map Equipped Edition Delete
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Map Equipped Edition Delete
+  guid: 50bbe4ab382a784d84beecbef7fab9ab
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
 --- !u!114 &-3568375911091632906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +478,53 @@ MonoBehaviour:
   m_Name: event:/Tools/TorchAttack_Flesh
   m_EditorClassIdentifier: 
   Path: event:/Tools/TorchAttack_Flesh
-  guid: 6a9b2f293903f84f9047cc8d316912db
+  guid: 531d7cad3d9610479cc3ce75b4bdf3da
+  Banks:
+  - {fileID: 6604019418416957208}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 805
+--- !u!114 &-3466169385347366271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wolf/Wolf Aggro
+  m_EditorClassIdentifier: 
+  Path: event:/Wolf/Wolf Aggro
+  guid: 3bf2296f2002704e8b38bb05689b52eb
+  Banks:
+  - {fileID: -8492132493119318880}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10200
+--- !u!114 &-3412115646402617043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Powder Usage
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Powder Usage
+  guid: 8e8da899d1bee44b9f6d98313e05f89a
   Banks:
   - {fileID: -7025831672429665221}
   IsStream: 0
@@ -128,7 +533,257 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 805
+  Length: 3461
+--- !u!114 &-3307364520215187056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Map Equipped Mode Stamp Draw
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Map Equipped Mode Stamp Draw
+  guid: 0b8231dfeaed964db266318c2a0e6d90
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2265
+--- !u!114 &-2610079172096239852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Sprint/Sprint End
+  m_EditorClassIdentifier: 
+  Name: Sprint End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-1592192072538018363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Key Item Used
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Key Item Used
+  guid: 859214b3457558459d9c803e18a01baa
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7288
+--- !u!114 &-1404196421984595112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Movement A REVOIR CHELOU/Oneira Footsteps changing soil
+  m_EditorClassIdentifier: 
+  Name: Oneira Footsteps changing soil
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-994276094145426650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/CampfireAll
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/CampfireAll
+  guid: f09af091fdb795448f18178b5c915384
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -4479232453415039945}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 25105
+--- !u!114 &-902909471261338415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Gun Bullet PickUp
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Gun Bullet PickUp
+  guid: e249376996d12d4ba8a4081aa97a7332
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1250
+--- !u!114 &-812018786911645983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Oneira Movement A REVOIR CHELOU
+  m_EditorClassIdentifier: 
+  Path: event:/Oneira Movement A REVOIR CHELOU
+  guid: ee7274c7c72c5a42ba94a6942240b03e
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -1404196421984595112}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7874
+--- !u!114 &-271793019277732544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wolf/Wolf Movement Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/Wolf/Wolf Movement Footsteps
+  guid: 08870dbd16381e41bcd8662f6bb9eb12
+  Banks:
+  - {fileID: -8492132493119318880}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 1631462493652774249}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2500
+--- !u!114 &-250924292531409488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambiance-Environnement/AnimalBison
+  m_EditorClassIdentifier: 
+  Path: event:/Ambiance-Environnement/AnimalBison
+  guid: b797217e49202e439b16df0f583a4fcc
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0.5
+  MaxDistance: 6.4
+  Length: 4449
+--- !u!114 &-231950116233183830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Clothes Equipped Light
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Clothes Equipped Light
+  guid: adf4488c01fb884f85f1730d980da537
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2884
+--- !u!114 &-204708299196735889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Gun Shot
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Gun Shot
+  guid: 7b25cb905542ae4ebf8248c43179e791
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1500
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,18 +800,58 @@ MonoBehaviour:
   - {fileID: -4708831577532911321}
   - {fileID: -7025831672429665221}
   - {fileID: -8492132493119318880}
+  - {fileID: 6604019418416957208}
   EditorEvents:
   - {fileID: -3568375911091632906}
   - {fileID: 8873090529769258035}
   - {fileID: 6637722649285837775}
-  - {fileID: -8607626536723543501}
-  - {fileID: -4988747338026073010}
+  - {fileID: 6781299064372736205}
+  - {fileID: -3307364520215187056}
+  - {fileID: 7757654227361825915}
+  - {fileID: 5967510043386137751}
+  - {fileID: 7802140237526674065}
+  - {fileID: 8659832738830196517}
+  - {fileID: 8282181828800819231}
+  - {fileID: 2582174993109247044}
+  - {fileID: 587017206143820260}
+  - {fileID: -4209818585679131384}
+  - {fileID: -5665726671829717673}
+  - {fileID: 2237961433424772017}
+  - {fileID: 7356133132410655289}
+  - {fileID: -3608453211105005026}
+  - {fileID: 6285227767818950466}
+  - {fileID: -5924956773522506446}
+  - {fileID: 4353216437017780986}
+  - {fileID: 8188265909076640822}
+  - {fileID: -6451782559160066259}
+  - {fileID: 8717444241491078060}
+  - {fileID: -8170385728497006225}
+  - {fileID: -204708299196735889}
+  - {fileID: -7881216895211598588}
+  - {fileID: -4674224730021336862}
+  - {fileID: 2781040229880278347}
+  - {fileID: -1592192072538018363}
+  - {fileID: -3412115646402617043}
+  - {fileID: -8128906443707740560}
+  - {fileID: -231950116233183830}
+  - {fileID: -5645028335480900222}
+  - {fileID: -6588539194277344278}
+  - {fileID: 3060663859481918894}
+  - {fileID: -250924292531409488}
+  - {fileID: 7399843976580558976}
+  - {fileID: -902909471261338415}
+  - {fileID: 969293876613438936}
+  - {fileID: -7253046091031309037}
+  - {fileID: -812018786911645983}
+  - {fileID: -994276094145426650}
+  - {fileID: -271793019277732544}
+  - {fileID: -3466169385347366271}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7025831672429665221}
   StringsBanks:
   - {fileID: -4708831577532911321}
-  stringsBankWriteTime: 637521790682214435
+  stringsBankWriteTime: 637545993309739239
   cacheVersion: 6
 --- !u!114 &301904912630116024
 MonoBehaviour:
@@ -178,6 +873,186 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &587017206143820260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambiance-Environnement/WindCave
+  m_EditorClassIdentifier: 
+  Path: event:/Ambiance-Environnement/WindCave
+  guid: 28d718b9dcf5af448e5133dbcd547fb6
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 15
+  Length: 15154
+--- !u!114 &969293876613438936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambiance-Environnement/WaterCaveDrop
+  m_EditorClassIdentifier: 
+  Path: event:/Ambiance-Environnement/WaterCaveDrop
+  guid: e8862e6358941a4f8bb68c823ddaeaae
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8560492643732078401}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 289500
+--- !u!114 &1506685606422408775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TorchAll/TorchEnd
+  m_EditorClassIdentifier: 
+  Name: TorchEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &1631462493652774249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wolf Movement Footsteps/Changing Soil
+  m_EditorClassIdentifier: 
+  Name: Changing Soil
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &2237961433424772017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Oneira/Oneira Sprint
+  m_EditorClassIdentifier: 
+  Path: event:/Oneira/Oneira Sprint
+  guid: 4703dbff97b2034583f70457d77f3f3d
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -2610079172096239852}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10062
+--- !u!114 &2582174993109247044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Map Equipped Mode Stamp Delete
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Map Equipped Mode Stamp Delete
+  guid: 23414bb051a5254e8109e7829d77e223
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1250
+--- !u!114 &2781040229880278347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Gun Equip
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Gun Equip
+  guid: 830a1ee6c250dd4eb42262acb479808b
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
+--- !u!114 &3060663859481918894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Spyglass Damaged
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Spyglass Damaged
+  guid: b433d9d1d774d0469accbb3e65c72de3
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1375
 --- !u!114 &4079739087554500541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +1073,94 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &4353216437017780986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Map Equipped Edition Apply
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Map Equipped Edition Apply
+  guid: 68aabf8db7038641b438eda36114c6fe
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1040
+--- !u!114 &5967510043386137751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambiance-Environnement/VegetationWindBush
+  m_EditorClassIdentifier: 
+  Path: event:/Ambiance-Environnement/VegetationWindBush
+  guid: 125f558f7bf96c42a8a885a324f51eea
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7800
+--- !u!114 &6285227767818950466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Torch Attack
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Torch Attack
+  guid: 64f19bb00872a5469912e4503fb8ad3c
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1875
+--- !u!114 &6604019418416957208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Tools.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Sounds/Banks/Tools.bank
+  Name: Tools
+  StudioPath: bank:/Tools
+  lastModified: 637545993309744241
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &6637722649285837775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +1174,7 @@ MonoBehaviour:
   m_Name: event:/Wolf/Wolf Attack
   m_EditorClassIdentifier: 
   Path: event:/Wolf/Wolf Attack
-  guid: 38864a62e8038c48a27b2fdbfe120ea9
+  guid: a6dad902c1df9143bd856905eb71caea
   Banks:
   - {fileID: -8492132493119318880}
   IsStream: 0
@@ -219,8 +1182,215 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
+  MaxDistance: 10
+  Length: 1427
+--- !u!114 &6781299064372736205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Map Equipped Mode
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Map Equipped Mode
+  guid: 062e06c7d53a814bb036a0485dc93ea1
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
   MaxDistance: 20
-  Length: 1801
+  Length: 1250
+--- !u!114 &7356133132410655289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Map Equipped
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Map Equipped
+  guid: 4ac96a210a59f94ca473f5a0cc4745ce
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1750
+--- !u!114 &7399843976580558976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Map Damaged
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Map Damaged
+  guid: d6ec505f506e3049b62cb941eea56edb
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1220
+--- !u!114 &7757654227361825915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Powder Idle
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Powder Idle
+  guid: 1135b64e48787f4e822034e1f707be63
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 22500
+--- !u!114 &7802140237526674065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Spyglass Zoom
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Spyglass Zoom
+  guid: 12a4fc597d306a4db7d558f6830c5ba3
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
+--- !u!114 &8188265909076640822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambiance-Environnement/WaterFlow
+  m_EditorClassIdentifier: 
+  Path: event:/Ambiance-Environnement/WaterFlow
+  guid: 6b729bce024d0747b2754a6cc1724ff5
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 70
+  Length: 302375
+--- !u!114 &8282181828800819231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambiance-Environnement/WaterIceFlow
+  m_EditorClassIdentifier: 
+  Path: event:/Ambiance-Environnement/WaterIceFlow
+  guid: 1a792da988b65d4c97651f201ca126c0
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 271132
+--- !u!114 &8659832738830196517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambiance-Environnement/AnimalCrow
+  m_EditorClassIdentifier: 
+  Path: event:/Ambiance-Environnement/AnimalCrow
+  guid: 1619518cadb06c4ea4ccd004acf4a467
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0.5
+  MaxDistance: 20
+  Length: 4664
+--- !u!114 &8717444241491078060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Clothes Equipped Medium
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Clothes Equipped Medium
+  guid: 768d93a8b78e804f9696d114c23dbbfd
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2307
 --- !u!114 &8873090529769258035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +1404,7 @@ MonoBehaviour:
   m_Name: event:/Wolf/Wolf Damaged
   m_EditorClassIdentifier: 
   Path: event:/Wolf/Wolf Damaged
-  guid: 092cfec9e6fa064c821176fc79e30164
+  guid: 79bae13b10d5a2499e23b58aac09783e
   Banks:
   - {fileID: -8492132493119318880}
   IsStream: 0
@@ -242,5 +1412,5 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 5.6
+  MaxDistance: 10
   Length: 1429
