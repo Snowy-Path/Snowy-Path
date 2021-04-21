@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
+using UnityEngine.Rendering;
 
 public class HUD : MonoBehaviour {
 
@@ -15,10 +16,12 @@ public class HUD : MonoBehaviour {
     //[SerializeField] AnimationCurve breathCurve;
 
     [Header("Freeze")]
+    [Tooltip("% of max temperature")]
     [Range(0, 1)] [SerializeField] float startFreeze1 = 0.5f;
+    [Tooltip("% of max temperature")]
     [Range(0, 1)] [SerializeField] float startFreeze2 = 0.3f;
-    [Range(0, 1)] [SerializeField] float startBlueOverlay = 0.4f;
-    [Range(0, 1)] [SerializeField] float blueColorMaxAlpha = 0.3f;
+    //[Range(0, 1)] [SerializeField] float startBlueOverlay = 0.4f;
+    //[Range(0, 1)] [SerializeField] float blueColorMaxAlpha = 0.3f;
 
     [Header("Blood")]
     [Range(0, 10)] [SerializeField] int startBloodVignette = 2;
@@ -42,11 +45,14 @@ public class HUD : MonoBehaviour {
     [SerializeField] private VisualEffect breathEffect;
 
 
+    private Volume volume;
     private GenericHealth playerHealth;
+    private PlayerController playerController;
     //private PlayerController controller;
-    private bool coldBreath = false;
+    //private bool coldBreath = false;
     //private float breathTimer;
     //private int breathDiv = 6;
+
  
 
     private void Start() {
@@ -142,14 +148,14 @@ public class HUD : MonoBehaviour {
         CalculateFreezeAlpha(ref freeze1Overlay, temperatureRatio, startFreeze1);
         CalculateFreezeAlpha(ref freeze2Overlay, temperatureRatio, startFreeze2);
 
-        if (temperatureRatio < startBlueOverlay) {
-            float factor = blueColorMaxAlpha / startBlueOverlay;
-            //blueOverlay.SetAlpha(blueColorMaxAlpha - factor * temperatureRatio);
-        }
-        else {
+        //if (temperatureRatio < startBlueOverlay) {
+        //    //float factor = blueColorMaxAlpha / startBlueOverlay;
+        //    //blueOverlay.SetAlpha(blueColorMaxAlpha - factor * temperatureRatio);
+        //}
+        //else {
 
-            //blueOverlay.SetAlpha(0);
-        }
+        //    //blueOverlay.SetAlpha(0);
+        //}
     }
 
     public void CalculateFreezeAlpha(ref Image img, float ratio, float startThreshold) {
