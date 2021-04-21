@@ -47,6 +47,9 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     private StudioEventEmitter m_tookDamageSoundEmitter;
 
     [SerializeField]
+    private FootstepChoose m_footstepChoose;
+
+    [SerializeField]
     [Tooltip("FMOD Studio Emitter for the Movement sound")]
     private FmodAudioPlayer m_movementSoundEmitter;
     #endregion
@@ -754,6 +757,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     /// Play the movement sound one time
     /// </summary>
     internal void MovementSoundEmission() {
+        m_footstepChoose.ChooseSound();
         m_movementSoundEmitter.PlaySound();
     }
     #endregion

@@ -23,6 +23,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 805
+--- !u!114 &-8898984247518259028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Movement A REVOIR CHELOU/Oneira Footsteps changing soil
+  m_EditorClassIdentifier: 
+  Name: Oneira Footsteps changing soil
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-8733116345798682769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +192,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -1418153349114383888}
+  - {fileID: 2084104571770411428}
   MinDistance: 1
   MaxDistance: 20
   Length: 289500
@@ -277,7 +297,7 @@ MonoBehaviour:
   Path: FMODAssets/Build/Desktop/Tools.bank
   Name: Tools
   StudioPath: bank:/Tools
-  lastModified: 637545988468275862
+  lastModified: 637546307170989280
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -304,6 +324,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1250
+--- !u!114 &-7595131744760710761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WindPlains/EndWindPlain
+  m_EditorClassIdentifier: 
+  Name: EndWindPlain
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-7507012074323823592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,7 +411,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 8208612104019506839}
+  - {fileID: 1860540755037976124}
   MinDistance: 1
   MaxDistance: 20
   Length: 857000
@@ -1107,7 +1147,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 4896814930053249290}
+  - {fileID: 8492206915765826897}
   MinDistance: 1
   MaxDistance: 20
   Length: 10062
@@ -1126,7 +1166,7 @@ MonoBehaviour:
   Path: FMODAssets/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637545988468246099
+  lastModified: 637546307167981731
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -1279,7 +1319,7 @@ MonoBehaviour:
   Path: FMODAssets/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637545988468270903
+  lastModified: 637546307168274371
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1729,6 +1769,46 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-2267704473060583463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TorchAll/TorchEnd
+  m_EditorClassIdentifier: 
+  Name: TorchEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-2190523468685586466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CampfireAll/Campfire End
+  m_EditorClassIdentifier: 
+  Name: Campfire End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-1820913374232433340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2089,7 +2169,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 5185335081453450339}
+  - {fileID: -2190523468685586466}
   MinDistance: 1
   MaxDistance: 20
   Length: 25105
@@ -2156,7 +2236,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 3732971285882009049}
+  - {fileID: -2267704473060583463}
   MinDistance: 1
   MaxDistance: 20
   Length: 36000
@@ -2227,7 +2307,7 @@ MonoBehaviour:
   - {fileID: -3979057679541750413}
   StringsBanks:
   - {fileID: -3533321539135886076}
-  stringsBankWriteTime: 637545988468270903
+  stringsBankWriteTime: 637546307168274371
   cacheVersion: 6
 --- !u!114 &30865789919675255
 MonoBehaviour:
@@ -2336,7 +2416,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 4899702352934121979}
+  - {fileID: 7157456994098963518}
   MinDistance: 1
   MaxDistance: 20
   Length: 2500
@@ -2711,7 +2791,7 @@ MonoBehaviour:
   Path: FMODAssets/Build/Desktop/Wolf.bank
   Name: Wolf
   StudioPath: bank:/Wolf
-  lastModified: 637545988468310582
+  lastModified: 637546307175205274
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -2805,6 +2885,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &1860540755037976124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Blizzard A REVOIR !!!!!/Blizzard Changed
+  m_EditorClassIdentifier: 
+  Name: Blizzard Changed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &2052745285383935956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2828,6 +2928,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 22500
+--- !u!114 &2084104571770411428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WaterCaveDrop/WaterCaveDropEnd
+  m_EditorClassIdentifier: 
+  Name: WaterCaveDropEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &2132882738815877845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2938,7 +3058,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -6566621927033433094}
+  - {fileID: -7595131744760710761}
   MinDistance: 0.5
   MaxDistance: 20
   Length: 127000
@@ -3632,7 +3752,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 7881108154333746253}
+  - {fileID: -8898984247518259028}
   MinDistance: 1
   MaxDistance: 20
   Length: 7874
@@ -3683,6 +3803,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 36000
+--- !u!114 &7157456994098963518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wolf Movement Footsteps/Changing Soil
+  m_EditorClassIdentifier: 
+  Name: Changing Soil
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &7253959766744487803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3901,6 +4041,26 @@ MonoBehaviour:
   m_Name: parameter:/Blizzard A REVOIR !!!!!/Blizzard Changed
   m_EditorClassIdentifier: 
   Name: Blizzard Changed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &8492206915765826897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Sprint/Sprint End
+  m_EditorClassIdentifier: 
+  Name: Sprint End
   Min: 0
   Max: 1
   Default: 0

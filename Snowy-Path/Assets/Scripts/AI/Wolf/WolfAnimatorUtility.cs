@@ -55,7 +55,6 @@ public class WolfAnimatorUtility : MonoBehaviour {
     }
 
     public void MovementSoundEmission() {
-        Debug.Log("MOVED");
         m_wolfController.MovementSoundEmission();
     }
 
