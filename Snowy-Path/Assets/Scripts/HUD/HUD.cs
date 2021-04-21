@@ -30,14 +30,14 @@ public class HUD : MonoBehaviour {
     [Range(0, 1)] [SerializeField] float bloodHealStep = 0.1f;
 
     [Header("Set up")]
-    [SerializeField] Image staminaOverlay;
+    //[SerializeField] Image staminaOverlay;
     [SerializeField] Image bloodVignette;
     [SerializeField] Image bloodOverlay1;
     [SerializeField] Image bloodOverlay2;
     [SerializeField] Image bloodVein;
     [SerializeField] Image freeze1Overlay;
     [SerializeField] Image freeze2Overlay;
-    [SerializeField] Image blueOverlay;
+    //[SerializeField] Image blueOverlay;
     //[SerializeField] Image breathOverlay;
     [SerializeField] private VisualEffect breathEffect;
 
@@ -64,14 +64,14 @@ public class HUD : MonoBehaviour {
     }
 
     public void ResetOverlays() {
-        staminaOverlay.SetAlpha(0);
+        //staminaOverlay.SetAlpha(0);
         bloodVignette.SetAlpha(0);
         bloodOverlay1.SetAlpha(0);
         bloodOverlay2.SetAlpha(0);
         bloodVein.SetAlpha(0);
         freeze1Overlay.SetAlpha(0);
         freeze2Overlay.SetAlpha(0);
-        blueOverlay.SetAlpha(0);
+        //blueOverlay.SetAlpha(0);
         //breathOverlay.SetAlpha(0);
     }
 
@@ -88,7 +88,7 @@ public class HUD : MonoBehaviour {
     //}
 
     public void SetStamina(float staminaRatio) {
-        staminaOverlay.SetAlpha(staminaCurve.Evaluate(staminaRatio));
+        //staminaOverlay.SetAlpha(staminaCurve.Evaluate(staminaRatio));
     }
 
     /// <summary>
@@ -144,10 +144,12 @@ public class HUD : MonoBehaviour {
 
         if (temperatureRatio < startBlueOverlay) {
             float factor = blueColorMaxAlpha / startBlueOverlay;
-            blueOverlay.SetAlpha(blueColorMaxAlpha - factor * temperatureRatio);
+            //blueOverlay.SetAlpha(blueColorMaxAlpha - factor * temperatureRatio);
         }
-        else
-            blueOverlay.SetAlpha(0);
+        else {
+
+            //blueOverlay.SetAlpha(0);
+        }
     }
 
     public void CalculateFreezeAlpha(ref Image img, float ratio, float startThreshold) {
