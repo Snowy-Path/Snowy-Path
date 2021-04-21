@@ -94,7 +94,6 @@ public class PostProcessHandler : MonoBehaviour {
         }
 
         //Debug.Log(dofComponent.focalLength.value);
-        Debug.Log(vignetteComponent.intensity.value);
-
+        //Debug.Log(vignetteComponent.intensity.value);
     }
 }

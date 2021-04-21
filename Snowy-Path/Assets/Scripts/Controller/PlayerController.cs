@@ -281,7 +281,6 @@ public class PlayerController : MonoBehaviour {
 
         //Update animator
         handsAnimator.SetBool("Run", isRunning);
-        playerHud.SetStamina(Mathf.Clamp(sprintTimer / maxSprintDuration, 0, 1));
     }
 
     private void Look() {
