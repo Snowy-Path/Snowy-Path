@@ -48,25 +48,24 @@ public class MeshDestroy : MonoBehaviour {
             Triangles = new int[originalMesh.subMeshCount][],
             Bounds = originalMesh.bounds
         };
+
         for (int i = 0; i < originalMesh.subMeshCount; i++)
             mainPart.Triangles[i] = originalMesh.GetTriangles(i);
 
         parts.Add(mainPart);
 
-        Plane[] planes = new Plane[cuts];
         for (var c = 0; c < cuts; c++) {
-            var bounds = mainPart.Bounds;
-            bounds.Expand(boundExpansion);
-            planes[c] = new Plane(Random.onUnitSphere, new Vector3(Random.Range(bounds.min.x, bounds.max.x),
-                                                                                  Random.Range(bounds.min.y, bounds.max.y),
-                                                                                  Random.Range(bounds.min.z, bounds.max.z)));
-        }
+            for (var i = 0; i < parts.Count; i++) {
+                var bounds = parts[i].Bounds;
+                bounds.Expand(boundExpansion);
+                Debug.Log(bounds);
 
-        foreach (var plane in planes) {
-            for (var p = 0; p < parts.Count; p++) {
+                var plane = new Plane(Random.onUnitSphere, new Vector3(Random.Range(bounds.min.x, bounds.max.x),
+                                                                       Random.Range(bounds.min.y, bounds.max.y),
+                                                                       Random.Range(bounds.min.z, bounds.max.z)));
 
-                subParts.Add(GenerateMesh(parts[p], plane, true));
-                subParts.Add(GenerateMesh(parts[p], plane, false));
+                subParts.Add(GenerateMesh(parts[i], plane, true));
+                subParts.Add(GenerateMesh(parts[i], plane, false));
             }
             parts = new List<PartMesh>(subParts);
             subParts.Clear();
