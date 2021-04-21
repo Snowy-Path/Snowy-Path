@@ -282,7 +282,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7da1055106670b34f9f4a579660e9081, type: 2}
+  - {fileID: 2100000, guid: b1fe5e56bdad3c7479f908472ecf9458, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -363,6 +363,7 @@ GameObject:
   - component: {fileID: 919132149522359269}
   - component: {fileID: 919132149522359268}
   - component: {fileID: 919132149522359267}
+  - component: {fileID: 578581165}
   m_Layer: 12
   m_Name: Wolf
   m_TagString: Ennemy
@@ -469,6 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_animator: {fileID: 5580642924379406412}
+  m_effectAnimator: {fileID: 578581165}
   m_attackGO: {fileID: 710376342}
   m_patrolSpeed: 2
   idleWaitingTime: 6
@@ -526,3 +528,22 @@ MonoBehaviour:
   m_attackTime: 0.1
   recoveryDuration: 4
   stunDuration: 5
+--- !u!95 &578581165
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7534338688541169995}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f7c76fed070810945be9cbd987b50165, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

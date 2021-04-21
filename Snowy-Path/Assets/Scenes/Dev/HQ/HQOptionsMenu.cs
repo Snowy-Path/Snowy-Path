@@ -23,6 +23,10 @@ public class HQOptionsMenu : MonoBehaviour
     List<string> stringList = new List<string>();
     List<string[]> parsedList = new List<string[]>();
 
+    private void Awake()
+    {
+        resolutions = Screen.resolutions;
+    }
 
     private void Start()
     {
@@ -137,9 +141,9 @@ public class HQOptionsMenu : MonoBehaviour
             //Debug.Log();
             SetResolution(int.Parse(parsedList[0][1]));
             SetQuality(int.Parse(parsedList[1][1]));
-            audioSettings.MasterVolumeLevel(float.Parse(parsedList[2][1]));
-            audioSettings.MusicVolumeLevel(float.Parse(parsedList[3][1]));
-            audioSettings.SFXVolumeLevel(float.Parse(parsedList[4][1]));
+            //audioSettings.MasterVolumeLevel(float.Parse(parsedList[2][1]));
+            //audioSettings.MusicVolumeLevel(float.Parse(parsedList[3][1]));
+            //audioSettings.SFXVolumeLevel(float.Parse(parsedList[4][1]));
             generalSlider.value = float.Parse(parsedList[2][1]);
             musicSlider.value = float.Parse(parsedList[3][1]);
             soundsSlider.value = float.Parse(parsedList[4][1]);
@@ -161,9 +165,9 @@ public class HQOptionsMenu : MonoBehaviour
         string serializedsettings =
         "Resolution, " + resolutionDropdown.value.ToString() + "\n" +
         "Antialiasing, " + aaDropdown.value.ToString() + "\n" +
-        "Master Volume, " + audioSettings.MasterVolume.ToString() + "\n" +
-        "Music Volume, " + audioSettings.MusicVolume.ToString() + "\n" +
-        "Sounds Effect Volume, " + audioSettings.SFXVolume.ToString() + "\n" +
+        //"Master Volume, " + audioSettings.MasterVolume.ToString() + "\n" +
+        //"Music Volume, " + audioSettings.MusicVolume.ToString() + "\n" +
+        //"Sounds Effect Volume, " + audioSettings.SFXVolume.ToString() + "\n" +
         "Gamma, " + gammaSlider.value.ToString() + "\n";
 
         string destination = Application.persistentDataPath + "/savesettings.txt";

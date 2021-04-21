@@ -18,6 +18,10 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     [SerializeField]
     private float slowSpeed = 3.75f;
 
+    [SerializeField]
+    [Tooltip("Effect animator.")]
+    private Animator m_effectAnimator;
+
     [Tooltip("Wendigo slowed donw duration when hit by gun.")]
     [Min(0)]
     [SerializeField]
@@ -65,6 +69,7 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     public void Hit(EToolType toolType, int attackDamage) {
         if (toolType == EToolType.Pistol) { // If Gun
             StartCoroutine(ReduceSpeed());
+            m_effectAnimator.SetTrigger("TookDamage");
         }
     }
     #endregion
