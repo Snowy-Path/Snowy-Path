@@ -8,19 +8,33 @@ public class HeatSource : MonoBehaviour
 
     public bool showDebug = false;
 
-    void Start()
+    SphereCollider sphereCollider;
+
+    GameObject child;
+    void Awake()
     {
         // Initialize the object that will contain our trigger collider
-        GameObject child = new GameObject("range");
+        child = new GameObject("range");
         child.tag = "HeatSource";
         child.transform.parent = transform;
         child.transform.localPosition = Vector3.zero;
         child.layer = 2;
 
         // Initialize the collider
-        SphereCollider sphereCollider = child.AddComponent<SphereCollider>();
+        sphereCollider = child.AddComponent<SphereCollider>();
+        sphereCollider.enabled = false;
         sphereCollider.isTrigger = true;
         sphereCollider.radius = radius;
+    }
+
+    private void OnEnable()
+    {
+        sphereCollider.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        sphereCollider.enabled = false;
     }
 
     void OnDrawGizmos()
