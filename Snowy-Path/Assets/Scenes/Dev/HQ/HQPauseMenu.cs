@@ -53,6 +53,11 @@ public class HQPauseMenu : MonoBehaviour
     {
         gameIsPaused = false;
         ResumeGame();
+        SceneSave sceneSave = FindObjectOfType<SceneSave>();
+        if(sceneSave != null)
+        {
+            sceneSave.SceneName = "";
+        }
         SceneLoader.Instance.LoadMainMenu();
 
     }
