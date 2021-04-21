@@ -48,7 +48,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
 
     [SerializeField]
     [Tooltip("FMOD Studio Emitter for the Movement sound")]
-    private StudioEventEmitter m_movementSoundEmitter;
+    private FmodAudioPlayer m_movementSoundEmitter;
     #endregion
 
     // Generic timer used when needed (in multiple cases)
@@ -748,6 +748,13 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     /// <returns>True if in the Inspect animation, false otherwise.</returns>
     private bool IsInInspectAnimation() {
         return m_animator.GetCurrentAnimatorStateInfo(0).IsName("Inspect");
+    }
+
+    /// <summary>
+    /// Play the movement sound one time
+    /// </summary>
+    internal void MovementSoundEmission() {
+        m_movementSoundEmitter.PlaySound();
     }
     #endregion
 

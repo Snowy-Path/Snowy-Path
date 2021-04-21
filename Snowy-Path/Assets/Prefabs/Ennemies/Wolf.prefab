@@ -75,6 +75,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 919132149522359267}
+--- !u!1 &507732982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 507732983}
+  - component: {fileID: 8648951486137977363}
+  m_Layer: 12
+  m_Name: Movement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &507732983
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507732982}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.03, z: -0.902}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1958437874}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8648951486137977363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507732982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72077b6ff51aa08459277feb8431f14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundPath: event:/Wolf/Wolf Movement Footsteps
+  paramValue: 0
 --- !u!1 &569149325
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,6 +306,7 @@ Transform:
   - {fileID: 3957412447933471584}
   - {fileID: 4679402957398342552}
   - {fileID: 788090784500458500}
+  - {fileID: 507732983}
   m_Father: {fileID: 7189022306030240753}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -509,7 +555,7 @@ MonoBehaviour:
   m_aggroSoundEmitter: {fileID: 1918227932983885476}
   m_attackSoundEmitter: {fileID: 6154611195395852416}
   m_tookDamageSoundEmitter: {fileID: 7452362684888859104}
-  m_movementSoundEmitter: {fileID: 0}
+  m_movementSoundEmitter: {fileID: 8648951486137977363}
   m_patrolSpeed: 2
   idleWaitingTime: 6
   defaultWaypoint: {fileID: 0}
