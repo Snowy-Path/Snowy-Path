@@ -16,11 +16,12 @@ public class PlayerCampfireSave : MonoBehaviour, ISaveable {
         if(lastCampfireId == "")
         {
             CharacterController charController = GetComponent<CharacterController>();
+            PlayerController playerController = GetComponent<PlayerController>();
             charController.enabled = false;
+            playerController.enabled = false;
             this.transform.position = FindObjectOfType<SpawnPlayerPosition>().transform.position;
+            this.transform.eulerAngles = new Vector3(0, 0, 0);
             this.transform.eulerAngles = new Vector3(14, -104, -83);
-            charController.enabled = true;
-
         }
         else
         {
@@ -37,10 +38,13 @@ public class PlayerCampfireSave : MonoBehaviour, ISaveable {
                         if (respawnTransform.gameObject.CompareTag("PlayerRespawnPoint"))
                         {
                             CharacterController charController = GetComponent<CharacterController>();
+                            PlayerController playerController = GetComponent<PlayerController>();
                             charController.enabled = false;
+                            playerController.enabled = false;
                             this.transform.position = respawnTransform.position;
+                            this.transform.eulerAngles = new Vector3(0, 0, 0);
                             this.transform.eulerAngles = new Vector3(14, -104, -83);
-                            charController.enabled = true;
+                            //charController.enabled = true;
                         }
                     }
                 }
