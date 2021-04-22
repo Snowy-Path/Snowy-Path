@@ -16,10 +16,10 @@ public class AudioSettings : MonoBehaviour
 
     void Awake()
     {
-        //Music = FMODUnity.RuntimeManager.GetBus("bus:/Master/Music");
-        //SFX = FMODUnity.RuntimeManager.GetBus("bus:/Master/SFX");
-        //Master = FMODUnity.RuntimeManager.GetBus("bus:/Master");
-        //SFXVolumeTestEvent = FMODUnity.RuntimeManager.CreateInstance("event:/SFX/SFXVolumeTest");
+        Music = FMODUnity.RuntimeManager.GetBus("bus:/Master/Music");
+        SFX = FMODUnity.RuntimeManager.GetBus("bus:/Master/SFX");
+        Master = FMODUnity.RuntimeManager.GetBus("bus:/Master");
+        SFXVolumeTestEvent = FMODUnity.RuntimeManager.CreateInstance("event:/SFX/SFXVolumeTest");
     }
 
     void Update()
