@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class FootstepChoose : MonoBehaviour {
@@ -30,6 +29,9 @@ public class FootstepChoose : MonoBehaviour {
 
     private Terrain m_terrain;
 
+    /// <summary>
+    /// Choose the sound value depending on the position the AI is standing on.
+    /// </summary>
     public void ChooseSound() {
 
         RaycastHit _hitInfo;
@@ -48,11 +50,14 @@ public class FootstepChoose : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// Detect if texture is in the list of snow sound.
+    /// </summary>
+    /// <param name="position"></param>
+    /// <returns></returns>
     private float ChooseSoundFromTexture(Vector3 position) {
 
         int activeTexture = GetActiveTerrainTextureIdx(position);
-
-        Debug.Log(activeTexture);
 
         if (m_snowSoundLayers.Contains(m_terrain.terrainData.terrainLayers[activeTexture].name)) {
             return m_snowValue;
@@ -62,6 +67,11 @@ public class FootstepChoose : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// Convert world position to Terrain position.
+    /// </summary>
+    /// <param name="worldPosition">World position to convert.</param>
+    /// <returns>Position in Terrain texture.</returns>
     private Vector3 ConvertToSplatMapCoordinate(Vector3 worldPosition) {
         Vector3 splatPosition = new Vector3();
         Vector3 terPosition = m_terrain.transform.position;
@@ -70,6 +80,11 @@ public class FootstepChoose : MonoBehaviour {
         return splatPosition;
     }
 
+    /// <summary>
+    /// Return TerrainLayer ID depending on the Terrain texture position.
+    /// </summary>
+    /// <param name="position">Terrain texture position.</param>
+    /// <returns>Terrain layer ID.</returns>
     private int GetActiveTerrainTextureIdx(Vector3 position) {
         Vector3 terrainCord = ConvertToSplatMapCoordinate(position);
         int activeTerrainIndex = 0;
@@ -92,12 +107,5 @@ public class FootstepChoose : MonoBehaviour {
 
         return activeTerrainIndex;
     }
-
-    //private void OnGUI() {
-
-    //    GUI.Box(new Rect(Screen.width - 110, 10, 100, 70), "Sound value");
-    //    GUI.Label(new Rect(Screen.width - 100, 40, 90, 70), $"{m_currentValue}");
-
-    //}
 
 }
