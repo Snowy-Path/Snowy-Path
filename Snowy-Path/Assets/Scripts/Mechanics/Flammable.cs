@@ -13,6 +13,18 @@ public class Flammable : MonoBehaviour {
     private bool ignited = false;
     private bool hasAudio = false;
 
+    private void OnEnable() {
+        Resetter.Reset += Reset;
+    }
+
+    private void OnDisable() {
+        Resetter.Reset -= Reset;
+    }
+
+    public void Reset() {
+        
+    }
+
     // Start is called before the first frame update
     void Start() {
         ignitePoints = ignitePointsParent.GetComponentsInChildren<Transform>().ToList();
