@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimatorHandler : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class AnimatorHandler : MonoBehaviour {
+    public Animator leftHand;
+    public Animator rightHand;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void Update() {
+        var state = leftHand.GetCurrentAnimatorStateInfo(0);
+        bool animLock = state.tagHash == Animator.StringToHash("lock");
+        leftHand.SetBool("Locked", animLock);
     }
 }

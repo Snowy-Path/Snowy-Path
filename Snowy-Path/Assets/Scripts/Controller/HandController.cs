@@ -17,13 +17,14 @@ public class HandController : MonoBehaviour {
         }
     }
 
-    [SerializeField] Animator handsAnimator;
+    private Animator handAnimator;
     private IHandTool[] tools;
     private int currentToolIndex = 0;
 
     // Start is called before the first frame update
     void Start() {
         tools = GetComponentsInChildren<IHandTool>(true);
+        handAnimator = GetComponent<Animator>();
         HideTools();
         tools[currentToolIndex].ToggleDisplay(true);
     }
@@ -139,7 +140,7 @@ public class HandController : MonoBehaviour {
     /// <param name="type">The type of tool to equip</param>
     /// <returns>Returns true if a tool was equiped, fase if not</returns>
     private bool EquipTool(EToolType type) {
-        if (handsAnimator.GetCurrentAnimatorStateInfo(0).IsName("SwitchLeftTool")) {
+        if (handAnimator.GetCurrentAnimatorStateInfo(0).IsName("SwitchLeftTool")) {
             return false;
         }
         if (!CurrentTool.IsBusy && TryGetToolIndex(type, out int index) && currentToolIndex != index) {
@@ -157,7 +158,7 @@ public class HandController : MonoBehaviour {
         HideTools();
         tools[currentToolIndex].IsBusy = false;
         tools[currentToolIndex].ToggleDisplay(true);
-        handsAnimator.SetTrigger("SwitchTool");
+        handAnimator.SetTrigger("SwitchTool");
     }
 
     /// <summary>
