@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class FmodAudioPlayer : MonoBehaviour {
+    [FMODUnity.EventRef]
     [SerializeField] string soundPath = "";
     [SerializeField] float paramValue;
 
