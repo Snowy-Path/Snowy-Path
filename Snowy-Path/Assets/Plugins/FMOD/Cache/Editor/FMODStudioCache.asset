@@ -168,7 +168,7 @@ MonoBehaviour:
   Path: Assets/Sounds/Banks/Wolf.bank
   Name: Wolf
   StudioPath: bank:/Wolf
-  lastModified: 637545287566934362
+  lastModified: 637546855965572373
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -3203,8 +3203,9 @@ MonoBehaviour:
   - {fileID: -3789870828703817886}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 1
-  Parameters: []
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -2547709809173981943}
   MinDistance: 1
   MaxDistance: 20
   Length: 1500
@@ -3226,9 +3227,10 @@ MonoBehaviour:
   - {fileID: -7025831672429665221}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 4486783096295891938}
+  MinDistance: 0.5
   MaxDistance: 20
   Length: 1730
 --- !u!114 &3452627848529924475
@@ -3254,7 +3256,27 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
---- !u!114 &3497496901949419257
+--- !u!114 &-7847196190949559083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Movement A REVOIR CHELOU/Oneira Footsteps changing soil
+  m_EditorClassIdentifier: 
+  Name: Oneira Footsteps changing soil
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-7253046091031309037
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3290,33 +3312,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/TorchAll/TorchEnd
   m_EditorClassIdentifier: 
-  Name: TorchEnd
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &3830975124951375260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/CampfireAll/Campfire End
-  m_EditorClassIdentifier: 
-  Name: Campfire End
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
+  Path: Assets/Sounds/Banks/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637546855965482389
+  LoadResult: 0
+  FileSizes: []
   Exists: 1
 --- !u!114 &3850227906553326055
 MonoBehaviour:
@@ -3402,8 +3403,9 @@ MonoBehaviour:
   - {fileID: -3979057679541750413}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 1
-  Parameters: []
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -2502870371438143179}
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
@@ -3473,7 +3475,27 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1875
---- !u!114 &4530721458172873088
+--- !u!114 &-5269293344893862521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Sprint/Sprint End
+  m_EditorClassIdentifier: 
+  Name: Sprint End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4988747338026073010
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3531,18 +3553,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Ambiance-Environnement/VegetationWindBush
   m_EditorClassIdentifier: 
-  Path: event:/Ambiance-Environnement/VegetationWindBush
-  guid: 125f558f7bf96c42a8a885a324f51eea
-  Banks:
-  - {fileID: -7025831672429665221}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 7800
---- !u!114 &4595505337272371352
+  Path: Assets/Sounds/Banks/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637546855965522377
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 1058
+  Exists: 1
+--- !u!114 &-3568375911091632906
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3608,7 +3628,70 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &4899702352934121979
+--- !u!114 &-2547709809173981943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Blizzard A REVOIR !!!!!/Blizzard Changed
+  m_EditorClassIdentifier: 
+  Name: Blizzard Changed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-2502870371438143179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TorchAll/TorchEnd
+  m_EditorClassIdentifier: 
+  Name: TorchEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-1592192072538018363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tools/Key Item Used
+  m_EditorClassIdentifier: 
+  Path: event:/Tools/Key Item Used
+  guid: 859214b3457558459d9c803e18a01baa
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7288
+--- !u!114 &-1404196421984595112
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3646,8 +3729,9 @@ MonoBehaviour:
   - {fileID: -3979057679541750413}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 1
-  Parameters: []
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 7286115341104702644}
   MinDistance: 1
   MaxDistance: 20
   Length: 1220
@@ -3689,8 +3773,9 @@ MonoBehaviour:
   - {fileID: -3789870828703817886}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 1
-  Parameters: []
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -7847196190949559083}
   MinDistance: 1
   MaxDistance: 20
   Length: 1375
@@ -3732,8 +3817,9 @@ MonoBehaviour:
   - {fileID: -3789870828703817886}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 1
-  Parameters: []
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 6912471623465925555}
   MinDistance: 1
   MaxDistance: 20
   Length: 1875
@@ -3822,14 +3908,31 @@ MonoBehaviour:
   guid: 062e06c7d53a814bb036a0485dc93ea1
   Banks:
   - {fileID: -7025831672429665221}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1250
---- !u!114 &6637722649285837775
+  StringsBanks:
+  - {fileID: -4708831577532911321}
+  stringsBankWriteTime: 637546855965522377
+  cacheVersion: 6
+--- !u!114 &301904912630116024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wolf Mouvement/Kind of soil
+  m_EditorClassIdentifier: 
+  Name: Kind of soil
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &587017206143820260
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3872,7 +3975,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 1845140622289863912}
+  - {fileID: 2003805300409465866}
   MinDistance: 1
   MaxDistance: 20
   Length: 7874
@@ -3943,7 +4046,51 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &7253959766744487803
+--- !u!114 &2003805300409465866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WaterCaveDrop/WaterCaveDropEnd
+  m_EditorClassIdentifier: 
+  Name: WaterCaveDropEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &2237961433424772017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Oneira/Oneira Sprint
+  m_EditorClassIdentifier: 
+  Path: event:/Oneira/Oneira Sprint
+  guid: 4703dbff97b2034583f70457d77f3f3d
+  Banks:
+  - {fileID: -7025831672429665221}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -5269293344893862521}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10062
+--- !u!114 &2582174993109247044
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4101,8 +4248,28 @@ MonoBehaviour:
   - {fileID: 3876552055413372912}
   MinDistance: 1
   MaxDistance: 20
-  Length: 10062
---- !u!114 &7881108154333746253
+  Length: 1040
+--- !u!114 &4486783096295891938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WindPlains/EndWindPlain
+  m_EditorClassIdentifier: 
+  Name: EndWindPlain
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &4808173903678863965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4180,13 +4347,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/Blizzard A REVOIR !!!!!/Blizzard Changed
   m_EditorClassIdentifier: 
-  Name: Blizzard Changed
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
+  Path: Assets/Sounds/Banks/Tools.bank
+  Name: Tools
+  StudioPath: bank:/Tools
+  lastModified: 637546855965532377
+  LoadResult: 0
+  FileSizes: []
   Exists: 1
 --- !u!114 &8492206915765826897
 MonoBehaviour:
@@ -4200,7 +4366,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/Oneira Sprint/Sprint End
   m_EditorClassIdentifier: 
-  Name: Sprint End
+  Path: event:/Wolf/Wolf Attack
+  guid: 38864a62e8038c48a27b2fdbfe120ea9
+  Banks:
+  - {fileID: -8492132493119318880}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1250
+--- !u!114 &6912471623465925555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wolf Movement Footsteps/Changing Soil
+  m_EditorClassIdentifier: 
+  Name: Changing Soil
   Min: 0
   Max: 1
   Default: 0
@@ -4208,7 +4397,27 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &8534900962129968145
+--- !u!114 &7286115341104702644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CampfireAll/Campfire End
+  m_EditorClassIdentifier: 
+  Name: Campfire End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &7356133132410655289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
