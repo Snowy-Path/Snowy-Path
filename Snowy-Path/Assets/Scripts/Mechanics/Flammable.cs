@@ -5,66 +5,110 @@ using UnityEngine;
 
 public class Flammable : MonoBehaviour {
 
+    #region Variables
     [SerializeField] GameObject fireFX;
     [SerializeField] Transform ignitePointsParent;
     [SerializeField] float fireDuration;
-    private List<Transform> ignitePoints;
 
     private bool ignited = false;
-    private bool hasAudio = false;
 
+    private List<Transform> fireParticles;
+    private List<GameObject> GFXs;
+    #endregion
+
+    /// <summary>
+    /// Called when SetActive(true).
+    /// Subscribe to the Resetter.
+    /// </summary>
     private void OnEnable() {
         Resetter.Reset += Reset;
     }
 
+    /// <summary>
+    /// Called when SetActive(false).
+    /// Unsubscribe to the Resetter.
+    /// </summary>
     private void OnDisable() {
         Resetter.Reset -= Reset;
     }
 
+    /// <summary>
+    /// Reset the gameobject.
+    /// </summary>
     public void Reset() {
-        
+        foreach (var gfx in GFXs) {
+            gfx.SetActive(true);
+        }
+        ignited = false;
     }
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Retrieves GFX & instantiate fire particles.
+    /// </summary>
     void Start() {
-        ignitePoints = ignitePointsParent.GetComponentsInChildren<Transform>().ToList();
+
+        //Retrives the GFXs children
+        MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
+        GFXs = new List<GameObject>(meshFilters.Length);
+        foreach (var mesh in meshFilters) {
+            GFXs.Add(mesh.gameObject);
+        }
+
+        //Instantiate a particle system for each ingnite point.
+        List<Transform> ignitePoints = ignitePointsParent.GetComponentsInChildren<Transform>().ToList();
         ignitePoints.Remove(this.transform);
+
+        fireParticles = new List<Transform>(ignitePoints.Count);
+
+        for (int i = 0; i < ignitePoints.Count; i++) {
+            GameObject go = Instantiate(fireFX, ignitePoints[i].position, Quaternion.identity, transform);
+            fireParticles.Add(go.transform);
+        }
+
     }
 
+    /// <summary>
+    /// Start the coroutine to destroy the brambles.
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
         if (!ignited && other.GetComponent<Torch>()) {
             ignited = true;
-            ignitePoints = ReorderPoints(other.transform.position);
+            fireParticles = ReorderPoints(other.transform.position);
             StartCoroutine(StartFire());
-            //Destroy(this.gameObject, 3f);
         }
     }
 
+    /// <summary>
+    /// Coroutines that start SFX and Particles of fire.
+    /// Deactivate GFX at the end.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator StartFire() {
-        ParticleSystem[] particles = new ParticleSystem[ignitePoints.Count];
 
-        for (int i = 0; i < ignitePoints.Count; i++) {
-            GameObject go = Instantiate(fireFX, ignitePoints[i].position, Quaternion.identity);
-            var audio = go.GetComponent<FMODUnity.StudioEventEmitter>();
-            if (audio) {
-                if (!hasAudio)
-                    hasAudio = true;
-                else
-                    audio.enabled = false;
-            }
-
-            ParticleSystem particle = go.GetComponent<ParticleSystem>();
-            particles[i] = particle;
-            yield return new WaitForSeconds(fireDuration / ignitePoints.Count);
+        for (int i = 0; i < fireParticles.Count; i++) {
+            fireParticles[i].GetComponent<ParticleSystem>().Play();
+            fireParticles[i].GetComponent<FMODUnity.StudioEventEmitter>().Play();
+            yield return new WaitForSeconds(fireDuration / fireParticles.Count);
         }
 
-        for (int i = 0; i < particles.Length; i++) {
-            particles[i].Stop();
+        for (int i = 0; i < fireParticles.Count; i++) {
+            fireParticles[i].GetComponent<ParticleSystem>().Stop();
+            fireParticles[i].GetComponent<FMODUnity.StudioEventEmitter>().Stop();
         }
-        Destroy(this.gameObject);
+
+        foreach (var gfx in GFXs) {
+            gfx.SetActive(false);
+        }
+
     }
 
+    /// <summary>
+    /// Order ignites points depending on the hit position.
+    /// </summary>
+    /// <param name="start"></param>
+    /// <returns></returns>
     private List<Transform> ReorderPoints(Vector3 start) {
-        return ignitePoints.OrderBy(o => (o.position - start).magnitude).ToList();
+        return fireParticles.OrderBy(o => (o.position - start).magnitude).ToList();
     }
 }
