@@ -596,6 +596,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4563211837339600621, guid: 67c8144407cf7ea488f28183cda34d2f,
+        type: 3}
+      propertyPath: OverrideAttenuation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563211837339600621, guid: 67c8144407cf7ea488f28183cda34d2f,
+        type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563211837339600621, guid: 67c8144407cf7ea488f28183cda34d2f,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4678685533191590111, guid: 67c8144407cf7ea488f28183cda34d2f,
         type: 3}
       propertyPath: m_RootOrder
@@ -658,43 +673,8 @@ PrefabInstance:
       objectReference: {fileID: 920103864}
     - target: {fileID: 8043846418154828136, guid: 67c8144407cf7ea488f28183cda34d2f,
         type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000,
-        type: 0}
-    - target: {fileID: 8043846418154828136, guid: 67c8144407cf7ea488f28183cda34d2f,
-        type: 3}
       propertyPath: m_Name
       value: WaterAudioSource
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67c8144407cf7ea488f28183cda34d2f, type: 3}
---- !u!1 &4563211837339600620 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8043846418154828136, guid: 67c8144407cf7ea488f28183cda34d2f,
-    type: 3}
-  m_PrefabInstance: {fileID: 4563211837339600619}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4563211837339600621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4563211837339600620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  Event: event:/Ambiance-Environnement/WaterFlow
-  PlayEvent: 1
-  StopEvent: 2
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 70
