@@ -10,7 +10,8 @@ public class Flammable : MonoBehaviour {
     [SerializeField] float fireDuration;
     private List<Transform> ignitePoints;
 
-    bool ignited;
+    private bool ignited = false;
+    private bool hasAudio = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -32,6 +33,14 @@ public class Flammable : MonoBehaviour {
 
         for (int i = 0; i < ignitePoints.Count; i++) {
             GameObject go = Instantiate(fireFX, ignitePoints[i].position, Quaternion.identity);
+            var audio = go.GetComponent<FMODUnity.StudioEventEmitter>();
+            if (audio) {
+                if (!hasAudio)
+                    hasAudio = true;
+                else
+                    audio.enabled = false;
+            }
+
             ParticleSystem particle = go.GetComponent<ParticleSystem>();
             particles[i] = particle;
             yield return new WaitForSeconds(fireDuration / ignitePoints.Count);

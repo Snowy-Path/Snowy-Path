@@ -13,11 +13,11 @@ public class HandsAudio : MonoBehaviour {
 
     public UnityEvent torchAttack;
     public UnityEvent step;
+    public UnityEvent reload;
 
     public void PlayTorchAttack() {
         torchAttack.Invoke();
         //FMODUnity.RuntimeManager.PlayOneShot(torchAttackPath);
-        //torchAttack.Invoke();
     }
 
     public void PlayWalk(AnimationEvent evt) {
@@ -29,7 +29,10 @@ public class HandsAudio : MonoBehaviour {
     public void PlayRun(AnimationEvent evt) {
         if (evt.animatorClipInfo.weight > 0.1f)
             step.Invoke();
-        //FootStepSound(1); //TODO : replace number by ground type
+    }
+
+    public void PlayReload(AnimationEvent evt) {
+            reload.Invoke();
     }
 
     //private void FootStepSound(float soil) {
