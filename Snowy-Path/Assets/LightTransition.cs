@@ -60,7 +60,10 @@ public class LightTransition : MonoBehaviour
 
         // Set Light Rendering
         RenderSettings.skybox = lightAsset.skyboxMaterial;
-        RenderSettings.sun.enabled = lightAsset.activateSunSource;
+        if(RenderSettings.sun != null)
+        {
+            RenderSettings.sun.enabled = lightAsset.activateSunSource;
+        }
         RenderSettings.reflectionIntensity = lightAsset.intensityMultiplierReflect;
 
         return lightAsset;

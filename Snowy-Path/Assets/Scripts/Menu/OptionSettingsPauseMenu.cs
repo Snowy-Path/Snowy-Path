@@ -19,11 +19,11 @@ public class OptionSettingsPauseMenu : MonoBehaviour
 
         List<string[]> parsedList = parseList(readTextFiled(destination));
         //OptionMenu.resolutionDropdown.value = int.Parse(parsedList[0][1]);
-        OptionMenu.aaDropdown.value =int.Parse(parsedList[1][1]);
-        OptionMenu.generalSlider.value = float.Parse(parsedList[2][1]);
-        OptionMenu.musicSlider.value = float.Parse(parsedList[3][1]);
-        OptionMenu.soundsSlider.value = float.Parse(parsedList[4][1]);
-        OptionMenu.gammaSlider.value = float.Parse(parsedList[5][1]);
+        //OptionMenu.aaDropdown.value =int.Parse(parsedList[1][1]);
+        //OptionMenu.generalSlider.value = float.Parse(parsedList[2][1]);
+        //OptionMenu.musicSlider.value = float.Parse(parsedList[3][1]);
+        //OptionMenu.soundsSlider.value = float.Parse(parsedList[4][1]);
+        //OptionMenu.gammaSlider.value = float.Parse(parsedList[5][1]);
     }
 
     private void Update()

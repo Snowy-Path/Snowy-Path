@@ -308,7 +308,6 @@ public class SceneLoader : MonoBehaviour
 
     public void LevelChanged()
     {
-        loadingScreen.SetActive(false);
 
         CharacterController charController = FindObjectOfType<CharacterController>();
         charController.enabled = false;
@@ -336,7 +335,8 @@ public class SceneLoader : MonoBehaviour
         charController.enabled = true;
 
         PlayerPlayable playerPlayable = FindObjectOfType<PlayerPlayable>();
-        if(playerPlayable != null)
+        loadingScreen.SetActive(false);
+        if (playerPlayable != null)
         {
             playerPlayable.playableWakeup.Play();
         }

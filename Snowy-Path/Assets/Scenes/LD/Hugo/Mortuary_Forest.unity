@@ -15,7 +15,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.5921569, g: 0.74509805, b: 0.86274517, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.04
@@ -12838,50 +12838,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 328322930}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &329873296
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 329873297}
-  - component: {fileID: 329873298}
-  m_Layer: 0
-  m_Name: Hitbox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &329873297
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 329873296}
-  m_LocalRotation: {x: -0, y: 0.3019466, z: -0, w: 0.95332485}
-  m_LocalPosition: {x: 0.389, y: 0.871, z: -0.124}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1691005100342117234}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &329873298
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 329873296}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &331953762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75589,7 +75545,7 @@ PrefabInstance:
     - target: {fileID: 1328651651416445904, guid: 7ca43720f16c9fe42b7336c768548bae,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1328651651416445904, guid: 7ca43720f16c9fe42b7336c768548bae,
         type: 3}
@@ -79939,7 +79895,7 @@ PrefabInstance:
     - target: {fileID: 1328651651416445904, guid: 7ca43720f16c9fe42b7336c768548bae,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1328651651416445904, guid: 7ca43720f16c9fe42b7336c768548bae,
         type: 3}
@@ -81276,7 +81232,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1691005099304145475}
-  - {fileID: 329873297}
   - {fileID: 1073297267}
   - {fileID: 1390721457}
   m_Father: {fileID: 1687798673}
@@ -81294,7 +81249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 797b8a473dd758e45b4d05f266d81d94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireFX: {fileID: 8086002252697548621, guid: 7fc762a936a19aa4a8efa9cd838b3bb6, type: 3}
+  fireFX: {fileID: 6658171924620709396, guid: ae88ed5278644ee4c94cf2f9438739bd, type: 3}
   ignitePointsParent: {fileID: 1691005099304145475}
   fireDuration: 3
 --- !u!1 &1691005100342117238
