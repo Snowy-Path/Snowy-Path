@@ -6,6 +6,8 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using System.IO;
 using System.Linq;
+using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class HQOptionsMenu : MonoBehaviour
 {
@@ -16,25 +18,35 @@ public class HQOptionsMenu : MonoBehaviour
     public Slider musicSlider;
     public Slider soundsSlider;
     public Slider gammaSlider;
-    public OptionSettings option;
+    public OptionHandler optionhandler;
     private float GammaCorrection;
     public Resolution[] resolutions;
 
-
+    public Gamepad current { get; }
+    public bool gamepadconnected;
     private void Awake()
     {
-        resolutions = Screen.resolutions;
+        OptionSettings opt = new OptionSettings();
+        
     }
 
-
+    //        RenderSettings.ambientLight = new Color(GammaCorrection, GammaCorrection, GammaCorrection, 1.0f);
 
 
     private void OnEnable()
     {
-        //stringList = new List<string>();
-        //parsedList = new List<string[]>();
-        //LoadSettings();
+
+
+
+        if (current != null)
+        {
+            gamepadconnected = true;
+        }
+        else
+            gamepadconnected = false;
+
     }
+
 
 
     public void SetResolution(int resolutionIndex)
@@ -44,7 +56,7 @@ public class HQOptionsMenu : MonoBehaviour
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width,
                   resolution.height, Screen.fullScreen);
-
+        
     }
 
     public void SetAntiAliasing(int aaIndex)
@@ -92,13 +104,6 @@ public class HQOptionsMenu : MonoBehaviour
 
 
 
-    void Update()
-    {
-
-        RenderSettings.ambientLight = new Color(GammaCorrection, GammaCorrection, GammaCorrection, 1.0f);
-
-    }
-
     public void SetGamma(float gammavalue)
     {
 
@@ -128,13 +133,14 @@ public class HQOptionsMenu : MonoBehaviour
 
     public void ApplySettings()
     {
-        option.SaveSettings();
+
+        
 
     }
 
     public void BackSettings()
     {
-        option.LoadSettings();
+        optionhandler.LoadSettings();
     }
 
 }

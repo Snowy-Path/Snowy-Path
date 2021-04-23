@@ -7,18 +7,23 @@ using UnityEngine.SceneManagement;
 
 public class HQMainMenu : MonoBehaviour
 {
-    public OptionSettings inputDevice;
+    //private OptionSettings inputDevice;
     public GameObject OptionsMenu, CreditsMenu, MainMenu;
     public GameObject OptionsButton, CreditsButton;
     public GameObject MainMenuFirstButton, OptionsFirstButton, CreditsFirstButton;
     public PlayerInput playerInput;
     public void Start()
     {
-        if (inputDevice.gamepadconnected)
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(MainMenuFirstButton);
-        }
+        //inputDevice = (OptionSettings)FindObjectOfType(typeof(OptionSettings));
+        //if (inputDevice)
+        //    Debug.Log("inputDevice object found: " + inputDevice.name);
+        //else
+        //    Debug.Log("No inputDevice object could be found");
+        //if (inputDevice.gamepadconnected)
+        //{
+        //    EventSystem.current.SetSelectedGameObject(null);
+        //    EventSystem.current.SetSelectedGameObject(MainMenuFirstButton);
+        //}
 
 
 
@@ -91,11 +96,11 @@ public class HQMainMenu : MonoBehaviour
     /// <param name="go"></param>
     private void SetFocus(GameObject go)
     {
-        if (inputDevice.gamepadconnected)
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(go);
-        }
+        //if (inputDevice.gamepadconnected)
+        //{
+        //    EventSystem.current.SetSelectedGameObject(null);
+        //    EventSystem.current.SetSelectedGameObject(go);
+        //}
 
     }
 
