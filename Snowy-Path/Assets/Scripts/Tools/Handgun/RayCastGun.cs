@@ -17,7 +17,6 @@ public class RayCastGun : MonoBehaviour, IHandTool {
     public float projectileDispersion;
     public int ammo;
     [SerializeField] private int projectileShot;
-    [SerializeField] Animator animator;
     public LayerMask layers;
 
     public Transform gunEnd; //Reference to the gun end object, marking the muzzle location of the gun   
@@ -41,6 +40,7 @@ public class RayCastGun : MonoBehaviour, IHandTool {
 
     public EToolType ToolType => EToolType.Pistol;
     public bool IsBusy { get; set; }
+    public Animator handAnimator { get; set; }
 
     void Start() {
         //Get references of components linerenderer and camera
@@ -49,7 +49,6 @@ public class RayCastGun : MonoBehaviour, IHandTool {
         readyToShoot = true;
 
         //Init reload Time
-        animator.SetFloat("ReloadTime", 1 / reloadingTime);
     }
 
     /// <summary>
@@ -119,7 +118,6 @@ public class RayCastGun : MonoBehaviour, IHandTool {
         //Set the start position for visual effect to the position of gunEnd
         //laserLine.SetPosition(0, gunEnd.position);
 
-
         //If the ray hit something
         if (Physics.Raycast(rayOrigin, forwardVector, out hit, range, layers)) {
             //Set the corresponding endline point
@@ -158,13 +156,14 @@ public class RayCastGun : MonoBehaviour, IHandTool {
         if (Time.time > nextFire && !reloading && ammo > 0 && readyToShoot) {
             OnFire.Invoke();//Emit sound to allow ennemies to detect the point of origin && play muzzle effect VFX
             projectileShot = projectilePerShot;
+            handAnimator.SetTrigger("Shoot");
             Shot();
             StartCoroutine("DammageApply");
             ammo--;
 
             if (maxAmmo > 0) {
                 //Start reloading method
-                Reload();
+                Invoke("Reload", 0.5f);
             }
         }
     }
@@ -184,14 +183,10 @@ public class RayCastGun : MonoBehaviour, IHandTool {
         }
     }
 
-    private void SecondaryInteraction() {
-        //Reload();
-    }
-
     private void Reload() {
         if (maxAmmo >= 0 && currentMagazineCapacity < maxMagazineCapacity) {
             reloading = true;
-            animator.SetTrigger("Reload");
+            handAnimator.SetTrigger("Reload");
 
             //Reload weapon during reloadingTime
             IsBusy = true;
@@ -210,15 +205,13 @@ public class RayCastGun : MonoBehaviour, IHandTool {
         reloading = false;
     }
 
-    public void ReloadOneAmmo()
-    {
+    public void ReloadOneAmmo() {
         if (ammo < maxAmmo)
             ammo += 1;
-        
+
     }
 
-    public void ReloadMax()
-    {
+    public void ReloadMax() {
         ammo = maxAmmo;
     }
 

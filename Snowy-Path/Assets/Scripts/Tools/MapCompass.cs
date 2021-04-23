@@ -7,6 +7,7 @@ public class MapCompass : MonoBehaviour, IHandTool {
     public EToolType ToolType => EToolType.MapCompass;
     public bool IsBusy { get; set; }
 
+
     //private MapUI m_mapUI;
 
     private PlayerInput m_playerInput;
@@ -14,30 +15,31 @@ public class MapCompass : MonoBehaviour, IHandTool {
 
     public Camera InGameMapCamera { get { return m_inGameMapCamera; } }
 
-    void Start()
-    {
+    public Animator handAnimator { get; set; }
+
+    void Start() {
         //m_mapUI = Utils.FindComponent<MapUI>("MapCanvas/Map");
 
         //m_inGameMapCamera = GetComponentInChildren<Camera>();
         m_playerInput = GetComponentInParent<PlayerInput>();
     }
 
-    public void SwitchCurrentActionMap(string name)
-    {
+    public void SwitchCurrentActionMap(string name) {
         //m_playerInput.SwitchCurrentActionMap(name);
     }
 
-    public void StartPrimaryUse()
-    {
+    public void StartPrimaryUse() {
+        IsBusy = true;
+        handAnimator.SetBool("UseCompass", true);
         //m_mapUI.OpenFullscreenMap();
     }
 
-    public void CancelPrimaryUse()
-    {
+    public void CancelPrimaryUse() {
+        IsBusy = false;
+        handAnimator.SetBool("UseCompass", false);
     }
 
-    public void SecondaryUse()
-    {
+    public void SecondaryUse() {
         //m_mapUI.OpenFullscreenMap();
     }
 

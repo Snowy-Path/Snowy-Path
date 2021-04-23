@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class Telescope : MonoBehaviour, IHandTool {
     [Header("Set up")]
     [Tooltip("Hands animator. Allows this script to trigger the look animation.")]
-    [SerializeField] Animator animator;
     [SerializeField] Camera scopeCamera;
     [SerializeField] GameObject spriteMask;
 
@@ -18,6 +17,7 @@ public class Telescope : MonoBehaviour, IHandTool {
     public EToolType ToolType => EToolType.Scope;
 
     public bool IsBusy { get; set; }
+    public Animator handAnimator { get; set; }
 
     private void Start() {
         spriteMask.SetActive(false);
@@ -29,12 +29,12 @@ public class Telescope : MonoBehaviour, IHandTool {
         scopeCamera.gameObject.SetActive(true);
         scopeCamera.fieldOfView = defaultZoom;
 
-        animator.SetBool("LookInTelescope", true);
+        handAnimator.SetBool("UseTelescope", true);
     }
 
     public void CancelPrimaryUse() {
         IsBusy = false;
-        animator.SetBool("LookInTelescope", false);
+        handAnimator.SetBool("UseTelescope", false);
         DisableCamera(.5f);
     }
 
