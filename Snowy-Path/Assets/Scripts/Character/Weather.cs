@@ -6,6 +6,10 @@ public class Weather : MonoBehaviour
 {
     public WeatherPreset defaultWeather;
 
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_blizzardEmitter;
+    private FMOD.Studio.PARAMETER_ID m_blizzardChangeID;
+
     private Dictionary<int, WeatherZone> m_activeWeatherZones = new Dictionary<int, WeatherZone>();
     private Inventory m_inventory;
 
@@ -18,6 +22,7 @@ public class Weather : MonoBehaviour
             //    blizzardAnimator.SetTrigger("BlizzardChanged");
             //}
             m_currentWeather = value;
+            SwitchBlizzardSoundParametter();
         }
     }
 
@@ -29,10 +34,35 @@ public class Weather : MonoBehaviour
 
     void Start() {
         m_inventory = GetComponent<Inventory>();
+
+        FMOD.Studio.EventDescription blizzardChangeEventDesc;
+        m_blizzardEmitter.EventInstance.getDescription(out blizzardChangeEventDesc);
+        FMOD.Studio.PARAMETER_DESCRIPTION blizzardChangeParametterDesc;
+        blizzardChangeEventDesc.getParameterDescriptionByName("Blizzard Changed", out blizzardChangeParametterDesc);
+        m_blizzardChangeID = blizzardChangeParametterDesc.id;
     }
 
     void Update() {
         m_inventory.ReduceClothDurability(GetCurrentWeather());
+    }
+
+    private void SwitchBlizzardSoundParametter() {
+        switch (m_currentWeather.blizzardStrength) {
+            case WeatherPreset.EBlizzardStrength.None:
+                m_blizzardEmitter.SetParameter(m_blizzardChangeID, 1.0f);
+                break;
+            case WeatherPreset.EBlizzardStrength.Low:
+                m_blizzardEmitter.SetParameter(m_blizzardChangeID, 0.1f);
+                break;
+            case WeatherPreset.EBlizzardStrength.Medium:
+                m_blizzardEmitter.SetParameter(m_blizzardChangeID, 0.4f);
+                break;
+            case WeatherPreset.EBlizzardStrength.High:
+                m_blizzardEmitter.SetParameter(m_blizzardChangeID, 0.6f);
+                break;
+            default:
+                break;
+        }
     }
 
     public WeatherPreset GetCurrentWeather() {
