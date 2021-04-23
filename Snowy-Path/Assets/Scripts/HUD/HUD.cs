@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
+using UnityEngine.Rendering;
 
 public class HUD : MonoBehaviour {
 
@@ -12,13 +13,12 @@ public class HUD : MonoBehaviour {
 
     [Header("Breath")]
     [Range(0, 1)] [SerializeField] float startBreath = 0.5f;
-    //[SerializeField] AnimationCurve breathCurve;
 
     [Header("Freeze")]
-    [Range(0, 1)] [SerializeField] float startFreeze1 = 0.5f;
-    [Range(0, 1)] [SerializeField] float startFreeze2 = 0.3f;
-    [Range(0, 1)] [SerializeField] float startBlueOverlay = 0.4f;
-    [Range(0, 1)] [SerializeField] float blueColorMaxAlpha = 0.3f;
+    [Tooltip("% of max temperature")]
+    [Range(0, 1)] [SerializeField] float startFreeze1 = 0.7f;
+    [Tooltip("% of max temperature")]
+    [Range(0, 1)] [SerializeField] float startFreeze2 = 0.2f;
 
     [Header("Blood")]
     [Range(0, 10)] [SerializeField] int startBloodVignette = 2;
@@ -30,73 +30,52 @@ public class HUD : MonoBehaviour {
     [Range(0, 1)] [SerializeField] float bloodHealStep = 0.1f;
 
     [Header("Set up")]
-    //[SerializeField] Image staminaOverlay;
     [SerializeField] Image bloodVignette;
     [SerializeField] Image bloodOverlay1;
     [SerializeField] Image bloodOverlay2;
     [SerializeField] Image bloodVein;
     [SerializeField] Image freeze1Overlay;
     [SerializeField] Image freeze2Overlay;
-    //[SerializeField] Image blueOverlay;
-    //[SerializeField] Image breathOverlay;
     [SerializeField] private VisualEffect breathEffect;
 
-
     private GenericHealth playerHealth;
-    //private PlayerController controller;
-    private bool coldBreath = false;
-    //private float breathTimer;
-    //private int breathDiv = 6;
- 
+    private Temperature temperature;
 
     private void Start() {
         ResetOverlays();
         playerHealth = GetComponent<GenericHealth>();
-        //controller = GetComponent<PlayerController>();
+        temperature = GetComponent<Temperature>();
     }
 
     private void Update() {
-        //ColdBreath();
-        //if (Keyboard.current.kKey.wasPressedThisFrame)
+        //Debug
+        //if (Keyboard.current.oKey.wasPressedThisFrame)
         //    playerHealth.Hit(1);
-        //if (Keyboard.current.jKey.wasPressedThisFrame)
+        //if (Keyboard.current.iKey.wasPressedThisFrame)
         //    playerHealth.Heal(1);
+        //if (Keyboard.current.kKey.wasPressedThisFrame)
+        //    temperature.DebugTemperature(5);
+        //if (Keyboard.current.jKey.wasPressedThisFrame)
+        //    temperature.DebugTemperature(-5);
+
+        SetFreezeOverlays(Mathf.Clamp(temperature.CurrentTemperature / temperature.maxTemperature, 0, 1));
+        SetBloodOverlays();
+        //Debug.Log(temperature.CurrentTemperature);
     }
 
     public void ResetOverlays() {
-        //staminaOverlay.SetAlpha(0);
         bloodVignette.SetAlpha(0);
         bloodOverlay1.SetAlpha(0);
         bloodOverlay2.SetAlpha(0);
         bloodVein.SetAlpha(0);
         freeze1Overlay.SetAlpha(0);
         freeze2Overlay.SetAlpha(0);
-        //blueOverlay.SetAlpha(0);
-        //breathOverlay.SetAlpha(0);
-    }
-
-    //public void ColdBreath() {
-    //    float breathSpeed = controller.CurrentSpeed / breathDiv;
-
-    //    breathTimer += Time.deltaTime * breathSpeed;
-    //    if (breathTimer > breathCurve.keys[breathCurve.keys.Length - 1].time)
-    //        breathTimer = 0;
-    //    if (coldBreath) {
-    //        breathOverlay.SetAlpha(breathCurve.Evaluate(breathTimer));
-    //    } else
-    //        breathOverlay.SetAlpha(0);
-    //}
-
-    public void SetStamina(float staminaRatio) {
-        //staminaOverlay.SetAlpha(staminaCurve.Evaluate(staminaRatio));
     }
 
     /// <summary>
     /// Update blood overlays alpha, called on player hit
     /// </summary>
-    /// <param name="tag"></param>
-    /// <param name="value"></param>
-    public void SetBloodOverlays(string tag, int value) {
+    public void SetBloodOverlays() {
         int health = playerHealth.GetCurrentHealth();
         CalculateBloodAlpha(ref bloodVignette, health, startBloodVignette);
         CalculateBloodAlpha(ref bloodOverlay1, health, startBlood1);
@@ -129,33 +108,28 @@ public class HUD : MonoBehaviour {
         }
         else
             Debug.LogError("HUD blood fade step can't be 0");
-
     }
 
-
     public void SetFreezeOverlays(float temperatureRatio) {
+        //Breath
         if (temperatureRatio < startBreath) {
             breathEffect.enabled = true;
-        } else {
-            breathEffect.enabled = false;
-        }
-        CalculateFreezeAlpha(ref freeze1Overlay, temperatureRatio, startFreeze1);
-        CalculateFreezeAlpha(ref freeze2Overlay, temperatureRatio, startFreeze2);
-
-        if (temperatureRatio < startBlueOverlay) {
-            float factor = blueColorMaxAlpha / startBlueOverlay;
-            //blueOverlay.SetAlpha(blueColorMaxAlpha - factor * temperatureRatio);
         }
         else {
-
-            //blueOverlay.SetAlpha(0);
+            breathEffect.enabled = false;
         }
+   
+
+        CalculateFreezeAlpha(ref freeze1Overlay, temperatureRatio, startFreeze1);
+        CalculateFreezeAlpha(ref freeze2Overlay, temperatureRatio, startFreeze2);
     }
 
     public void CalculateFreezeAlpha(ref Image img, float ratio, float startThreshold) {
         if (ratio < startThreshold) {
             float factor = 1 / startThreshold;
-            img.SetAlpha(1 - factor * ratio);
+            float newAlpha = Mathf.Lerp(img.color.a, 1 - factor * ratio, Time.deltaTime);
+
+            img.SetAlpha(newAlpha);
         }
         else
             img.SetAlpha(0);
