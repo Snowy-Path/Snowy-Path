@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{dc86c26d-4b5a-4ecf-8048-b0b5071b9deb}">
+		<property name="color">
+			<value>Red</value>
+		</property>
 		<property name="name">
 			<value>Oneira Death</value>
 		</property>
@@ -90,7 +93,7 @@
 	<object class="MixerBusPanner" id="{6beaf044-c2a3-4d49-9d72-99b471897796}" />
 	<object class="MultiSound" id="{27c0ba17-ded9-49ce-976e-eba7eb348200}">
 		<property name="length">
-			<value>16</value>
+			<value>4.1000000000000005</value>
 		</property>
 		<relationship name="modulators">
 			<destination>{7284585c-d9f4-40cc-9c73-06e36f660107}</destination>
@@ -153,6 +156,12 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{c696ff82-c8c9-4439-a536-b05738b8f9b7}">
+		<property name="startOffset">
+			<value>21.5</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{c691d2cb-bc3e-47d6-875d-32ef0ce18dc8}</destination>
+		</relationship>
 		<relationship name="audioFile">
 			<destination>{2ba5f044-3643-41cd-8f86-7bc7d4b8b188}</destination>
 		</relationship>
@@ -178,12 +187,12 @@
 			<value>0</value>
 		</property>
 		<property name="curveShape">
-			<value>0.497990102</value>
+			<value>-0.627239704</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{cc7631af-d42c-4645-9f74-fd0836f866f0}">
 		<property name="position">
-			<value>0.60000000000000009</value>
+			<value>0.20000000000000001</value>
 		</property>
 		<property name="value">
 			<value>1</value>
@@ -191,21 +200,29 @@
 	</object>
 	<object class="AutomationPoint" id="{f56093da-3851-4f89-9aa6-516a344613ec}">
 		<property name="position">
-			<value>14</value>
+			<value>3.3000000000000007</value>
 		</property>
 		<property name="value">
 			<value>1</value>
 		</property>
 		<property name="curveShape">
-			<value>0.25471893</value>
+			<value>-0.457251459</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{b658de34-5f13-43f2-a5b7-45b0d6a50b0f}">
 		<property name="position">
-			<value>16</value>
+			<value>4.1000000000000059</value>
 		</property>
 		<property name="value">
 			<value>0</value>
+		</property>
+	</object>
+	<object class="RandomizerModulator" id="{c691d2cb-bc3e-47d6-875d-32ef0ce18dc8}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>7</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{1056013d-1989-4d17-8418-cbecae065c63}" />

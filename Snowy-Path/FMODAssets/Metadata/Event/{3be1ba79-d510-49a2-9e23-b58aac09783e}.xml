@@ -5,7 +5,7 @@
 			<value>Wolf Damaged</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{af1b716f-9fbf-4e16-bf78-8d3399268ff8}</destination>
@@ -132,6 +132,7 @@
 		<relationship name="effects">
 			<destination>{86368cd5-d679-418c-817e-260896f95be3}</destination>
 			<destination>{8642c6c2-be93-4591-b368-12959a538193}</destination>
+			<destination>{3e5d449b-3783-4c00-a3a6-7d7a2fd508fc}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{ef8a6cd1-2cbe-48e2-9b14-9f1636a62bd4}" />
@@ -175,6 +176,20 @@
 		<property name="maximumDistance">
 			<value>10</value>
 		</property>
+	</object>
+	<object class="ConvolutionReverbEffect" id="{3e5d449b-3783-4c00-a3a6-7d7a2fd508fc}">
+		<property name="endFrame">
+			<value>37314</value>
+		</property>
+		<property name="wetLevel">
+			<value>-28.5</value>
+		</property>
+		<property name="dryLevel">
+			<value>0</value>
+		</property>
+		<relationship name="referenceableData">
+			<destination>{6e351553-5c9f-42fd-b83c-b6b3d34dbd1f}</destination>
+		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{52b33d9c-df9c-418c-8f3d-2a158f1e77e6}" />
 </objects>
