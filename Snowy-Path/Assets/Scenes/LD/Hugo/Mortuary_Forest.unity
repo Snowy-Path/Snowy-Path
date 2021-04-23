@@ -2390,6 +2390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e40be4213d908745af4c1d8d5f46aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultLight: {fileID: 0}
 --- !u!4 &63632849
 Transform:
   m_ObjectHideFlags: 0
@@ -10102,7 +10103,17 @@ PrefabInstance:
       objectReference: {fileID: 1144139867}
     - target: {fileID: 919132149522359269, guid: c581f8ec80de62d43b9ca27a04b2d734,
         type: 3}
+      propertyPath: onHit.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149522359269, guid: c581f8ec80de62d43b9ca27a04b2d734,
+        type: 3}
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149522359269, guid: c581f8ec80de62d43b9ca27a04b2d734,
+        type: 3}
+      propertyPath: onHit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149522359269, guid: c581f8ec80de62d43b9ca27a04b2d734,
@@ -10115,6 +10126,11 @@ PrefabInstance:
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 454562458}
+    - target: {fileID: 919132149522359269, guid: c581f8ec80de62d43b9ca27a04b2d734,
+        type: 3}
+      propertyPath: onHit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149522359269, guid: c581f8ec80de62d43b9ca27a04b2d734,
         type: 3}
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_CallState

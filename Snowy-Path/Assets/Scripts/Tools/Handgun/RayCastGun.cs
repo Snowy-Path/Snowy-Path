@@ -48,6 +48,9 @@ public class RayCastGun : MonoBehaviour, IHandTool {
         fpsCam = GetComponentInParent<Camera>();
         readyToShoot = true;
 
+        currentMagazineCapacity = maxMagazineCapacity - ammo;
+
+
         //Init reload Time
         animator.SetFloat("ReloadTime", 1 / reloadingTime);
     }
@@ -76,7 +79,10 @@ public class RayCastGun : MonoBehaviour, IHandTool {
         HashSet<GameObject> EnnemySet = EnnemyHashSet;
         foreach (var valu in EnnemySet) {
             //apply dammage
-            valu.GetComponent<IEnnemyController>().Hit(EToolType.Pistol, damageDealt);
+            if(valu != null)
+            {
+                valu.GetComponent<IEnnemyController>().Hit(EToolType.Pistol, damageDealt);
+            }
         }
         //Clear the hashsets
         EnnemyHashSet.Clear();
@@ -196,7 +202,6 @@ public class RayCastGun : MonoBehaviour, IHandTool {
             //Reload weapon during reloadingTime
             IsBusy = true;
             Invoke("ReloadFinished", reloadingTime);
-            currentMagazineCapacity = maxMagazineCapacity - ammo;
         }
     }
 
