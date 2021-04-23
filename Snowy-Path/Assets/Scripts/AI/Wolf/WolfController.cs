@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using FMODUnity;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -29,6 +30,29 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     [SerializeField]
     [Tooltip("The attack gameobject to active and deactivate while attacking the player.")]
     private GameObject m_attackGO;
+
+    #region SFX
+    [Header("SFX")]
+    
+    [SerializeField]
+    [Tooltip("FMOD Studio Emitter for the Aggro / Howling sound")]
+    private StudioEventEmitter m_aggroSoundEmitter;
+
+    [SerializeField]
+    [Tooltip("FMOD Studio Emitter for the Attack sound")]
+    private StudioEventEmitter m_attackSoundEmitter;
+
+    [SerializeField]
+    [Tooltip("FMOD Studio Emitter for the TookDamage sound")]
+    private StudioEventEmitter m_tookDamageSoundEmitter;
+
+    [SerializeField]
+    private FootstepChoose m_footstepChoose;
+
+    [SerializeField]
+    [Tooltip("FMOD Studio Emitter for the Movement sound")]
+    private FmodAudioPlayer m_movementSoundEmitter;
+    #endregion
 
     // Generic timer used when needed (in multiple cases)
     private float m_timer;
@@ -411,6 +435,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
         State<EWolfState> aggro = new State<EWolfState>(EWolfState.Aggro, parent,
             onEntry: (state) => {
                 m_animator.SetTrigger("Aggro");
+                m_aggroSoundEmitter.Play();
             }
         );
 
@@ -552,6 +577,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
 
                 m_attackGO.SetActive(true);
                 m_timer = Time.time + m_attackTime;
+                m_attackSoundEmitter.Play();
             },
             onUpdate: (state) => {
                 m_agent.SetDestination(transform.position + attackDirection); // Going straight in a single direction
@@ -726,6 +752,14 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     private bool IsInInspectAnimation() {
         return m_animator.GetCurrentAnimatorStateInfo(0).IsName("Inspect");
     }
+
+    /// <summary>
+    /// Play the movement sound one time
+    /// </summary>
+    internal void MovementSoundEmission() {
+        m_footstepChoose.ChooseSound();
+        m_movementSoundEmitter.PlaySound();
+    }
     #endregion
 
     #region IEnnemyController
@@ -737,6 +771,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     /// <param name="attackDamage">The damage value to be dealt.</param>
     public void Hit(EToolType toolType, int attackDamage) {
         m_genericHealth.Hit(attackDamage);
+        m_tookDamageSoundEmitter.Play();
         if (toolType == EToolType.Pistol) { // If Gun, stun wolf
             SetStunState();
             m_effectAnimator.SetTrigger("TookDamage");
