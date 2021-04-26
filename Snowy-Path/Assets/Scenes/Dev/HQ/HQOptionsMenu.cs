@@ -16,7 +16,7 @@ public class HQOptionsMenu : MonoBehaviour
     public Slider musicSlider;
     public Slider soundsSlider;
     public Slider gammaSlider;
-    public OptionSettings option;
+    public OptionSettings option; 
     private float GammaCorrection;
     public Resolution[] resolutions;
 
@@ -26,8 +26,10 @@ public class HQOptionsMenu : MonoBehaviour
         resolutions = Screen.resolutions;
     }
 
-
-
+    private void Start()
+    {
+        RenderSettings.ambientLight = Color.white;
+    }
 
     private void OnEnable()
     {
@@ -91,11 +93,11 @@ public class HQOptionsMenu : MonoBehaviour
     }
 
 
-
+    // FAUT PAS QUE CE SOIS EN UPDATE
     void Update()
     {
 
-        RenderSettings.ambientLight = new Color(GammaCorrection, GammaCorrection, GammaCorrection, 1.0f);
+        //RenderSettings.ambientLight = new Color(GammaCorrection, GammaCorrection, GammaCorrection, 1.0f);
 
     }
 
