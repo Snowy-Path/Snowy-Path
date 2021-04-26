@@ -22,22 +22,26 @@ public class SoundTimer : MonoBehaviour {
     [Min(0f)]
     private float m_cooldownMax = 120.0f;
 
+    private float m_internalCooldown;
+
     private void Awake() {
         if (m_randomCooldown) {
-            m_cooldown = Random.Range(m_cooldownMin, m_cooldownMax);
+            m_internalCooldown = Random.Range(m_cooldownMin, m_cooldownMax);
+        } else {
+            m_internalCooldown = m_cooldown;
         }
     }
 
     private void Update() {
 
         m_timer += Time.deltaTime;
-        if (m_timer >= m_cooldown) {
+        if (m_timer >= m_internalCooldown) {
 
             FMODUnity.RuntimeManager.PlayOneShot(m_eventPath, transform.position);
             m_timer = 0.0f;
 
             if (m_randomCooldown) {
-                m_cooldown = Random.Range(m_cooldownMin, m_cooldownMax);
+                m_internalCooldown = Random.Range(m_cooldownMin, m_cooldownMax);
             }
         }
     }
