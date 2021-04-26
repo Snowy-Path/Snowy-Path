@@ -12,25 +12,21 @@ public class HQMainMenu : MonoBehaviour
     public GameObject OptionsButton, CreditsButton;
     public GameObject MainMenuFirstButton, OptionsFirstButton, CreditsFirstButton;
     public PlayerInput playerInput;
-    public void Start()
+    public void OnEnable()
     {
-        //inputDevice = (OptionSettings)FindObjectOfType(typeof(OptionSettings));
-        //if (inputDevice)
-        //    Debug.Log("inputDevice object found: " + inputDevice.name);
-        //else
-        //    Debug.Log("No inputDevice object could be found");
-        //if (inputDevice.gamepadconnected)
-        //{
-        //    EventSystem.current.SetSelectedGameObject(null);
-        //    EventSystem.current.SetSelectedGameObject(MainMenuFirstButton);
-        //}
+
+        if (OptionHandler.gamepadconnected)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(MainMenuFirstButton);
+        }
 
 
 
     }
     public void PlayGame()
     {
-        //playerInput.SwitchCurrentActionMap("Gameplay");
+
         SceneLoader.Instance.LoadWorld();
         SaveSystem.Instance.SetCurrentSave(0);
     }
@@ -96,11 +92,11 @@ public class HQMainMenu : MonoBehaviour
     /// <param name="go"></param>
     private void SetFocus(GameObject go)
     {
-        //if (inputDevice.gamepadconnected)
-        //{
-        //    EventSystem.current.SetSelectedGameObject(null);
-        //    EventSystem.current.SetSelectedGameObject(go);
-        //}
+        if (OptionHandler.gamepadconnected)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(go);
+        }
 
     }
 

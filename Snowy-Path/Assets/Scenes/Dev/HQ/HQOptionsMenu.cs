@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
-using System.IO;
-using System.Linq;
-using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
+
+
 
 public class HQOptionsMenu : MonoBehaviour
 {
@@ -22,8 +18,7 @@ public class HQOptionsMenu : MonoBehaviour
     private float GammaCorrection;
     public Resolution[] resolutions;
     public List<int> AntiAliasing = new List<int>{0,2,4,8};
-    public Gamepad current { get; }
-    public bool gamepadconnected;
+
 
     private void Awake()
     {
@@ -37,19 +32,7 @@ public class HQOptionsMenu : MonoBehaviour
     //        RenderSettings.ambientLight = new Color(GammaCorrection, GammaCorrection, GammaCorrection, 1.0f);
 
 
-    private void OnEnable()
-    {
 
-
-
-        if (current != null)
-        {
-            gamepadconnected = true;
-        }
-        else
-            gamepadconnected = false;
-
-    }
 
 
 

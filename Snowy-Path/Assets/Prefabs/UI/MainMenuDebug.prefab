@@ -1090,7 +1090,7 @@ MonoBehaviour:
   musicSlider: {fileID: 7953096628900302344}
   soundsSlider: {fileID: 2218405017509345300}
   gammaSlider: {fileID: 7852106517591199868}
-  optionhandler: {fileID: 0}
+  AntiAliasing: 00000000020000000400000008000000
   gamepadconnected: 0
 --- !u!1 &1051708611558380136
 GameObject:
@@ -8144,7 +8144,18 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9203550307623837350}
+        m_MethodName: SetGamma
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7180300972525556960
 GameObject:
   m_ObjectHideFlags: 0
@@ -8866,28 +8877,30 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 6715641824537485118}
+  m_TargetGraphic: {fileID: 0}
   m_Template: {fileID: 2432941594913921260}
   m_CaptionText: {fileID: 3077647551602897695}
   m_CaptionImage: {fileID: 0}
   m_Placeholder: {fileID: 0}
-  m_ItemText: {fileID: 877572258184032950}
+  m_ItemText: {fileID: 3077647551602897695}
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Option A
+    - m_Text: 0
       m_Image: {fileID: 0}
-    - m_Text: Option B
+    - m_Text: 2
       m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: 4
+      m_Image: {fileID: 0}
+    - m_Text: 8
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9203550307623837350}
-        m_MethodName: SetQuality
-        m_Mode: 3
+        m_MethodName: SetAntiAliasing
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

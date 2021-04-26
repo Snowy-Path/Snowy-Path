@@ -16,5 +16,4 @@ public class OptionSettings
     public float gammavalue;
 
 
-
 }

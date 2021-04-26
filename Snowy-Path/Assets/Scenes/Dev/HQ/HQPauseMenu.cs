@@ -17,13 +17,10 @@ public class HQPauseMenu : MonoBehaviour
 
     public void Start()
     {
-        //inputDevice = (OptionSettings)FindObjectOfType(typeof(OptionSettings));
-        //inputDevice = GetComponent<OptionSettings>();
-        //gameIsPaused = false;
-        //CameraLayerToggle();
+
         ShowDefaultView();
         SetFocus(PauseMenuFirstButton);
-        //ResumeGame();
+
         
     }
     private void OnEnable()
@@ -107,11 +104,11 @@ public class HQPauseMenu : MonoBehaviour
     /// <param name="go"></param>
     private void SetFocus(GameObject go)
     {
-        //if (inputDevice.gamepadconnected)
-        //{
+        if (OptionHandler.gamepadconnected)
+        {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(go);
-        //}
+        }
 
     }
 

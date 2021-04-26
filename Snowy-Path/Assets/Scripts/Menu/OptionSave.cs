@@ -5,8 +5,12 @@ using System.IO;
 
 public static class OptionSave
 {
-    public static string file =  "savesettings.json";
+    public static string file = "savesettings.json";
     public static string destination = Application.persistentDataPath + "/savesettings.json";
+    /// <summary>
+    /// Check if the file destination exist
+    /// </summary>
+    /// <returns></returns>
     public static bool Init()
     {
 
@@ -20,14 +24,20 @@ public static class OptionSave
             return false;
         }
     }
- 
+    /// <summary>
+    /// Create save of current option settings
+    /// </summary>
+    /// <param name="option"></param>
     public static void Save(OptionSettings option)
     {
         string json = JsonUtility.ToJson(option);
         File.WriteAllText(destination, json);
 
     }
-
+    /// <summary>
+    /// Load a current option settings save
+    /// </summary>
+    /// <returns></returns>
     public static OptionSettings Load()
     {
         OptionSettings option = new OptionSettings();
@@ -37,16 +47,11 @@ public static class OptionSave
     }
 
 
-
-    public static void WriteToFile(string fileName, string json)
-    {
-        string path = GetFilePath(fileName);
-        FileStream fileStram = new FileStream(path, FileMode.Create);
-        using(StreamWriter writer = new StreamWriter(fileStram)){
-            writer.Write(json);
-        }
-    }
-
+    /// <summary>
+    /// Return the json file
+    /// </summary>
+    /// <param name="filename"></param>
+    /// <returns></returns>
     public static string ReadFromFile(string filename)
     {
         string path = GetFilePath(filename);
