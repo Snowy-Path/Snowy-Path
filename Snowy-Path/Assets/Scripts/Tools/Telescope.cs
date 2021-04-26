@@ -14,7 +14,7 @@ public class Telescope : MonoBehaviour, IHandTool {
     [Header("Zoom")]
     [SerializeField] float defaultZoom = 4f;
     [SerializeField] float secondaryZoom = 8f;
-
+    [SerializeField] float zoomStep = 0.05f;
 
     [Header("Audio")]
     public UnityEvent OnZoom;
@@ -25,10 +25,23 @@ public class Telescope : MonoBehaviour, IHandTool {
     public bool IsBusy { get; set; }
     public Animator handAnimator { get; set; }
 
+    private float targetFov;
+
     private void Start() {
+        targetFov = defaultZoom;
         spriteMask.SetActive(false);
         scopeCamera.gameObject.SetActive(false);
         lens.SetActive(false);
+    }
+
+    private void Update() {
+        Debug.Log(scopeCamera.fieldOfView);
+        if (scopeCamera.fieldOfView < targetFov)
+            scopeCamera.fieldOfView = Mathf.Lerp(scopeCamera.fieldOfView, targetFov, zoomStep);
+        //scopeCamera.fieldOfView += zoomStep;
+        else if (scopeCamera.fieldOfView > targetFov)
+            scopeCamera.fieldOfView = Mathf.Lerp(scopeCamera.fieldOfView, targetFov, zoomStep);
+        //scopeCamera.fieldOfView -= zoomStep;
     }
 
     public void StartPrimaryUse() {
@@ -53,15 +66,14 @@ public class Telescope : MonoBehaviour, IHandTool {
     }
 
     public void SecondaryUse() {
-        SwitchZoom();
     }
 
-    private void SwitchZoom() {
+    public void SwitchZoom() {
         if (IsBusy && gameObject.activeSelf) {
-            if (scopeCamera.fieldOfView == defaultZoom)
-                scopeCamera.fieldOfView = secondaryZoom;
+            if (targetFov == defaultZoom)
+                targetFov = secondaryZoom;
             else
-                scopeCamera.fieldOfView = defaultZoom;
+                targetFov = defaultZoom;
             OnZoom.Invoke();
         }
     }
