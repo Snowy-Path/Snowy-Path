@@ -47,15 +47,15 @@ public class OptionSettings : MonoBehaviour
         File.Create(destination).Dispose();
         File.WriteAllText(destination, serializedsettings);
         List<string[]> parsedList = parseList(readTextFiled(destination));
-        OptionMenu.SetResolution(int.Parse(parsedList[0][1]));
-        OptionMenu.SetQuality(int.Parse(parsedList[1][1]));
-        audioSettings.MasterVolumeLevel(float.Parse(parsedList[2][1]));
-        audioSettings.MusicVolumeLevel(float.Parse(parsedList[3][1]));
-        audioSettings.SFXVolumeLevel(float.Parse(parsedList[4][1]));
-        OptionMenu.generalSlider.value = float.Parse(parsedList[2][1]);
-        OptionMenu.musicSlider.value = float.Parse(parsedList[3][1]);
-        OptionMenu.soundsSlider.value = float.Parse(parsedList[4][1]);
-        OptionMenu.gammaSlider.value = float.Parse(parsedList[5][1]);
+        //OptionMenu.SetResolution(int.Parse(parsedList[0][1]));
+        //OptionMenu.SetQuality(int.Parse(parsedList[1][1]));
+        //audioSettings.MasterVolumeLevel(float.Parse(parsedList[2][1]));
+        //audioSettings.MusicVolumeLevel(float.Parse(parsedList[3][1]));
+        //audioSettings.SFXVolumeLevel(float.Parse(parsedList[4][1]));
+        //OptionMenu.generalSlider.value = float.Parse(parsedList[2][1]);
+        //OptionMenu.musicSlider.value = float.Parse(parsedList[3][1]);
+        //OptionMenu.soundsSlider.value = float.Parse(parsedList[4][1]);
+        //OptionMenu.gammaSlider.value = float.Parse(parsedList[5][1]);
 
     }
 
@@ -66,15 +66,15 @@ public class OptionSettings : MonoBehaviour
         string destination = Application.persistentDataPath + "/savesettings.txt";
         
         List<string[]> parsedList = parseList(readTextFiled(destination));
-        OptionMenu.SetResolution(int.Parse(parsedList[0][1]));
-        OptionMenu.SetQuality(int.Parse(parsedList[1][1]));
-        audioSettings.MasterVolumeLevel(float.Parse(parsedList[2][1]));
-        audioSettings.MusicVolumeLevel(float.Parse(parsedList[3][1]));
-        audioSettings.SFXVolumeLevel(float.Parse(parsedList[4][1]));
-        OptionMenu.generalSlider.value = float.Parse(parsedList[2][1]);
-        OptionMenu.musicSlider.value = float.Parse(parsedList[3][1]);
-        OptionMenu.soundsSlider.value = float.Parse(parsedList[4][1]);
-        OptionMenu.gammaSlider.value = float.Parse(parsedList[5][1]);
+        //OptionMenu.SetResolution(int.Parse(parsedList[0][1]));
+        //OptionMenu.SetQuality(int.Parse(parsedList[1][1]));
+        //audioSettings.MasterVolumeLevel(float.Parse(parsedList[2][1]));
+        //audioSettings.MusicVolumeLevel(float.Parse(parsedList[3][1]));
+        //audioSettings.SFXVolumeLevel(float.Parse(parsedList[4][1]));
+        //OptionMenu.generalSlider.value = float.Parse(parsedList[2][1]);
+        //OptionMenu.musicSlider.value = float.Parse(parsedList[3][1]);
+        //OptionMenu.soundsSlider.value = float.Parse(parsedList[4][1]);
+        //OptionMenu.gammaSlider.value = float.Parse(parsedList[5][1]);
 
     }
 

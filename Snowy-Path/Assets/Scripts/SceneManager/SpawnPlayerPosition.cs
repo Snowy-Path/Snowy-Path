@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class SpawnPlayerPosition : MonoBehaviour
 {
-
+    public LightAndFogAsset defaultLight;
 }
