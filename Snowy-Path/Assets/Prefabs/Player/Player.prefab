@@ -1219,7 +1219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultWeather: {fileID: 11400000, guid: 61a8b083a0fc25f4a95f6d231729c735, type: 2}
-  m_blizzardEmitter: {fileID: 1595502566328840}
+  m_blizzardEmitter: {fileID: 7606882472948149071}
 --- !u!114 &1900730401729707196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1926,7 +1926,7 @@ GameObject:
   - component: {fileID: 8830478258521020880}
   - component: {fileID: 4918354641188338237}
   - component: {fileID: 879709953}
-  - component: {fileID: 1595502566328840}
+  - component: {fileID: 7606882472948149071}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -1944,7 +1944,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6998290531695500975}
   m_Father: {fileID: 8225597999148151143}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2036,7 +2037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
   ListenerNumber: -1
---- !u!114 &1595502566328840
+--- !u!114 &7606882472948149071
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2852,6 +2853,116 @@ CapsuleCollider:
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7644827765913577247
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6998290531695500975}
+  - component: {fileID: 5391886826434858067}
+  - component: {fileID: 3305834310745280246}
+  - component: {fileID: 1503089976266389129}
+  - component: {fileID: 8029624298810463999}
+  m_Layer: 28
+  m_Name: SFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6998290531695500975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7644827765913577247}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7907031086017780882}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &5391886826434858067
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7644827765913577247}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.7070038
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.54354846, z: 0}
+--- !u!114 &3305834310745280246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7644827765913577247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/SFX/Ambiance-Environnement/WindPlains
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0.5
+  OverrideMaxDistance: 20
+--- !u!114 &1503089976266389129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7644827765913577247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/SFX/Ambiance-Environnement/WaterCaveDrop
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &8029624298810463999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7644827765913577247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fbc0ce34987b8f4890c7b714e3ebce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_windPlainsEmitter: {fileID: 3305834310745280246}
+  m_windPlainsTag: WindPlains
+  m_waterCaveDropEmitter: {fileID: 1503089976266389129}
+  m_waterCaveDropTag: WaterCaveDrop
 --- !u!1 &8192476097884933435
 GameObject:
   m_ObjectHideFlags: 0
@@ -4743,6 +4854,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ddb2735a48e70a43ae8c8477b8eb05a, type: 3}
+--- !u!1 &6651715207127492675 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2007954537897194065, guid: 6ddb2735a48e70a43ae8c8477b8eb05a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5157206231929788946}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6651715207409613283 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2007954537069782001, guid: 6ddb2735a48e70a43ae8c8477b8eb05a,
@@ -4755,9 +4872,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584821da66d179b4280b66a841456d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &6651715207127492675 stripped
+--- !u!1 &3279505640007265046 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 2007954537897194065, guid: 6ddb2735a48e70a43ae8c8477b8eb05a,
+  m_CorrespondingSourceObject: {fileID: 7642950238337954052, guid: 6ddb2735a48e70a43ae8c8477b8eb05a,
     type: 3}
   m_PrefabInstance: {fileID: 5157206231929788946}
   m_PrefabAsset: {fileID: 0}
@@ -4770,12 +4887,6 @@ Light:
 --- !u!1 &5734331920690300571 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 578258721905761417, guid: 6ddb2735a48e70a43ae8c8477b8eb05a,
-    type: 3}
-  m_PrefabInstance: {fileID: 5157206231929788946}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3279505640007265046 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7642950238337954052, guid: 6ddb2735a48e70a43ae8c8477b8eb05a,
     type: 3}
   m_PrefabInstance: {fileID: 5157206231929788946}
   m_PrefabAsset: {fileID: 0}
