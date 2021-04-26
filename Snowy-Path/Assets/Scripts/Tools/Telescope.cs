@@ -15,6 +15,11 @@ public class Telescope : MonoBehaviour, IHandTool {
     [SerializeField] float defaultZoom = 4f;
     [SerializeField] float secondaryZoom = 8f;
 
+
+    [Header("Audio")]
+    public UnityEvent OnZoom;
+    public UnityEvent OnEquip;
+
     public EToolType ToolType => EToolType.Scope;
 
     public bool IsBusy { get; set; }
@@ -48,19 +53,24 @@ public class Telescope : MonoBehaviour, IHandTool {
     }
 
     public void SecondaryUse() {
+        SwitchZoom();
     }
 
-    public void SwitchZoom() {
+    private void SwitchZoom() {
         if (IsBusy && gameObject.activeSelf) {
             if (scopeCamera.fieldOfView == defaultZoom)
                 scopeCamera.fieldOfView = secondaryZoom;
             else
                 scopeCamera.fieldOfView = defaultZoom;
+            OnZoom.Invoke();
         }
     }
 
     public void ToggleDisplay(bool display) {
         gameObject.SetActive(display);
         spriteMask.SetActive(false);
+        if (display) {
+            OnEquip.Invoke();
+        }
     }
 }

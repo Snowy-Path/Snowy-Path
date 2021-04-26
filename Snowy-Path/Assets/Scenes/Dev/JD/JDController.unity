@@ -2391,60 +2391,6 @@ MonoBehaviour:
   progressiveThreshold: 0.5
   vignetteMin: 0.2
   vignetteMax: 0.4
---- !u!114 &1664476435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437083488434565278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a3fb36ed95a94d42b3b8df901ed1dad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  torchAttack:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6831358457769463909}
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  step:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1093104201}
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  reload:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2493894262549487411}
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1676079033
 GameObject:
   m_ObjectHideFlags: 0
@@ -3797,6 +3743,7 @@ GameObject:
   m_Component:
   - component: {fileID: 244230143226230117}
   - component: {fileID: 1668099201454915095}
+  - component: {fileID: 244230143226230118}
   m_Layer: 22
   m_Name: Telescope
   m_TagString: Untagged
@@ -3822,6 +3769,29 @@ Transform:
   m_Father: {fileID: 2228237609626941388}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 1.21, y: 65.861, z: 46.61}
+--- !u!114 &244230143226230118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244230143226230116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Tools/Spyglass Equipped
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!4 &253404296277874344
 Transform:
   m_ObjectHideFlags: 0
@@ -4205,7 +4175,7 @@ Transform:
   - {fileID: 2622593353288251213}
   m_Father: {fileID: 2721815156987313251}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -40.136864, y: -21.338083, z: -14.417649}
+  m_LocalEulerAnglesHint: {x: -40.704018, y: -8.833894, z: -5.6033454}
 --- !u!1 &739957152425380082
 GameObject:
   m_ObjectHideFlags: 0
@@ -5009,7 +4979,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1668099201454915095}
-        m_MethodName: SwitchZoom
+        m_MethodName: SecondaryUse
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5209,7 +5179,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1437083488434565279}
-  - component: {fileID: 1664476435}
   m_Layer: 13
   m_Name: Hands
   m_TagString: Untagged
@@ -10299,6 +10268,34 @@ MonoBehaviour:
   lens: {fileID: 8125855421184383330}
   defaultZoom: 8
   secondaryZoom: 3
+  OnZoom:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8125855421184383331}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnEquip:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 244230143226230118}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1668099202443506768
 GameObject:
   m_ObjectHideFlags: 0
@@ -10547,7 +10544,7 @@ Transform:
   - {fileID: 2740519255377088480}
   m_Father: {fileID: 5412197300613578955}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 3.5630002, y: -182.78499, z: -133.51001}
+  m_LocalEulerAnglesHint: {x: -4.446714, y: -171.0472, z: -165.58061}
 --- !u!33 &1818024568054363797
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -11302,7 +11299,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 590587400089007680}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 24.144266, y: -4.3671603, z: -42.5707}
+  m_LocalEulerAnglesHint: {x: 11.1803, y: -13.927131, z: -57.200127}
 --- !u!4 &2628964412320146594
 Transform:
   m_ObjectHideFlags: 0
@@ -15765,7 +15762,7 @@ Transform:
   - {fileID: 1805118333717234577}
   m_Father: {fileID: 4486655050077289830}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 52.889004, y: -41.510002, z: -66.090004}
+  m_LocalEulerAnglesHint: {x: 62.022137, y: -3.38647, z: -8.243703}
 --- !u!4 &5417310300555523053
 Transform:
   m_ObjectHideFlags: 0
@@ -26527,7 +26524,7 @@ Transform:
   - {fileID: 8557097644104727566}
   m_Father: {fileID: 8469653968834860943}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -52.749004, y: -2.015, z: -61.564003}
+  m_LocalEulerAnglesHint: {x: -27.572424, y: 2.6612308, z: -58.780148}
 --- !u!114 &6831358457769463909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43033,6 +43030,7 @@ GameObject:
   - component: {fileID: 8125855421184705466}
   - component: {fileID: 8125855421183302038}
   - component: {fileID: 8125855421182702542}
+  - component: {fileID: 8125855421184383331}
   m_Layer: 22
   m_Name: Lens
   m_TagString: Untagged
@@ -43040,6 +43038,29 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &8125855421184383331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8125855421184383330}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Tools/Spyglass Zoom
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!4 &8125855421184705466
 Transform:
   m_ObjectHideFlags: 0
@@ -43294,7 +43315,7 @@ Transform:
   - {fileID: 2721815156987313251}
   m_Father: {fileID: 1805118333717234577}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -22.503, y: 11.679001, z: 81.591}
+  m_LocalEulerAnglesHint: {x: -45.53814, y: -4.121926, z: 49.08321}
 --- !u!222 &8489659375352288689
 CanvasRenderer:
   m_ObjectHideFlags: 0

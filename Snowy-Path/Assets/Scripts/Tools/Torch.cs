@@ -35,7 +35,8 @@ public class Torch : MonoBehaviour {
     /// The animation itself MUST manage the box collider enabling/disabling.
     /// </summary>
     private void PerformAttack() {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && attackLocked == false) {
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && attackLocked == false 
+            && !FindObjectOfType<Telescope>().IsBusy) {
             animator.SetTrigger("Attack");
             attackLocked = true;
             Invoke("ResetAttack", 0.2f);
