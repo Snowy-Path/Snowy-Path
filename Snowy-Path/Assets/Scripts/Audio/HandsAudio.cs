@@ -9,8 +9,9 @@ public class HandsAudio : MonoBehaviour {
     private FMOD.Studio.PARAMETER_ID soilParamId;
 
     public UnityEvent torchAttack;
-    public UnityEvent step;
     public UnityEvent reload;
+    public UnityEvent step;
+    public UnityEvent death;
 
     public void AudioPlayTorchAttack() {
         torchAttack.Invoke();
@@ -28,6 +29,10 @@ public class HandsAudio : MonoBehaviour {
     public void AudioPlayRun(AnimationEvent evt) {
         if (evt.animatorClipInfo.weight > 0.1f)
             step.Invoke();
+    }
+
+    public void AudioPlayDeath(AnimationEvent evt) {
+        death.Invoke();
     }
 
     //private void FootStepSound(float soil) {

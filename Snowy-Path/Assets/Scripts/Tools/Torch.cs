@@ -17,6 +17,8 @@ public class Torch : MonoBehaviour {
     [Tooltip("Hands animator. Allows this script to trigger the attack animation.")]
     public Animator animator;
 
+    public MonoBehaviour[] lockingTools;
+
     private bool attackLocked = false;
 
     /// <summary>
@@ -35,13 +37,23 @@ public class Torch : MonoBehaviour {
     /// The animation itself MUST manage the box collider enabling/disabling.
     /// </summary>
     private void PerformAttack() {
+
+        bool isBusy = false;
+        foreach (var tool in lockingTools) {
+            IHandTool iTool = tool.GetComponent<IHandTool>(); 
+            if (iTool.IsBusy) {
+                isBusy = true;
+                break;
+            }
+        }
+
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && attackLocked == false 
-            && !FindObjectOfType<Telescope>().IsBusy) {
+            && !isBusy) {
             animator.SetTrigger("Attack");
             attackLocked = true;
             Invoke("ResetAttack", 0.2f);
-        }
     }
+}
 
     private void ResetAttack() {
         attackLocked = false;

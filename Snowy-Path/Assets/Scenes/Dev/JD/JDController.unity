@@ -4093,7 +4093,6 @@ GameObject:
   - component: {fileID: 6651715207296572180}
   - component: {fileID: 6651715207296572182}
   - component: {fileID: 6831358457769463909}
-  - component: {fileID: 532204407042009509}
   m_Layer: 13
   m_Name: Torch
   m_TagString: Untagged
@@ -4101,29 +4100,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &532204407042009509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532204407042009508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  Event: event:/Tools/Torch Attack
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!23 &559723089122078531
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4842,7 +4818,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1437083488281240583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12325,9 +12301,6 @@ MonoBehaviour:
   torchAttack:
     m_PersistentCalls:
       m_Calls: []
-  step:
-    m_PersistentCalls:
-      m_Calls: []
   reload:
     m_PersistentCalls:
       m_Calls:
@@ -12342,6 +12315,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  step:
+    m_PersistentCalls:
+      m_Calls: []
+  death:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!33 &3887551978972673504
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -26390,6 +26369,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 1
   animator: {fileID: 8658300974269699070}
+  lockingTools:
+  - {fileID: 1668099201454915095}
 --- !u!108 &6651715207509478068
 Light:
   m_ObjectHideFlags: 0
@@ -43515,6 +43496,7 @@ GameObject:
   - component: {fileID: 8658300974269699070}
   - component: {fileID: 8658300974269699071}
   - component: {fileID: 8658300974269699072}
+  - component: {fileID: 8658300974269699073}
   m_Layer: 0
   m_Name: RHand
   m_TagString: Untagged
@@ -43579,12 +43561,38 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  step:
-    m_PersistentCalls:
-      m_Calls: []
   reload:
     m_PersistentCalls:
       m_Calls: []
+  step:
+    m_PersistentCalls:
+      m_Calls: []
+  death:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8658300974269699073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8658300974269699069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Oneira/Oneira Death
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &8700553237514046193
 GameObject:
   m_ObjectHideFlags: 0

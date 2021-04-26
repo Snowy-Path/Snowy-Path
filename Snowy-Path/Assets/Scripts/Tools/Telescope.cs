@@ -35,13 +35,10 @@ public class Telescope : MonoBehaviour, IHandTool {
     }
 
     private void Update() {
-        Debug.Log(scopeCamera.fieldOfView);
         if (scopeCamera.fieldOfView < targetFov)
             scopeCamera.fieldOfView = Mathf.Lerp(scopeCamera.fieldOfView, targetFov, zoomStep);
-        //scopeCamera.fieldOfView += zoomStep;
         else if (scopeCamera.fieldOfView > targetFov)
             scopeCamera.fieldOfView = Mathf.Lerp(scopeCamera.fieldOfView, targetFov, zoomStep);
-        //scopeCamera.fieldOfView -= zoomStep;
     }
 
     public void StartPrimaryUse() {
