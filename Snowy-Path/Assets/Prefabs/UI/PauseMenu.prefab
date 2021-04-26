@@ -5014,6 +5014,8 @@ MonoBehaviour:
   musicSlider: {fileID: 6090819400348669508}
   soundsSlider: {fileID: 6090819398825927468}
   gammaSlider: {fileID: 6090819399481368240}
+  AntiAliasing: 00000000020000000400000008000000
+  gamepadconnected: 0
 --- !u!1 &6090819399470042002
 GameObject:
   m_ObjectHideFlags: 0
@@ -5236,7 +5238,18 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6090819399396326377}
+        m_MethodName: SetGamma
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6090819399512773171
 GameObject:
   m_ObjectHideFlags: 0
@@ -5355,28 +5368,30 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 6090819399512773168}
-  m_Template: {fileID: 6090819400683969026}
-  m_CaptionText: {fileID: 6090819399470042001}
+  m_TargetGraphic: {fileID: 0}
+  m_Template: {fileID: 0}
+  m_CaptionText: {fileID: 0}
   m_CaptionImage: {fileID: 0}
   m_Placeholder: {fileID: 0}
-  m_ItemText: {fileID: 6090819399230250560}
+  m_ItemText: {fileID: 0}
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Option A
+    - m_Text: 0
       m_Image: {fileID: 0}
-    - m_Text: Option B
+    - m_Text: 2
       m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: 4
+      m_Image: {fileID: 0}
+    - m_Text: 8
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6090819399396326377}
-        m_MethodName: SetQuality
-        m_Mode: 3
+      - m_Target: {fileID: 0}
+        m_MethodName: SetAntiAliasing
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

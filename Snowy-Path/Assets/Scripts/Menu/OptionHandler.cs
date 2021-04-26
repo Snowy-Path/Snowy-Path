@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class OptionHandler : MonoBehaviour
 {
-    public Resolution[] resolutions;
+    Resolution[] resolutions;
+    public OptionSettings optionSettings;
 
     // Start is called before the first frame update
     void Awake()
@@ -24,7 +25,7 @@ public class OptionHandler : MonoBehaviour
 
         if (!OptionSave.Init())
         {
-            OptionSettings optionSettings = new OptionSettings
+            optionSettings = new OptionSettings
             {
                 MasterVolume = 1f,
                 MusicVolume = 0.5f,
@@ -33,29 +34,17 @@ public class OptionHandler : MonoBehaviour
                 aa_index = 0,
                 gammavalue = 1
             };
-            SaveSettings(optionSettings);
+            OptionSave.Save(optionSettings);
         }
         else
         {
 
-            OptionSettings optionSettings = OptionSettings.Load(OptionSave.destination);
+            optionSettings = OptionSave.Load();
         }
 
     }
 
 
-    public void SaveSettings(OptionSettings optionsettings)
-    {
-        string json= JsonUtility.ToJson(optionsettings);
-        OptionSave.SaveSettings(json);
-        Debug.Log(json);
-    }
-
-    public void LoadSettings()
-    {
-        OptionSettings optionSettings = OptionSettings.Load(OptionSave.destination);
-
-    }
 }
 
 // Update is called once per frame

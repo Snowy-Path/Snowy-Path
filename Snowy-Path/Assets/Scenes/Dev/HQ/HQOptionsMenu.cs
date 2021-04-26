@@ -18,16 +18,20 @@ public class HQOptionsMenu : MonoBehaviour
     public Slider musicSlider;
     public Slider soundsSlider;
     public Slider gammaSlider;
-    public OptionHandler optionhandler;
+    OptionHandler optionhandler;
     private float GammaCorrection;
     public Resolution[] resolutions;
-
+    public List<int> AntiAliasing = new List<int>{0,2,4,8};
     public Gamepad current { get; }
     public bool gamepadconnected;
+
     private void Awake()
     {
-        OptionSettings opt = new OptionSettings();
-        
+        optionhandler = GameObject.FindObjectOfType<OptionHandler>();//("OptionSettings"); GameObject.F
+        Debug.Log(optionhandler.name);
+        Debug.Log(optionhandler.optionSettings);
+        StartResolution();
+        LoadSettings(optionhandler.optionSettings);
     }
 
     //        RenderSettings.ambientLight = new Color(GammaCorrection, GammaCorrection, GammaCorrection, 1.0f);
@@ -56,13 +60,14 @@ public class HQOptionsMenu : MonoBehaviour
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width,
                   resolution.height, Screen.fullScreen);
-        
+        //optionhandler.optionSettings.resolution_index = resolutionIndex;
+
+
     }
 
     public void SetAntiAliasing(int aaIndex)
     {
-        QualitySettings.antiAliasing = aaIndex;
-
+        QualitySettings.antiAliasing = AntiAliasing[aaIndex];
     }
 
 
@@ -106,8 +111,8 @@ public class HQOptionsMenu : MonoBehaviour
 
     public void SetGamma(float gammavalue)
     {
-
-        GammaCorrection = gammavalue;
+        float newgamma = gammavalue;
+        Screen.brightness = newgamma;
 
     }
 
@@ -130,17 +135,36 @@ public class HQOptionsMenu : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
         return currentResolutionIndex;
     }
-
+    
     public void ApplySettings()
     {
-
+        OptionSettings newsettings = new OptionSettings {
+            MasterVolume = generalSlider.value,
+            MusicVolume = musicSlider.value,
+            SFXVolume = soundsSlider.value,
+            aa_index = aaDropdown.value,
+            resolution_index = resolutionDropdown.value,
+            gammavalue = gammaSlider.value };
+        
+        OptionSave.Save(newsettings);
+        optionhandler.optionSettings = newsettings;
         
 
     }
 
     public void BackSettings()
     {
-        optionhandler.LoadSettings();
+        LoadSettings(optionhandler.optionSettings);
+    }
+
+    public void LoadSettings(OptionSettings settings)
+    {
+        generalSlider.value = settings.MasterVolume;
+        musicSlider.value = settings.MusicVolume;
+        soundsSlider.value = settings.SFXVolume;
+        aaDropdown.value = settings.aa_index;
+        resolutionDropdown.value = settings.resolution_index;
+        gammaSlider.value = settings.gammavalue;
     }
 
 }

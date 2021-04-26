@@ -10,9 +10,9 @@ public class AudioSettings : MonoBehaviour
     FMOD.Studio.Bus Music;
     FMOD.Studio.Bus SFX;
     FMOD.Studio.Bus Master;
-    public float MusicVolume = 0.5f;
-    public float SFXVolume = 0.5f;
-    public float MasterVolume = 1f;
+    public float MusicVolume;
+    public float SFXVolume;
+    public float MasterVolume;
 
     void Awake()
     {

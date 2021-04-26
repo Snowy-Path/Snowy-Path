@@ -17,27 +17,4 @@ public class OptionSettings
 
 
 
-
-
-
-
-    public static OptionSettings Load(string destination)
-    {
-
-        return JsonUtility.FromJson<OptionSettings>(destination);
-
-
-    }
-
-    public static string Save(OptionSettings optionsettings)
-    {
-        return JsonUtility.ToJson(optionsettings);
-
-
-    }
-
-
-
-
-
 }
