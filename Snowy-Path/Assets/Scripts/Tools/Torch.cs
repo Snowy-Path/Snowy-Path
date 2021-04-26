@@ -33,7 +33,9 @@ public class Torch : MonoBehaviour {
     /// The animation itself MUST manage the box collider enabling/disabling.
     /// </summary>
     private void PerformAttack() {
-        animator.SetTrigger("Attack");
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
+            animator.SetTrigger("Attack");
+        }
     }
 
     /// <summary>
