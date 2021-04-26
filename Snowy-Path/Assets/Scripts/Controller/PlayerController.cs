@@ -95,7 +95,6 @@ public class PlayerController : MonoBehaviour {
     private float startStepOffset;
     private const float inputThreshold = 0.2f;
 
-    private HUD playerHud;
     private HandController handController;
 
     #region INPUTS SYSTEM EVENTS
@@ -138,7 +137,6 @@ public class PlayerController : MonoBehaviour {
 
     void Start() {
         controller = GetComponent<CharacterController>();
-        playerHud = GetComponent<HUD>();
         handController = GetComponentInChildren<HandController>();
 
         //Lock and hide cursor
@@ -166,6 +164,7 @@ public class PlayerController : MonoBehaviour {
         Look();
         Sprint();
         leftHandAnimator.SetBool("Grounded", isGrounded);
+        rightHandAnimator.SetBool("Grounded", isGrounded);
 
         //Move
         if (canMove) {
@@ -173,9 +172,11 @@ public class PlayerController : MonoBehaviour {
             if (!isSliding && IsGrounded)
                 speed = Mathf.Lerp(speed, (xzVelocity.magnitude * SpeedFactor) / currentSpeed, 0.1f);
             leftHandAnimator.SetFloat("Speed", speed);
+            rightHandAnimator.SetFloat("Speed", speed);
         }
         else {
             leftHandAnimator.SetFloat("Speed", 0);
+            rightHandAnimator.SetFloat("Speed", 0);
         }
         controller.Move(yVelocity * Time.deltaTime);
     }
@@ -282,6 +283,7 @@ public class PlayerController : MonoBehaviour {
 
         //Update animator
         leftHandAnimator.SetBool("Run", isRunning);
+        rightHandAnimator.SetBool("Run", isRunning);
     }
 
     private void Look() {
