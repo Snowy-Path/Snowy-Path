@@ -9,6 +9,7 @@ public class Telescope : MonoBehaviour, IHandTool {
     [Tooltip("Hands animator. Allows this script to trigger the look animation.")]
     [SerializeField] Camera scopeCamera;
     [SerializeField] GameObject spriteMask;
+    [SerializeField] GameObject lens;
 
     [Header("Zoom")]
     [SerializeField] float defaultZoom = 4f;
@@ -22,6 +23,7 @@ public class Telescope : MonoBehaviour, IHandTool {
     private void Start() {
         spriteMask.SetActive(false);
         scopeCamera.gameObject.SetActive(false);
+        lens.SetActive(false);
     }
 
     public void StartPrimaryUse() {
@@ -36,6 +38,8 @@ public class Telescope : MonoBehaviour, IHandTool {
         IsBusy = false;
         handAnimator.SetBool("UseTelescope", false);
         DisableCamera(.5f);
+        lens.SetActive(false);
+
     }
 
     public IEnumerator DisableCamera(float waitTime) {
