@@ -15,7 +15,7 @@ public class HQOptionsMenu : MonoBehaviour
     public Slider soundsSlider;
     public Slider gammaSlider;
     OptionHandler optionhandler;
-    private float GammaCorrection;
+    AudioSettings audioSettings;
     public Resolution[] resolutions;
     public List<int> AntiAliasing = new List<int>{0,2,4,8};
 
@@ -23,8 +23,7 @@ public class HQOptionsMenu : MonoBehaviour
     private void Awake()
     {
         optionhandler = GameObject.FindObjectOfType<OptionHandler>();//("OptionSettings"); GameObject.F
-        Debug.Log(optionhandler.name);
-        Debug.Log(optionhandler.optionSettings);
+        audioSettings = GameObject.FindObjectOfType<AudioSettings>();
         StartResolution();
         LoadSettings(optionhandler.optionSettings);
     }
@@ -34,7 +33,27 @@ public class HQOptionsMenu : MonoBehaviour
 
 
 
+    public void MasterVolumeLevel(float newMasterVolume)
+    {
+        audioSettings.MasterVolume = newMasterVolume;
+    }
 
+    public void MusicVolumeLevel(float newMusicVolume)
+    {
+        audioSettings.MusicVolume = newMusicVolume;
+    }
+
+    public void SFXVolumeLevel(float newSFXVolume)
+    {
+        audioSettings.SFXVolume = newSFXVolume;
+
+        //FMOD.Studio.PLAYBACK_STATE PbState;
+        //audioSettings.SFXVolumeTestEvent.getPlaybackState(out PbState);
+        //if (PbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        //{
+        //    audioSettings.SFXVolumeTestEvent.start();
+        //}
+    }
 
     public void SetResolution(int resolutionIndex)
     {
