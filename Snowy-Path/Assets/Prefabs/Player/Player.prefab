@@ -2863,8 +2863,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6998290531695500975}
   - component: {fileID: 5391886826434858067}
-  - component: {fileID: 3305834310745280246}
-  - component: {fileID: 1503089976266389129}
   - component: {fileID: 8029624298810463999}
   m_Layer: 28
   m_Name: SFX
@@ -2901,52 +2899,6 @@ CapsuleCollider:
   m_Height: 1.7070038
   m_Direction: 1
   m_Center: {x: 0, y: -0.54354846, z: 0}
---- !u!114 &3305834310745280246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7644827765913577247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  Event: event:/SFX/Ambiance-Environnement/WindPlains
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 0.5
-  OverrideMaxDistance: 20
---- !u!114 &1503089976266389129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7644827765913577247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  Event: event:/SFX/Ambiance-Environnement/WaterCaveDrop
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!114 &8029624298810463999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2959,9 +2911,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fbc0ce34987b8f4890c7b714e3ebce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_windPlainsEmitter: {fileID: 3305834310745280246}
+  m_windPlainsEvent: event:/SFX/Ambiance-Environnement/WindPlains
   m_windPlainsTag: WindPlains
-  m_waterCaveDropEmitter: {fileID: 1503089976266389129}
+  m_waterCaveDropEvent: event:/SFX/Ambiance-Environnement/WaterCaveDrop
   m_waterCaveDropTag: WaterCaveDrop
 --- !u!1 &8192476097884933435
 GameObject:
@@ -4208,15 +4160,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba9d9a285ec01ac42901567307947131, type: 3}
---- !u!1 &2981173176494127177 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ba9d9a285ec01ac42901567307947131,
-    type: 3}
-  m_PrefabInstance: {fileID: 2710648987099579672}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2455747783616537331 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ba9d9a285ec01ac42901567307947131,
+    type: 3}
+  m_PrefabInstance: {fileID: 2710648987099579672}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2981173176494127177 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ba9d9a285ec01ac42901567307947131,
     type: 3}
   m_PrefabInstance: {fileID: 2710648987099579672}
   m_PrefabAsset: {fileID: 0}
@@ -4854,9 +4806,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ddb2735a48e70a43ae8c8477b8eb05a, type: 3}
---- !u!1 &6651715207127492675 stripped
+--- !u!1 &5734331920690300571 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 2007954537897194065, guid: 6ddb2735a48e70a43ae8c8477b8eb05a,
+  m_CorrespondingSourceObject: {fileID: 578258721905761417, guid: 6ddb2735a48e70a43ae8c8477b8eb05a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5157206231929788946}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3279505640007265046 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7642950238337954052, guid: 6ddb2735a48e70a43ae8c8477b8eb05a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5157206231929788946}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &6651715207127492673 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 2007954537897194067, guid: 6ddb2735a48e70a43ae8c8477b8eb05a,
     type: 3}
   m_PrefabInstance: {fileID: 5157206231929788946}
   m_PrefabAsset: {fileID: 0}
@@ -4872,21 +4836,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584821da66d179b4280b66a841456d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &3279505640007265046 stripped
+--- !u!1 &6651715207127492675 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 7642950238337954052, guid: 6ddb2735a48e70a43ae8c8477b8eb05a,
-    type: 3}
-  m_PrefabInstance: {fileID: 5157206231929788946}
-  m_PrefabAsset: {fileID: 0}
---- !u!108 &6651715207127492673 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 2007954537897194067, guid: 6ddb2735a48e70a43ae8c8477b8eb05a,
-    type: 3}
-  m_PrefabInstance: {fileID: 5157206231929788946}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5734331920690300571 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 578258721905761417, guid: 6ddb2735a48e70a43ae8c8477b8eb05a,
+  m_CorrespondingSourceObject: {fileID: 2007954537897194065, guid: 6ddb2735a48e70a43ae8c8477b8eb05a,
     type: 3}
   m_PrefabInstance: {fileID: 5157206231929788946}
   m_PrefabAsset: {fileID: 0}

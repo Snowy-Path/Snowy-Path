@@ -6,9 +6,7 @@ public class Player_SFX : MonoBehaviour {
 
     #region Variables
     #region Wind
-    //[SerializeField]
-    //private FMODUnity.StudioEventEmitter m_windPlainsEmitter;
-
+    [Header("Wind Plains")]
     [FMODUnity.EventRef]
     public string m_windPlainsEvent = "";
     private FMOD.Studio.EventInstance m_windPlainsInstance;
@@ -17,22 +15,28 @@ public class Player_SFX : MonoBehaviour {
     private string m_windPlainsTag;
 
     private FMOD.Studio.PARAMETER_ID m_windPlainsID;
+    private FMOD.Studio.PLAYBACK_STATE m_windPlainsPlaybackState;
+    //private bool m_windIsStarting = false;
     #endregion
 
-    //#region WaterDrops
-    //[SerializeField]
-    //private FMODUnity.StudioEventEmitter m_waterCaveDropEmitter;
+    #region Water
+    [Header("Water Cave Drops")]
+    [FMODUnity.EventRef]
+    public string m_waterCaveDropEvent = "";
+    private FMOD.Studio.EventInstance m_waterCaveDropInstance;
 
-    //[SerializeField]
-    //private string m_waterCaveDropTag;
+    [SerializeField]
+    private string m_waterCaveDropTag;
 
-    //private FMOD.Studio.PARAMETER_ID m_waterCaveDropID;
-    //#endregion
+    private FMOD.Studio.PARAMETER_ID m_waterCaveDropID;
+    private FMOD.Studio.PLAYBACK_STATE m_waterCaveDropPlaybackState;
+    #endregion
     #endregion
 
     private void Start() {
 
         m_windPlainsInstance = FMODUnity.RuntimeManager.CreateInstance(m_windPlainsEvent);
+        m_waterCaveDropInstance = FMODUnity.RuntimeManager.CreateInstance(m_waterCaveDropEvent);
 
         // Wind Plains parameter
         FMOD.Studio.EventDescription windPlainsEventDesc;
@@ -42,71 +46,73 @@ public class Player_SFX : MonoBehaviour {
         m_windPlainsID = windPlainsParametterDesc.id;
 
         // Water Cave Drop parameter
-        //FMOD.Studio.EventDescription waterCaveDropEventDesc;
-        //m_waterCaveDropEmitter.EventInstance.getDescription(out waterCaveDropEventDesc);
-        //FMOD.Studio.PARAMETER_DESCRIPTION waterCaveDropParametterDesc;
-        //waterCaveDropEventDesc.getParameterDescriptionByIndex(0, out waterCaveDropParametterDesc);
-        //m_waterCaveDropID = waterCaveDropParametterDesc.id;
+        FMOD.Studio.EventDescription waterCaveDropEventDesc;
+        m_waterCaveDropInstance.getDescription(out waterCaveDropEventDesc);
+        FMOD.Studio.PARAMETER_DESCRIPTION waterCaveDropParametterDesc;
+        waterCaveDropEventDesc.getParameterDescriptionByIndex(0, out waterCaveDropParametterDesc);
+        m_waterCaveDropID = waterCaveDropParametterDesc.id;
     }
 
     private void Update() {
-        float value;
-        m_windPlainsInstance.getParameterByID(m_windPlainsID, out value);
-        Debug.Log(value);
+        m_windPlainsInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
+        m_waterCaveDropInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
     }
 
-    private void OnTriggerEnter(Collider other) {
-
-        if (other.CompareTag(m_windPlainsTag)) {
-            StartWind();
-        }
-        //else if (other.CompareTag(m_waterCaveDropTag)) {
-        //    StartWater();
-        //}
-    }
+    //private void OnTriggerEnter(Collider other) {
+    //    if (other.CompareTag(m_windPlainsTag)) {
+    //        StartWind();
+    //    } else if (other.CompareTag(m_waterCaveDropTag)) {
+    //        StartWater();
+    //    }
+    //}
 
     private void OnTriggerExit(Collider other) {
-
         if (other.CompareTag(m_windPlainsTag)) {
             StopWind();
-        }
-        //else if (other.CompareTag(m_waterCaveDropTag)) {
-        //    StopWater();
-        //}
-    }
-
-
-    private void StartWind() {
-        Debug.Log("START WIND");
-
-        FMOD.Studio.PLAYBACK_STATE playbackState;
-        m_windPlainsInstance.getPlaybackState(out playbackState);
-
-        if (playbackState != FMOD.Studio.PLAYBACK_STATE.PLAYING) {
-            Debug.Log("HERE BABY");
-            //m_windPlainsEmitter.Play();
-            m_windPlainsInstance.setParameterByID(m_windPlainsID, 0.0f);
-            m_windPlainsInstance.start();
+        } else if (other.CompareTag(m_waterCaveDropTag)) {
+            StopWater();
         }
     }
+
+    private void OnTriggerStay(Collider other) {
+        if (other.CompareTag(m_windPlainsTag)) {
+            m_windPlainsInstance.getPlaybackState(out m_windPlainsPlaybackState);
+            if (m_windPlainsPlaybackState != FMOD.Studio.PLAYBACK_STATE.PLAYING) {
+                m_windPlainsInstance.start();
+            }
+        } else if (other.CompareTag(m_waterCaveDropTag)) {
+            m_waterCaveDropInstance.getPlaybackState(out m_waterCaveDropPlaybackState);
+            if (m_waterCaveDropPlaybackState != FMOD.Studio.PLAYBACK_STATE.PLAYING) {
+                m_waterCaveDropInstance.start();
+            }
+        }
+    }
+
+    //private void StartWind() {
+    //    FMOD.Studio.PLAYBACK_STATE playbackState;
+    //    m_waterCaveDropInstance.getPlaybackState(out playbackState);
+    //    if (playbackState != FMOD.Studio.PLAYBACK_STATE.PLAYING) {
+    //        m_windPlainsInstance.setParameterByID(m_waterCaveDropID, 0.0f);
+    //        m_windPlainsInstance.start();
+    //    }
+    //}
 
     private void StopWind() {
-        Debug.Log("STOP WIND");
         m_windPlainsInstance.setParameterByID(m_windPlainsID, 1.0f);
     }
 
 
     //private void StartWater() {
-    //    Debug.Log("START WATER");
-    //    if (!m_waterCaveDropEmitter.IsPlaying()) {
-    //        //m_waterCaveDropEmitter.Play();
-    //        m_waterCaveDropEmitter.SetParameter(m_waterCaveDropID, 0.0f);
+    //    FMOD.Studio.PLAYBACK_STATE playbackState;
+    //    m_waterCaveDropInstance.getPlaybackState(out playbackState);
+    //    if (playbackState != FMOD.Studio.PLAYBACK_STATE.PLAYING) {
+    //        m_waterCaveDropInstance.setParameterByID(m_waterCaveDropID, 0.0f);
+    //        m_waterCaveDropInstance.start();
     //    }
     //}
 
-    //private void StopWater() {
-    //    Debug.Log("STOP WATER");
-    //    m_waterCaveDropEmitter.SetParameter(m_waterCaveDropID, 1.0f);
-    //}
+    private void StopWater() {
+        m_waterCaveDropInstance.setParameterByID(m_waterCaveDropID, 1.0f);
+    }
 
 }
