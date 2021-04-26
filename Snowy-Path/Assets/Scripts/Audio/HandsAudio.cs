@@ -5,9 +5,6 @@ using UnityEngine.Events;
 
 public class HandsAudio : MonoBehaviour {
 
-    //[SerializeField] string torchAttackPath = "";
-    //[SerializeField] string stepPath = "";
-
     private FMOD.Studio.EventInstance instance;
     private FMOD.Studio.PARAMETER_ID soilParamId;
 
@@ -15,24 +12,22 @@ public class HandsAudio : MonoBehaviour {
     public UnityEvent step;
     public UnityEvent reload;
 
-    public void PlayTorchAttack() {
+    public void AudioPlayTorchAttack() {
         torchAttack.Invoke();
-        //FMODUnity.RuntimeManager.PlayOneShot(torchAttackPath);
+    }
+    public void AudioPlayReload(AnimationEvent evt) {
+        reload.Invoke();
     }
 
-    public void PlayWalk(AnimationEvent evt) {
+    public void AudioPlayWalk(AnimationEvent evt) {
         if (evt.animatorClipInfo.weight > 0.1f)
             step.Invoke();
-            //FootStepSound(0); //TODO : replace number by ground type
+        //FootStepSound(0); //TODO : replace number by ground type
     }
 
-    public void PlayRun(AnimationEvent evt) {
+    public void AudioPlayRun(AnimationEvent evt) {
         if (evt.animatorClipInfo.weight > 0.1f)
             step.Invoke();
-    }
-
-    public void PlayReload(AnimationEvent evt) {
-            reload.Invoke();
     }
 
     //private void FootStepSound(float soil) {
