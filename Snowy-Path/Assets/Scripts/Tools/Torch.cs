@@ -17,6 +17,8 @@ public class Torch : MonoBehaviour {
     [Tooltip("Hands animator. Allows this script to trigger the attack animation.")]
     public Animator animator;
 
+    private bool attackLocked = false;
+
     /// <summary>
     /// The main interaction of the torch.
     /// Perform the attack method only once.
@@ -33,9 +35,15 @@ public class Torch : MonoBehaviour {
     /// The animation itself MUST manage the box collider enabling/disabling.
     /// </summary>
     private void PerformAttack() {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && attackLocked == false) {
             animator.SetTrigger("Attack");
+            attackLocked = true;
+            Invoke("ResetAttack", 0.2f);
         }
+    }
+
+    private void ResetAttack() {
+        attackLocked = false;
     }
 
     /// <summary>
