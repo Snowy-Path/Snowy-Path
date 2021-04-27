@@ -13,9 +13,7 @@ public class SoundTrigger : MonoBehaviour {
     [SerializeField]
     private TriggerType m_triggerType;
 
-    [SerializeField]
-    [FMODUnity.EventRef]
-    private string m_eventPath = "";
+    private FMODUnity.StudioEventEmitter m_emitter;
 
     [SerializeField]
     [Min(0f)]
@@ -27,6 +25,7 @@ public class SoundTrigger : MonoBehaviour {
     private void Start() {
         m_emitterPosition = transform.GetChild(0);
         m_timer = m_cooldown;
+        m_emitter = m_emitterPosition.GetComponent<FMODUnity.StudioEventEmitter>();
     }
 
     private void Update() {
@@ -47,7 +46,7 @@ public class SoundTrigger : MonoBehaviour {
 
     private void PlayEvent() {
         m_timer = 0.0f;
-        FMODUnity.RuntimeManager.PlayOneShot(m_eventPath, m_emitterPosition.position);
+        m_emitter.Play();
     }
 
 }
