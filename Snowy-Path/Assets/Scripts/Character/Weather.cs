@@ -91,7 +91,10 @@ public class Weather : MonoBehaviour
         // If we enter a weather zone, add it to our dictionary
         if (other.tag == "WeatherZone") {
             var weatherZone = other.GetComponent<WeatherZone>();
-            m_activeWeatherZones.Add(weatherZone.GetInstanceID(), weatherZone);
+            if (!m_activeWeatherZones.ContainsKey(weatherZone.GetInstanceID()))
+            {
+                m_activeWeatherZones.Add(weatherZone.GetInstanceID(), weatherZone);
+            }
             CurrentWeather = GetCurrentWeather();
         }
     }
