@@ -31,15 +31,11 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     #region SFX
     [Header("SFX")]
     [SerializeField]
-    [FMODUnity.EventRef]
-    private string m_spawnEventPath;
+    private FMODUnity.StudioEventEmitter m_spawnEvent;
 
     [SerializeField]
-    [FMODUnity.EventRef]
-    private string m_damagedEventPath;
+    private FMODUnity.StudioEventEmitter m_damagedEvent;
 
-    [SerializeField]
-    private GameObject m_SFXGameObject;
     #endregion
     #endregion
 
@@ -105,10 +101,10 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
 
     #region SFX_Utility
     private void PlaySpawnSFX() {
-        FMODUnity.RuntimeManager.PlayOneShotAttached(m_spawnEventPath, m_SFXGameObject);
+        m_spawnEvent.Play();
     }
-    internal void PlayDamagedSFX() {
-        FMODUnity.RuntimeManager.PlayOneShotAttached(m_damagedEventPath, m_SFXGameObject);
+    private void PlayDamagedSFX() {
+        m_damagedEvent.Play();
     }
     #endregion
 }
