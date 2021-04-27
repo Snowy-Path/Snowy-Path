@@ -36,6 +36,12 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     [SerializeField]
     private FMODUnity.StudioEventEmitter m_damagedEvent;
 
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_movementEvent;
+
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_attackEvent;
+
     #endregion
     #endregion
 
@@ -111,25 +117,29 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
         m_damagedEvent.Play();
     }
 
-    private void StopSpawnSFX() {
-        //FMOD.Studio.PARAMETER_ID m_spawnENDID;
-        //FMOD.Studio.EventDescription spawnEventDesc;
-        //m_spawnEvent.EventInstance.getDescription(out spawnEventDesc);
-        //FMOD.Studio.PARAMETER_DESCRIPTION spawnParametterDesc;
-        //spawnEventDesc.getParameterDescriptionByIndex(0, out spawnParametterDesc);
-        //m_spawnENDID = spawnParametterDesc.id;
+    private void StopMovementSFX() {
+        FMOD.Studio.PARAMETER_ID m_movementEND_ID;
+        FMOD.Studio.EventDescription movementEventDesc;
+        m_movementEvent.EventInstance.getDescription(out movementEventDesc);
+        FMOD.Studio.PARAMETER_DESCRIPTION movementParametterDesc;
+        movementEventDesc.getParameterDescriptionByIndex(0, out movementParametterDesc);
+        m_movementEND_ID = movementParametterDesc.id;
 
-        //m_spawnEvent.EventInstance.setParameterByID(m_spawnENDID, 1.0f);
+        m_movementEvent.EventInstance.setParameterByID(m_movementEND_ID, 1.0f);
     }
-    private void StopDamagedSFX() {
-        //FMOD.Studio.PARAMETER_ID m_attackENDID;
-        //FMOD.Studio.EventDescription attackEventDesc;
-        //m_damagedEvent.EventInstance.getDescription(out attackEventDesc);
-        //FMOD.Studio.PARAMETER_DESCRIPTION attackParametterDesc;
-        //attackEventDesc.getParameterDescriptionByIndex(0, out attackParametterDesc);
-        //m_attackENDID = attackParametterDesc.id;
+    private void StopAttackSFX() {
+        FMOD.Studio.PARAMETER_ID m_attackEND_ID;
+        FMOD.Studio.EventDescription attackEventDesc;
+        m_attackEvent.EventInstance.getDescription(out attackEventDesc);
+        FMOD.Studio.PARAMETER_DESCRIPTION attackParametterDesc;
+        attackEventDesc.getParameterDescriptionByIndex(0, out attackParametterDesc);
+        m_attackEND_ID = attackParametterDesc.id;
 
-        //m_damagedEvent.EventInstance.setParameterByID(m_attackENDID, 1.0f);
+        m_attackEvent.EventInstance.setParameterByID(m_attackEND_ID, 1.0f);
+    }
+
+    private void Deactivate() {
+        gameObject.SetActive(false);
     }
     #endregion
 }
