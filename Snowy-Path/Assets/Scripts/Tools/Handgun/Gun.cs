@@ -27,9 +27,10 @@ public class Gun : MonoBehaviour, IHandTool
 
 
     [Header("Settings")]
-    public Camera fpsCamera;
     public Animator animator;
     public LayerMask ignoredLayers;
+    private Camera fpsCamera;
+
 
     [Header("AI")]
     // AI script for the hearing sense
