@@ -27,6 +27,20 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     [Min(0)]
     [SerializeField]
     private float slowDuration = 5f;
+
+    #region SFX
+    [Header("SFX")]
+    [SerializeField]
+    [FMODUnity.EventRef]
+    private string m_spawnEventPath;
+
+    [SerializeField]
+    [FMODUnity.EventRef]
+    private string m_damagedEventPath;
+
+    [SerializeField]
+    private GameObject m_SFXGameObject;
+    #endregion
     #endregion
 
 
@@ -86,6 +100,15 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     /// <param name="newWendigoPos">The new position to warp at.</param>
     internal void Teleport(Transform newWendigoPos) {
         m_agent.Warp(newWendigoPos.position);
+    }
+    #endregion
+
+    #region SFX_Utility
+    private void PlaySpawnSFX() {
+        FMODUnity.RuntimeManager.PlayOneShotAttached(m_spawnEventPath, m_SFXGameObject);
+    }
+    internal void PlayDamagedSFX() {
+        FMODUnity.RuntimeManager.PlayOneShotAttached(m_damagedEventPath, m_SFXGameObject);
     }
     #endregion
 }
