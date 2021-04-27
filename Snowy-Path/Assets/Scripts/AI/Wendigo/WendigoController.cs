@@ -97,6 +97,10 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     internal void Teleport(Transform newWendigoPos) {
         m_agent.Warp(newWendigoPos.position);
     }
+
+    internal void PlayDisappearingAnimation() {
+        m_effectAnimator.SetTrigger("Disappear");
+    }
     #endregion
 
     #region SFX_Utility
@@ -105,6 +109,27 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     }
     private void PlayDamagedSFX() {
         m_damagedEvent.Play();
+    }
+
+    private void StopSpawnSFX() {
+        //FMOD.Studio.PARAMETER_ID m_spawnENDID;
+        //FMOD.Studio.EventDescription spawnEventDesc;
+        //m_spawnEvent.EventInstance.getDescription(out spawnEventDesc);
+        //FMOD.Studio.PARAMETER_DESCRIPTION spawnParametterDesc;
+        //spawnEventDesc.getParameterDescriptionByIndex(0, out spawnParametterDesc);
+        //m_spawnENDID = spawnParametterDesc.id;
+
+        //m_spawnEvent.EventInstance.setParameterByID(m_spawnENDID, 1.0f);
+    }
+    private void StopDamagedSFX() {
+        //FMOD.Studio.PARAMETER_ID m_attackENDID;
+        //FMOD.Studio.EventDescription attackEventDesc;
+        //m_damagedEvent.EventInstance.getDescription(out attackEventDesc);
+        //FMOD.Studio.PARAMETER_DESCRIPTION attackParametterDesc;
+        //attackEventDesc.getParameterDescriptionByIndex(0, out attackParametterDesc);
+        //m_attackENDID = attackParametterDesc.id;
+
+        //m_damagedEvent.EventInstance.setParameterByID(m_attackENDID, 1.0f);
     }
     #endregion
 }
