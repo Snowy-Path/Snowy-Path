@@ -121,6 +121,141 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &603261478 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1437083489160638314, guid: 10335cfd1ad372a47a05d871e6244960,
+    type: 3}
+  m_PrefabInstance: {fileID: 1785841319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &603261480 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 841839620, guid: 10335cfd1ad372a47a05d871e6244960,
+    type: 3}
+  m_PrefabInstance: {fileID: 1785841319}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603261478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &603261482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603261478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c34351c5a84d8441b46ae58aa0ab2a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onShoot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1456302900}
+        m_MethodName: Emit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1949557069}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1456302898}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  ammunitionInInventory: 0
+  ammunitionInventoryLimit: 5
+  ammoLoaded: 5
+  ammoLoadedLimit: 5
+  range: 1000
+  damage: 0
+  fireRate: 0.25
+  fpsCamera: {fileID: 0}
+  animator: {fileID: 1573604450}
+  ignoredLayers:
+    serializedVersion: 2
+    m_Bits: 4609
+  emitter: {fileID: 1456302900}
+  onEquip:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 603261480}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &1236114696 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 244230142568585105, guid: 10335cfd1ad372a47a05d871e6244960,
+    type: 3}
+  m_PrefabInstance: {fileID: 1785841319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1456302898 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4013720763126952866, guid: 10335cfd1ad372a47a05d871e6244960,
+    type: 3}
+  m_PrefabInstance: {fileID: 1785841319}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1456302900 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4702712927437806650, guid: 10335cfd1ad372a47a05d871e6244960,
+    type: 3}
+  m_PrefabInstance: {fileID: 1785841319}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1355a60f42a07084e89d350effcf5273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &1573604450 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7900053022104568126, guid: 10335cfd1ad372a47a05d871e6244960,
+    type: 3}
+  m_PrefabInstance: {fileID: 1785841319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1613947307 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1437083488951513502, guid: 10335cfd1ad372a47a05d871e6244960,
+    type: 3}
+  m_PrefabInstance: {fileID: 1785841319}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1785841319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153,6 +288,11 @@ PrefabInstance:
       propertyPath: m_CullingMask.m_Bits
       value: 262149943
       objectReference: {fileID: 0}
+    - target: {fileID: 1027967347773432187, guid: 10335cfd1ad372a47a05d871e6244960,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1419045311392325748, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
       propertyPath: m_RootOrder
@@ -176,7 +316,7 @@ PrefabInstance:
     - target: {fileID: 1419045311392325748, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 662.3
+      value: 659.6
       objectReference: {fileID: 0}
     - target: {fileID: 1419045311392325748, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
@@ -186,7 +326,7 @@ PrefabInstance:
     - target: {fileID: 1419045311392325748, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 42.4
+      value: 45.1
       objectReference: {fileID: 0}
     - target: {fileID: 1419045311392325748, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
@@ -328,6 +468,21 @@ PrefabInstance:
       propertyPath: m_Events.m_Signals.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4344437270155854826, guid: 10335cfd1ad372a47a05d871e6244960,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 603261478}
+    - target: {fileID: 4344437270155854826, guid: 10335cfd1ad372a47a05d871e6244960,
+        type: 3}
+      propertyPath: compass
+      value: 
+      objectReference: {fileID: 1613947307}
+    - target: {fileID: 4344437270155854826, guid: 10335cfd1ad372a47a05d871e6244960,
+        type: 3}
+      propertyPath: telescope
+      value: 
+      objectReference: {fileID: 1236114696}
     - target: {fileID: 4358950433255647707, guid: 10335cfd1ad372a47a05d871e6244960,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -463,5 +618,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1027967347773432187, guid: 10335cfd1ad372a47a05d871e6244960, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 10335cfd1ad372a47a05d871e6244960, type: 3}
+--- !u!2083052967 &1949557069 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 1073833155, guid: 10335cfd1ad372a47a05d871e6244960,
+    type: 3}
+  m_PrefabInstance: {fileID: 1785841319}
+  m_PrefabAsset: {fileID: 0}
