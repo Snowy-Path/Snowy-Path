@@ -34,7 +34,7 @@ public class OptionHandler : MonoBehaviour
                 MusicVolume = 0.5f,
                 SFXVolume = 0.5f,
                 resolution_index = currentResolutionIndex,
-                aa_index = 0,
+                aa_index = 2,
                 gammavalue = 1
             };
             OptionSave.Save(optionSettings);
