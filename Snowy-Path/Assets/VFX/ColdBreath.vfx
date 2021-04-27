@@ -215,8 +215,9 @@ VisualEffectResource:
       stripData = GetStripDataFromParticleIndex(index, PARTICLE_PER_STRIP_COUNT);\n           
       InitStripAttributes(index, attributes, stripData);\n#endif\n\t\t\t\n\t\t\t{\n\t\t\t   
       FlipbookPlay_0( /*inout */attributes.texIndex, (float)10, deltaTime_a);\n\t\t\t}\n\t\t\t{\n\t\t\t   
-      Drag_0( /*inout */attributes.velocity, attributes.mass, (float)0.5, deltaTime_a);\n\t\t\t}\n\t\t\t{\n\t\t\t   
-      Gravity( /*inout */attributes.velocity, float3(0, 0.200000003, 0), deltaTime_a);\n\t\t\t}\n\t\t\tEulerIntegration(
+      Drag_0( /*inout */attributes.velocity, attributes.mass, (float)0.300000012,
+      deltaTime_a);\n\t\t\t}\n\t\t\t{\n\t\t\t    Gravity( /*inout */attributes.velocity,
+      float3(0, 0.200000003, 0), deltaTime_a);\n\t\t\t}\n\t\t\tEulerIntegration(
       /*inout */attributes.position, attributes.velocity, deltaTime_a);\n\t\t\tAge(
       /*inout */attributes.age, deltaTime_a);\n\t\t\tReap(attributes.age, attributes.lifetime, 
       /*inout */attributes.alive);\n\t\t\t\n\n\n\t\t\tif (attributes.alive)\n\t\t\t{\n\t\t\t\tattributeBuffer.Store3((index
@@ -247,10 +248,11 @@ VisualEffectResource:
       = GetStripDataFromParticleIndex(index, PARTICLE_PER_STRIP_COUNT);\n       
       InitStripAttributes(index, attributes, stripData);\n#endif\n\t\t\n\t\t{\n\t\t   
       FlipbookPlay_0( /*inout */attributes.texIndex, (float)10, deltaTime_a);\n\t\t}\n\t\t{\n\t\t   
-      Drag_0( /*inout */attributes.velocity, attributes.mass, (float)0.5, deltaTime_a);\n\t\t}\n\t\t{\n\t\t   
-      Gravity( /*inout */attributes.velocity, float3(0, 0.200000003, 0), deltaTime_a);\n\t\t}\n\t\tEulerIntegration(
-      /*inout */attributes.position, attributes.velocity, deltaTime_a);\n\t\tAge(
-      /*inout */attributes.age, deltaTime_a);\n\t\tReap(attributes.age, attributes.lifetime, 
+      Drag_0( /*inout */attributes.velocity, attributes.mass, (float)0.300000012,
+      deltaTime_a);\n\t\t}\n\t\t{\n\t\t    Gravity( /*inout */attributes.velocity,
+      float3(0, 0.200000003, 0), deltaTime_a);\n\t\t}\n\t\tEulerIntegration( /*inout
+      */attributes.position, attributes.velocity, deltaTime_a);\n\t\tAge( /*inout
+      */attributes.age, deltaTime_a);\n\t\tReap(attributes.age, attributes.lifetime, 
       /*inout */attributes.alive);\n\t\t\n\n\t\tattributeBuffer.Store3((index * 0x8
       + 0x0) << 2,asuint(attributes.position));\n\t\tattributeBuffer.Store3((index
       * 0x4 + 0x100) << 2,asuint(attributes.velocity));\n\t\tattributeBuffer.Store((index
@@ -933,7 +935,7 @@ VisualEffectResource:
       m_Float:
         m_Array:
         - m_ExpressionIndex: 12
-          m_Value: 0.5
+          m_Value: 0.3
         - m_ExpressionIndex: 14
           m_Value: 2
         - m_ExpressionIndex: 22
@@ -1015,7 +1017,7 @@ VisualEffectResource:
             serializedVersion: 2
             key0: {r: 0.6611339, g: 0.7733016, b: 0.7830189, a: 0}
             key1: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-            key2: {r: 0, g: 0, b: 0, a: 0.78431374}
+            key2: {r: 0, g: 0, b: 0, a: 0.88235295}
             key3: {r: 0, g: 0, b: 0, a: 0}
             key4: {r: 0, g: 0, b: 0, a: 0}
             key5: {r: 0, g: 0, b: 0, a: 0}
@@ -1283,7 +1285,6 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661614717}
-  - {fileID: 8926484042661614852}
   m_UIPosition: {x: 941.2763, y: -132.6938}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
@@ -2493,7 +2494,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.661133885383606,"g":0.7733016014099121,"b":0.7830188870429993,"a":1.0},"time":0.0},{"color":{"r":0.5,"g":0.5,"b":0.5,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":1.0,"time":0.10000763088464737},{"alpha":0.7843137383460999,"time":0.5588311553001404},{"alpha":0.0,"time":1.0}],"gradientMode":0}'
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.661133885383606,"g":0.7733016014099121,"b":0.7830188870429993,"a":1.0},"time":0.0},{"color":{"r":0.5,"g":0.5,"b":0.5,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":1.0,"time":0.10000763088464737},{"alpha":0.8823529481887817,"time":0.5588311553001404},{"alpha":0.0,"time":1.0}],"gradientMode":0}'
     m_Space: 2147483647
   m_Property:
     name: Color
@@ -3482,7 +3483,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.5
+      m_SerializableObject: 0.3
     m_Space: 2147483647
   m_Property:
     name: dragCoefficient
@@ -4704,123 +4705,6 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
     attributes: []
   m_Direction: 1
-  m_LinkedSlots: []
---- !u!114 &8926484042661614852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e382412bb691334bb79457a6c127924, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Parent: {fileID: 8926484042661614555}
-  m_Children: []
-  m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 0
-  m_UISuperCollapsed: 0
-  m_InputSlots:
-  - {fileID: 8926484042661614853}
-  - {fileID: 8926484042661614857}
-  m_OutputSlots: []
-  m_Disabled: 1
-  repeat: 1
-  spawnMode: 0
-  delayMode: 0
---- !u!114 &8926484042661614853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f780aa281814f9842a7c076d436932e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Parent: {fileID: 0}
-  m_Children: []
-  m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
-  m_UISuperCollapsed: 0
-  m_MasterSlot: {fileID: 8926484042661614853}
-  m_MasterData:
-    m_Owner: {fileID: 8926484042661614852}
-    m_Value:
-      m_Type:
-        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-          PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1
-    m_Space: 2147483647
-  m_Property:
-    name: Count
-    m_serializedType:
-      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-    attributes:
-    - m_Type: 3
-      m_Min: -Infinity
-      m_Max: Infinity
-      m_Tooltip: Sets the number of particles to be spawned with each burst.
-      m_Regex: 
-      m_RegexMaxLength: 0
-    - m_Type: 1
-      m_Min: 0
-      m_Max: Infinity
-      m_Tooltip: 
-      m_Regex: 
-      m_RegexMaxLength: 0
-  m_Direction: 0
-  m_LinkedSlots: []
---- !u!114 &8926484042661614857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f780aa281814f9842a7c076d436932e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Parent: {fileID: 0}
-  m_Children: []
-  m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
-  m_UISuperCollapsed: 0
-  m_MasterSlot: {fileID: 8926484042661614857}
-  m_MasterData:
-    m_Owner: {fileID: 8926484042661614852}
-    m_Value:
-      m_Type:
-        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-          PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1
-    m_Space: 2147483647
-  m_Property:
-    name: Delay
-    m_serializedType:
-      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-    attributes:
-    - m_Type: 3
-      m_Min: -Infinity
-      m_Max: Infinity
-      m_Tooltip: Sets the delay in seconds between each burst.
-      m_Regex: 
-      m_RegexMaxLength: 0
-    - m_Type: 1
-      m_Min: 0
-      m_Max: Infinity
-      m_Tooltip: 
-      m_Regex: 
-      m_RegexMaxLength: 0
-  m_Direction: 0
   m_LinkedSlots: []
 --- !u!114 &8926484042661614938
 MonoBehaviour:

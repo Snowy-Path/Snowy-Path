@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
     [Space]
     [Header("Sprint")]
     [Tooltip("Max sprint duration")]
-    [SerializeField] float maxSprintDuration = 6f;
+    public float maxSprintDuration = 6f;
     [Tooltip("Recovery rate factor -> recovery = time * sprintRoveryRate")]
     [SerializeField] float sprintRecoveryRate = 0.5f;
     [Tooltip("Mulitplier for lateral speed when sprinting")]
@@ -96,7 +96,6 @@ public class PlayerController : MonoBehaviour {
 
     private HUD playerHud;
     private HandController handController;
-    private FootStepsAudio playerAudio;
 
     #region INPUTS SYSTEM EVENTS
     public void OnMove(InputAction.CallbackContext context) {
@@ -140,7 +139,6 @@ public class PlayerController : MonoBehaviour {
         controller = GetComponent<CharacterController>();
         playerHud = GetComponent<HUD>();
         handController = GetComponentInChildren<HandController>();
-        playerAudio = GetComponent<FootStepsAudio>();
 
         //Lock and hide cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -174,11 +172,9 @@ public class PlayerController : MonoBehaviour {
             if (!isSliding && IsGrounded)
                 speed = Mathf.Lerp(speed, (xzVelocity.magnitude * SpeedFactor) / currentSpeed, 0.1f);
             handsAnimator.SetFloat("Speed", speed);
-            playerAudio.SetParam(xzVelocity.magnitude * SpeedFactor);
         }
         else {
             handsAnimator.SetFloat("Speed", 0);
-            playerAudio.SetParam(0);
         }
         controller.Move(yVelocity * Time.deltaTime);
     }
@@ -285,7 +281,6 @@ public class PlayerController : MonoBehaviour {
 
         //Update animator
         handsAnimator.SetBool("Run", isRunning);
-        playerHud.SetStamina(Mathf.Clamp(sprintTimer / maxSprintDuration, 0, 1));
     }
 
     private void Look() {

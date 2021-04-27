@@ -33,7 +33,11 @@ public class Torch : MonoBehaviour {
     /// The animation itself MUST manage the box collider enabling/disabling.
     /// </summary>
     private void PerformAttack() {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("Run")) { // Without this line, the animation can be triggered WHILE playing. Meaning it will repeat again & again.
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Run") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Jump") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Reload")
+            ) { // Without this line, the animation can be triggered WHILE playing. Meaning it will repeat again & again.
             animator.SetTrigger("BaseAttack");
         }
     }

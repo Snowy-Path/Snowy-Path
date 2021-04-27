@@ -1,64 +1,75 @@
-﻿using System;
-using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
+
+
 
 public class HQOptionsMenu : MonoBehaviour
 {
     //public AudioMixer audioMixer;
     public TMPro.TMP_Dropdown resolutionDropdown;
     public TMPro.TMP_Dropdown aaDropdown;
-    public Slider volumeSlider;
-    float currentVolume;
-    Resolution[] resolutions;
+    public Slider generalSlider;
+    public Slider musicSlider;
+    public Slider soundsSlider;
+    public Slider gammaSlider;
+    OptionHandler optionhandler;
+    AudioSettings audioSettings;
+    public Resolution[] resolutions;
+    public List<int> AntiAliasing = new List<int>{0,2,4,8};
 
-    Transform menuPanel;
-    Event keyEvent;
-    Text buttonText;
-    KeyCode newKey;
 
-
-    bool waitingForKey;
-
-    private void Start()
+    private void Awake()
     {
-        resolutionDropdown.ClearOptions();
-        List<string> options = new List<string>();
-        resolutions = Screen.resolutions;
-        int currentResolutionIndex = 0;
-        for (int i = 0; i < resolutions.Length; i++)
-        {
-            string option = resolutions[i].width + " x " +
-                     resolutions[i].height;
-            options.Add(option);
-            if (resolutions[i].width == Screen.currentResolution.width
-                  && resolutions[i].height == Screen.currentResolution.height)
-                currentResolutionIndex = i;
-        }
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.RefreshShownValue();
-        
+        optionhandler = GameObject.FindObjectOfType<OptionHandler>();//("OptionSettings"); GameObject.F
+        audioSettings = GameObject.FindObjectOfType<AudioSettings>();
+        StartResolution();
+        LoadSettings(optionhandler.optionSettings);
     }
 
-    public void SetVolume(float volume)
+    //        RenderSettings.ambientLight = new Color(GammaCorrection, GammaCorrection, GammaCorrection, 1.0f);
+
+
+
+
+    public void MasterVolumeLevel(float newMasterVolume)
     {
-        //audioMixer.SetFloat("Volume", volume);
-        currentVolume = volume;
+        audioSettings.MasterVolume = newMasterVolume;
+    }
+
+    public void MusicVolumeLevel(float newMusicVolume)
+    {
+        audioSettings.MusicVolume = newMusicVolume;
+    }
+
+    public void SFXVolumeLevel(float newSFXVolume)
+    {
+        audioSettings.SFXVolume = newSFXVolume;
+
+        //FMOD.Studio.PLAYBACK_STATE PbState;
+        //audioSettings.SFXVolumeTestEvent.getPlaybackState(out PbState);
+        //if (PbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        //{
+        //    audioSettings.SFXVolumeTestEvent.start();
+        //}
     }
 
     public void SetResolution(int resolutionIndex)
     {
+        resolutionDropdown.value = resolutionIndex;
+        //LoadSettings(currentResolutionIndex);
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width,
                   resolution.height, Screen.fullScreen);
+        //optionhandler.optionSettings.resolution_index = resolutionIndex;
+
+
     }
 
     public void SetAntiAliasing(int aaIndex)
     {
-        QualitySettings.antiAliasing = aaIndex;
-
+        QualitySettings.antiAliasing = AntiAliasing[aaIndex];
     }
 
 
@@ -86,7 +97,7 @@ public class HQOptionsMenu : MonoBehaviour
                 aaDropdown.value = 0;
                 break;
             case 4: // quality level - very high
-               // textureDropdown.value = 0;
+                    // textureDropdown.value = 0;
                 aaDropdown.value = 1;
                 break;
             case 5: // quality level - ultra
@@ -98,44 +109,68 @@ public class HQOptionsMenu : MonoBehaviour
         //qualityDropdown.value = qualityIndex;
     }
 
-    public void SaveSettings()
+
+
+    public void SetGamma(float gammavalue)
     {
-        PlayerPrefs.SetInt("ResolutionPreference",
-                   resolutionDropdown.value);
-        PlayerPrefs.SetInt("AntiAliasingPreference",
-                   aaDropdown.value);
-        PlayerPrefs.SetFloat("VolumePreference",
-                   currentVolume);
-        SetResolution(resolutionDropdown.value);
+        float newgamma = gammavalue;
+        Screen.brightness = newgamma;
+
     }
 
-
-    public void LoadSettings(int currentResolutionIndex)
+    public int StartResolution()
     {
+        resolutionDropdown.ClearOptions();
+        List<string> options = new List<string>();
+        resolutions = Screen.resolutions;
+        int currentResolutionIndex = 0;
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string option = resolutions[i].width + " x " +
+                     resolutions[i].height;
+            options.Add(option);
+            if (resolutions[i].width == Screen.currentResolution.width
+                  && resolutions[i].height == Screen.currentResolution.height)
+                currentResolutionIndex = i;
+        }
+        resolutionDropdown.AddOptions(options);
+        resolutionDropdown.RefreshShownValue();
+        return currentResolutionIndex;
+    }
+    
+    public void ApplySettings()
+    {
+        OptionSettings newsettings = new OptionSettings {
+            MasterVolume = generalSlider.value,
+            MusicVolume = musicSlider.value,
+            SFXVolume = soundsSlider.value,
+            aa_index = aaDropdown.value,
+            resolution_index = resolutionDropdown.value,
+            gammavalue = gammaSlider.value };
+        
+        OptionSave.Save(newsettings);
+        optionhandler.optionSettings = newsettings;
+        
 
-        if (PlayerPrefs.HasKey("ResolutionPreference"))
-            resolutionDropdown.value =
-                         PlayerPrefs.GetInt("ResolutionPreference");
-        else
-            resolutionDropdown.value = currentResolutionIndex;
-
-        if (PlayerPrefs.HasKey("AntiAliasingPreference"))
-            aaDropdown.value =
-                         PlayerPrefs.GetInt("AntiAliasingPreference");
-        else
-            aaDropdown.value = 1;
-
-        if (PlayerPrefs.HasKey("VolumePreference"))
-            volumeSlider.value =
-                        PlayerPrefs.GetFloat("VolumePreference");
-        else
-            volumeSlider.value =
-                        PlayerPrefs.GetFloat("VolumePreference");
     }
 
+    public void BackSettings()
+    {
+        LoadSettings(optionhandler.optionSettings);
+    }
 
+    public void LoadSettings(OptionSettings settings)
+    {
+        generalSlider.value = settings.MasterVolume;
+        musicSlider.value = settings.MusicVolume;
+        soundsSlider.value = settings.SFXVolume;
+        aaDropdown.value = settings.aa_index;
+        resolutionDropdown.value = settings.resolution_index;
+        gammaSlider.value = settings.gammavalue;
+    }
 
 }
+
 
 
 
