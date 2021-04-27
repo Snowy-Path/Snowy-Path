@@ -7,14 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class HQMainMenu : MonoBehaviour
 {
-    public OptionSettings inputDevice;
+    //private OptionSettings inputDevice;
     public GameObject OptionsMenu, CreditsMenu, MainMenu;
     public GameObject OptionsButton, CreditsButton;
     public GameObject MainMenuFirstButton, OptionsFirstButton, CreditsFirstButton;
     public PlayerInput playerInput;
-    public void Start()
+    public void OnEnable()
     {
-        if (inputDevice.gamepadconnected)
+
+        if (OptionHandler.gamepadconnected)
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(MainMenuFirstButton);
@@ -25,7 +26,7 @@ public class HQMainMenu : MonoBehaviour
     }
     public void PlayGame()
     {
-        //playerInput.SwitchCurrentActionMap("Gameplay");
+
         SceneLoader.Instance.LoadWorld();
         SaveSystem.Instance.SetCurrentSave(0);
     }
@@ -91,7 +92,7 @@ public class HQMainMenu : MonoBehaviour
     /// <param name="go"></param>
     private void SetFocus(GameObject go)
     {
-        if (inputDevice.gamepadconnected)
+        if (OptionHandler.gamepadconnected)
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(go);
