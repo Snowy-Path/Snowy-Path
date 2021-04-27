@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -38,6 +39,10 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
         m_player = FindObjectOfType<PlayerController>().transform;
         m_agent = GetComponent<NavMeshAgent>();
         m_normalSpeed = m_agent.speed;
+    }
+
+    internal void Reset() {
+        m_agent.speed = m_normalSpeed;
     }
 
     /// <summary>

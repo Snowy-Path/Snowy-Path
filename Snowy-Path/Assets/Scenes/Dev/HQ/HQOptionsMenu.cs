@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
-using System.IO;
-using System.Linq;
+
+
 
 public class HQOptionsMenu : MonoBehaviour
 {
@@ -16,46 +14,46 @@ public class HQOptionsMenu : MonoBehaviour
     public Slider musicSlider;
     public Slider soundsSlider;
     public Slider gammaSlider;
-    public AudioSettings audioSettings;
-    private float GammaCorrection;
-    Resolution[] resolutions;
+    OptionHandler optionhandler;
+    AudioSettings audioSettings;
+    public Resolution[] resolutions;
+    public List<int> AntiAliasing = new List<int>{0,2,4,8};
 
-    List<string> stringList = new List<string>();
-    List<string[]> parsedList = new List<string[]>();
 
     private void Awake()
     {
-        resolutions = Screen.resolutions;
+        optionhandler = GameObject.FindObjectOfType<OptionHandler>();//("OptionSettings"); GameObject.F
+        audioSettings = GameObject.FindObjectOfType<AudioSettings>();
+        StartResolution();
+        LoadSettings(optionhandler.optionSettings);
     }
 
-    private void Start()
+    //        RenderSettings.ambientLight = new Color(GammaCorrection, GammaCorrection, GammaCorrection, 1.0f);
+
+
+
+
+    public void MasterVolumeLevel(float newMasterVolume)
     {
-        resolutionDropdown.ClearOptions();
-        List<string> options = new List<string>();
-        resolutions = Screen.resolutions;
-        int currentResolutionIndex = 0;
-        for (int i = 0; i < resolutions.Length; i++)
-        {
-            string option = resolutions[i].width + " x " +
-                     resolutions[i].height;
-            options.Add(option);
-            if (resolutions[i].width == Screen.currentResolution.width
-                  && resolutions[i].height == Screen.currentResolution.height)
-                currentResolutionIndex = i;
-        }
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.RefreshShownValue();
-        LoadSettings();
-
+        audioSettings.MasterVolume = newMasterVolume;
     }
 
-    private void OnEnable()
+    public void MusicVolumeLevel(float newMusicVolume)
     {
-        stringList = new List<string>();
-        parsedList = new List<string[]>();
-        LoadSettings();
+        audioSettings.MusicVolume = newMusicVolume;
     }
 
+    public void SFXVolumeLevel(float newSFXVolume)
+    {
+        audioSettings.SFXVolume = newSFXVolume;
+
+        //FMOD.Studio.PLAYBACK_STATE PbState;
+        //audioSettings.SFXVolumeTestEvent.getPlaybackState(out PbState);
+        //if (PbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        //{
+        //    audioSettings.SFXVolumeTestEvent.start();
+        //}
+    }
 
     public void SetResolution(int resolutionIndex)
     {
@@ -64,13 +62,14 @@ public class HQOptionsMenu : MonoBehaviour
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width,
                   resolution.height, Screen.fullScreen);
+        //optionhandler.optionSettings.resolution_index = resolutionIndex;
+
 
     }
 
     public void SetAntiAliasing(int aaIndex)
     {
-        QualitySettings.antiAliasing = aaIndex;
-
+        QualitySettings.antiAliasing = AntiAliasing[aaIndex];
     }
 
 
@@ -112,109 +111,64 @@ public class HQOptionsMenu : MonoBehaviour
 
 
 
-    void Update()
-    {
-
-        RenderSettings.ambientLight = new Color(GammaCorrection, GammaCorrection, GammaCorrection, 1.0f);
-
-    }
-
     public void SetGamma(float gammavalue)
     {
-
-        GammaCorrection = gammavalue;
+        float newgamma = gammavalue;
+        Screen.brightness = newgamma;
 
     }
 
-
-
-
-    public void LoadSettings()
+    public int StartResolution()
     {
-
-        string destination = Application.persistentDataPath + "/savesettings.txt";
-        if (File.Exists(destination))
+        resolutionDropdown.ClearOptions();
+        List<string> options = new List<string>();
+        resolutions = Screen.resolutions;
+        int currentResolutionIndex = 0;
+        for (int i = 0; i < resolutions.Length; i++)
         {
-            readTextFiled(destination);
-            parseList();
-            //Debug.Log(parsedList[0][1]);
-            //Debug.Log();
-            SetResolution(int.Parse(parsedList[0][1]));
-            SetQuality(int.Parse(parsedList[1][1]));
-            //audioSettings.MasterVolumeLevel(float.Parse(parsedList[2][1]));
-            //audioSettings.MusicVolumeLevel(float.Parse(parsedList[3][1]));
-            //audioSettings.SFXVolumeLevel(float.Parse(parsedList[4][1]));
-            generalSlider.value = float.Parse(parsedList[2][1]);
-            musicSlider.value = float.Parse(parsedList[3][1]);
-            soundsSlider.value = float.Parse(parsedList[4][1]);
-            gammaSlider.value = float.Parse(parsedList[5][1]);
+            string option = resolutions[i].width + " x " +
+                     resolutions[i].height;
+            options.Add(option);
+            if (resolutions[i].width == Screen.currentResolution.width
+                  && resolutions[i].height == Screen.currentResolution.height)
+                currentResolutionIndex = i;
         }
-
-        else
-        {
-            Debug.LogError("File not found");
-            return;
-        }
-
-
-
+        resolutionDropdown.AddOptions(options);
+        resolutionDropdown.RefreshShownValue();
+        return currentResolutionIndex;
     }
-
-    public void SaveSettings()
+    
+    public void ApplySettings()
     {
-        string serializedsettings =
-        "Resolution, " + resolutionDropdown.value.ToString() + "\n" +
-        "Antialiasing, " + aaDropdown.value.ToString() + "\n" +
-        //"Master Volume, " + audioSettings.MasterVolume.ToString() + "\n" +
-        //"Music Volume, " + audioSettings.MusicVolume.ToString() + "\n" +
-        //"Sounds Effect Volume, " + audioSettings.SFXVolume.ToString() + "\n" +
-        "Gamma, " + gammaSlider.value.ToString() + "\n";
-
-        string destination = Application.persistentDataPath + "/savesettings.txt";
-
-        if (File.Exists(destination))
-            File.WriteAllText(destination, serializedsettings);
-        else
-            File.Create(destination).Dispose();
-        File.WriteAllText(destination, serializedsettings);
-
-
+        OptionSettings newsettings = new OptionSettings {
+            MasterVolume = generalSlider.value,
+            MusicVolume = musicSlider.value,
+            SFXVolume = soundsSlider.value,
+            aa_index = aaDropdown.value,
+            resolution_index = resolutionDropdown.value,
+            gammavalue = gammaSlider.value };
+        
+        OptionSave.Save(newsettings);
+        optionhandler.optionSettings = newsettings;
+        
 
     }
 
-
-
-    void readTextFiled(string path)
+    public void BackSettings()
     {
-        StreamReader inp_stm = new StreamReader(path);
-
-        while (!inp_stm.EndOfStream)
-        {
-            string inp_ln = inp_stm.ReadLine();
-
-            stringList.Add(inp_ln);
-        }
-
-        inp_stm.Close();
-
-
+        LoadSettings(optionhandler.optionSettings);
     }
 
-    void parseList()
+    public void LoadSettings(OptionSettings settings)
     {
-        for (int i = 0; i < stringList.Count; i++)
-        {
-            string[] temp = stringList[i].Split(","[0]);
-            for (int j = 0; j < temp.Length; j++)
-            {
-                temp[j] = temp[j].Trim();  //removed the blank spaces
-            }
-            parsedList.Add(temp);
-
-
-        }
-
+        generalSlider.value = settings.MasterVolume;
+        musicSlider.value = settings.MusicVolume;
+        soundsSlider.value = settings.SFXVolume;
+        aaDropdown.value = settings.aa_index;
+        resolutionDropdown.value = settings.resolution_index;
+        gammaSlider.value = settings.gammavalue;
     }
+
 }
 
 

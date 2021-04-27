@@ -35,6 +35,7 @@ public class WendigoSpawner : MonoBehaviour {
 
     public void Reset() {
         wendigo.SetActive(false);
+        wendigo.GetComponent<WendigoController>().Reset();
         wendigo.transform.position = m_wendigoSpawnPosition;
         wendigo.transform.rotation = m_wendigoSpawnRotation;
         wendigoIsSpawned = false;

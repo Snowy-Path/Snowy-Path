@@ -7,6 +7,12 @@ using System;
 
 public class HandController : MonoBehaviour {
 
+    // Variables for references of the different tools
+    public GameObject gun;
+    public GameObject telescope;
+    public GameObject compass;
+
+
     public IHandTool CurrentTool {
         get {
             if (currentToolIndex >= 0) {

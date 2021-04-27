@@ -5,34 +5,40 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class HQPauseMenu : MonoBehaviour {
+public class HQPauseMenu : MonoBehaviour
+{
+    //private OptionSettings inputDevice;
     public static bool gameIsPaused;
-    public GameObject OptionsMenu, GalleryMenu, CreditsMenu, PauseMenu;
-    public GameObject OptionsButton, GalleryButton, CreditsButton;
-    public GameObject PauseMenuFirstButton, OptionsFirstButton, GalleryFirstButton, CreditsFirstButton;
+    public GameObject OptionsMenu, CreditsMenu, PauseMenu;
+    public GameObject OptionsButton, CreditsButton;
+    public GameObject PauseMenuFirstButton, OptionsFirstButton, CreditsFirstButton;
     public PlayerInput playerInput;
-    public bool debugMode = false;
+ 
 
-    public void Start() {
-        //gameIsPaused = false;
-        //CameraLayerToggle();
+    public void Start()
+    {
+
         ShowDefaultView();
         SetFocus(PauseMenuFirstButton);
-        //ResumeGame();
 
+        
     }
-    private void OnEnable() {
+    private void OnEnable()
+    {
         ShowDefaultView();
     }
 
-    public void OnPause(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            if (!debugMode)
-                PauseGame();
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            PauseGame();
         }
     }
-    public void OnResume(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
+    public void OnResume(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
             ResumeGame();
         }
     }
@@ -43,55 +49,51 @@ public class HQPauseMenu : MonoBehaviour {
     /// <summary>
     /// Load The Menu scene
     /// </summary>
-    public void MainMenu() {
+    public void MainMenu()
+    {
         gameIsPaused = false;
         ResumeGame();
         SceneSave sceneSave = FindObjectOfType<SceneSave>();
-        if (sceneSave != null) {
+        if(sceneSave != null)
+        {
             sceneSave.SceneName = "";
         }
         SceneLoader.Instance.LoadMainMenu();
 
     }
-
-    public void OpenOptions() {
+    
+    public void OpenOptions()
+    {
         OptionsMenu.SetActive(true);
         PauseMenu.SetActive(false);
         SetFocus(OptionsFirstButton);
     }
 
-    public void OpenCredits() {
+    public void OpenCredits()
+    {
         CreditsMenu.SetActive(true);
         PauseMenu.SetActive(false);
         SetFocus(CreditsFirstButton);
     }
 
-    public void OpenGallery() {
-        GalleryMenu.SetActive(true);
-        PauseMenu.SetActive(false);
-        SetFocus(GalleryFirstButton);
-    }
     #endregion
 
     #region CLOSE MENUS
     //Set unactive the closed menu and reactivate the pause menu
-    public void ExitOptions() {
+    public void ExitOptions()
+    {
         OptionsMenu.SetActive(false);
         PauseMenu.SetActive(true);
         SetFocus(OptionsButton);
     }
 
-    public void ExitCredits() {
+    public void ExitCredits()
+    {
         CreditsMenu.SetActive(false);
         PauseMenu.SetActive(true);
         SetFocus(CreditsButton);
     }
 
-    public void ExitGallery() {
-        GalleryMenu.SetActive(false);
-        PauseMenu.SetActive(true);
-        SetFocus(GalleryButton);
-    }
     #endregion
 
     #region NAVIGATION METHODS
@@ -100,25 +102,31 @@ public class HQPauseMenu : MonoBehaviour {
     /// Set the selsection focus on the button go
     /// </summary>
     /// <param name="go"></param>
-    private void SetFocus(GameObject go) {
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(go);
+    private void SetFocus(GameObject go)
+    {
+        if (OptionHandler.gamepadconnected)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(go);
+        }
+
     }
 
     /// <summary>
     /// Default PauseMenu view
     /// </summary>
-    private void ShowDefaultView() {
+    private void ShowDefaultView()
+    {
         CreditsMenu.SetActive(false);
         OptionsMenu.SetActive(false);
-        GalleryMenu.SetActive(false);
         PauseMenu.SetActive(true);
     }
 
     /// <summary>
     /// Resume the game, timescale at 1
     /// </summary>
-    public void ResumeGame() {
+    public void ResumeGame()
+    {
         //GetComponentInChildren<Canvas>().gameObject.SetActive(false);
         this.gameObject.SetActive(false);
         Time.timeScale = 1f;
@@ -136,7 +144,8 @@ public class HQPauseMenu : MonoBehaviour {
     /// <summary>
     /// Pause the game, timescale at 0
     /// </summary>
-    public void PauseGame() {
+    public void PauseGame()
+    {
         //GetComponentInChildren<Canvas>().gameObject.SetActive(true);
         this.gameObject.SetActive(true);
         Time.timeScale = 0f;
@@ -152,7 +161,8 @@ public class HQPauseMenu : MonoBehaviour {
     /// <summary>
     /// Change the culling mask to hide Player Body during Pause
     /// </summary>
-    public void CameraLayerToggle() {
+    public void CameraLayerToggle()
+    {
         Camera cam = GameObject.Find("Camera").GetComponent<Camera>();
         //cam.cullingMask ^= 1 << LayerMask.NameToLayer("Vision");
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("PlayerBody");
@@ -161,12 +171,15 @@ public class HQPauseMenu : MonoBehaviour {
     /// <summary>
     /// Toggle between pause and resume game
     /// </summary>
-    public void Toggle() {
-        if (!gameIsPaused) {
+    public void Toggle()
+    {
+        if (!gameIsPaused)
+        {
             PauseGame();
         }
 
-        else {
+        else
+        {
             ResumeGame();
         }
 
