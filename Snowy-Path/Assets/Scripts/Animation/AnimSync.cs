@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnimSync : StateMachineBehaviour {
     public bool rightHand = false;
     private Animator otherAnimator;
+    private bool enteredByForce = false;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
@@ -16,6 +17,9 @@ public class AnimSync : StateMachineBehaviour {
                 otherAnimator = GameObject.Find("RHand").GetComponent<Animator>();
         }
 
+        if (enteredByForce)
+            return;
+
         AnimatorStateInfo animationState = otherAnimator.GetCurrentAnimatorStateInfo(0);
         if (animationState.IsName("Run")) {
             AnimatorClipInfo[] otherMotionClip = otherAnimator.GetCurrentAnimatorClipInfo(0);
@@ -26,6 +30,7 @@ public class AnimSync : StateMachineBehaviour {
             AnimatorClipInfo[] otherMotionClip = otherAnimator.GetCurrentAnimatorClipInfo(0);
             float syncTime = otherMotionClip[0].clip.length * animationState.normalizedTime;
             animator.Play("Basic Motion", 0, animationState.normalizedTime);
+            enteredByForce = true;
         }
         Debug.Log( "Debug");
 
@@ -38,10 +43,9 @@ public class AnimSync : StateMachineBehaviour {
     //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+        enteredByForce = false;
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
