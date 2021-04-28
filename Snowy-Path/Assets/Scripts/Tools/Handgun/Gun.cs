@@ -19,7 +19,7 @@ public class Gun : MonoBehaviour, IHandTool {
     [Header("Gun")]
     public int ammoLoaded = 0;
     public int ammoLoadedLimit = 5;
-    public float reloadingTime;
+    public float reloadingTime = 4;
 
     public int range = 1000;
     public int damage = 0;
