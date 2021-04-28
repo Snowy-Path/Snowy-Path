@@ -17,6 +17,10 @@ public class Torch : MonoBehaviour {
     [Tooltip("Hands animator. Allows this script to trigger the attack animation.")]
     public Animator animator;
 
+    public MonoBehaviour[] lockingTools;
+
+    private bool attackLocked = false;
+
     /// <summary>
     /// The main interaction of the torch.
     /// Perform the attack method only once.
@@ -33,13 +37,26 @@ public class Torch : MonoBehaviour {
     /// The animation itself MUST manage the box collider enabling/disabling.
     /// </summary>
     private void PerformAttack() {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
-            animator.GetCurrentAnimatorStateInfo(0).IsName("Run") ||
-            animator.GetCurrentAnimatorStateInfo(0).IsName("Jump") ||
-            animator.GetCurrentAnimatorStateInfo(0).IsName("Reload")
-            ) { // Without this line, the animation can be triggered WHILE playing. Meaning it will repeat again & again.
-            animator.SetTrigger("BaseAttack");
+
+        bool isBusy = false;
+        foreach (var tool in lockingTools) {
+            IHandTool iTool = tool.GetComponent<IHandTool>(); 
+            if (iTool.IsBusy) {
+                isBusy = true;
+                break;
+            }
         }
+
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && attackLocked == false 
+            && !isBusy) {
+            animator.SetTrigger("Attack");
+            attackLocked = true;
+            Invoke("ResetAttack", 0.2f);
+    }
+}
+
+    private void ResetAttack() {
+        attackLocked = false;
     }
 
     /// <summary>

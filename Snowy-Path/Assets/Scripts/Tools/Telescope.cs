@@ -7,21 +7,38 @@ using UnityEngine.InputSystem;
 public class Telescope : MonoBehaviour, IHandTool {
     [Header("Set up")]
     [Tooltip("Hands animator. Allows this script to trigger the look animation.")]
-    [SerializeField] Animator animator;
     [SerializeField] Camera scopeCamera;
     [SerializeField] GameObject spriteMask;
+    [SerializeField] GameObject lens;
 
     [Header("Zoom")]
     [SerializeField] float defaultZoom = 4f;
     [SerializeField] float secondaryZoom = 8f;
+    [SerializeField] float zoomStep = 0.05f;
+
+    [Header("Audio")]
+    public UnityEvent OnZoom;
+    public UnityEvent OnEquip;
 
     public EToolType ToolType => EToolType.Scope;
 
     public bool IsBusy { get; set; }
+    public Animator handAnimator { get; set; }
+
+    private float targetFov;
 
     private void Start() {
+        targetFov = defaultZoom;
         spriteMask.SetActive(false);
         scopeCamera.gameObject.SetActive(false);
+        lens.SetActive(false);
+    }
+
+    private void Update() {
+        if (scopeCamera.fieldOfView < targetFov)
+            scopeCamera.fieldOfView = Mathf.Lerp(scopeCamera.fieldOfView, targetFov, zoomStep);
+        else if (scopeCamera.fieldOfView > targetFov)
+            scopeCamera.fieldOfView = Mathf.Lerp(scopeCamera.fieldOfView, targetFov, zoomStep);
     }
 
     public void StartPrimaryUse() {
@@ -29,13 +46,15 @@ public class Telescope : MonoBehaviour, IHandTool {
         scopeCamera.gameObject.SetActive(true);
         scopeCamera.fieldOfView = defaultZoom;
 
-        animator.SetBool("LookInTelescope", true);
+        handAnimator.SetBool("UseTelescope", true);
     }
 
     public void CancelPrimaryUse() {
         IsBusy = false;
-        animator.SetBool("LookInTelescope", false);
+        handAnimator.SetBool("UseTelescope", false);
         DisableCamera(.5f);
+        lens.SetActive(false);
+
     }
 
     public IEnumerator DisableCamera(float waitTime) {
@@ -48,15 +67,19 @@ public class Telescope : MonoBehaviour, IHandTool {
 
     public void SwitchZoom() {
         if (IsBusy && gameObject.activeSelf) {
-            if (scopeCamera.fieldOfView == defaultZoom)
-                scopeCamera.fieldOfView = secondaryZoom;
+            if (targetFov == defaultZoom)
+                targetFov = secondaryZoom;
             else
-                scopeCamera.fieldOfView = defaultZoom;
+                targetFov = defaultZoom;
+            OnZoom.Invoke();
         }
     }
 
     public void ToggleDisplay(bool display) {
         gameObject.SetActive(display);
         spriteMask.SetActive(false);
+        if (display) {
+            OnEquip.Invoke();
+        }
     }
 }
