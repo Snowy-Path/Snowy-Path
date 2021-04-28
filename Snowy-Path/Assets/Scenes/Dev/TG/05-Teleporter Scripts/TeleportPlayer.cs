@@ -25,7 +25,12 @@ public class TeleportPlayer : MonoBehaviour
     public void Teleport() {
 
         SceneLoader.Instance.LoadLevel(sceneToLoad.sceneName);
-
+        GameObject playerGameObject = FindObjectOfType<PlayerController>().gameObject;
+        if(playerGameObject != null)
+        {
+            playerGameObject.GetComponent<GenericHealth>().FullHeal();
+            playerGameObject.GetComponent<Temperature>().FullTemperature();
+        }
         //CharacterController charController = FindObjectOfType<CharacterController>();
         //charController.enabled = false;
         //if (tpToRespawn)

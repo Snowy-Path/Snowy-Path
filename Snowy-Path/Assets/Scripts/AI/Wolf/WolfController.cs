@@ -770,8 +770,13 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     /// <param name="toolType">The type of tool that called this method. Used to differentiate between Pistol and Torch weapons.</param>
     /// <param name="attackDamage">The damage value to be dealt.</param>
     public void Hit(EToolType toolType, int attackDamage) {
+
+        if (m_genericHealth.IsAlive()) {
+            m_tookDamageSoundEmitter.Play();
+        }
+
         m_genericHealth.Hit(attackDamage);
-        m_tookDamageSoundEmitter.Play();
+
         if (toolType == EToolType.Pistol) { // If Gun, stun wolf
             SetStunState();
             m_effectAnimator.SetTrigger("TookDamage");
