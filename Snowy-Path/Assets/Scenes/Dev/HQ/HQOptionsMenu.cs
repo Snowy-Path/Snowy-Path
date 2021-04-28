@@ -36,16 +36,19 @@ public class HQOptionsMenu : MonoBehaviour
     public void MasterVolumeLevel(float newMasterVolume)
     {
         audioSettings.MasterVolume = newMasterVolume;
+        audioSettings.SetVolume();
     }
 
     public void MusicVolumeLevel(float newMusicVolume)
     {
         audioSettings.MusicVolume = newMusicVolume;
+        audioSettings.SetVolume();
     }
 
     public void SFXVolumeLevel(float newSFXVolume)
     {
         audioSettings.SFXVolume = newSFXVolume;
+        audioSettings.SetVolume();
 
         //FMOD.Studio.PLAYBACK_STATE PbState;
         //audioSettings.SFXVolumeTestEvent.getPlaybackState(out PbState);

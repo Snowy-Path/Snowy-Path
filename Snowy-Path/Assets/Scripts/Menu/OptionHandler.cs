@@ -43,6 +43,7 @@ public class OptionHandler : MonoBehaviour
         {
 
             optionSettings = OptionSave.Load();
+            
         }
 
         if (current != null)
