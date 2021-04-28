@@ -14,17 +14,19 @@ public class SoundTrigger : MonoBehaviour {
     private TriggerType m_triggerType;
 
     private FMODUnity.StudioEventEmitter m_emitter;
+    private Transform m_emitterPosition;
 
     [SerializeField]
     [Min(0f)]
     private float m_cooldown = 60.0f;
-    private float m_timer;
+    private float m_timer = 0.0f;
 
-    private Transform m_emitterPosition;
+    private void Awake() {
+        m_timer = m_cooldown;
+    }
 
     private void Start() {
         m_emitterPosition = transform.GetChild(0);
-        m_timer = m_cooldown;
         m_emitter = m_emitterPosition.GetComponent<FMODUnity.StudioEventEmitter>();
     }
 
@@ -33,13 +35,13 @@ public class SoundTrigger : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (m_triggerType == TriggerType.Enter && m_timer >= m_cooldown) {
+        if (m_triggerType == TriggerType.Enter && m_timer >= m_cooldown && other.CompareTag("Player")) {
             PlayEvent();
         }
     }
 
     private void OnTriggerExit(Collider other) {
-        if (m_triggerType == TriggerType.Exit && m_timer >= m_cooldown) {
+        if (m_triggerType == TriggerType.Exit && m_timer >= m_cooldown && other.CompareTag("Player")) {
             PlayEvent();
         }
     }
