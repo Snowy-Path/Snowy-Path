@@ -42,11 +42,16 @@ public class Gun : MonoBehaviour, IHandTool {
     }
 
     public void StartPrimaryUse() {
+        bool hasShot = false;
         if (ammoLoaded > 0 && shootReady && !IsBusy) {
             Shoot();
+            hasShot = true;
         }
         if (ammoLoaded <= 0 && ammunitionInInventory > 0) {
-            Reload();
+            if (hasShot)
+                Invoke(nameof(Reload), 0.3f);
+            else
+                Reload();
         }
     }
 
@@ -81,6 +86,7 @@ public class Gun : MonoBehaviour, IHandTool {
     /// Triggered when the player hit secondary use or don't have any ammo
     /// </summary>
     private void Reload() {
+
         handAnimator.SetTrigger("Reload");
 
         int ammoToReload = ammoLoadedLimit - ammoLoaded;
