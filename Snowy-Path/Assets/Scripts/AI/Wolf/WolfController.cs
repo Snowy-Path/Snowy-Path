@@ -47,6 +47,10 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     private StudioEventEmitter m_tookDamageSoundEmitter;
 
     [SerializeField]
+    [Tooltip("FMOD Studio Emitter for the Death sound")]
+    private StudioEventEmitter m_deathSoundEmitter;
+
+    [SerializeField]
     private FootstepChoose m_footstepChoose;
 
     [SerializeField]
@@ -771,11 +775,13 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     /// <param name="attackDamage">The damage value to be dealt.</param>
     public void Hit(EToolType toolType, int attackDamage) {
 
+        m_genericHealth.Hit(attackDamage);
+
         if (m_genericHealth.IsAlive()) {
             m_tookDamageSoundEmitter.Play();
+        } else {
+            m_deathSoundEmitter.Play();
         }
-
-        m_genericHealth.Hit(attackDamage);
 
         if (toolType == EToolType.Pistol) { // If Gun, stun wolf
             SetStunState();
