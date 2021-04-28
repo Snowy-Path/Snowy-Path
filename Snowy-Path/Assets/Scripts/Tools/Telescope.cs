@@ -26,6 +26,7 @@ public class Telescope : MonoBehaviour, IHandTool {
     public Animator handAnimator { get; set; }
 
     private float targetFov;
+    private bool inZooming = false;
 
     private void Start() {
         targetFov = defaultZoom;
@@ -35,10 +36,16 @@ public class Telescope : MonoBehaviour, IHandTool {
     }
 
     private void Update() {
-        if (scopeCamera.fieldOfView < targetFov)
+        if (scopeCamera.fieldOfView < targetFov) {
+            inZooming = true;
             scopeCamera.fieldOfView = Mathf.Lerp(scopeCamera.fieldOfView, targetFov, zoomStep);
-        else if (scopeCamera.fieldOfView > targetFov)
+        }
+        else if (scopeCamera.fieldOfView > targetFov) {
+            inZooming = true;
             scopeCamera.fieldOfView = Mathf.Lerp(scopeCamera.fieldOfView, targetFov, zoomStep);
+        }
+        else
+            inZooming = false;
     }
 
     public void StartPrimaryUse() {
@@ -66,6 +73,9 @@ public class Telescope : MonoBehaviour, IHandTool {
     }
 
     public void SwitchZoom() {
+        //if (inZooming)
+        //    return;
+
         if (IsBusy && gameObject.activeSelf) {
             if (targetFov == defaultZoom)
                 targetFov = secondaryZoom;
