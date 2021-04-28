@@ -111,6 +111,17 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadLevel(string sceneToLoadName)
     {
+        loadingScreen.SetActive(true);
+
+        if (SceneManager.GetSceneByName(sceneToLoadName).IsValid())
+        {
+            levelChange = true;
+            worldHasLoaded = true;
+            LevelChanged();
+
+            return;
+        }
+
         levelChange = true;
 
         // Check if the scene already loaded
@@ -131,8 +142,6 @@ public class SceneLoader : MonoBehaviour
         }
 
         StartCoroutine(LoadingScreen());
-
-
     }
 
     public void LoadWorld()
@@ -270,6 +279,12 @@ public class SceneLoader : MonoBehaviour
     // called second
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if(scene.name == sceneDataBase.mainMenuScenes.sceneName)
+        {
+            SceneManager.SetActiveScene(scene);
+            return;
+        }
+
         foreach (GameObject item in scene.GetRootGameObjects())
         {
             if (item.CompareTag("SceneWorld"))
@@ -308,7 +323,6 @@ public class SceneLoader : MonoBehaviour
 
     public void LevelChanged()
     {
-        loadingScreen.SetActive(false);
 
         CharacterController charController = FindObjectOfType<CharacterController>();
         charController.enabled = false;
@@ -319,6 +333,10 @@ public class SceneLoader : MonoBehaviour
             if (item.GetComponent<SpawnPlayerPosition>() != null)
             {
                 spawn = item.GetComponent<SpawnPlayerPosition>();
+                if(spawn.defaultLight != null)
+                {
+                    LightTransition.LightTransitionTo(spawn.defaultLight);
+                }
             }
         }
         if(spawn != null)
@@ -336,7 +354,8 @@ public class SceneLoader : MonoBehaviour
         charController.enabled = true;
 
         PlayerPlayable playerPlayable = FindObjectOfType<PlayerPlayable>();
-        if(playerPlayable != null)
+        loadingScreen.SetActive(false);
+        if (playerPlayable != null)
         {
             playerPlayable.playableWakeup.Play();
         }
