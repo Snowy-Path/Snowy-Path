@@ -618,7 +618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Tools/Gun Equip
+  Event: event:/SFX/Tools/Gun Equip
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -1794,7 +1794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Tools/Gun Shot
+  Event: event:/SFX/Tools/Gun Shot
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -2122,7 +2122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Tools/Spyglass Zoom
+  Event: event:/SFX/Tools/Spyglass Zoom
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -2576,7 +2576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Tools/Spyglass Equipped
+  Event: event:/SFX/Tools/Spyglass Equipped
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -5124,7 +5124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Tools/Gun Reload
+  Event: event:/SFX/Tools/Gun Reload
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -6036,18 +6036,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OptionsMenu: {fileID: 8006827833097810191}
-  GalleryMenu: {fileID: 4358950434372424605}
   CreditsMenu: {fileID: 8006827833286031847}
   PauseMenu: {fileID: 4358950435190513015}
   OptionsButton: {fileID: 4358950434697611486}
-  GalleryButton: {fileID: 4358950434462227048}
   CreditsButton: {fileID: 4358950434211494247}
   PauseMenuFirstButton: {fileID: 4358950434972703552}
   OptionsFirstButton: {fileID: 8006827833672319301}
-  GalleryFirstButton: {fileID: 4358950434002113671}
   CreditsFirstButton: {fileID: 8006827833430206105}
   playerInput: {fileID: 1437083488281240583}
-  debugMode: 1
 --- !u!114 &45007552649072076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6330,6 +6326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultWeather: {fileID: 11400000, guid: 61a8b083a0fc25f4a95f6d231729c735, type: 2}
+  m_blizzardEmitter: {fileID: 2661352561315648587}
 --- !u!114 &421924837290088840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12910,6 +12907,7 @@ GameObject:
   - component: {fileID: 8830478257829444389}
   - component: {fileID: 4918354641569437896}
   - component: {fileID: 220212724}
+  - component: {fileID: 2661352561315648587}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -12917,6 +12915,29 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2661352561315648587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2661352561315648586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/SFX/Ambiance-Environnement/Blizzard
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!222 &2696550535500687735
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13531,6 +13552,7 @@ GameObject:
   - component: {fileID: 4486655050077289830}
   - component: {fileID: 3821335429637072861}
   - component: {fileID: 3821335429637072862}
+  - component: {fileID: 3821335429637072865}
   - component: {fileID: 3821335429637072863}
   - component: {fileID: 3821335429637072864}
   m_Layer: 0
@@ -13571,6 +13593,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df49862af62f644b8767d3f9e13f38a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gun: {fileID: 0}
+  telescope: {fileID: 0}
+  compass: {fileID: 0}
 --- !u!114 &3821335429637072863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13618,6 +13643,21 @@ MonoBehaviour:
   death:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3821335429637072865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3821335429637072860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e0fe369b635c3c4696b5ada6eaa30d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  otherAnimator: {fileID: 8658300974269699070}
+  motionState: Basic Motion
+  runState: Run
 --- !u!222 &3895103738068036923
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16960,7 +17000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Tools/TorchAll
+  Event: event:/SFX/Tools/TorchAll
   PlayEvent: 1
   StopEvent: 2
   AllowFadeout: 1
@@ -17115,7 +17155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5734331921641677934}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.429, z: 0}
+  m_LocalPosition: {x: 0, y: 0.455, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5734331921882425956}
@@ -17205,7 +17245,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.6
+      scalar: 0.7
       minScalar: 3
       maxCurve:
         serializedVersion: 2
@@ -17374,8 +17414,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.2
-      minScalar: 0.2
+      scalar: 0.3
+      minScalar: 0.3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -26666,7 +26706,7 @@ Transform:
   - {fileID: 5093668149059608112}
   m_Father: {fileID: 1767586141680956101}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -46.807003, y: -40.714, z: -26.244001}
+  m_LocalEulerAnglesHint: {x: -44.649002, y: -43.032, z: -24.269001}
 --- !u!114 &6197311836699364362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27351,7 +27391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Tools/Torch Attack
+  Event: event:/SFX/Tools/Torch Attack
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -28315,7 +28355,7 @@ MonoBehaviour:
   musicSlider: {fileID: 6599994211119308120}
   soundsSlider: {fileID: 8006827833645018923}
   gammaSlider: {fileID: 8006827833442346990}
-  audioSettings: {fileID: 5636519258505055814}
+  AntiAliasing: 00000000020000000400000008000000
 --- !u!1 &8006827833097810191
 GameObject:
   m_ObjectHideFlags: 0
@@ -43609,7 +43649,7 @@ Transform:
   - {fileID: 3570640921106303211}
   m_Father: {fileID: 1767586141680956101}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -41.309002, y: -43.249, z: -25.777}
+  m_LocalEulerAnglesHint: {x: -37.765003, y: -38.530003, z: -28.94}
 --- !u!224 &8142680247437808061
 RectTransform:
   m_ObjectHideFlags: 0
@@ -43846,6 +43886,7 @@ GameObject:
   - component: {fileID: 8314672338422712647}
   - component: {fileID: 8658300974269699070}
   - component: {fileID: 8658300974269699071}
+  - component: {fileID: 8658300974269699074}
   - component: {fileID: 8658300974269699072}
   - component: {fileID: 8658300974269699073}
   m_Layer: 0
@@ -43945,7 +43986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Oneira/Oneira Death
+  Event: event:/SFX/Oneira/Oneira Death
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -43955,6 +43996,21 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &8658300974269699074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8658300974269699069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e0fe369b635c3c4696b5ada6eaa30d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  otherAnimator: {fileID: 3821335429637072861}
+  motionState: Basic Motion
+  runState: Run
 --- !u!224 &8729830267484060517
 RectTransform:
   m_ObjectHideFlags: 0

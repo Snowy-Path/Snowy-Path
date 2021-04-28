@@ -2,60 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimSync : StateMachineBehaviour {
-    public bool rightHand = false;
-    private Animator otherAnimator;
-    private bool enteredByForce = false;
+public class AnimSync : MonoBehaviour {
 
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+    [SerializeField] Animator otherAnimator;
+    [SerializeField] string motionState = "Basic Motion";
+    [SerializeField] string runState = "Run";
 
-        if (otherAnimator == null ) {
-            if (rightHand)
-                otherAnimator = GameObject.Find("LHand").GetComponent<Animator>();
-            else
-                otherAnimator = GameObject.Find("RHand").GetComponent<Animator>();
-        }
+    private Animator animator;
+    private int lastStateHash = -1;
 
-        if (enteredByForce)
-            return;
+    private int motionStateHash;
+    private int runStateHash;
 
-        AnimatorStateInfo animationState = otherAnimator.GetCurrentAnimatorStateInfo(0);
-        if (animationState.IsName("Run")) {
-            AnimatorClipInfo[] otherMotionClip = otherAnimator.GetCurrentAnimatorClipInfo(0);
-            float syncTime = otherMotionClip[0].clip.length * animationState.normalizedTime;
-            animator.Play("Run", 0, animationState.normalizedTime);
-        }
-        else if (animationState.IsName("Basic Motion")) {
-            AnimatorClipInfo[] otherMotionClip = otherAnimator.GetCurrentAnimatorClipInfo(0);
-            float syncTime = otherMotionClip[0].clip.length * animationState.normalizedTime;
-            animator.Play("Basic Motion", 0, animationState.normalizedTime);
-            enteredByForce = true;
-        }
-        Debug.Log( "Debug");
-
+    private void Start() {
+        animator = GetComponent<Animator>();
+        motionStateHash = Animator.StringToHash(motionState);
+        runStateHash = Animator.StringToHash(runState);
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    private void Update() {
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+        if (lastStateHash != motionStateHash && lastStateHash != runStateHash) {
+            if (state.IsName(motionState) || state.IsName(runState)) {
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        enteredByForce = false;
+                AnimatorStateInfo otherState = otherAnimator.GetCurrentAnimatorStateInfo(0);
+                if (otherState.IsName(motionState))
+                    animator.Play(motionState, 0, otherState.normalizedTime);
+                else if (otherState.IsName(runState))
+                    animator.Play(runState, 0, otherState.normalizedTime);
+            }
+        }
+        lastStateHash = state.shortNameHash;
     }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }
