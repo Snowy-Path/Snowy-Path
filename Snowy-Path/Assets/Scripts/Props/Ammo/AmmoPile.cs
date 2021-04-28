@@ -14,7 +14,7 @@ public class AmmoPile : MonoBehaviour
                 if (gun.ammunitionInInventory < gun.ammunitionInventoryLimit)
                 {
                     gun.ammunitionInInventory = gun.ammunitionInventoryLimit;
-                    Destroy(this.gameObject);
+                    //Destroy(this.gameObject);
                 }
             }
         }
