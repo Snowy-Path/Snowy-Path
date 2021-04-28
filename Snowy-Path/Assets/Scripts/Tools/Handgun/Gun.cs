@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Gun : MonoBehaviour, IHandTool
-{
+public class Gun : MonoBehaviour, IHandTool {
     public EToolType ToolType => EToolType.Pistol;
 
     public bool IsBusy { get; set; }
+    public Animator handAnimator { get; set; }
 
     public UnityEvent onShoot;
 
@@ -19,6 +19,7 @@ public class Gun : MonoBehaviour, IHandTool
     [Header("Gun")]
     public int ammoLoaded = 0;
     public int ammoLoadedLimit = 5;
+    public float reloadingTime;
 
     public int range = 1000;
     public int damage = 0;
@@ -27,7 +28,6 @@ public class Gun : MonoBehaviour, IHandTool
 
 
     [Header("Settings")]
-    public Animator animator;
     public LayerMask ignoredLayers;
     private Camera fpsCamera;
 
@@ -37,19 +37,15 @@ public class Gun : MonoBehaviour, IHandTool
     public HearingSenseEmitter emitter;
     public UnityEvent onEquip;
 
-    private void Awake()
-    {
+    private void Awake() {
         fpsCamera = GetComponentInParent<Camera>();
     }
 
-    public void StartPrimaryUse()
-    {
-        if (ammoLoaded > 0 && shootReady && !IsBusy)
-        {
+    public void StartPrimaryUse() {
+        if (ammoLoaded > 0 && shootReady && !IsBusy) {
             Shoot();
         }
-        if (ammoLoaded <= 0 && ammunitionInInventory > 0)
-        {
+        if (ammoLoaded <= 0 && ammunitionInInventory > 0) {
             Reload();
         }
     }
@@ -57,29 +53,25 @@ public class Gun : MonoBehaviour, IHandTool
     /// <summary>
     /// Triggered when the player hit primary use
     /// </summary>
-    private void Shoot()
-    {
+    private void Shoot() {
         RaycastHit hit;
         //If the ray hit something
-        if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range, ignoredLayers))
-        {
+        if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range, ignoredLayers)) {
             //Set the corresponding endline point
-            if (hit.transform.CompareTag("Ennemy"))
-            {
+            if (hit.transform.CompareTag("Ennemy")) {
                 IEnnemyController ennemyController = hit.transform.GetComponent<IEnnemyController>();
-                if(ennemyController != null)
-                {
+                if (ennemyController != null) {
                     ennemyController.Hit(EToolType.Pistol, damage);
                 }
             }
         }
+        handAnimator.SetTrigger("Shoot");
         onShoot.Invoke();
         ammoLoaded--;
         StartCoroutine(fireRateCoroutine());
     }
 
-    IEnumerator fireRateCoroutine()
-    {
+    IEnumerator fireRateCoroutine() {
         shootReady = false;
         yield return new WaitForSeconds(fireRate);
         shootReady = true;
@@ -88,50 +80,41 @@ public class Gun : MonoBehaviour, IHandTool
     /// <summary>
     /// Triggered when the player hit secondary use or don't have any ammo
     /// </summary>
-    private void Reload()
-    {
-        animator.SetTrigger("Reload");
+    private void Reload() {
+        handAnimator.SetTrigger("Reload");
 
         int ammoToReload = ammoLoadedLimit - ammoLoaded;
 
-        if (ammoToReload < ammunitionInInventory)
-        {
+        if (ammoToReload < ammunitionInInventory) {
             ammunitionInInventory -= ammoToReload;
             ammoLoaded += ammoToReload;
         }
-        else
-        {
+        else {
             ammoLoaded += ammunitionInInventory;
             ammunitionInInventory = 0;
         }
 
         //Reload weapon during reloadingTime
         IsBusy = true;
-        Invoke(nameof(ReloadFinished), animator.GetFloat("ReloadTime"));
+        Invoke(nameof(ReloadFinished), reloadingTime);
     }
 
-    private void ReloadFinished()
-    {
+    private void ReloadFinished() {
         IsBusy = false;
     }
 
-    public void CancelPrimaryUse()
-    {     
+    public void CancelPrimaryUse() {
     }
 
-    public void SecondaryUse()
-    {
-        if(ammunitionInInventory > 0)
-        {
+    public void SecondaryUse() {
+        if (ammunitionInInventory > 0) {
             Reload();
         }
     }
 
-    public void ToggleDisplay(bool display)
-    {
+    public void ToggleDisplay(bool display) {
         gameObject.SetActive(display);
-        if (display)
-        {
+        if (display) {
             onEquip.Invoke();
         }
     }
