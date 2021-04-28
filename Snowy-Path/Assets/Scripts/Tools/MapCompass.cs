@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class MapCompass : MonoBehaviour, IHandTool {
@@ -16,6 +17,7 @@ public class MapCompass : MonoBehaviour, IHandTool {
     public Camera InGameMapCamera { get { return m_inGameMapCamera; } }
 
     public Animator handAnimator { get; set; }
+    public UnityEvent onEquip;
 
     void Start() {
         //m_mapUI = Utils.FindComponent<MapUI>("MapCanvas/Map");
@@ -45,5 +47,8 @@ public class MapCompass : MonoBehaviour, IHandTool {
 
     public void ToggleDisplay(bool display) {
         gameObject.SetActive(display);
+        if (display) {
+            onEquip.Invoke();
+        }
     }
 }

@@ -2968,13 +2968,14 @@ GameObject:
   m_Component:
   - component: {fileID: 820719033}
   - component: {fileID: 820719034}
+  - component: {fileID: 820719035}
   m_Layer: 22
   m_Name: MapCompass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &820719033
 Transform:
   m_ObjectHideFlags: 0
@@ -3002,6 +3003,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19852c5476dfb474188d5287aee13307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onEquip:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 820719035}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &820719035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820719032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/SFX/Tools/Map Equipped
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &878863009
 GameObject:
   m_ObjectHideFlags: 0
@@ -13652,8 +13690,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherAnimator: {fileID: 8658300974269699070}
-  motionState: Basic Motion
-  runState: Run
+  motionStateName: Basic Motion
+  runStateName: Run
 --- !u!222 &3895103738068036923
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -44005,8 +44043,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherAnimator: {fileID: 3821335429637072861}
-  motionState: Basic Motion
-  runState: Run
+  motionStateName: Basic Motion
+  runStateName: Run
 --- !u!224 &8729830267484060517
 RectTransform:
   m_ObjectHideFlags: 0
