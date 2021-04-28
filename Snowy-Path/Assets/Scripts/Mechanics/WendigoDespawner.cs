@@ -12,7 +12,7 @@ public class WendigoDespawner : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
-            wendigo.SetActive(false);
+            wendigo.GetComponent<WendigoController>().PlayDisappearingAnimation();
             gameObject.SetActive(false);
             wendigoSpawner.SetActive(false);
         }
