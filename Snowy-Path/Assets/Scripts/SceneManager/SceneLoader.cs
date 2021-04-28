@@ -279,6 +279,12 @@ public class SceneLoader : MonoBehaviour
     // called second
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if(scene.name == sceneDataBase.mainMenuScenes.sceneName)
+        {
+            SceneManager.SetActiveScene(scene);
+            return;
+        }
+
         foreach (GameObject item in scene.GetRootGameObjects())
         {
             if (item.CompareTag("SceneWorld"))

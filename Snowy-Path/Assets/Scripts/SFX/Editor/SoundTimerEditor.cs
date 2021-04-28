@@ -5,8 +5,6 @@ using UnityEngine;
 [CanEditMultipleObjects]
 public class SoundTimerEditor : Editor {
 
-    SerializedProperty m_eventPath;
-
     SerializedProperty m_randomCooldown;
 
     SerializedProperty m_cooldown;
@@ -15,8 +13,6 @@ public class SoundTimerEditor : Editor {
     SerializedProperty m_cooldownMax;
 
     void OnEnable() {
-        m_eventPath = serializedObject.FindProperty("m_eventPath");
-
         m_randomCooldown = serializedObject.FindProperty("m_randomCooldown");
 
         m_cooldown = serializedObject.FindProperty("m_cooldown");
@@ -27,8 +23,6 @@ public class SoundTimerEditor : Editor {
 
     public override void OnInspectorGUI() {
         serializedObject.Update();
-
-        EditorGUILayout.PropertyField(m_eventPath);
 
         bool toggle = EditorGUILayout.Toggle("Random Cooldown ?", m_randomCooldown.boolValue);
         if (toggle != m_randomCooldown.boolValue) {

@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(FMODUnity.StudioEventEmitter))]
 public class SoundTimer : MonoBehaviour {
 
-    [SerializeField]
-    [FMODUnity.EventRef]
-    private string m_eventPath = "";
+    private FMODUnity.StudioEventEmitter m_emitter;
 
     [SerializeField]
     [Min(0f)]
@@ -32,12 +31,16 @@ public class SoundTimer : MonoBehaviour {
         }
     }
 
+    private void Start() {
+        m_emitter = GetComponent<FMODUnity.StudioEventEmitter>();
+    }
+
     private void Update() {
 
         m_timer += Time.deltaTime;
         if (m_timer >= m_internalCooldown) {
 
-            FMODUnity.RuntimeManager.PlayOneShot(m_eventPath, transform.position);
+            m_emitter.Play();
             m_timer = 0.0f;
 
             if (m_randomCooldown) {
