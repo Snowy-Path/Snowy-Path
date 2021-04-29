@@ -7,4 +7,5 @@ public class PlayerPlayable : MonoBehaviour
 {
     public PlayableDirector playableWakeup;
     public PlayableDirector playableDeath;
+    public PlayableDirector playableEndGame;
 }
