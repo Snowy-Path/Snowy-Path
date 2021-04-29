@@ -81,7 +81,7 @@ public class SceneLoader : MonoBehaviour
         Scene activeScene = SceneManager.GetActiveScene();
 
         // Check if the scene already loaded
-        if (activeScene.IsValid())
+        if (activeScene.IsValid() && activeScene.name != sceneDataBase.systemScene.sceneName)
         {
             SceneManager.UnloadSceneAsync(activeScene);
         }
@@ -92,8 +92,6 @@ public class SceneLoader : MonoBehaviour
         {
             SceneManager.UnloadSceneAsync(sceneDataBase.playerScene.sceneName);
         }
-
-
 
         //// We unload the world scene and load the main menu
         //foreach (GameScene scene in sceneDataBase.worldScenes)
@@ -184,13 +182,13 @@ public class SceneLoader : MonoBehaviour
 
             StartCoroutine(LoadingScreen());
 
-            // We unload the main menu scene
+            //// We unload the main menu scene
 
-            // Check if the scene already loaded
-            if (SceneManager.GetSceneByName(sceneDataBase.mainMenuScenes.sceneName).IsValid())
-            {
-                SceneManager.UnloadSceneAsync(sceneDataBase.mainMenuScenes.sceneName);
-            }
+            //// Check if the scene already loaded
+            //if (SceneManager.GetSceneByName(sceneDataBase.mainMenuScenes.sceneName).IsValid())
+            //{
+            //    SceneManager.UnloadSceneAsync(sceneDataBase.mainMenuScenes.sceneName);
+            //}
         }
 
 
@@ -223,15 +221,44 @@ public class SceneLoader : MonoBehaviour
 
         StartCoroutine(LoadingScreen());
 
-        // We unload the main menu scene
+        //// We unload the main menu scene
 
-        // Check if the scene already loaded
-        if (SceneManager.GetSceneByName(sceneDataBase.mainMenuScenes.sceneName).IsValid())
-        {
-            SceneManager.UnloadSceneAsync(sceneDataBase.mainMenuScenes.sceneName);
-        }
+        //// Check if the scene already loaded
+        //if (SceneManager.GetSceneByName(sceneDataBase.mainMenuScenes.sceneName).IsValid())
+        //{
+        //    SceneManager.UnloadSceneAsync(sceneDataBase.mainMenuScenes.sceneName);
+        //}
     }
 
+    public void LoadEndScene()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        // Check if the scene already loaded
+        if (!SceneManager.GetSceneByName(sceneDataBase.endScene.sceneName).IsValid())
+        {
+            SceneManager.LoadScene(sceneDataBase.endScene.sceneName, LoadSceneMode.Additive);
+        }
+
+        // Unloading old level sequence
+
+        // Unload Active level
+        Scene activeScene = SceneManager.GetActiveScene();
+
+        // Check if the scene already loaded
+        if (activeScene.IsValid())
+        {
+            SceneManager.UnloadSceneAsync(activeScene);
+        }
+
+        // Unload Player
+        // Check if the scene already loaded
+        if (SceneManager.GetSceneByName(sceneDataBase.playerScene.sceneName).IsValid())
+        {
+            SceneManager.UnloadSceneAsync(sceneDataBase.playerScene.sceneName);
+        }
+    }
 
     //public void LoadWorld()
     //{
@@ -290,6 +317,14 @@ public class SceneLoader : MonoBehaviour
         if(scene.name == sceneDataBase.mainMenuScenes.sceneName)
         {
             SceneManager.SetActiveScene(scene);
+
+            // Unload EndScene
+            // Check if the scene already loaded
+            if (SceneManager.GetSceneByName(sceneDataBase.endScene.sceneName).IsValid())
+            {
+                SceneManager.UnloadSceneAsync(sceneDataBase.endScene.sceneName);
+            }
+
             return;
         }
 
@@ -299,6 +334,14 @@ public class SceneLoader : MonoBehaviour
             {
                 SceneManager.SetActiveScene(scene);
                 item.SetActive(true);
+
+                // We unload the main menu scene
+
+                // Check if the scene already loaded
+                if (SceneManager.GetSceneByName(sceneDataBase.mainMenuScenes.sceneName).IsValid())
+                {
+                    SceneManager.UnloadSceneAsync(sceneDataBase.mainMenuScenes.sceneName);
+                }
             }
         }
 
