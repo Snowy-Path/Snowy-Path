@@ -68,16 +68,15 @@ public class Torch : MonoBehaviour {
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
 
-        if (other.CompareTag("Campfire")) {
+        if (other.CompareTag("Ennemy")) {
+            other.GetComponent<IEnnemyController>().Hit(EToolType.Torch, attackDamage);
+        } else {
             Interactable inter = other.GetComponent<Interactable>();
-            if (inter) {
+            if (inter && inter.IsTorchInteractable) {
                 inter.Interact();
             }
         }
 
-        if (other.CompareTag("Ennemy")) {
-            other.GetComponent<IEnnemyController>().Hit(EToolType.Torch, attackDamage);
-        }
     }
 
 }
