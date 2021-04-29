@@ -12,6 +12,7 @@ public class SceneLoader : MonoBehaviour
     public ScenesData sceneDataBase;
     public GameObject loadingScreen;
     public Slider slider;
+    public PlayableDirector logoClip;
     public Text loadingProgressText;
     public static SceneLoader Instance;
     private List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
@@ -112,6 +113,8 @@ public class SceneLoader : MonoBehaviour
     public void LoadLevel(string sceneToLoadName)
     {
         loadingScreen.SetActive(true);
+        logoClip.Play();
+
 
         if (SceneManager.GetSceneByName(sceneToLoadName).IsValid())
         {
@@ -149,6 +152,9 @@ public class SceneLoader : MonoBehaviour
         // Hide menu
         //Show Loading Screen
         loadingScreen.SetActive(true);
+        logoClip.Play();
+
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -201,6 +207,8 @@ public class SceneLoader : MonoBehaviour
         // Hide menu
         //Show Loading Screen
         loadingScreen.SetActive(true);
+        logoClip.Play();
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -256,17 +264,17 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator LoadingScreen()
     {
-        float totalProgress = 0f;
+        //float totalProgress = 0f;
 
         for (int i = 0; i < scenesToLoad.Count; i++)
         {
             while (!scenesToLoad[i].isDone)
             {
-                totalProgress += scenesToLoad[i].progress / 2;
-                Debug.Log(totalProgress + "/" + scenesToLoad.Count);
-                Debug.Log((totalProgress / scenesToLoad.Count));
-                slider.value = (totalProgress / scenesToLoad.Count);
-                loadingProgressText.text = (int)(totalProgress * 100f / scenesToLoad.Count) + "%";
+                //totalProgress += scenesToLoad[i].progress / 2;
+                //Debug.Log(totalProgress + "/" + scenesToLoad.Count);
+                //Debug.Log((totalProgress / scenesToLoad.Count));
+                //slider.value = (totalProgress / scenesToLoad.Count);
+                //loadingProgressText.text = (int)(totalProgress * 100f / scenesToLoad.Count) + "%";
 
                 yield return null;
             }
@@ -316,6 +324,7 @@ public class SceneLoader : MonoBehaviour
 
             sc.Spawn();
 
+            logoClip.Stop();
             loadingScreen.SetActive(false);
             isLoadingCompleted = true;
         }
@@ -354,6 +363,7 @@ public class SceneLoader : MonoBehaviour
         charController.enabled = true;
 
         PlayerPlayable playerPlayable = FindObjectOfType<PlayerPlayable>();
+        logoClip.Stop();
         loadingScreen.SetActive(false);
         if (playerPlayable != null)
         {

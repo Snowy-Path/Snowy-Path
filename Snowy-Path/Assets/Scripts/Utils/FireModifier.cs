@@ -23,8 +23,6 @@ public class FireModifier : MonoBehaviour {
         baseParams.lifeTime = mainModule.startLifetimeMultiplier;
         baseParams.inheritVelocity = velocityModule.curveMultiplier;
         baseParams.emission = emissionModule.rateOverTimeMultiplier;
-
-        Debug.Log($"{baseParams.lifeTime} {baseParams.inheritVelocity} {baseParams.emission}");
     }
 
     public void EnableAttackParams() {

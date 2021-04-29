@@ -43,6 +43,7 @@ public class HQMainMenu : MonoBehaviour
         {
             SaveSystem.Instance.DeleteSave(0);
             SaveSystem.Instance.CreateNewSave(0);
+            DynamicSystem.ResetDynamicSystem();
         }
     }
 

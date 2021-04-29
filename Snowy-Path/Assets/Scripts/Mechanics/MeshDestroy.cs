@@ -76,7 +76,8 @@ public class MeshDestroy : MonoBehaviour {
             parts[i].Rigidbody.AddExplosionForce(explosionForce, sourcePosition, explosionRadius);
         }
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private PartMesh GenerateMesh(PartMesh original, Plane plane, bool left) {
