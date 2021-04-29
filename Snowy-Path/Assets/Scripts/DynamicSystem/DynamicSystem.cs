@@ -64,4 +64,9 @@ public static class DynamicSystem {
         //Else return false
         return false;
     }
+
+    public static void ResetDynamicSystem()
+    {
+        RegisteredEvents.Clear();
+    }
 }
