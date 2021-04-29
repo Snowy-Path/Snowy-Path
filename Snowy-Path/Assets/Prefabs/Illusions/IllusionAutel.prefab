@@ -1,5 +1,73 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &159278611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 159278612}
+  - component: {fileID: 159278613}
+  - component: {fileID: 5560006519178612778}
+  m_Layer: 0
+  m_Name: SFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &159278612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159278611}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5265154386748110758}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &159278613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159278611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/SFX/Tools/Powder Idle
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &5560006519178612778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159278611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 515270d6b7276314895beffcdfea9575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxRadius: 7
 --- !u!1 &182779983
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +353,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6517187880376893477}
+  - {fileID: 8169777607094060414}
+  - {fileID: 182779984}
+  - {fileID: 1501690571}
+  - {fileID: 159278612}
   - {fileID: 5813386717824216310}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -330,8 +402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef51acc2c86a204ca520f937ab4f263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wendigoIllusionMask: {fileID: 2718180730697667265}
-  rocksIllusionMask: {fileID: 2921044877673977190}
+  wendigoIllusionMask: {fileID: 182779983}
+  rocksIllusionMask: {fileID: 1501690570}
 --- !u!1001 &5265154385458828167
 PrefabInstance:
   m_ObjectHideFlags: 0
