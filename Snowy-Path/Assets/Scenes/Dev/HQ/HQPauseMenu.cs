@@ -9,7 +9,7 @@ public class HQPauseMenu : MonoBehaviour
 {
     //private OptionSettings inputDevice;
     public static bool gameIsPaused;
-    public GameObject OptionsMenu, CreditsMenu, PauseMenu;
+    public GameObject OptionsMenu, CreditsMenu, PauseMenu, PlayMenu;
     public GameObject OptionsButton, CreditsButton;
     public GameObject PauseMenuFirstButton, OptionsFirstButton, CreditsFirstButton;
     public PlayerInput playerInput;
@@ -120,6 +120,7 @@ public class HQPauseMenu : MonoBehaviour
         CreditsMenu.SetActive(false);
         OptionsMenu.SetActive(false);
         PauseMenu.SetActive(true);
+        PlayMenu.SetActive(false);
     }
 
     /// <summary>
