@@ -102,13 +102,16 @@ public class Flammable : MonoBehaviour {
 
         for (int i = 0; i < fireParticles.Count; i++) {
             fireParticles[i].GetComponent<ParticleSystem>().Stop();
-            fireParticles[i].GetComponent<FMODUnity.StudioEventEmitter>().Stop();
         }
 
         foreach (var gfx in GFXs) {
             gfx.SetActive(false);
         }
 
+        for (int i = 0; i < fireParticles.Count; i++) {
+            fireParticles[i].GetComponent<FMODUnity.StudioEventEmitter>().Stop();
+            yield return new WaitForSeconds(.05f);
+        }
     }
 
     /// <summary>
