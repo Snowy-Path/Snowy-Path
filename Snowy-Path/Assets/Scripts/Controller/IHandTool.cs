@@ -6,7 +6,8 @@ using UnityEngine.Events;
 public interface IHandTool {
 
     bool IsBusy { get; set; }
-    EToolType ToolType { get;}
+    Animator handAnimator { get; set; }
+    EToolType ToolType { get; }
     void StartPrimaryUse();
     void CancelPrimaryUse();
     void SecondaryUse();
