@@ -34,7 +34,7 @@ public class Interactable : MonoBehaviour {
     [Tooltip("If true, the player can interact with it using the torch attack")]
     [SerializeField]
     private bool isTorchInteractable = false;
-    public bool IsTorchInteractable { get { return isTorchInteractable; } }
+    public bool IsTorchInteractable { private set { isTorchInteractable = value; } get { return isTorchInteractable; } }
 
     [Header("UnityEvents callbacks")]
 
