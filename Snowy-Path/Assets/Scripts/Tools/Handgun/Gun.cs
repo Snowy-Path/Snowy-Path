@@ -113,9 +113,9 @@ public class Gun : MonoBehaviour, IHandTool {
     }
 
     public void SecondaryUse() {
-        if (ammunitionInInventory > 0) {
-            Reload();
-        }
+        //if (ammunitionInInventory > 0) {
+        //    Reload();
+        //}
     }
 
     public void ToggleDisplay(bool display) {
