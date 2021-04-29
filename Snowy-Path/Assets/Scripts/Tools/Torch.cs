@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 /// <summary>
@@ -18,6 +19,7 @@ public class Torch : MonoBehaviour {
     public Animator animator;
 
     public MonoBehaviour[] lockingTools;
+    public UnityEvent onAttack;
 
     private bool attackLocked = false;
 
@@ -40,20 +42,20 @@ public class Torch : MonoBehaviour {
 
         bool isBusy = false;
         foreach (var tool in lockingTools) {
-            IHandTool iTool = tool.GetComponent<IHandTool>(); 
+            IHandTool iTool = tool.GetComponent<IHandTool>();
             if (iTool.IsBusy) {
                 isBusy = true;
                 break;
             }
         }
 
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && attackLocked == false 
-            && !isBusy) {
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && attackLocked == false && !isBusy) {
+            onAttack.Invoke();
             animator.SetTrigger("Attack");
             attackLocked = true;
-            Invoke("ResetAttack", 0.2f);
+            Invoke(nameof(ResetAttack), 0.3f);
+        }
     }
-}
 
     private void ResetAttack() {
         attackLocked = false;
@@ -66,16 +68,15 @@ public class Torch : MonoBehaviour {
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
 
-        if (other.CompareTag("Campfire")) {
+        if (other.CompareTag("Ennemy")) {
+            other.GetComponent<IEnnemyController>().Hit(EToolType.Torch, attackDamage);
+        } else {
             Interactable inter = other.GetComponent<Interactable>();
-            if (inter) {
+            if (inter && inter.IsTorchInteractable) {
                 inter.Interact();
             }
         }
 
-        if (other.CompareTag("Ennemy")) {
-            other.GetComponent<IEnnemyController>().Hit(EToolType.Torch, attackDamage);
-        }
     }
 
 }
