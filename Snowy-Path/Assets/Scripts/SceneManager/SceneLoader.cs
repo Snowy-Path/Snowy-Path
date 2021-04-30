@@ -54,14 +54,10 @@ public class SceneLoader : MonoBehaviour
         if (isPlayerLoaded && !isLoadingCompleted)
             Spawn();
 
-        if(worldHasLoaded && !isPlayerLoaded)
-        {
-            if (!SceneManager.GetSceneByName(sceneDataBase.playerScene.sceneName).IsValid())
-            {
-                SceneManager.LoadScene(sceneDataBase.playerScene.sceneName, LoadSceneMode.Additive);
-                isPlayerLoaded = true;
-            }
-        }
+        //if(!worldHasLoaded && isPlayerLoaded)
+        //{
+        //    LoadWorld();
+        //}
     }
 
     public void LoadMainMenu()
@@ -157,6 +153,12 @@ public class SceneLoader : MonoBehaviour
         Cursor.visible = false;
 
         SaveSystem.Instance.Load();
+
+        if (!SceneManager.GetSceneByName(sceneDataBase.playerScene.sceneName).IsValid())
+        {
+            SceneManager.LoadScene(sceneDataBase.playerScene.sceneName, LoadSceneMode.Additive);
+            isPlayerLoaded = true;
+        }
 
         SceneSave sceneSave = FindObjectOfType<SceneSave>();
         if(sceneSave != null)
