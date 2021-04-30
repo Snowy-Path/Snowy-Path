@@ -62,37 +62,43 @@ public class Gun : MonoBehaviour, IHandTool {
     /// Triggered when the player hit primary use
     /// </summary>
     private void Shoot() {
-        RaycastHit hit;
 
-        for (int i = 0; i < projectilePerShot; i++) {
+
+        FireBullet(fpsCamera.transform.forward);
+        for (int i = 0; i < projectilePerShot -1; i++) {
 
             float x = Random.Range(-spread, spread);
             float y = Random.Range(-spread, spread);
             float z = Random.Range(-spread, spread);
-            Vector3 randDirection = new Vector3(x, y, z);
+            Vector3 dispersion = new Vector3(x, y, z);
 
-            //If the ray hit something
-            if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward + randDirection, out hit, range, ignoredLayers)) {
-
-                if (impactPrefab) {
-                    GameObject impactGo = Instantiate(impactPrefab, hit.point, Quaternion.Euler(hit.normal));
-                    Destroy(impactGo, 1f);
-                }
-
-                //Set the corresponding endline point
-                if (hit.transform.CompareTag("Ennemy")) {
-                    IEnnemyController ennemyController = hit.transform.GetComponent<IEnnemyController>();
-                    if (ennemyController != null) {
-                        ennemyController.Hit(EToolType.Pistol, damage);
-                    }
-                }
-            }
+            FireBullet(fpsCamera.transform.forward + dispersion);
         }
 
         ammoLoaded--;
         handAnimator.SetTrigger("Shoot");
         onShoot.Invoke();
         StartCoroutine(FireRateCoroutine());
+    }
+
+    private void FireBullet(Vector3 direction) {
+        RaycastHit hit;
+        //If the ray hit something
+        if (Physics.Raycast(fpsCamera.transform.position, direction, out hit, range, ignoredLayers)) {
+
+            if (impactPrefab) {
+                GameObject impactGo = Instantiate(impactPrefab, hit.point, Quaternion.Euler(hit.normal));
+                Destroy(impactGo, 1f);
+            }
+
+            //Set the corresponding endline point
+            if (hit.transform.CompareTag("Ennemy")) {
+                IEnnemyController ennemyController = hit.transform.GetComponent<IEnnemyController>();
+                if (ennemyController != null) {
+                    ennemyController.Hit(EToolType.Pistol, damage);
+                }
+            }
+        }
     }
 
     IEnumerator FireRateCoroutine() {
