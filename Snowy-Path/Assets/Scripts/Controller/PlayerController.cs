@@ -263,7 +263,7 @@ public class PlayerController : MonoBehaviour {
         //canStartSprint = isGrounded && sprintTimer <= 0;
 
         isRunning = sprintCmd && sprintTimer <= maxSprintDuration && inputs.z >= inputThreshold &&
-           (handController.CurrentTool.IsBusy == false || handController.CurrentTool.GetType() == typeof(RayCastGun));
+           (handController.CurrentTool.IsBusy == false || handController.CurrentTool.GetType() == typeof(Gun));
 
         //Stop sprint if timer reached max sprint duration
         if (sprintTimer >= maxSprintDuration)

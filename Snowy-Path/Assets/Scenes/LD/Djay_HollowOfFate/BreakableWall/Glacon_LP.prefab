@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 8557692464567656223}
   - component: {fileID: 9000291879215612686}
   - component: {fileID: 9000291879215612673}
+  - component: {fileID: 456812647537194160}
   m_Layer: 0
   m_Name: Glacon_LP
   m_TagString: Untagged
@@ -200,11 +201,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62f8011909e6494c862b5c0340f3162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cuts: 10
+  cuts: 6
   explosionForce: 100
   explosionRadius: 15
-  boundExpansion: {x: 0.1, y: 0.1, z: 0.1}
+  boundExpansion: {x: 0, y: 0, z: 0}
   fadeOutCooldown: 2
   fadeOutRate: 0.7
   meshFilter: {fileID: 0}
   meshRenderer: {fileID: 0}
+--- !u!114 &456812647537194160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9000291879215612672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75f925abc5344b6479815fa7854ffd33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

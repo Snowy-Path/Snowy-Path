@@ -9,5 +9,6 @@ public class ScenesData : ScriptableObject
     public GameScene mainLevel;
     public GameScene mainMenuScenes;
     public GameScene playerScene;
-    public GameScene SystemScene;
+    public GameScene systemScene;
+    public GameScene endScene;
 }
