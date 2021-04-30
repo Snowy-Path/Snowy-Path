@@ -30,6 +30,10 @@ public class TeleportPlayer : MonoBehaviour
         {
             playerGameObject.GetComponent<GenericHealth>().FullHeal();
             playerGameObject.GetComponent<Temperature>().FullTemperature();
+            playerGameObject.GetComponent<Weather>().ResetBlizzard();
+            Player_SFX sfx = playerGameObject.GetComponentInChildren<Player_SFX>();
+            sfx.StopWind();
+            sfx.StopCave();
         }
         //CharacterController charController = FindObjectOfType<CharacterController>();
         //charController.enabled = false;
