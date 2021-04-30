@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,10 +19,30 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     [SerializeField]
     private float slowSpeed = 3.75f;
 
+    [SerializeField]
+    [Tooltip("Effect animator.")]
+    private Animator m_effectAnimator;
+
     [Tooltip("Wendigo slowed donw duration when hit by gun.")]
     [Min(0)]
     [SerializeField]
     private float slowDuration = 5f;
+
+    #region SFX
+    [Header("SFX")]
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_spawnEvent;
+
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_damagedEvent;
+
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_movementEvent;
+
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_attackEvent;
+
+    #endregion
     #endregion
 
 
@@ -34,6 +55,10 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
         m_player = FindObjectOfType<PlayerController>().transform;
         m_agent = GetComponent<NavMeshAgent>();
         m_normalSpeed = m_agent.speed;
+    }
+
+    internal void Reset() {
+        m_agent.speed = m_normalSpeed;
     }
 
     /// <summary>
@@ -65,6 +90,7 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     public void Hit(EToolType toolType, int attackDamage) {
         if (toolType == EToolType.Pistol) { // If Gun
             StartCoroutine(ReduceSpeed());
+            m_effectAnimator.SetTrigger("TookDamage");
         }
     }
     #endregion
@@ -76,6 +102,44 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     /// <param name="newWendigoPos">The new position to warp at.</param>
     internal void Teleport(Transform newWendigoPos) {
         m_agent.Warp(newWendigoPos.position);
+    }
+
+    internal void PlayDisappearingAnimation() {
+        m_effectAnimator.SetTrigger("Disappear");
+    }
+    #endregion
+
+    #region SFX_Utility
+    private void PlaySpawnSFX() {
+        m_spawnEvent.Play();
+    }
+    private void PlayDamagedSFX() {
+        m_damagedEvent.Play();
+    }
+
+    private void StopMovementSFX() {
+        FMOD.Studio.PARAMETER_ID m_movementEND_ID;
+        FMOD.Studio.EventDescription movementEventDesc;
+        m_movementEvent.EventInstance.getDescription(out movementEventDesc);
+        FMOD.Studio.PARAMETER_DESCRIPTION movementParametterDesc;
+        movementEventDesc.getParameterDescriptionByIndex(0, out movementParametterDesc);
+        m_movementEND_ID = movementParametterDesc.id;
+
+        m_movementEvent.EventInstance.setParameterByID(m_movementEND_ID, 1.0f);
+    }
+    private void StopAttackSFX() {
+        FMOD.Studio.PARAMETER_ID m_attackEND_ID;
+        FMOD.Studio.EventDescription attackEventDesc;
+        m_attackEvent.EventInstance.getDescription(out attackEventDesc);
+        FMOD.Studio.PARAMETER_DESCRIPTION attackParametterDesc;
+        attackEventDesc.getParameterDescriptionByIndex(0, out attackParametterDesc);
+        m_attackEND_ID = attackParametterDesc.id;
+
+        m_attackEvent.EventInstance.setParameterByID(m_attackEND_ID, 1.0f);
+    }
+
+    private void Deactivate() {
+        gameObject.SetActive(false);
     }
     #endregion
 }

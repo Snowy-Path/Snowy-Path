@@ -7,26 +7,28 @@ using UnityEngine.SceneManagement;
 
 public class HQMainMenu : MonoBehaviour
 {
+    //private OptionSettings inputDevice;
     public GameObject OptionsMenu, CreditsMenu, MainMenu;
     public GameObject OptionsButton, CreditsButton;
     public GameObject MainMenuFirstButton, OptionsFirstButton, CreditsFirstButton;
     public PlayerInput playerInput;
-    public void Start()
+    public void OnEnable()
     {
 
-        ////playerInput = FindObjectOfType<PlayerInput>();
-        //playerInput.SwitchCurrentActionMap("PauseMenu");
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(MainMenuFirstButton);
+        if (OptionHandler.gamepadconnected)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(MainMenuFirstButton);
+        }
+
 
 
     }
     public void PlayGame()
     {
-        //playerInput.SwitchCurrentActionMap("Gameplay");
+
         SceneLoader.Instance.LoadWorld();
         SaveSystem.Instance.SetCurrentSave(0);
-
     }
 
     public void QuitGame()
@@ -41,6 +43,7 @@ public class HQMainMenu : MonoBehaviour
         {
             SaveSystem.Instance.DeleteSave(0);
             SaveSystem.Instance.CreateNewSave(0);
+            DynamicSystem.ResetDynamicSystem();
         }
     }
 
@@ -90,8 +93,12 @@ public class HQMainMenu : MonoBehaviour
     /// <param name="go"></param>
     private void SetFocus(GameObject go)
     {
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(go);
+        if (OptionHandler.gamepadconnected)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(go);
+        }
+
     }
 
     /// <summary>

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 /// <summary>
@@ -16,6 +17,11 @@ public class Torch : MonoBehaviour {
 
     [Tooltip("Hands animator. Allows this script to trigger the attack animation.")]
     public Animator animator;
+
+    public MonoBehaviour[] lockingTools;
+    public UnityEvent onAttack;
+
+    private bool attackLocked = false;
 
     /// <summary>
     /// The main interaction of the torch.
@@ -33,9 +39,26 @@ public class Torch : MonoBehaviour {
     /// The animation itself MUST manage the box collider enabling/disabling.
     /// </summary>
     private void PerformAttack() {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("Run")) { // Without this line, the animation can be triggered WHILE playing. Meaning it will repeat again & again.
-            animator.SetTrigger("BaseAttack");
+
+        bool isBusy = false;
+        foreach (var tool in lockingTools) {
+            IHandTool iTool = tool.GetComponent<IHandTool>();
+            if (iTool.IsBusy) {
+                isBusy = true;
+                break;
+            }
         }
+
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && attackLocked == false && !isBusy) {
+            onAttack.Invoke();
+            animator.SetTrigger("Attack");
+            attackLocked = true;
+            Invoke(nameof(ResetAttack), 0.3f);
+        }
+    }
+
+    private void ResetAttack() {
+        attackLocked = false;
     }
 
     /// <summary>
@@ -45,16 +68,15 @@ public class Torch : MonoBehaviour {
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
 
-        if (other.CompareTag("Campfire")) {
+        if (other.CompareTag("Ennemy")) {
+            other.GetComponent<IEnnemyController>().Hit(EToolType.Torch, attackDamage);
+        } else {
             Interactable inter = other.GetComponent<Interactable>();
-            if (inter) {
+            if (inter && inter.IsTorchInteractable) {
                 inter.Interact();
             }
         }
 
-        if (other.CompareTag("Ennemy")) {
-            other.GetComponent<IEnnemyController>().Hit(EToolType.Torch, attackDamage);
-        }
     }
 
 }

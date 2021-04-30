@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using FMODUnity;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -23,8 +25,43 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     private Animator m_animator;
 
     [SerializeField]
+    [Tooltip("Effect animator.")]
+    private Animator m_effectAnimator;
+
+    [SerializeField]
     [Tooltip("The attack gameobject to active and deactivate while attacking the player.")]
     private GameObject m_attackGO;
+
+    #region SFX
+    [Header("SFX")]
+    
+    [SerializeField]
+    [Tooltip("FMOD Studio Emitter for the Aggro / Howling sound")]
+    private StudioEventEmitter m_aggroSoundEmitter;
+
+    [SerializeField]
+    [Tooltip("FMOD Studio Emitter for the Attack sound")]
+    private StudioEventEmitter m_attackSoundEmitter;
+
+    [SerializeField]
+    [Tooltip("FMOD Studio Emitter for the TookDamage sound")]
+    private StudioEventEmitter m_tookDamageSoundEmitter;
+
+    [SerializeField]
+    [Tooltip("FMOD Studio Emitter for the Combat sound")]
+    private StudioEventEmitter m_combatSoundEmitter;
+
+    [SerializeField]
+    [Tooltip("FMOD Studio Emitter for the Death sound")]
+    private StudioEventEmitter m_deathSoundEmitter;
+
+    [SerializeField]
+    private FootstepChoose m_footstepChoose;
+
+    [SerializeField]
+    [Tooltip("FMOD Studio Emitter for the Movement sound")]
+    private FmodAudioPlayer m_movementSoundEmitter;
+    #endregion
 
     // Generic timer used when needed (in multiple cases)
     private float m_timer;
@@ -137,6 +174,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     private AnimationCurve curve;
 
     private float m_lurkingTime; // Random lurking time
+    private Coroutine m_combatSFXCoroutine;
     #endregion
 
     #region Charge
@@ -277,6 +315,11 @@ public class WolfController : MonoBehaviour, IEnnemyController {
         StateMachine<EWolfState> patrol = new StateMachine<EWolfState>(EWolfState.Patrol, EWolfState.MoveToWaypoint, parent,
             onEntry: (state) => {
                 m_agent.speed = m_patrolSpeed;
+            },
+            onExit: (state) => {
+                if (!m_animator.IsInTransition(0) && IsInInspectAnimation()) {
+                    m_animator.SetTrigger("HeardPlayer");
+                }
             }
         );
 
@@ -402,6 +445,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
         State<EWolfState> aggro = new State<EWolfState>(EWolfState.Aggro, parent,
             onEntry: (state) => {
                 m_animator.SetTrigger("Aggro");
+                m_aggroSoundEmitter.Play();
             }
         );
 
@@ -440,7 +484,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
 
         parent.AddState(combat);
     }
-
+    
     /// <summary>
     /// Creates and add to <c>parent</c> the Lurk state.
     /// All logic and transitions of the Lurk state are created.
@@ -451,6 +495,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
             onEntry: (state) => {
                 m_lurkingTime = Random.Range(lurkingDurationMin, lurkingDurationMax);
                 m_timer = Time.time + m_lurkingTime;
+                m_combatSFXCoroutine = StartCoroutine(CombatSFX());
             },
             onUpdate: (state) => {
                 m_agent.SetDestination(PositionToLurk());
@@ -458,6 +503,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
             onExit: (state) => {
                 m_timer = float.NegativeInfinity;
                 ResetAgentPath();
+                StopCoroutine(m_combatSFXCoroutine);
             }
         );
 
@@ -467,6 +513,13 @@ public class WolfController : MonoBehaviour, IEnnemyController {
         ));
 
         parent.AddState(lurk);
+    }
+
+    IEnumerator CombatSFX() {
+        while (true) {
+            m_combatSoundEmitter.Play();
+            yield return new WaitForSeconds(Random.Range(1.0f, 5.0f));
+        }
     }
 
     /// <summary>
@@ -543,6 +596,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
 
                 m_attackGO.SetActive(true);
                 m_timer = Time.time + m_attackTime;
+                m_attackSoundEmitter.Play();
             },
             onUpdate: (state) => {
                 m_agent.SetDestination(transform.position + attackDirection); // Going straight in a single direction
@@ -709,6 +763,22 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     private bool IsInAggroAnimation() {
         return m_animator.GetCurrentAnimatorStateInfo(0).IsName("Aggro");
     }
+
+    /// <summary>
+    /// Check if the animator is in the Inspect animation.
+    /// </summary>
+    /// <returns>True if in the Inspect animation, false otherwise.</returns>
+    private bool IsInInspectAnimation() {
+        return m_animator.GetCurrentAnimatorStateInfo(0).IsName("Inspect");
+    }
+
+    /// <summary>
+    /// Play the movement sound one time
+    /// </summary>
+    internal void MovementSoundEmission() {
+        m_footstepChoose.ChooseSound();
+        m_movementSoundEmitter.PlaySound();
+    }
     #endregion
 
     #region IEnnemyController
@@ -719,9 +789,23 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     /// <param name="toolType">The type of tool that called this method. Used to differentiate between Pistol and Torch weapons.</param>
     /// <param name="attackDamage">The damage value to be dealt.</param>
     public void Hit(EToolType toolType, int attackDamage) {
+
+        // Guard to prevent switch to Stun state or trigger sounds
+        if (!m_genericHealth.IsAlive()) {
+            return;
+        }
+
         m_genericHealth.Hit(attackDamage);
+
+        if (m_genericHealth.IsAlive()) {
+            m_tookDamageSoundEmitter.Play();
+        } else {
+            m_deathSoundEmitter.Play();
+        }
+
         if (toolType == EToolType.Pistol) { // If Gun, stun wolf
             SetStunState();
+            m_effectAnimator.SetTrigger("TookDamage");
         }
     }
     #endregion

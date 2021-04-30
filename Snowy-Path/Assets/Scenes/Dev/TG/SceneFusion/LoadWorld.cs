@@ -9,6 +9,6 @@ public class LoadWorld : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        SceneLoader.Instance.LoadWorld();
+        //SceneLoader.Instance.LoadWorld();
     }
 }

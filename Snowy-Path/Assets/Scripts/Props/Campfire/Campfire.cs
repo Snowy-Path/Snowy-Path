@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Campfire : MonoBehaviour
-{
+public class Campfire : MonoBehaviour {
     [Header("Campfire ID")]
     [Tooltip("Id can be generate by rightclick on the scripts and generateID")]
     // The ID of the Saveable entity that will link this object with the data saved
@@ -30,6 +29,8 @@ public class Campfire : MonoBehaviour
     public UnityEvent onExtinguish;
 
     public bool showDebug = false;
+
+    public LightAndFogAsset lightForThisCampfire;
 
     private HeatSource heatSource;
 
@@ -69,8 +70,14 @@ public class Campfire : MonoBehaviour
         isFireActive = true;
         PlayerCampfireSave playerCampfireSave = FindObjectOfType<PlayerCampfireSave>();
         playerCampfireSave.LastCampfireId = this.id;
-        playerCampfireSave.SceneName = this.gameObject.scene.name;
+        SceneSave sceneSave = FindObjectOfType<SceneSave>();
+        if (sceneSave)
+            sceneSave.SceneName = this.gameObject.scene.name;
         heatSource.enabled = true;
+        GenericHealth playerHealth = playerCampfireSave.gameObject.GetComponent<GenericHealth>();
+        if (playerHealth != null) {
+            playerHealth.FullHeal();
+        }
         onIgnite.Invoke();
 
     }

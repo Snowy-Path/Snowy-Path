@@ -48,13 +48,14 @@ public class WolfAnimatorUtility : MonoBehaviour {
     private void Align() {
         m_theRay = -transform.up;
 
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z),
-            m_theRay, out m_hit, 20, m_terrainMask)) {
-
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), m_theRay, out m_hit, 20, m_terrainMask)) {
             Quaternion targetRotation = Quaternion.FromToRotation(transform.up, m_hit.normal) * transform.parent.rotation;
-
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime / 0.15f);
         }
+    }
+
+    public void MovementSoundEmission() {
+        m_wolfController.MovementSoundEmission();
     }
 
 }

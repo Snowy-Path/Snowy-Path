@@ -13,53 +13,44 @@ public class PlayerCampfireSave : MonoBehaviour, ISaveable {
     public string SceneName { get => sceneName; set => sceneName = value; }
 
     public void RestorePlayerAtCampfire() {
+        CharacterController charController = GetComponent<CharacterController>();
+        PlayerController playerController = GetComponent<PlayerController>();
 
-
-        if(lastCampfireId == "")
+        // We go through all campfire in scene
+        foreach (Campfire item in FindObjectsOfType<Campfire>())
         {
-            CharacterController charController = GetComponent<CharacterController>();
-            charController.enabled = false;
-            this.transform.position = FindObjectOfType<SpawnPlayerPosition>().transform.position;
-            this.transform.eulerAngles = new Vector3(14, -104, -83);
-            charController.enabled = true;
-
-        }
-        else
-        {
-            Scene scene = SceneManager.GetSceneByName(sceneName);
-            foreach (GameObject item in scene.GetRootGameObjects())
+            // Check if it's the same campfire as the save
+            if (item.Id == lastCampfireId)
             {
-                if (item.CompareTag("SceneWorld"))
+                // We go through all the campfire object to find the transform respawn point
+                foreach (Transform respawnTransform in item.gameObject.GetComponentsInChildren<Transform>())
                 {
-                    SceneManager.SetActiveScene(scene);
-                    item.SetActive(true);
-                }
-
-            }
-
-            // We go through all campfire in scene
-            foreach (Campfire item in FindObjectsOfType<Campfire>())
-            {
-                // Check if it's the same campfire as the save
-                if (item.Id == lastCampfireId)
-                {
-                    // We go through all the campfire object to find the transform respawn point
-                    foreach (Transform respawnTransform in item.gameObject.GetComponentsInChildren<Transform>())
+                    // If found the player transform is set as the last campfire respawn point
+                    if (respawnTransform.gameObject.CompareTag("PlayerRespawnPoint"))
                     {
-                        // If found the player transform is set as the last campfire respawn point
-                        if (respawnTransform.gameObject.CompareTag("PlayerRespawnPoint"))
+                        item.IgniteFire();
+                        if (item.lightForThisCampfire != null)
                         {
-                            CharacterController charController = GetComponent<CharacterController>();
-                            charController.enabled = false;
-                            this.transform.position = respawnTransform.position;
-                            this.transform.eulerAngles = new Vector3(14, -104, -83);
-                            charController.enabled = true;
-
+                            LightTransition.LightTransitionTo(item.lightForThisCampfire);
                         }
+                        charController.enabled = false;
+                        playerController.enabled = false;
+                        this.transform.position = respawnTransform.position;
+                        this.transform.eulerAngles = new Vector3(0, 0, 0);
+                        this.transform.eulerAngles = new Vector3(14, -104, -83);
+                        //charController.enabled = true;
+                        return;
                     }
                 }
             }
         }
+
+        // What happen by default if we don't found the campfire in the scene
+        charController.enabled = false;
+        playerController.enabled = false;
+        this.transform.position = FindObjectOfType<SpawnPlayerPosition>().transform.position;
+        this.transform.eulerAngles = new Vector3(0, 0, 0);
+        this.transform.eulerAngles = new Vector3(14, -104, -83);
     }
 
     #region Save section

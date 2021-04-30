@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float groundCheckRadius = 0.2f;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float gravity = -9.81f;
-    [SerializeField] Animator handsAnimator;
+    [SerializeField] Animator leftHandAnimator;
+    [SerializeField] Animator rightHandAnimator;
 
     [Space]
     [Header("Movement")]
@@ -25,7 +26,7 @@ public class PlayerController : MonoBehaviour {
     [Space]
     [Header("Sprint")]
     [Tooltip("Max sprint duration")]
-    [SerializeField] float maxSprintDuration = 6f;
+    public float maxSprintDuration = 6f;
     [Tooltip("Recovery rate factor -> recovery = time * sprintRoveryRate")]
     [SerializeField] float sprintRecoveryRate = 0.5f;
     [Tooltip("Mulitplier for lateral speed when sprinting")]
@@ -94,9 +95,7 @@ public class PlayerController : MonoBehaviour {
     private float startStepOffset;
     private const float inputThreshold = 0.2f;
 
-    private HUD playerHud;
     private HandController handController;
-    private FootStepsAudio playerAudio;
 
     #region INPUTS SYSTEM EVENTS
     public void OnMove(InputAction.CallbackContext context) {
@@ -138,9 +137,7 @@ public class PlayerController : MonoBehaviour {
 
     void Start() {
         controller = GetComponent<CharacterController>();
-        playerHud = GetComponent<HUD>();
         handController = GetComponentInChildren<HandController>();
-        playerAudio = GetComponent<FootStepsAudio>();
 
         //Lock and hide cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -160,26 +157,26 @@ public class PlayerController : MonoBehaviour {
         else {
             controller.stepOffset = 0;
         }
-
         //Process movement
         ApplyGravity();
         UpdateVelocity();
         Sliding();
         Look();
         Sprint();
-        handsAnimator.SetBool("Grounded", isGrounded);
+        leftHandAnimator.SetBool("Grounded", isGrounded);
+        rightHandAnimator.SetBool("Grounded", isGrounded);
 
         //Move
         if (canMove) {
             controller.Move(xzVelocity * SpeedFactor * Time.deltaTime);
             if (!isSliding && IsGrounded)
                 speed = Mathf.Lerp(speed, (xzVelocity.magnitude * SpeedFactor) / currentSpeed, 0.1f);
-            handsAnimator.SetFloat("Speed", speed);
-            playerAudio.SetParam(xzVelocity.magnitude * SpeedFactor);
+            leftHandAnimator.SetFloat("Speed", speed);
+            rightHandAnimator.SetFloat("Speed", speed);
         }
         else {
-            handsAnimator.SetFloat("Speed", 0);
-            playerAudio.SetParam(0);
+            leftHandAnimator.SetFloat("Speed", 0);
+            rightHandAnimator.SetFloat("Speed", 0);
         }
         controller.Move(yVelocity * Time.deltaTime);
     }
@@ -241,12 +238,18 @@ public class PlayerController : MonoBehaviour {
         inputs.z = contextInputs.y;
     }
 
+    bool groundedLastFrame = false;
     private void ApplyGravity() {
-        if (IsGrounded && yVelocity.y < 0) {
+        if (isGrounded && yVelocity.y <= 0) {
             yVelocity.y = gravity;
         }
-        else
+        else {
+            if (groundedLastFrame && yVelocity.y <= 0)
+                yVelocity.y = 0;
+
             yVelocity.y += gravity * Time.deltaTime;
+        }
+        groundedLastFrame = isGrounded;
     }
 
     private void Jump() {
@@ -260,7 +263,7 @@ public class PlayerController : MonoBehaviour {
         //canStartSprint = isGrounded && sprintTimer <= 0;
 
         isRunning = sprintCmd && sprintTimer <= maxSprintDuration && inputs.z >= inputThreshold &&
-           (handController.CurrentTool.GetType() == typeof(Telescope) && handController.CurrentTool.IsBusy) == false;
+           (handController.CurrentTool.IsBusy == false || handController.CurrentTool.GetType() == typeof(Gun));
 
         //Stop sprint if timer reached max sprint duration
         if (sprintTimer >= maxSprintDuration)
@@ -279,8 +282,8 @@ public class PlayerController : MonoBehaviour {
         }
 
         //Update animator
-        handsAnimator.SetBool("Run", isRunning);
-        playerHud.SetStamina(Mathf.Clamp(sprintTimer / maxSprintDuration, 0, 1));
+        leftHandAnimator.SetBool("Run", isRunning);
+        rightHandAnimator.SetBool("Run", isRunning);
     }
 
     private void Look() {
