@@ -46,6 +46,11 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float slideDetectorRadius = 0.3f;
 
     [Space]
+    [Header("Turn back")]
+    [SerializeField] float turnTime = 0.5f;
+    [SerializeField] bool allowMovementInTurn = false;
+
+    [Space]
     [Header("Camera")]
     [Tooltip("Look sensitivity")]
     [SerializeField] float lookSpeed = 1.0f;
@@ -55,6 +60,7 @@ public class PlayerController : MonoBehaviour {
     //Status
     private CharacterController controller;
     private bool canMove = true;
+    private bool canRotate = true;
     private bool isSliding = false;
     private float slideSpeed = 0;
     private ControllerColliderHit colliderHit;
@@ -90,12 +96,14 @@ public class PlayerController : MonoBehaviour {
     //Look
     private Vector2 lookPos = Vector2.zero;
     private float yRotation = 0f;
+    private bool isTurningBack = false;
 
     //Parameters
     private float startStepOffset;
     private const float inputThreshold = 0.2f;
 
     private HandController handController;
+
 
     #region INPUTS SYSTEM EVENTS
     public void OnMove(InputAction.CallbackContext context) {
@@ -119,15 +127,21 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void OnToggleSprint(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            if (sprintTimer <= 0)
-                sprintCmd = true;
-        }
+        //if (context.phase == InputActionPhase.Performed) {
+        //    if (sprintTimer <= 0)
+        //        sprintCmd = true;
+        //}
     }
 
     public void OnJump(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Jump();
+        }
+    }
+
+    public void OnTurnBack(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            StartCoroutine(TurnBack());
         }
     }
     #endregion
@@ -168,9 +182,12 @@ public class PlayerController : MonoBehaviour {
 
         //Move
         if (canMove) {
-            controller.Move(xzVelocity * SpeedFactor * Time.deltaTime);
+            if (!isTurningBack || isTurningBack == allowMovementInTurn)
+                controller.Move(xzVelocity * SpeedFactor * Time.deltaTime);
+
             if (!isSliding && IsGrounded)
                 speed = Mathf.Lerp(speed, (xzVelocity.magnitude * SpeedFactor) / currentSpeed, 0.1f);
+
             leftHandAnimator.SetFloat("Speed", speed);
             rightHandAnimator.SetFloat("Speed", speed);
         }
@@ -287,7 +304,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Look() {
-        if (canMove) {
+        if (canMove && canRotate) {
             //Orient camera thanks to mouse position
             yRotation += -lookPos.y * lookSpeed;
             yRotation = Mathf.Clamp(yRotation, -lookYLimit, lookYLimit);
@@ -296,6 +313,25 @@ public class PlayerController : MonoBehaviour {
             //Rotate player 
             transform.rotation *= Quaternion.Euler(0, lookPos.x * lookSpeed, 0);
         }
+    }
+
+    private IEnumerator TurnBack() {
+        if (isTurningBack) {
+            yield break;
+        }
+
+        canRotate = false;
+        isTurningBack = true;
+
+        float turnSpeed = 180 / turnTime;
+        float rot = 0;
+        while (rot < 180) {
+            transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
+            rot += turnSpeed * Time.deltaTime;
+            yield return null;
+        }
+        canRotate = true;
+        isTurningBack = false;
     }
 
     private void Sliding() {

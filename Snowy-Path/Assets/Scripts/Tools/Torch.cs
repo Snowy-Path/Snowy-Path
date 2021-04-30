@@ -21,7 +21,38 @@ public class Torch : MonoBehaviour {
     public MonoBehaviour[] lockingTools;
     public UnityEvent onAttack;
 
+
+    [SerializeField]
+    [FMODUnity.EventRef]
+    private string m_attackEventPath;
+    [SerializeField]
+    private Transform m_attackEmissionPosition;
+    private FMOD.Studio.EventInstance m_attackInstance;
+    private FMOD.Studio.PARAMETER_ID m_attackID;
+
+    private float m_rockHitValue = 0.0f;
+    private float m_snowHitValue = 0.15f;
+    private float m_iceHitValue = 0.25f;
+    private float m_waterHitValue = 0.35f;
+    private float m_woodHitValue = 0.45f;
+    private float m_leavesHitValue = 0.55f;
+    private float m_fleshHitValue = 0.65f;
+
     private bool attackLocked = false;
+
+    private void Start() {
+        m_attackInstance = FMODUnity.RuntimeManager.CreateInstance(m_attackEventPath);
+
+        FMOD.Studio.EventDescription attackEventDesc;
+        m_attackInstance.getDescription(out attackEventDesc);
+        FMOD.Studio.PARAMETER_DESCRIPTION attackParametterDesc;
+        attackEventDesc.getParameterDescriptionByIndex(0, out attackParametterDesc);
+        m_attackID = attackParametterDesc.id;
+    }
+
+    private void Update() {
+        m_attackInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(m_attackEmissionPosition));
+    }
 
     /// <summary>
     /// The main interaction of the torch.
@@ -61,19 +92,31 @@ public class Torch : MonoBehaviour {
         attackLocked = false;
     }
 
+    private void PlayAttackSoundValue(float value) {
+        m_attackInstance.setParameterByID(m_attackID, value);
+        m_attackInstance.start();
+    }
+
     /// <summary>
     /// This method is active when the collider is enabled. Since it is enabled from the animator, it can only detected other collider when the animation is running.
     /// It is called for each collider detected. And it verifies for each collider if it was an ennemy. If so, it applies damage.
     /// </summary>
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
-
         if (other.CompareTag("Ennemy")) {
             other.GetComponent<IEnnemyController>().Hit(EToolType.Torch, attackDamage);
+            PlayAttackSoundValue(m_fleshHitValue);
+        } else if (other.CompareTag("Ice")) {
+            PlayAttackSoundValue(m_iceHitValue);
         } else {
             Interactable inter = other.GetComponent<Interactable>();
             if (inter && inter.IsTorchInteractable) {
                 inter.Interact();
+                if (other.CompareTag("Campfire") || other.CompareTag("FireInteractable")) {
+                    PlayAttackSoundValue(m_woodHitValue);
+                } else {
+                    PlayAttackSoundValue(m_rockHitValue);
+                }
             }
         }
 

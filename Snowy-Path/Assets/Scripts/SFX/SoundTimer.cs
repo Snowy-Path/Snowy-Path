@@ -25,9 +25,9 @@ public class SoundTimer : MonoBehaviour {
 
     private void Awake() {
         if (m_randomCooldown) {
-            m_internalCooldown = Random.Range(m_cooldownMin, m_cooldownMax);
+            m_internalCooldown = Random.Range(0, m_cooldownMax);
         } else {
-            m_internalCooldown = m_cooldown;
+            m_internalCooldown = Random.Range(0, m_cooldown);
         }
     }
 
