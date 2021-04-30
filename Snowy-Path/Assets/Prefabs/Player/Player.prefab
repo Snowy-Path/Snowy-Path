@@ -790,6 +790,8 @@ MonoBehaviour:
   airSpeedZ: 2
   slideFactor: 0.4
   slideDetectorRadius: 0.2
+  turnTime: 0.2
+  allowMovementInTurn: 0
   lookSpeed: 0.1
   lookYLimit: 80
 --- !u!114 &3567335824391310408
@@ -1170,6 +1172,21 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e62f82ab-2316-4896-8992-6347b4888473
     m_ActionName: Rebindingkeys/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6956198845757208931}
+        m_MethodName: OnTurnBack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 949ee8b1-2ba6-42f1-9c17-3d6d1d96ed4a
+    m_ActionName: Gameplay/Turn[/XInputControllerWindows/leftShoulder]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -3627,7 +3644,7 @@ PrefabInstance:
     - target: {fileID: 4640468693047883531, guid: d0ae317e3ada9564a8f8067e3d8eb2d6,
         type: 3}
       propertyPath: onAttack.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4640468693047883531, guid: d0ae317e3ada9564a8f8067e3d8eb2d6,
         type: 3}
@@ -3687,12 +3704,12 @@ PrefabInstance:
     - target: {fileID: 6034140212318947446, guid: d0ae317e3ada9564a8f8067e3d8eb2d6,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6034140212318947446, guid: d0ae317e3ada9564a8f8067e3d8eb2d6,
         type: 3}
       propertyPath: InheritVelocityModule.m_Curve.scalar
-      value: 0.85
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 6560371138840676951, guid: d0ae317e3ada9564a8f8067e3d8eb2d6,
         type: 3}
