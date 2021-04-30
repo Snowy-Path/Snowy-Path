@@ -26,6 +26,7 @@ public class HandController : MonoBehaviour {
     private Animator handAnimator;
     private IHandTool[] tools;
     private int currentToolIndex = 0;
+    private int toolToEquip;
 
     // Start is called before the first frame update
     void Start() {
@@ -34,6 +35,7 @@ public class HandController : MonoBehaviour {
         foreach (var tool in tools) {
             tool.handAnimator = handAnimator;
         }
+        toolToEquip = currentToolIndex;
         DisplayCurrentTool();
     }
 
@@ -86,6 +88,7 @@ public class HandController : MonoBehaviour {
     #endregion
 
     public void DisplayCurrentTool() {
+        currentToolIndex = toolToEquip;
         HideTools();
         tools[currentToolIndex].ToggleDisplay(true);
     }
@@ -125,14 +128,14 @@ public class HandController : MonoBehaviour {
             return;
 
         //shift the current index
-        currentToolIndex += indexShift;
+        toolToEquip += indexShift;
 
         //Handle index outside the array
-        if (currentToolIndex >= tools.Length) {
-            currentToolIndex = 0;
+        if (toolToEquip >= tools.Length) {
+            toolToEquip = 0;
         }
-        else if (currentToolIndex < 0) {
-            currentToolIndex = tools.Length - 1;
+        else if (toolToEquip < 0) {
+            toolToEquip = tools.Length - 1;
         }
 
         LaunchSwapAnimation();
@@ -158,7 +161,7 @@ public class HandController : MonoBehaviour {
         //}
 
         if (!CurrentTool.IsBusy && TryGetToolIndex(type, out int index) && currentToolIndex != index) {
-            currentToolIndex = index;
+            toolToEquip = index;
 
             LaunchSwapAnimation();
             return true;
