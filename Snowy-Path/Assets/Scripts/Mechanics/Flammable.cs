@@ -9,8 +9,12 @@ public class Flammable : MonoBehaviour {
     [SerializeField] GameObject fireFX;
     [SerializeField] Transform ignitePointsParent;
     [SerializeField] float fireDuration;
+    [SerializeField] float maxDissolve = .4f;
 
     private bool ignited = false;
+    private float dissolve = 0f;
+    private float dissolveStep;
+    private const float timeStep = .1f;
 
     private List<Transform> fireParticles;
     private List<GameObject> GFXs;
@@ -39,6 +43,7 @@ public class Flammable : MonoBehaviour {
         foreach (var gfx in GFXs) {
             gfx.SetActive(true);
         }
+        ResetDissolve();
         ignited = false;
     }
 
@@ -65,6 +70,8 @@ public class Flammable : MonoBehaviour {
             fireParticles.Add(go.transform);
         }
 
+        //Init dissolve step
+        dissolveStep = timeStep * maxDissolve / fireDuration;
     }
 
     /// <summary>
@@ -76,6 +83,7 @@ public class Flammable : MonoBehaviour {
             ignited = true;
             fireParticles = ReorderPoints(other.transform.position);
             StartCoroutine(StartFire());
+            ApplyDissolve();
         }
     }
 
@@ -94,13 +102,16 @@ public class Flammable : MonoBehaviour {
 
         for (int i = 0; i < fireParticles.Count; i++) {
             fireParticles[i].GetComponent<ParticleSystem>().Stop();
-            fireParticles[i].GetComponent<FMODUnity.StudioEventEmitter>().Stop();
         }
 
         foreach (var gfx in GFXs) {
             gfx.SetActive(false);
         }
 
+        for (int i = 0; i < fireParticles.Count; i++) {
+            fireParticles[i].GetComponent<FMODUnity.StudioEventEmitter>().Stop();
+            yield return new WaitForSeconds(.05f);
+        }
     }
 
     /// <summary>
@@ -110,5 +121,27 @@ public class Flammable : MonoBehaviour {
     /// <returns></returns>
     private List<Transform> ReorderPoints(Vector3 start) {
         return fireParticles.OrderBy(o => (o.position - start).magnitude).ToList();
+    }
+
+    private void ApplyDissolve() {
+
+        dissolve += dissolveStep;
+        foreach (var mesh in GFXs) {
+            MeshRenderer renderer = mesh.GetComponent<MeshRenderer>();
+            renderer.material.SetFloat("_Progress", dissolve);
+        }
+
+        if (dissolve < maxDissolve) {
+            Invoke(nameof(ApplyDissolve), timeStep);
+        }
+    }
+
+    private void ResetDissolve() {
+        foreach (var mesh in GFXs) {
+            MeshRenderer renderer = mesh.GetComponent<MeshRenderer>();
+            renderer.material.SetFloat("_Progress", 0);
+        }
+        dissolve = 0;
+        dissolveStep = timeStep * maxDissolve / fireDuration;
     }
 }
