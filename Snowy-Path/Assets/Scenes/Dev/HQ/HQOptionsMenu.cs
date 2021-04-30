@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 
@@ -18,6 +19,7 @@ public class HQOptionsMenu : MonoBehaviour
     AudioSettings audioSettings;
     public Resolution[] resolutions;
     public List<int> AntiAliasing = new List<int>{0,2,4,8};
+    public PlayerInput playerInput;
 
 
     private void Awake()
@@ -32,6 +34,10 @@ public class HQOptionsMenu : MonoBehaviour
 
 
 
+    public void SetSensitivity(float newSensitivity)
+    {
+
+    }
 
     public void MasterVolumeLevel(float newMasterVolume)
     {
