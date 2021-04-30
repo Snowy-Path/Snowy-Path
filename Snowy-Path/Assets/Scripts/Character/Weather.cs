@@ -60,8 +60,6 @@ public class Weather : MonoBehaviour
             case WeatherPreset.EBlizzardStrength.High:
                 m_blizzardEmitter.SetParameter(m_blizzardChangeID, 0.6f);
                 break;
-            default:
-                break;
         }
     }
 
@@ -106,5 +104,9 @@ public class Weather : MonoBehaviour
             m_activeWeatherZones.Remove(weatherZone.GetInstanceID());
             CurrentWeather = GetCurrentWeather();
         }
+    }
+
+    internal void ResetBlizzard() {
+        CurrentWeather = defaultWeather;
     }
 }
