@@ -27,6 +27,7 @@ public class HandController : MonoBehaviour {
     private IHandTool[] tools;
     private int currentToolIndex = 0;
     private int toolToEquip;
+    private bool canUse = true;
 
     // Start is called before the first frame update
     void Start() {
@@ -87,17 +88,11 @@ public class HandController : MonoBehaviour {
     }
     #endregion
 
-    public void DisplayCurrentTool() {
-        currentToolIndex = toolToEquip;
-        HideTools();
-        tools[currentToolIndex].ToggleDisplay(true);
-    }
-
     /// <summary>
     /// Use active tool primary function
     /// </summary>
     private void PrimaryUseCurrentTool() {
-        if (tools.Length > 0)
+        if (tools.Length > 0 && canUse)
             tools[currentToolIndex].StartPrimaryUse();
     }
 
@@ -105,7 +100,7 @@ public class HandController : MonoBehaviour {
     /// Use active tool secondary function
     /// </summary>
     private void SecondaryUseCurrentTool() {
-        if (tools.Length > 0)
+        if (tools.Length > 0 && canUse)
             tools[currentToolIndex].SecondaryUse();
     }
 
@@ -114,7 +109,7 @@ public class HandController : MonoBehaviour {
     /// Cancel active tool use
     /// </summary>
     private void CancelUseCurrentTool() {
-        if (tools.Length > 0)
+        if (tools.Length > 0 && canUse)
             tools[currentToolIndex].CancelPrimaryUse();
     }
 
@@ -138,7 +133,8 @@ public class HandController : MonoBehaviour {
             toolToEquip = tools.Length - 1;
         }
 
-        LaunchSwapAnimation();
+        if (canUse) // = if not in swapping anim
+            LaunchSwapAnimation();
     }
 
     /// <summary>
@@ -172,11 +168,18 @@ public class HandController : MonoBehaviour {
 
     private void LaunchSwapAnimation() {
         //Update display
+        CancelUseCurrentTool();
         handAnimator.SetTrigger("SwitchTool");
         tools[currentToolIndex].IsBusy = false;
+        canUse = false;
     }
 
-
+    public void DisplayCurrentTool() {
+        currentToolIndex = toolToEquip;
+        HideTools();
+        tools[currentToolIndex].ToggleDisplay(true);
+        canUse = true;
+    }
 
     /// <summary>
     /// Find a tool matching type in among tools 
