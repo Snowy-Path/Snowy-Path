@@ -298,6 +298,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-8612895009756055269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Sprint/Sprint End
+  m_EditorClassIdentifier: 
+  Name: Sprint End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-8581464943385590158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -765,11 +785,11 @@ MonoBehaviour:
   Path: FMODAssets/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637556406207347148
+  lastModified: 637556494009301567
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 4786
+    Value: 5004
   Exists: 1
 --- !u!114 &-7788325683893487526
 MonoBehaviour:
@@ -976,7 +996,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -3645610823418417942}
+  - {fileID: -8612895009756055269}
   MinDistance: 1
   MaxDistance: 20
   Length: 10062
@@ -1022,6 +1042,31 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
+--- !u!114 &-7509520004581981544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Musics/Exploration
+  m_EditorClassIdentifier: 
+  Path: event:/Musics/Exploration
+  guid: 46f71c095b2e0a40a7d1c399c6634782
+  Banks:
+  - {fileID: 4144793587785197368}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 2774645689049840253}
+  - {fileID: 1934626584119278349}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 196000
 --- !u!114 &-7291785639484801962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1262,7 +1307,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -5021885045907643037}
+  - {fileID: 583195199239774246}
   MinDistance: 1
   MaxDistance: 20
   Length: 20500
@@ -1326,7 +1371,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 7977846677658889416}
+  - {fileID: 1497992374006997003}
   MinDistance: 1
   MaxDistance: 20
   Length: 36000
@@ -1961,7 +2006,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-4968499178757348894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2747,7 +2792,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-3645056856089535505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4815,12 +4860,14 @@ MonoBehaviour:
   - {fileID: -1964991661332218199}
   - {fileID: -4681312794872849813}
   - {fileID: 2416154925367049632}
+  - {fileID: -7509520004581981544}
+  - {fileID: 8440506048598882526}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4144793587785197368}
   StringsBanks:
   - {fileID: -7801712518959601678}
-  stringsBankWriteTime: 637556406207347148
+  stringsBankWriteTime: 637556494009301567
   cacheVersion: 6
 --- !u!114 &8914348932171093
 MonoBehaviour:
@@ -5215,6 +5262,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &583195199239774246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Powder Idle/Powder Idle End
+  m_EditorClassIdentifier: 
+  Name: Powder Idle End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &828022140042724127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5355,6 +5422,26 @@ MonoBehaviour:
   m_Name: parameter:/Blizzard/Blizzard Changed
   m_EditorClassIdentifier: 
   Name: Blizzard Changed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &1155880068640314498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Gun Bullet Impact/Bullet Impact
+  m_EditorClassIdentifier: 
+  Name: Bullet Impact
   Min: 0
   Max: 1
   Default: 0
@@ -5514,6 +5601,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &1497992374006997003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TorchAll/TorchEnd
+  m_EditorClassIdentifier: 
+  Name: TorchEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &1544375438958167023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5616,6 +5723,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &1888192850249782801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Safe Place/Safe Place End
+  m_EditorClassIdentifier: 
+  Name: Safe Place End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &1912539681156674253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5656,6 +5783,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &1934626584119278349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Exploration/Exploration Action
+  m_EditorClassIdentifier: 
+  Name: Exploration Action
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &2118160293264561490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5993,7 +6140,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 3592062609810481394}
+  - {fileID: 1155880068640314498}
   MinDistance: 1
   MaxDistance: 20
   Length: 15000
@@ -6090,6 +6237,26 @@ MonoBehaviour:
   m_Name: parameter:/Gun Bullet Impact/Bullet Impact
   m_EditorClassIdentifier: 
   Name: Bullet Impact
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &2774645689049840253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Exploration/Exploration End
+  m_EditorClassIdentifier: 
+  Name: Exploration End
   Min: 0
   Max: 1
   Default: 0
@@ -6542,7 +6709,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &3622266667597023482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6790,7 +6957,7 @@ MonoBehaviour:
   Path: FMODAssets/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637556406207307180
+  lastModified: 637556494017582770
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -8453,7 +8620,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &7996146781515351533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8723,6 +8890,30 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &8440506048598882526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Musics/Safe Place
+  m_EditorClassIdentifier: 
+  Path: event:/Musics/Safe Place
+  guid: 59351732eb60fa4192deb5fc0266f2d6
+  Banks:
+  - {fileID: 4144793587785197368}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 1888192850249782801}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 109000
 --- !u!114 &8581262890253501568
 MonoBehaviour:
   m_ObjectHideFlags: 0
