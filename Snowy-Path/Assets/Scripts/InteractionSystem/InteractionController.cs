@@ -72,7 +72,6 @@ public class InteractionController : MonoBehaviour {
                 if (Physics.Raycast(_rayBlock, out _hitInfoBlock, maxDistance, blockingLayers)) {
                     if (_hitInfoBlock.transform.GetInstanceID() == _hitInfoInteract.transform.GetInstanceID()) {
                         // Can interact with it
-                        Debug.Log("CAN INTERACT");
                         if (!_interHit.IsActive) {
                             if (m_interactable != null) { // Hide previous object if it was a real object
                                 m_interactable.HideInteractionFeedback();
@@ -89,8 +88,6 @@ public class InteractionController : MonoBehaviour {
                             m_interactable.ShowInteractionFeedback();
                         }
                     } else {
-
-                        Debug.Log("CAN NOT INTERACT");
                         // Hide previous object if it was a real object & switch to null
                         if (m_interactable != null) {
                             m_interactable.HideInteractionFeedback();
