@@ -26,6 +26,10 @@ public class InteractionController : MonoBehaviour {
     private LayerMask interactableLayer;
 
     [SerializeField]
+    [Tooltip("Layers blocking the interaction.")]
+    private LayerMask blockingLayers;
+
+    [SerializeField]
     [Header("Player Camera")]
     private Camera playerCamera;
 
@@ -51,31 +55,45 @@ public class InteractionController : MonoBehaviour {
     /// </summary>
     private void CheckForInteractable() {
 
-        Ray _ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-        RaycastHit _hitInfo;
+        Ray _rayInteract = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        RaycastHit _hitInfoInteract;
 
-        bool _hitSomething = Physics.SphereCast(_ray, radius, out _hitInfo, maxDistance, interactableLayer);
+        bool _hitInteract = Physics.SphereCast(_rayInteract, radius, out _hitInfoInteract, maxDistance, interactableLayer);
 
         // If we hit an object
-        if (_hitSomething) {
-            Interactable _interHit = _hitInfo.transform.GetComponent<Interactable>(); // Try to retrieve it's interactable component
+        if (_hitInteract) {
+            Interactable _interHit = _hitInfoInteract.transform.GetComponent<Interactable>(); // Try to retrieve it's interactable component
 
             if (_interHit != null) { // We really did hit an interactable object
 
-                if (!_interHit.IsActive) {
-                    if (m_interactable != null) { // Hide previous object if it was a real object
-                        m_interactable.HideInteractionFeedback();
-                        m_interactable = null;
-                    }
-                }else if (m_interactable != _interHit) { //If previous object is different from current object
+                Ray _rayBlock = new Ray(playerCamera.transform.position, _interHit.transform.position - playerCamera.transform.position);
+                RaycastHit _hitInfoBlock;
 
-                    if (m_interactable != null) { // Hide previous object if it was a real object
-                        m_interactable.HideInteractionFeedback();
-                    }
+                if (Physics.Raycast(_rayBlock, out _hitInfoBlock, maxDistance, blockingLayers)) {
+                    if (_hitInfoBlock.transform.GetInstanceID() == _hitInfoInteract.transform.GetInstanceID()) {
+                        // Can interact with it
+                        if (!_interHit.IsActive) {
+                            if (m_interactable != null) { // Hide previous object if it was a real object
+                                m_interactable.HideInteractionFeedback();
+                                m_interactable = null;
+                            }
+                        } else if (m_interactable != _interHit) { //If previous object is different from current object
 
-                    // Switch and show current object if it is active
-                    m_interactable = _interHit;
-                    m_interactable.ShowInteractionFeedback();
+                            if (m_interactable != null) { // Hide previous object if it was a real object
+                                m_interactable.HideInteractionFeedback();
+                            }
+
+                            // Switch and show current object if it is active
+                            m_interactable = _interHit;
+                            m_interactable.ShowInteractionFeedback();
+                        }
+                    } else {
+                        // Hide previous object if it was a real object & switch to null
+                        if (m_interactable != null) {
+                            m_interactable.HideInteractionFeedback();
+                            m_interactable = null;
+                        }
+                    }
                 }
 
             } else { // A non-interactable object was detected
@@ -94,7 +112,7 @@ public class InteractionController : MonoBehaviour {
             m_interactable = null;
         }
 
-        Debug.DrawRay(_ray.origin, _ray.direction * maxDistance, _hitSomething ? Color.green : Color.red);
+        Debug.DrawRay(_rayInteract.origin, _rayInteract.direction * maxDistance, _hitInteract ? Color.green : Color.red);
 
     }
 
