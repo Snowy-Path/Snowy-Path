@@ -70,7 +70,7 @@ public class Player_SFX : MonoBehaviour {
         if (other.CompareTag(m_windPlainsTag)) {
             StopWind();
         } else if (other.CompareTag(m_waterCaveDropTag)) {
-            StopWater();
+            StopCave();
         }
     }
 
@@ -97,7 +97,7 @@ public class Player_SFX : MonoBehaviour {
     //    }
     //}
 
-    private void StopWind() {
+    internal void StopWind() {
         m_windPlainsInstance.setParameterByID(m_windPlainsID, 1.0f);
     }
 
@@ -111,7 +111,7 @@ public class Player_SFX : MonoBehaviour {
     //    }
     //}
 
-    private void StopWater() {
+    internal void StopCave() {
         m_waterCaveDropInstance.setParameterByID(m_waterCaveDropID, 1.0f);
     }
 
