@@ -40,6 +40,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-9079139105035963528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Powder Idle/Powder Idle End
+  m_EditorClassIdentifier: 
+  Name: Powder Idle End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-9073854280244539739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -785,7 +805,7 @@ MonoBehaviour:
   Path: FMODAssets/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637556494009301567
+  lastModified: 637556500832180962
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -996,7 +1016,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -8612895009756055269}
+  - {fileID: -4090071722650837996}
   MinDistance: 1
   MaxDistance: 20
   Length: 10062
@@ -1087,6 +1107,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &-7271852407535118867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wolf Movement Footsteps/Changing Soil
+  m_EditorClassIdentifier: 
+  Name: Changing Soil
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-7231551453984110326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1307,10 +1347,30 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 583195199239774246}
+  - {fileID: -9079139105035963528}
   MinDistance: 1
   MaxDistance: 20
   Length: 20500
+--- !u!114 &-6786806132827840404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Sprint/Sprint End
+  m_EditorClassIdentifier: 
+  Name: Sprint End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-6702182189969225278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1331,6 +1391,30 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &-6623565559224662121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Musics/Safe Place
+  m_EditorClassIdentifier: 
+  Path: event:/Musics/Safe Place
+  guid: 59351732eb60fa4192deb5fc0266f2d6
+  Banks:
+  - {fileID: 4144793587785197368}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 8580119581691736379}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 109000
 --- !u!114 &-6618801590190144005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1344,6 +1428,51 @@ MonoBehaviour:
   m_Name: parameter:/Powder Idle/Powder Idle End
   m_EditorClassIdentifier: 
   Name: Powder Idle End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-6531595535859336083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Musics/Exploration
+  m_EditorClassIdentifier: 
+  Path: event:/Musics/Exploration
+  guid: 46f71c095b2e0a40a7d1c399c6634782
+  Banks:
+  - {fileID: 4144793587785197368}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 4799581581648326867}
+  - {fileID: -5837107401274277841}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 196000
+--- !u!114 &-6524871124830559469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Gun Bullet Impact/Bullet Impact
+  m_EditorClassIdentifier: 
+  Name: Bullet Impact
   Min: 0
   Max: 1
   Default: 0
@@ -1371,7 +1500,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 1497992374006997003}
+  - {fileID: 4523395178819350918}
   MinDistance: 1
   MaxDistance: 20
   Length: 36000
@@ -1612,6 +1741,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &-5837107401274277841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Exploration/Exploration Action
+  m_EditorClassIdentifier: 
+  Name: Exploration Action
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-5834579301416485626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2607,6 +2756,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 26125
+--- !u!114 &-4090071722650837996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Sprint/Sprint End
+  m_EditorClassIdentifier: 
+  Name: Sprint End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-4083235073693350418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3431,6 +3600,26 @@ MonoBehaviour:
   m_Name: parameter:/Wolf Movement Footsteps/Changing Soil
   m_EditorClassIdentifier: 
   Name: Changing Soil
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-2445166707381427918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Gun Bullet Impact/Bullet Impact
+  m_EditorClassIdentifier: 
+  Name: Bullet Impact
   Min: 0
   Max: 1
   Default: 0
@@ -4612,6 +4801,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2710
+--- !u!114 &-302936857469957663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TorchAll/TorchEnd
+  m_EditorClassIdentifier: 
+  Name: TorchEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-293282387438426599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4758,7 +4967,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &-42731332600002544
+--- !u!114 &-43464372326755514
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4768,16 +4977,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Powder Idle/Powder Idle End
+  m_Name: parameter:/TorchAll/TorchEnd
   m_EditorClassIdentifier: 
-  Name: Powder Idle End
+  Name: TorchEnd
   Min: 0
   Max: 1
   Default: 0
   ID:
     data1: 0
     data2: 0
-  Exists: 0
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4796,69 +5005,10 @@ MonoBehaviour:
   - {fileID: 3904802501574176839}
   - {fileID: 246845400061130193}
   EditorEvents:
-  - {fileID: -3785038216273010466}
-  - {fileID: -6191418383388777743}
-  - {fileID: -8277501199493809590}
-  - {fileID: -6846021378668608835}
-  - {fileID: 294744787512344923}
-  - {fileID: 2870909079121914871}
-  - {fileID: -1576594551701731852}
-  - {fileID: 1298108366927765141}
-  - {fileID: 1245923118486824643}
-  - {fileID: 2616124458348701995}
-  - {fileID: -4179962668385873014}
-  - {fileID: -1631516995370433442}
-  - {fileID: -3128421113746770438}
-  - {fileID: -7560031547471181538}
-  - {fileID: -5769754846468596417}
-  - {fileID: -1014043070924089497}
-  - {fileID: -6380007835104579162}
-  - {fileID: -6516707338727716694}
-  - {fileID: 1446417277723970413}
-  - {fileID: 2507722241785272895}
-  - {fileID: 498023156567692287}
-  - {fileID: 1800850632974720488}
-  - {fileID: -7616395946108923739}
-  - {fileID: 4412132256427457250}
-  - {fileID: 8791386560525870407}
-  - {fileID: 8230327323229172078}
-  - {fileID: -800050168495054530}
-  - {fileID: -7521891831730136724}
-  - {fileID: -1056963918607617126}
-  - {fileID: 6001262386945939329}
-  - {fileID: 8680826586583427423}
-  - {fileID: 2513190485980438832}
-  - {fileID: -4328679622381373474}
-  - {fileID: -8829013730077052805}
-  - {fileID: -4351537514671350165}
-  - {fileID: -7651172944886685396}
-  - {fileID: -3611047450427697794}
-  - {fileID: 7348127539718043281}
-  - {fileID: -4176824876851584791}
-  - {fileID: 3752009186494044149}
-  - {fileID: -5678865028581761042}
-  - {fileID: -7934702585497598880}
-  - {fileID: -6297901561180123238}
-  - {fileID: -4920630788525404932}
-  - {fileID: 9009160267384966301}
-  - {fileID: -7920550570065263844}
-  - {fileID: 4059270283796997983}
-  - {fileID: 6537724925852039376}
-  - {fileID: -4810796346452459389}
-  - {fileID: -2264178008621091819}
   - {fileID: 8329392223496906064}
   - {fileID: 1374365570945885631}
   - {fileID: 964155778557732237}
   - {fileID: -5196591763731096633}
-  - {fileID: -88440503965177872}
-  - {fileID: -312184055619431745}
-  - {fileID: -4716341979739915114}
-  - {fileID: -6326254395165074834}
-  - {fileID: 6868704004871436200}
-  - {fileID: 7332524231580459446}
-  - {fileID: 2297548411292196179}
-  - {fileID: -1964991661332218199}
-  - {fileID: -4681312794872849813}
   - {fileID: 2416154925367049632}
   - {fileID: -7509520004581981544}
   - {fileID: 8440506048598882526}
@@ -4867,7 +5017,7 @@ MonoBehaviour:
   - {fileID: 4144793587785197368}
   StringsBanks:
   - {fileID: -7801712518959601678}
-  stringsBankWriteTime: 637556494009301567
+  stringsBankWriteTime: 637556500832180962
   cacheVersion: 6
 --- !u!114 &8914348932171093
 MonoBehaviour:
@@ -5007,10 +5157,10 @@ MonoBehaviour:
   Path: FMODAssets/Build/Desktop/Wolf.bank
   Name: Wolf
   StudioPath: bank:/Wolf
-  lastModified: 637552099835499779
+  lastModified: 637552981404264733
   LoadResult: 0
   FileSizes: []
-  Exists: 0
+  Exists: 1
 --- !u!114 &270574804368100250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6140,7 +6290,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 1155880068640314498}
+  - {fileID: -2445166707381427918}
   MinDistance: 1
   MaxDistance: 20
   Length: 15000
@@ -6367,6 +6517,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &3071055438771587607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Powder Idle/Powder Idle End
+  m_EditorClassIdentifier: 
+  Name: Powder Idle End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &3099555197797750676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6380,6 +6550,26 @@ MonoBehaviour:
   m_Name: parameter:/Main Title/Snowy_Path_Menu_End
   m_EditorClassIdentifier: 
   Name: Snowy_Path_Menu_End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &3122838450663299690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Gun Bullet Impact/Bullet Impact
+  m_EditorClassIdentifier: 
+  Name: Bullet Impact
   Min: 0
   Max: 1
   Default: 0
@@ -6815,10 +7005,10 @@ MonoBehaviour:
   Path: FMODAssets/Build/Desktop/Tools.bank
   Name: Tools
   StudioPath: bank:/Tools
-  lastModified: 637552099835449918
+  lastModified: 637556500832200906
   LoadResult: 0
   FileSizes: []
-  Exists: 0
+  Exists: 1
 --- !u!114 &3907378145233222927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6957,8 +7147,8 @@ MonoBehaviour:
   Path: FMODAssets/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637556494017582770
-  LoadResult: 0
+  lastModified: 637556500844879917
+  LoadResult: 70
   FileSizes: []
   Exists: 1
 --- !u!114 &4186479910872654183
@@ -7102,6 +7292,26 @@ MonoBehaviour:
   m_Name: parameter:/Powder Idle/Powder Idle End
   m_EditorClassIdentifier: 
   Name: Powder Idle End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &4523395178819350918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TorchAll/TorchEnd
+  m_EditorClassIdentifier: 
+  Name: TorchEnd
   Min: 0
   Max: 1
   Default: 0
@@ -7332,6 +7542,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &4799581581648326867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Exploration/Exploration End
+  m_EditorClassIdentifier: 
+  Name: Exploration End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &4912610256245943203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7452,6 +7682,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &5465700672311719891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wolf Movement Footsteps/Changing Soil
+  m_EditorClassIdentifier: 
+  Name: Changing Soil
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &5565287600960051621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7559,6 +7809,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &5782547893657094033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Sprint/Sprint End
+  m_EditorClassIdentifier: 
+  Name: Sprint End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &5895945745505164603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8521,6 +8791,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &7768269168022525109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Powder Idle/Powder Idle End
+  m_EditorClassIdentifier: 
+  Name: Powder Idle End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &7775198008474548863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8843,7 +9133,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 8664142188504293283}
+  - {fileID: 5465700672311719891}
   MinDistance: 1
   MaxDistance: 20
   Length: 2750
@@ -8890,7 +9180,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &8440506048598882526
+--- !u!114 &8580119581691736379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8899,21 +9189,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Musics/Safe Place
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Safe Place/Safe Place End
   m_EditorClassIdentifier: 
-  Path: event:/Musics/Safe Place
-  guid: 59351732eb60fa4192deb5fc0266f2d6
-  Banks:
-  - {fileID: 4144793587785197368}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 1888192850249782801}
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 109000
+  Name: Safe Place End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &8581262890253501568
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Compass : MonoBehaviour
-{
+public class Compass : MonoBehaviour {
     private SphereCollider jammingcollider;
     public Vector3 NorthPole; //Position of north pole
     public Transform Needle;
@@ -17,29 +16,24 @@ public class Compass : MonoBehaviour
     private float number;
 
 
-    private void Start()
-    {
+    private void Start() {
         jammingcollider = gameObject.AddComponent<SphereCollider>();
         jammingcollider.radius = JammingRange;
     }
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
 
         //If no ennemy in range
-        if (isjamming == false)
-        {
+        if (isjamming == false) {
             //Classic behavior
             jammingtimer = 0;
             ChangeNorthDirection();
         }
 
-        else
-        {
+        else {
             //Generate random number every time jammingtimer reach jammingchangetime 
             jammingtimer += Time.deltaTime;
-            if (jammingtimer >= jammingchangetime)
-            {
+            if (jammingtimer >= jammingchangetime) {
                 jammingtimer = 0;
                 NumberGen();
             }
@@ -51,26 +45,19 @@ public class Compass : MonoBehaviour
     /// <summary>
     /// Point the needle at north direction 
     /// </summary>
-    public void ChangeNorthDirection()
-    {
+    public void ChangeNorthDirection() {
 
-        {
-            Needle.LookAt(NorthPole);
-            //Disable rotation out of the compass housing
-            Needle.localEulerAngles = new Vector3(0, Needle.localEulerAngles.y, 0);
-
-        }
-
+        Needle.LookAt(NorthPole);
+        //Disable rotation out of the compass housing
+        Needle.localEulerAngles = new Vector3(0, Needle.localEulerAngles.y, 0);
     }
 
     /// <summary>
     /// If an ennemy collide with the compass collider, set isjamming
     /// </summary>
     /// <param name="other"></param>
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Ennemy"))
-        {
+    public void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Ennemy")) {
             isjamming = true;
 
         }
@@ -80,17 +67,15 @@ public class Compass : MonoBehaviour
     ///  If an ennemy stop colliding with the compass collider, unset isjamming
     /// </summary>
     /// <param name="other"></param>
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Ennemy"))
-        {
+    public void OnTriggerExit(Collider other) {
+        if (other.gameObject.CompareTag("Ennemy")) {
 
             isjamming = false;
             //Smoothing transition
-            Needle.localEulerAngles=Vector3.Slerp(Needle.localEulerAngles, new Vector3(0, Needle.localEulerAngles.y, 0), Time.deltaTime * jammingspeed);
+            Needle.localEulerAngles = Vector3.Slerp(Needle.localEulerAngles, new Vector3(0, Needle.localEulerAngles.y, 0), Time.deltaTime * jammingspeed);
 
         }
-        
+
 
     }
 
@@ -98,8 +83,7 @@ public class Compass : MonoBehaviour
     /// Jamming Behavior, the needle turns on itself and changes direction of rotation according to the value of number
     /// 
     /// </summary>
-    public void Jamming()
-    {
+    public void Jamming() {
         if (number > 0)
             Needle.localRotation *= Quaternion.Euler(0, jammingspeed, 0);
         else
@@ -109,8 +93,7 @@ public class Compass : MonoBehaviour
     /// <summary>
     /// Generate random number
     /// </summary>
-    private void NumberGen()
-    {
+    private void NumberGen() {
         number = (Random.Range(0, 2));
 
     }
@@ -118,8 +101,7 @@ public class Compass : MonoBehaviour
     /// <summary>
     /// Displaying NorthPole
     /// </summary>
-    private void OnDrawGizmos()
-    {
+    private void OnDrawGizmos() {
         Gizmos.DrawCube(NorthPole, new Vector3(0.5f, 4f, 0.5f));
     }
 

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2703811083540725976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 577982004446596942}
+  m_Layer: 22
+  m_Name: Needle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &577982004446596942
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703811083540725976}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.000012, y: -0.003009, z: -0.00127}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5568199953884427025}
+  m_Father: {fileID: 5568199953492600966}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5568199953278660172
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +138,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 14.550004, y: 14.549998, z: 14.550001}
   m_Children:
-  - {fileID: 5568199953884427025}
+  - {fileID: 577982004446596942}
   - {fileID: 5568199953278660173}
   - {fileID: 5568199954734066525}
   m_Father: {fileID: 5568199953503079775}
@@ -126,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NorthPole: {x: 0, y: 0, z: 10000000}
-  Needle: {fileID: 5568199953884427025}
+  Needle: {fileID: 577982004446596942}
   jammingspeed: 20
   JammingRange: 10
 --- !u!1 &5568199953503079774
@@ -236,13 +267,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5568199953884427024}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00013502453, y: -0.0028614127, z: -0.0011915773}
+  m_LocalRotation: {x: -0, y: -0.14519562, z: -0, w: 0.989403}
+  m_LocalPosition: {x: 0.000155, y: 0, z: 0.000125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5568199953492600966}
+  m_Father: {fileID: 577982004446596942}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -16.697, z: 0}
 --- !u!33 &5568199953884427039
 MeshFilter:
   m_ObjectHideFlags: 0
