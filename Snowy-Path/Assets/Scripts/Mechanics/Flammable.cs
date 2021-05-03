@@ -18,6 +18,9 @@ public class Flammable : MonoBehaviour {
 
     private List<Transform> fireParticles;
     private List<GameObject> GFXs;
+
+    [SerializeField]
+    private List<GameObject> m_additionalGOToDeactivate;
     #endregion
 
     /// <summary>
@@ -42,6 +45,9 @@ public class Flammable : MonoBehaviour {
     public void Reset() {
         foreach (var gfx in GFXs) {
             gfx.SetActive(true);
+        }
+        foreach (var go in m_additionalGOToDeactivate) {
+            go.SetActive(true);
         }
         ResetDissolve();
         ignited = false;
@@ -106,6 +112,10 @@ public class Flammable : MonoBehaviour {
 
         foreach (var gfx in GFXs) {
             gfx.SetActive(false);
+        }
+
+        foreach(var go in m_additionalGOToDeactivate) {
+            go.SetActive(false);
         }
 
         for (int i = 0; i < fireParticles.Count; i++) {
