@@ -52,7 +52,6 @@ public class HUD : MonoBehaviour {
         float tempRatio = Mathf.Clamp(temperature.CurrentTemperature / temperature.maxTemperature, 0, 1);
         SetFreezeOverlays(tempRatio);
         SetBloodOverlays();
-
     }
 
     public void ResetOverlays() {
