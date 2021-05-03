@@ -3,36 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HandsAudio : MonoBehaviour {
+public class LeftHandAudio : MonoBehaviour {
 
     private FMOD.Studio.EventInstance instance;
     private FMOD.Studio.PARAMETER_ID soilParamId;
 
-    public UnityEvent torchAttack;
     public UnityEvent reload;
     public UnityEvent step;
-    public UnityEvent death;
 
-    public void AudioPlayTorchAttack() {
-        torchAttack.Invoke();
-    }
     public void AudioPlayReload(AnimationEvent evt) {
         reload.Invoke();
     }
 
     public void AudioPlayWalk(AnimationEvent evt) {
-        if (evt.animatorClipInfo.weight > 0.1f)
+        if (evt.animatorClipInfo.weight > 0.1f) {
             step.Invoke();
+            Debug.Log("Left");
+        }
         //FootStepSound(0); //TODO : replace number by ground type
     }
 
     public void AudioPlayRun(AnimationEvent evt) {
         if (evt.animatorClipInfo.weight > 0.1f)
             step.Invoke();
-    }
-
-    public void AudioPlayDeath(AnimationEvent evt) {
-        death.Invoke();
     }
 
     //private void FootStepSound(float soil) {
