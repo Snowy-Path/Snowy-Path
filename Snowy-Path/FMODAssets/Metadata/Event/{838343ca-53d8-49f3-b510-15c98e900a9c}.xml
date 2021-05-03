@@ -260,6 +260,9 @@
 		<property name="length">
 			<value>2</value>
 		</property>
+		<property name="pitch">
+			<value>-7</value>
+		</property>
 		<relationship name="modulators">
 			<destination>{43645029-4ceb-4afc-b27d-61708a30d961}</destination>
 		</relationship>
@@ -331,8 +334,14 @@
 		<property name="length">
 			<value>1.625</value>
 		</property>
+		<property name="pitch">
+			<value>3</value>
+		</property>
 		<relationship name="modulators">
 			<destination>{cb068842-dbff-4775-b097-52d11fe27c10}</destination>
+		</relationship>
+		<relationship name="fadeInCurve">
+			<destination>{14134836-e709-4e11-a13b-39817a446210}</destination>
 		</relationship>
 		<relationship name="fadeOutCurve">
 			<destination>{ac8b0e47-1b9d-48b2-9b8f-488f12d82012}</destination>
@@ -935,6 +944,14 @@
 			<value>3.5</value>
 		</property>
 	</object>
+	<object class="FadeCurve" id="{14134836-e709-4e11-a13b-39817a446210}">
+		<relationship name="startPoint">
+			<destination>{517b10cf-6be0-4341-8ac9-40b220ec85a2}</destination>
+		</relationship>
+		<relationship name="endPoint">
+			<destination>{d542b498-3fe5-45b9-8df9-4ec13fec194b}</destination>
+		</relationship>
+	</object>
 	<object class="FadeCurve" id="{ac8b0e47-1b9d-48b2-9b8f-488f12d82012}">
 		<relationship name="startPoint">
 			<destination>{cca0d688-d46f-4546-b7f8-8aaf420e2392}</destination>
@@ -1191,6 +1208,25 @@
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{a1968ddf-a611-4882-83c0-41687c17026f}" />
+	<object class="AutomationPoint" id="{517b10cf-6be0-4341-8ac9-40b220ec85a2}">
+		<property name="position">
+			<value>16</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+		<property name="curveShape">
+			<value>0.186766118</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{d542b498-3fe5-45b9-8df9-4ec13fec194b}">
+		<property name="position">
+			<value>16.050000000000001</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{cca0d688-d46f-4546-b7f8-8aaf420e2392}">
 		<property name="position">
 			<value>17</value>
