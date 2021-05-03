@@ -6,7 +6,7 @@ using UnityEngine;
 public class StelePuzzle : MonoBehaviour {
 
     [SerializeField]
-    [Tooltip("MANDATORY: Put them in order.")]
+    [Tooltip("Bowl used in this puzzle. MANDATORY: Put them in order.")]
     private BowlStelePuzzle[] m_bowls;
 
     [SerializeField]
@@ -16,7 +16,12 @@ public class StelePuzzle : MonoBehaviour {
     private DynamicComponent m_dynamicComponent;
 
     [SerializeField]
+    [Tooltip("Sound played when the puzzle is finised.")]
     private FMODUnity.StudioEventEmitter m_finishPuzzleEmitter;
+
+    [SerializeField]
+    [Tooltip("Gradient used by particle when the puzzle is finished.")]
+    private Gradient m_finishedColor;
 
     private void Start() {
         m_dynamicComponent = GetComponent<DynamicComponent>();
@@ -43,6 +48,7 @@ public class StelePuzzle : MonoBehaviour {
     private void ClosePuzzle() {
         foreach (var bowl in m_bowls) {
             bowl.LightBowl();
+            bowl.ChangeParticleColor(m_finishedColor);
             bowl.GetComponent<Interactable>().SwitchActivation();
         }
         m_finishPuzzleEmitter.Play();
