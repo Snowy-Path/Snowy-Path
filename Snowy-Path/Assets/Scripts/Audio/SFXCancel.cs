@@ -8,7 +8,6 @@ public class SFXCancel : MonoBehaviour {
     [SerializeField] StudioEventEmitter[] cancelSources;
 
     StudioEventEmitter emitter;
-    bool paused = false;
 
     // Start is called before the first frame update
     void Start() {
