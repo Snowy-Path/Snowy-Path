@@ -5,20 +5,30 @@ using UnityEngine;
 
 public class ExplorationMusic : MonoBehaviour {
 
-    private static int m_nbWolfInCombat;
-    private static bool m_isInCombat;
+    public static ExplorationMusic Instance { get; private set; }
 
-    public static void AddWolfInCombat() {
+    private int m_nbWolfInCombat;
+    private bool m_isInCombat;
+
+    private void Awake() {
+        if (Instance != null && Instance != this) {
+            Destroy(this.gameObject);
+        } else {
+            Instance = this;
+        }
+    }
+
+    public void AddWolfInCombat() {
         m_nbWolfInCombat++;
         CheckPlayerInCombat();
     }
 
-    public static void RemoveWolfInCombat() {
+    public void RemoveWolfInCombat() {
         m_nbWolfInCombat--;
         CheckPlayerInCombat();
     }
 
-    private static void CheckPlayerInCombat() {
+    private void CheckPlayerInCombat() {
         if (m_nbWolfInCombat > 0) {
             if (!m_isInCombat) {
                 m_isInCombat = true;
@@ -32,4 +42,11 @@ public class ExplorationMusic : MonoBehaviour {
         }
     }
 
+    public void EnterSafeMusic() {
+        MusicManager.Instance.ChangeParametter("ExplorationSafe", 1f);
+    }
+
+    public void ExitSafeMusic() {
+        MusicManager.Instance.ChangeParametter("ExplorationSafe", 0f);
+    }
 }

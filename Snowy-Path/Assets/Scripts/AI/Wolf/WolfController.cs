@@ -470,10 +470,14 @@ public class WolfController : MonoBehaviour, IEnnemyController {
         StateMachine<EWolfState> combat = new StateMachine<EWolfState>(EWolfState.Combat, EWolfState.Lurk, parent,
             onEntry: (state) => {
                 m_agent.speed = m_lurkSpeed;
-                ExplorationMusic.AddWolfInCombat();
+                if (ExplorationMusic.Instance) {
+                    ExplorationMusic.Instance.AddWolfInCombat();
+                }
             },
             onExit: (state) => {
-                ExplorationMusic.RemoveWolfInCombat();
+                if (ExplorationMusic.Instance) {
+                    ExplorationMusic.Instance.RemoveWolfInCombat();
+                }
             }
         );
 
@@ -666,11 +670,15 @@ public class WolfController : MonoBehaviour, IEnnemyController {
             onEntry: (state) => {
                 m_timer = Time.time + stunDuration;
                 m_animator.SetTrigger("TookDamage");
-                ExplorationMusic.AddWolfInCombat();
+                if (ExplorationMusic.Instance) {
+                    ExplorationMusic.Instance.AddWolfInCombat();
+                }
             },
             onExit: (state) => {
                 m_timer = float.NegativeInfinity;
-                ExplorationMusic.RemoveWolfInCombat();
+                if (ExplorationMusic.Instance) {
+                    ExplorationMusic.Instance.RemoveWolfInCombat();
+                }
             }
         );
 
