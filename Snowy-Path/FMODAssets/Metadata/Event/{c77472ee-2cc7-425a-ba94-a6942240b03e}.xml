@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{c77472ee-2cc7-425a-ba94-a6942240b03e}">
+		<property name="color">
+			<value>Magenta</value>
+		</property>
 		<property name="name">
 			<value>Oneira Movement</value>
 		</property>
@@ -141,7 +144,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{a11b3cde-ee66-44e2-aa53-70fe3996611d}">
 		<property name="volume">
-			<value>-10</value>
+			<value>-11.5</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{763e0959-0854-4cd7-b5d3-224ff4c1dc33}</destination>
@@ -600,6 +603,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{763e0959-0854-4cd7-b5d3-224ff4c1dc33}">
 		<relationship name="effects">
+			<destination>{52f28147-34aa-41c2-a379-0c8280b614e3}</destination>
 			<destination>{2137da59-33a5-4fdd-b03f-9bacdb033c3a}</destination>
 			<destination>{36b47c12-2e47-451e-98da-6add26e4491a}</destination>
 		</relationship>
@@ -923,6 +927,17 @@
 		</property>
 		<relationship name="parameter">
 			<destination>{eddd55e1-1769-4f12-8fc1-b443f19d0859}</destination>
+		</relationship>
+	</object>
+	<object class="MixerSend" id="{52f28147-34aa-41c2-a379-0c8280b614e3}">
+		<property name="level">
+			<value>0</value>
+		</property>
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{c6269794-42ec-43d8-9753-eda133a8fa8c}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{2137da59-33a5-4fdd-b03f-9bacdb033c3a}" />

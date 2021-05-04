@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{9c16857f-c128-4c97-bfe5-8c7e1856b30b}">
-		<property name="color">
-			<value>Blue</value>
-		</property>
 		<property name="name">
 			<value>IceSpike</value>
 		</property>
@@ -134,8 +131,10 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{23fd1cde-75f4-46e3-a62f-02b34e5ec2a4}">
 		<relationship name="effects">
+			<destination>{45e1388e-a93f-4c6a-aad9-edd0f174dec2}</destination>
 			<destination>{0f2d371c-6dfa-485a-80f8-7a4099690bf5}</destination>
 			<destination>{2a735750-390b-4e41-a984-b64bf31afe8e}</destination>
+			<destination>{7f49d4b8-6d02-4055-b2ad-814c77ab23f3}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{2ab30cad-24ec-47f0-8877-3ea38fb9c7e6}" />
@@ -172,8 +171,48 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{38f512d6-449a-4940-b960-496c2ed4b340}" />
+	<object class="MultibandEqEffect" id="{45e1388e-a93f-4c6a-aad9-edd0f174dec2}">
+		<property name="filterTypeA">
+			<value>9</value>
+		</property>
+		<property name="filterTypeB">
+			<value>4</value>
+		</property>
+		<property name="filterTypeC">
+			<value>9</value>
+		</property>
+		<property name="frequencyA">
+			<value>5266.79639</value>
+		</property>
+		<property name="frequencyB">
+			<value>47.7479286</value>
+		</property>
+		<property name="frequencyC">
+			<value>447.46637</value>
+		</property>
+		<property name="qualityA">
+			<value>0.379999995</value>
+		</property>
+		<property name="qualityB">
+			<value>1.30000007</value>
+		</property>
+		<property name="qualityC">
+			<value>0.639999986</value>
+		</property>
+		<property name="gainA">
+			<value>12</value>
+		</property>
+		<property name="gainC">
+			<value>6.72413731</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{0f2d371c-6dfa-485a-80f8-7a4099690bf5}" />
 	<object class="SpatialiserEffect" id="{2a735750-390b-4e41-a984-b64bf31afe8e}" />
+	<object class="SFXReverbEffect" id="{7f49d4b8-6d02-4055-b2ad-814c77ab23f3}">
+		<property name="decayTime">
+			<value>4000</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{a8920cd9-fe71-4c86-a8ee-702289ad6fbe}">
 		<property name="position">
 			<value>0</value>
