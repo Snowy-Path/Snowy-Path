@@ -30,9 +30,6 @@ public class HQOptionsMenu : MonoBehaviour
 
     //        RenderSettings.ambientLight = new Color(GammaCorrection, GammaCorrection, GammaCorrection, 1.0f);
 
-
-
-
     public void MasterVolumeLevel(float newMasterVolume)
     {
         audioSettings.MasterVolume = newMasterVolume;
