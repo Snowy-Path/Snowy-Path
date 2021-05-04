@@ -18,7 +18,6 @@ public class RightHandAudio : MonoBehaviour {
     public void AudioPlayWalk(AnimationEvent evt) {
         if (evt.animatorClipInfo.weight > 0.1f) {
             step.Invoke();
-            Debug.Log("Right");
         }
         //FootStepSound(0); //TODO : replace number by ground type
     }
