@@ -42,7 +42,7 @@ public class Temperature : MonoBehaviour {
     public float sprintLossRate = 0.5f;
 
     public float CurrentTemperature { get => m_currentTemperature; }
-    private float m_currentTemperature = 0;
+    [SerializeField] private float m_currentTemperature = 0;
     private float m_healthRegenerationCooldownTimer = 0;
     private float m_damageHypothermiaCooldownTimer = 0;
     private float m_temperatureRegenerationCooldownTimer = 0;
