@@ -66,7 +66,16 @@ public class InteractionController : MonoBehaviour {
 
             if (_interHit != null) { // We really did hit an interactable object
 
-                Ray _rayBlock = new Ray(playerCamera.transform.position, _interHit.transform.position - playerCamera.transform.position);
+                // Getting the point to raycast to
+                // Allow us to ensure we can interact with the Interactable found with the first ray
+                Vector3 _interPosition;
+                if (_interHit.InteractionPoint) {
+                    _interPosition = _interHit.InteractionPoint.position;
+                } else {
+                    _interPosition = _interHit.transform.position;
+                }
+
+                Ray _rayBlock = new Ray(playerCamera.transform.position, _interPosition - playerCamera.transform.position);
                 RaycastHit _hitInfoBlock;
 
                 if (Physics.Raycast(_rayBlock, out _hitInfoBlock, maxDistance, blockingLayers)) {

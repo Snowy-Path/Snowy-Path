@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{d6fb9cae-4006-4427-9897-dc8261c45288}">
+		<property name="color">
+			<value>Magenta</value>
+		</property>
 		<property name="name">
 			<value>Gun Reload</value>
 		</property>
@@ -108,7 +111,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{1355474e-6d53-419e-9301-f66c41816826}">
 		<property name="volume">
-			<value>-7.5</value>
+			<value>-2</value>
 		</property>
 		<property name="name">
 			<value>Gun Reload</value>
@@ -125,6 +128,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{43c59512-abab-482b-b3f9-f8aef67f1963}">
 		<relationship name="effects">
+			<destination>{63e9fab0-1ef4-4e7d-b9b8-a8c2cbd9bde6}</destination>
 			<destination>{835391c3-326f-4939-8f3a-b17566bacaf0}</destination>
 			<destination>{3af5d57f-7250-4330-bcf8-4b0ef4b45b5e}</destination>
 		</relationship>
@@ -171,6 +175,17 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{3ebf9e63-a493-48ec-8423-03b944aaf106}" />
+	<object class="MixerSend" id="{63e9fab0-1ef4-4e7d-b9b8-a8c2cbd9bde6}">
+		<property name="level">
+			<value>0</value>
+		</property>
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{c6269794-42ec-43d8-9753-eda133a8fa8c}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{835391c3-326f-4939-8f3a-b17566bacaf0}" />
 	<object class="SpatialiserEffect" id="{3af5d57f-7250-4330-bcf8-4b0ef4b45b5e}" />
 	<object class="AutomationPoint" id="{899174b0-36d3-4234-b951-3ab9f67d4fd2}">

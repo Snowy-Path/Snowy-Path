@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{632315ae-610b-4ec4-b2af-c40d344f050b}">
+		<property name="color">
+			<value>Magenta</value>
+		</property>
 		<property name="name">
 			<value>Spyglass Equipped</value>
 		</property>
@@ -123,6 +126,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{2fae3d52-06bd-4e10-a7ae-7db967cb607f}">
 		<relationship name="effects">
+			<destination>{6317075c-0474-4996-87f2-4d260e52c6ad}</destination>
 			<destination>{cba9092c-7a9f-4c1a-86d7-5e5088319324}</destination>
 			<destination>{145b225c-bd95-4ea8-aa2f-f746c6c2f1f5}</destination>
 		</relationship>
@@ -166,6 +170,17 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{90bf1326-1f60-4a0d-bf40-13a47e75c22f}" />
+	<object class="MixerSend" id="{6317075c-0474-4996-87f2-4d260e52c6ad}">
+		<property name="level">
+			<value>0</value>
+		</property>
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{c6269794-42ec-43d8-9753-eda133a8fa8c}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{cba9092c-7a9f-4c1a-86d7-5e5088319324}" />
 	<object class="SpatialiserEffect" id="{145b225c-bd95-4ea8-aa2f-f746c6c2f1f5}" />
 	<object class="AutomationPoint" id="{b62ec1e3-fa3a-4222-bca2-4e0953824f0e}">

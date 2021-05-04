@@ -47,6 +47,13 @@ public class Interactable : MonoBehaviour {
     [Tooltip("Callbacks called when the player's camera doesn't look anymore at the object")]
     public UnityEvent onHideFeedback;
 
+    public Transform InteractionPoint { private set; get; }
+    #endregion
+
+    #region Built-In Methods
+    private void Start() {
+        InteractionPoint = transform.Find("InteractionPoint");
+    }
     #endregion
 
 

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{90cb257b-4255-4eae-bf82-48c43179e791}">
+		<property name="color">
+			<value>Magenta Light 2</value>
+		</property>
 		<property name="name">
 			<value>Gun Shot</value>
 		</property>
@@ -109,9 +112,6 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{e83bfb48-d688-4fb5-9e73-8df5970612e3}">
-		<property name="volume">
-			<value>-4</value>
-		</property>
 		<property name="name">
 			<value>Gun Shot</value>
 		</property>
@@ -127,6 +127,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{41755e08-606f-4ef2-9c1d-f4d3a352f74a}">
 		<relationship name="effects">
+			<destination>{a901d719-9ae9-422d-bc1d-878d3f096f49}</destination>
 			<destination>{935c62a4-5c88-4cd5-8a93-3b3b0ff3d9e9}</destination>
 			<destination>{1a10d84d-b546-44f1-bcf2-e010f057fb62}</destination>
 			<destination>{58885667-6e43-4cec-a7d3-d0cb56b6cd61}</destination>
@@ -184,6 +185,17 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{4795cc8b-cf2c-4ffb-b261-3f4470b6920f}" />
+	<object class="MixerSend" id="{a901d719-9ae9-422d-bc1d-878d3f096f49}">
+		<property name="level">
+			<value>0</value>
+		</property>
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{c6269794-42ec-43d8-9753-eda133a8fa8c}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{935c62a4-5c88-4cd5-8a93-3b3b0ff3d9e9}" />
 	<object class="SpatialiserEffect" id="{1a10d84d-b546-44f1-bcf2-e010f057fb62}" />
 	<object class="SFXReverbEffect" id="{58885667-6e43-4cec-a7d3-d0cb56b6cd61}">

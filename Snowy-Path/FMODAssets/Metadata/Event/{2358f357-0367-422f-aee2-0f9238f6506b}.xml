@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{2358f357-0367-422f-aee2-0f9238f6506b}">
+		<property name="color">
+			<value>Magenta</value>
+		</property>
 		<property name="name">
 			<value>Oneira Sprint Recovery</value>
 		</property>
@@ -100,6 +103,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{7871dc82-1349-43f0-aa03-75e0aa2de5fc}">
+		<property name="volume">
+			<value>-10</value>
+		</property>
 		<property name="name">
 			<value>Oneira Sprint Recovery</value>
 		</property>
@@ -115,6 +121,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{b738b883-75a6-4199-b0e9-59dc1475379d}">
 		<relationship name="effects">
+			<destination>{c898775f-5a2a-4755-9d39-e7e7a965ea15}</destination>
 			<destination>{34637263-41b4-41fb-ac56-6083a2e79186}</destination>
 			<destination>{38fd3291-1971-46f2-8a0b-51ebbba76b09}</destination>
 		</relationship>
@@ -135,6 +142,17 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{934cb37a-0415-45ac-bcb1-2afc3db23ed0}" />
+	<object class="MixerSend" id="{c898775f-5a2a-4755-9d39-e7e7a965ea15}">
+		<property name="level">
+			<value>0</value>
+		</property>
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{c6269794-42ec-43d8-9753-eda133a8fa8c}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{34637263-41b4-41fb-ac56-6083a2e79186}" />
 	<object class="SpatialiserEffect" id="{38fd3291-1971-46f2-8a0b-51ebbba76b09}" />
 	<object class="AutomationPoint" id="{acee0b83-ed28-4069-9d5e-2a8eceab1f61}">

@@ -31,6 +31,9 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     #region SFX
     [Header("SFX")]
     [SerializeField]
+    private FMODUnity.StudioEventEmitter m_whooshEvent;
+
+    [SerializeField]
     private FMODUnity.StudioEventEmitter m_spawnEvent;
 
     [SerializeField]
@@ -110,6 +113,9 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     #endregion
 
     #region SFX_Utility
+    private void PlayWhooshSFX() {
+        m_whooshEvent.Play();
+    }
     private void PlaySpawnSFX() {
         m_spawnEvent.Play();
     }
