@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{3fcaf5ef-9482-4a70-8ff6-b25e96d3b430}">
-		<property name="color">
-			<value>Blue</value>
-		</property>
 		<property name="name">
 			<value>WendigoSpawn</value>
 		</property>
@@ -56,7 +53,7 @@
 			<destination>{8564177d-ab9b-4e3a-bf0a-4a5acd6fc2b7}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{6ff218c2-fa7e-4eae-bbf4-de8a28b062a3}</destination>
+			<destination>{3a0791a2-748d-4b18-ac83-5bfac01fb917}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{9ae97f00-e5e0-400b-8160-73f2aadc2834}" />
@@ -76,7 +73,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{1700b408-400c-4074-a61d-112aff646cce}">
 		<property name="volume">
-			<value>-6</value>
+			<value>4.5</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{1fa4e3b9-b4d5-4ba6-88e6-405c15a03756}</destination>
@@ -117,9 +114,6 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{5d2a2d8c-7d22-469c-a45e-eb78218d1ce8}">
-		<property name="volume">
-			<value>-4</value>
-		</property>
 		<property name="name">
 			<value>WendigoSpawn</value>
 		</property>
@@ -188,13 +182,17 @@
 	</object>
 	<object class="MixerBusPanner" id="{4a8262d6-8a1a-4878-a6af-810211d384dd}" />
 	<object class="MixerBusFader" id="{7b91c2b7-3a20-434f-9b54-92c2c0b9d9ec}" />
-	<object class="SpatialiserEffect" id="{57971fe8-59d7-425b-a3f5-ab1b7969f9c6}" />
+	<object class="SpatialiserEffect" id="{57971fe8-59d7-425b-a3f5-ab1b7969f9c6}">
+		<property name="maximumDistance">
+			<value>10000</value>
+		</property>
+	</object>
 	<object class="SFXReverbEffect" id="{af04c458-2e75-4efb-a515-c4f5944403de}">
 		<property name="decayTime">
 			<value>3800</value>
 		</property>
 		<property name="wetLevel">
-			<value>-13</value>
+			<value>-5</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{978438c4-43f0-4c7c-8760-fcdf7f6a5f02}">

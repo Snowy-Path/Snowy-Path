@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{02d9daa6-dfc1-4391-bd85-6905eb71caea}">
+		<property name="color">
+			<value>Magenta</value>
+		</property>
 		<property name="name">
 			<value>Wolf Attack</value>
 		</property>
@@ -59,7 +62,7 @@
 			<destination>{d1f26ebd-4b31-4b81-ad3c-7b6f752571de}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{6ff218c2-fa7e-4eae-bbf4-de8a28b062a3}</destination>
+			<destination>{3a0791a2-748d-4b18-ac83-5bfac01fb917}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{36c46a3d-f3e0-48e7-859c-ea5487c7d9dd}" />
@@ -129,9 +132,6 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{74551374-4d01-4bde-840f-190e556d4059}">
-		<property name="volume">
-			<value>-2</value>
-		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -147,7 +147,6 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{2a805d2a-554f-43b2-b88a-cad39e73e672}">
 		<relationship name="effects">
-			<destination>{3a16a2a4-1d99-45e2-b128-854fa3745de7}</destination>
 			<destination>{8897f920-cd37-402d-bef5-444771d42a4e}</destination>
 			<destination>{95e7ff0a-37b2-46e8-a823-4d6b4cc2569e}</destination>
 		</relationship>
@@ -214,20 +213,6 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{108bf2e5-c0bb-4a56-800e-766e27a4248f}" />
-	<object class="ConvolutionReverbEffect" id="{3a16a2a4-1d99-45e2-b128-854fa3745de7}">
-		<property name="endFrame">
-			<value>37314</value>
-		</property>
-		<property name="wetLevel">
-			<value>-20.5</value>
-		</property>
-		<property name="dryLevel">
-			<value>0</value>
-		</property>
-		<relationship name="referenceableData">
-			<destination>{3e5ed35a-d3e0-4c25-b1c3-2def3840c5a2}</destination>
-		</relationship>
-	</object>
 	<object class="MixerBusFader" id="{8897f920-cd37-402d-bef5-444771d42a4e}" />
 	<object class="SpatialiserEffect" id="{95e7ff0a-37b2-46e8-a823-4d6b4cc2569e}">
 		<property name="maximumDistance">

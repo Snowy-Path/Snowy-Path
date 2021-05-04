@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 /// <summary>
@@ -16,6 +17,42 @@ public class Torch : MonoBehaviour {
 
     [Tooltip("Hands animator. Allows this script to trigger the attack animation.")]
     public Animator animator;
+
+    public MonoBehaviour[] lockingTools;
+    public UnityEvent onAttack;
+
+
+    [SerializeField]
+    [FMODUnity.EventRef]
+    private string m_attackEventPath;
+    [SerializeField]
+    private Transform m_attackEmissionPosition;
+    private FMOD.Studio.EventInstance m_attackInstance;
+    private FMOD.Studio.PARAMETER_ID m_attackID;
+
+    private float m_rockHitValue = 0.0f;
+    private float m_snowHitValue = 0.15f;
+    private float m_iceHitValue = 0.25f;
+    private float m_waterHitValue = 0.35f;
+    private float m_woodHitValue = 0.45f;
+    private float m_leavesHitValue = 0.55f;
+    private float m_fleshHitValue = 0.65f;
+
+    private bool attackLocked = false;
+
+    private void Start() {
+        m_attackInstance = FMODUnity.RuntimeManager.CreateInstance(m_attackEventPath);
+
+        FMOD.Studio.EventDescription attackEventDesc;
+        m_attackInstance.getDescription(out attackEventDesc);
+        FMOD.Studio.PARAMETER_DESCRIPTION attackParametterDesc;
+        attackEventDesc.getParameterDescriptionByIndex(0, out attackParametterDesc);
+        m_attackID = attackParametterDesc.id;
+    }
+
+    private void Update() {
+        m_attackInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(m_attackEmissionPosition));
+    }
 
     /// <summary>
     /// The main interaction of the torch.
@@ -33,13 +70,31 @@ public class Torch : MonoBehaviour {
     /// The animation itself MUST manage the box collider enabling/disabling.
     /// </summary>
     private void PerformAttack() {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
-            animator.GetCurrentAnimatorStateInfo(0).IsName("Run") ||
-            animator.GetCurrentAnimatorStateInfo(0).IsName("Jump") ||
-            animator.GetCurrentAnimatorStateInfo(0).IsName("Reload")
-            ) { // Without this line, the animation can be triggered WHILE playing. Meaning it will repeat again & again.
-            animator.SetTrigger("BaseAttack");
+
+        bool isBusy = false;
+        foreach (var tool in lockingTools) {
+            IHandTool iTool = tool.GetComponent<IHandTool>();
+            if (iTool.IsBusy) {
+                isBusy = true;
+                break;
+            }
         }
+
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && attackLocked == false && !isBusy) {
+            onAttack.Invoke();
+            animator.SetTrigger("Attack");
+            attackLocked = true;
+            Invoke(nameof(ResetAttack), 0.3f);
+        }
+    }
+
+    private void ResetAttack() {
+        attackLocked = false;
+    }
+
+    private void PlayAttackSoundValue(float value) {
+        m_attackInstance.setParameterByID(m_attackID, value);
+        m_attackInstance.start();
     }
 
     /// <summary>
@@ -48,17 +103,23 @@ public class Torch : MonoBehaviour {
     /// </summary>
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
-
-        if (other.CompareTag("Campfire")) {
+        if (other.CompareTag("Ennemy")) {
+            other.GetComponent<IEnnemyController>().Hit(EToolType.Torch, attackDamage);
+            PlayAttackSoundValue(m_fleshHitValue);
+        } else if (other.CompareTag("Ice")) {
+            PlayAttackSoundValue(m_iceHitValue);
+        } else {
             Interactable inter = other.GetComponent<Interactable>();
-            if (inter) {
+            if (inter && inter.IsTorchInteractable) {
                 inter.Interact();
+                if (other.CompareTag("Campfire") || other.CompareTag("FireInteractable")) {
+                    PlayAttackSoundValue(m_woodHitValue);
+                } else {
+                    PlayAttackSoundValue(m_rockHitValue);
+                }
             }
         }
 
-        if (other.CompareTag("Ennemy")) {
-            other.GetComponent<IEnnemyController>().Hit(EToolType.Torch, attackDamage);
-        }
     }
 
 }

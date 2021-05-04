@@ -191,6 +191,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44794bb902c78de45ac7117b5ee78bd2, type: 3}
+--- !u!1 &1304267793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1304267795}
+  - component: {fileID: 1304267797}
+  - component: {fileID: 1304267794}
+  m_Layer: 0
+  m_Name: OptionSettings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1304267794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304267793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f9e31727340c5248968de52a790c6da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  optionSettings:
+    MasterVolume: 0
+    MusicVolume: 0
+    SFXVolume: 0
+    resolution_index: 0
+    aa_index: 0
+    gammavalue: 0
+--- !u!4 &1304267795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304267793}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1071.7561, y: 576.6401, z: -774.4744}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1304267797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304267793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87b641213805c0e479ad50c66a908148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MusicVolume: 0.5
+  SFXVolume: 0.5
+  MasterVolume: 1
 --- !u!1001 &5056028581156680756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -256,6 +322,16 @@ PrefabInstance:
     - target: {fileID: 5056028579978527349, guid: ab1154a79082172479fc6fea676d939b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056028580127192806, guid: ab1154a79082172479fc6fea676d939b,
+        type: 3}
+      propertyPath: m_Name
+      value: Background
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881029138014235623, guid: ab1154a79082172479fc6fea676d939b,
+        type: 3}
+      propertyPath: m_InitialState
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

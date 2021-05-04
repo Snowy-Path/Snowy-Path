@@ -82,7 +82,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -105,9 +105,10 @@ GameObject:
   - component: {fileID: 8557692464567656223}
   - component: {fileID: 9000291879215612686}
   - component: {fileID: 9000291879215612673}
+  - component: {fileID: 456812647537194160}
   m_Layer: 0
   m_Name: Glacon_LP
-  m_TagString: Untagged
+  m_TagString: Ice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,14 +120,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9000291879215612672}
-  m_LocalRotation: {x: -0, y: -0, z: 1, w: -6.123234e-17}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0.00000028088027}
   m_LocalPosition: {x: 121.25, y: -3.12, z: -746.85}
   m_LocalScale: {x: 197.33714, y: 197.33714, z: 197.33714}
   m_Children:
   - {fileID: 8831264098240913246}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 179.99998}
 --- !u!33 &3431362157899399001
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -200,11 +201,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62f8011909e6494c862b5c0340f3162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cuts: 10
+  cuts: 6
   explosionForce: 100
   explosionRadius: 15
-  boundExpansion: {x: 0.1, y: 0.1, z: 0.1}
+  boundExpansion: {x: 0, y: 0, z: 0}
   fadeOutCooldown: 2
   fadeOutRate: 0.7
   meshFilter: {fileID: 0}
   meshRenderer: {fileID: 0}
+--- !u!114 &456812647537194160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9000291879215612672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75f925abc5344b6479815fa7854ffd33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

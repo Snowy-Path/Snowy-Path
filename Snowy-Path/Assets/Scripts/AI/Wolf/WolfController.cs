@@ -1,4 +1,5 @@
 ﻿using FMODUnity;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -45,6 +46,14 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     [SerializeField]
     [Tooltip("FMOD Studio Emitter for the TookDamage sound")]
     private StudioEventEmitter m_tookDamageSoundEmitter;
+
+    [SerializeField]
+    [Tooltip("FMOD Studio Emitter for the Combat sound")]
+    private StudioEventEmitter m_combatSoundEmitter;
+
+    [SerializeField]
+    [Tooltip("FMOD Studio Emitter for the Death sound")]
+    private StudioEventEmitter m_deathSoundEmitter;
 
     [SerializeField]
     private FootstepChoose m_footstepChoose;
@@ -165,6 +174,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     private AnimationCurve curve;
 
     private float m_lurkingTime; // Random lurking time
+    private Coroutine m_combatSFXCoroutine;
     #endregion
 
     #region Charge
@@ -474,7 +484,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
 
         parent.AddState(combat);
     }
-
+    
     /// <summary>
     /// Creates and add to <c>parent</c> the Lurk state.
     /// All logic and transitions of the Lurk state are created.
@@ -485,6 +495,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
             onEntry: (state) => {
                 m_lurkingTime = Random.Range(lurkingDurationMin, lurkingDurationMax);
                 m_timer = Time.time + m_lurkingTime;
+                m_combatSFXCoroutine = StartCoroutine(CombatSFX());
             },
             onUpdate: (state) => {
                 m_agent.SetDestination(PositionToLurk());
@@ -492,6 +503,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
             onExit: (state) => {
                 m_timer = float.NegativeInfinity;
                 ResetAgentPath();
+                StopCoroutine(m_combatSFXCoroutine);
             }
         );
 
@@ -501,6 +513,13 @@ public class WolfController : MonoBehaviour, IEnnemyController {
         ));
 
         parent.AddState(lurk);
+    }
+
+    IEnumerator CombatSFX() {
+        while (true) {
+            m_combatSoundEmitter.Play();
+            yield return new WaitForSeconds(Random.Range(1.0f, 5.0f));
+        }
     }
 
     /// <summary>
@@ -770,8 +789,20 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     /// <param name="toolType">The type of tool that called this method. Used to differentiate between Pistol and Torch weapons.</param>
     /// <param name="attackDamage">The damage value to be dealt.</param>
     public void Hit(EToolType toolType, int attackDamage) {
+
+        // Guard to prevent switch to Stun state or trigger sounds
+        if (!m_genericHealth.IsAlive()) {
+            return;
+        }
+
         m_genericHealth.Hit(attackDamage);
-        m_tookDamageSoundEmitter.Play();
+
+        if (m_genericHealth.IsAlive()) {
+            m_tookDamageSoundEmitter.Play();
+        } else {
+            m_deathSoundEmitter.Play();
+        }
+
         if (toolType == EToolType.Pistol) { // If Gun, stun wolf
             SetStunState();
             m_effectAnimator.SetTrigger("TookDamage");

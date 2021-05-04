@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3731473692754726343}
   - component: {fileID: 4391317825168200863}
   - component: {fileID: 3731473692754726342}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Powder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3566856688555362426, guid: c265bca1f7e820c4282007ccaa1503f1, type: 3}
 --- !u!23 &3731473692754726343
@@ -122,11 +122,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
+  isTorchInteractable: 0
   onInteract:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4391317825168200863}
         m_MethodName: ActivatePowderEffects
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4391317825168200863}
+        m_MethodName: PlaySFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

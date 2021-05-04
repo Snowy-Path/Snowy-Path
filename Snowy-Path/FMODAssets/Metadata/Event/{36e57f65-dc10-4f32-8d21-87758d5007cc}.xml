@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{36e57f65-dc10-4f32-8d21-87758d5007cc}">
+		<property name="color">
+			<value>Magenta</value>
+		</property>
 		<property name="name">
 			<value>TorchAll</value>
 		</property>
@@ -61,7 +64,7 @@
 			<destination>{a605b50a-b6ca-4865-813b-119fdb066ef5}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{6ff218c2-fa7e-4eae-bbf4-de8a28b062a3}</destination>
+			<destination>{3a0791a2-748d-4b18-ac83-5bfac01fb917}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{e13ce080-d635-419e-a8f6-d1e78cc7d10e}" />
@@ -117,6 +120,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{ed7bb48e-4bd8-41f6-80b0-77bf7d115aa1}">
+		<property name="volume">
+			<value>-6.5</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{5c5c8b66-20f2-4f86-a391-83df4587a2b5}</destination>
 		</relationship>
@@ -367,6 +373,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{5c5c8b66-20f2-4f86-a391-83df4587a2b5}">
 		<relationship name="effects">
+			<destination>{ed7cb973-28ee-4469-be21-fcb1ba7ad277}</destination>
 			<destination>{015fed49-9807-4ac1-a22e-d9e31538c542}</destination>
 			<destination>{a3a6d2ba-8e93-4d53-8b5e-fc69b82e9dd5}</destination>
 		</relationship>
@@ -484,6 +491,17 @@
 		</property>
 		<relationship name="parameter">
 			<destination>{f9b1ce76-d170-4c35-b831-5a932b9825c9}</destination>
+		</relationship>
+	</object>
+	<object class="MixerSend" id="{ed7cb973-28ee-4469-be21-fcb1ba7ad277}">
+		<property name="level">
+			<value>-7</value>
+		</property>
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{c6269794-42ec-43d8-9753-eda133a8fa8c}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{015fed49-9807-4ac1-a22e-d9e31538c542}" />

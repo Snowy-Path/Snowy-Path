@@ -14,6 +14,7 @@ public class HUD : MonoBehaviour {
     [Header("Breath")]
     [Range(0, 1)] [SerializeField] float startBreath = 0.5f;
 
+
     [Header("Freeze")]
     [Tooltip("% of max temperature")]
     [Range(0, 1)] [SerializeField] float startFreeze1 = 0.7f;
@@ -43,24 +44,14 @@ public class HUD : MonoBehaviour {
 
     private void Start() {
         ResetOverlays();
-        playerHealth = GetComponent<GenericHealth>();
-        temperature = GetComponent<Temperature>();
+        playerHealth = GetComponentInParent<GenericHealth>();
+        temperature = GetComponentInParent<Temperature>();
     }
 
     private void Update() {
-        //Debug
-        //if (Keyboard.current.oKey.wasPressedThisFrame)
-        //    playerHealth.Hit(1);
-        //if (Keyboard.current.iKey.wasPressedThisFrame)
-        //    playerHealth.Heal(1);
-        //if (Keyboard.current.kKey.wasPressedThisFrame)
-        //    temperature.DebugTemperature(5);
-        //if (Keyboard.current.jKey.wasPressedThisFrame)
-        //    temperature.DebugTemperature(-5);
-
-        SetFreezeOverlays(Mathf.Clamp(temperature.CurrentTemperature / temperature.maxTemperature, 0, 1));
+        float tempRatio = Mathf.Clamp(temperature.CurrentTemperature / temperature.maxTemperature, 0, 1);
+        SetFreezeOverlays(tempRatio);
         SetBloodOverlays();
-        //Debug.Log(temperature.CurrentTemperature);
     }
 
     public void ResetOverlays() {
@@ -118,7 +109,7 @@ public class HUD : MonoBehaviour {
         else {
             breathEffect.enabled = false;
         }
-   
+
 
         CalculateFreezeAlpha(ref freeze1Overlay, temperatureRatio, startFreeze1);
         CalculateFreezeAlpha(ref freeze2Overlay, temperatureRatio, startFreeze2);

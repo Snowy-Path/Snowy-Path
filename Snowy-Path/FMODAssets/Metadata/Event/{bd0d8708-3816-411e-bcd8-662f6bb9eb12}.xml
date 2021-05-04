@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{bd0d8708-3816-411e-bcd8-662f6bb9eb12}">
+		<property name="color">
+			<value>Magenta</value>
+		</property>
 		<property name="name">
 			<value>Wolf Movement Footsteps</value>
 		</property>
@@ -62,7 +65,7 @@
 			<destination>{46973f70-80ed-4773-ac0b-d711d4a30236}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{6ff218c2-fa7e-4eae-bbf4-de8a28b062a3}</destination>
+			<destination>{3a0791a2-748d-4b18-ac83-5bfac01fb917}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{2244ec90-9ecc-48fc-9774-1f9c67ff5160}" />
@@ -103,6 +106,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{205b233a-13ba-4a6a-a2dd-590d6819c499}">
+		<property name="volume">
+			<value>-10</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{9628c84b-f771-483e-a124-52ae77df3525}</destination>
 		</relationship>
@@ -592,7 +598,11 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{2f984396-4c3d-4704-a08e-c5deb99965cb}" />
-	<object class="SpatialiserEffect" id="{9f18a042-ae1f-46b6-9be4-25685cbbd83c}" />
+	<object class="SpatialiserEffect" id="{9f18a042-ae1f-46b6-9be4-25685cbbd83c}">
+		<property name="distanceRolloffType">
+			<value>2</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{01203b55-6419-4690-91c0-31fbcc8d50ff}">
 		<property name="position">
 			<value>0</value>

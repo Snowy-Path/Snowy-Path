@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{693749e2-d196-4b2d-a8a4-081aa97a7332}">
+		<property name="color">
+			<value>Magenta</value>
+		</property>
 		<property name="name">
 			<value>Gun Bullet PickUp</value>
 		</property>
@@ -53,7 +56,7 @@
 			<destination>{6660d9b0-36f9-443f-aeda-765e83d5d58c}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{6ff218c2-fa7e-4eae-bbf4-de8a28b062a3}</destination>
+			<destination>{3a0791a2-748d-4b18-ac83-5bfac01fb917}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{9ccc0456-6622-4787-9562-1de5fadf14a5}" />
@@ -109,9 +112,6 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{d497506a-2548-4a45-b1f5-07c9deb76a1c}">
-		<property name="volume">
-			<value>-8.5</value>
-		</property>
 		<property name="name">
 			<value>Gun Bullet PickUp</value>
 		</property>
@@ -127,6 +127,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{a5bab79d-1fe8-4939-998b-bb8272ed32f7}">
 		<relationship name="effects">
+			<destination>{d443b31f-686e-487c-a06e-a81f8242aab0}</destination>
 			<destination>{1eca97c6-e728-4ceb-a4b7-0d8a5d6ab6a7}</destination>
 			<destination>{4cb74eb2-8f6f-47d9-a175-ebc2b4c82c64}</destination>
 		</relationship>
@@ -183,6 +184,17 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{c77dfaf1-2b6c-4228-abf6-2420db47ae0c}" />
+	<object class="MixerSend" id="{d443b31f-686e-487c-a06e-a81f8242aab0}">
+		<property name="level">
+			<value>0</value>
+		</property>
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{c6269794-42ec-43d8-9753-eda133a8fa8c}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{1eca97c6-e728-4ceb-a4b7-0d8a5d6ab6a7}" />
 	<object class="SpatialiserEffect" id="{4cb74eb2-8f6f-47d9-a175-ebc2b4c82c64}" />
 	<object class="AutomationPoint" id="{3a9cc99a-21b5-4845-8b35-46f665dde472}">

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{b3149285-7545-4558-9d9c-803e18a01baa}">
+		<property name="color">
+			<value>Magenta</value>
+		</property>
 		<property name="name">
 			<value>Key Item Used</value>
 		</property>
@@ -53,7 +56,7 @@
 			<destination>{b1e45543-c819-4378-bd81-73520d9c133d}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{6ff218c2-fa7e-4eae-bbf4-de8a28b062a3}</destination>
+			<destination>{3a0791a2-748d-4b18-ac83-5bfac01fb917}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{8586d5d4-fe80-460c-80cb-cd03998c2853}" />
@@ -124,6 +127,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{2200f0b6-1239-4bcd-b7b0-7455cd317993}">
 		<relationship name="effects">
+			<destination>{61f145b7-1b6b-4c44-bbfd-837c3fdc06f3}</destination>
 			<destination>{3262c841-a654-48d3-8cdd-cb90b7da58db}</destination>
 			<destination>{692571f4-d490-4572-9267-b0f23b1d665e}</destination>
 			<destination>{1a00e126-a511-4179-9191-80e19f3df979}</destination>
@@ -153,11 +157,28 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{2b619b9b-f050-40bb-afe3-a2eb82ffb585}" />
+	<object class="MixerSend" id="{61f145b7-1b6b-4c44-bbfd-837c3fdc06f3}">
+		<property name="level">
+			<value>0</value>
+		</property>
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{c6269794-42ec-43d8-9753-eda133a8fa8c}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{3262c841-a654-48d3-8cdd-cb90b7da58db}" />
 	<object class="SpatialiserEffect" id="{692571f4-d490-4572-9267-b0f23b1d665e}" />
 	<object class="SFXReverbEffect" id="{1a00e126-a511-4179-9191-80e19f3df979}">
+		<property name="decayTime">
+			<value>2000</value>
+		</property>
 		<property name="wetLevel">
-			<value>-15.5</value>
+			<value>-8</value>
+		</property>
+		<property name="dryLevel">
+			<value>-8</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{e5c53967-3f26-42b1-970a-8c73502aff09}">

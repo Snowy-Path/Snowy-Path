@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -14,7 +15,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float groundCheckRadius = 0.2f;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float gravity = -9.81f;
-    [SerializeField] Animator handsAnimator;
+    [SerializeField] Animator leftHandAnimator;
+    [SerializeField] Animator rightHandAnimator;
 
     [Space]
     [Header("Movement")]
@@ -38,11 +40,18 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float airSpeedFactor = 0.7f;
     [SerializeField] float airSpeedX = 3f;
     [SerializeField] float airSpeedZ = 1f;
+    [SerializeField] UnityEvent onLand;
+    [SerializeField] UnityEvent onJump;
 
     [Space]
     [Header("Slide")]
     [SerializeField] float slideFactor = 5f;
     [SerializeField] float slideDetectorRadius = 0.3f;
+
+    [Space]
+    [Header("Turn back")]
+    [SerializeField] float turnTime = 0.5f;
+    [SerializeField] bool allowMovementInTurn = false;
 
     [Space]
     [Header("Camera")]
@@ -54,6 +63,7 @@ public class PlayerController : MonoBehaviour {
     //Status
     private CharacterController controller;
     private bool canMove = true;
+    private bool canRotate = true;
     private bool isSliding = false;
     private float slideSpeed = 0;
     private ControllerColliderHit colliderHit;
@@ -89,13 +99,14 @@ public class PlayerController : MonoBehaviour {
     //Look
     private Vector2 lookPos = Vector2.zero;
     private float yRotation = 0f;
+    private bool isTurningBack = false;
 
     //Parameters
     private float startStepOffset;
     private const float inputThreshold = 0.2f;
 
-    private HUD playerHud;
     private HandController handController;
+
 
     #region INPUTS SYSTEM EVENTS
     public void OnMove(InputAction.CallbackContext context) {
@@ -119,15 +130,21 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void OnToggleSprint(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            if (sprintTimer <= 0)
-                sprintCmd = true;
-        }
+        //if (context.phase == InputActionPhase.Performed) {
+        //    if (sprintTimer <= 0)
+        //        sprintCmd = true;
+        //}
     }
 
     public void OnJump(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Jump();
+        }
+    }
+
+    public void OnTurnBack(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            StartCoroutine(TurnBack());
         }
     }
     #endregion
@@ -137,7 +154,6 @@ public class PlayerController : MonoBehaviour {
 
     void Start() {
         controller = GetComponent<CharacterController>();
-        playerHud = GetComponent<HUD>();
         handController = GetComponentInChildren<HandController>();
 
         //Lock and hide cursor
@@ -150,31 +166,43 @@ public class PlayerController : MonoBehaviour {
     private float speed = 0;
     void Update() {
 
+        bool wasGrounded = isGrounded;
         //Update ground status
         isGrounded = Physics.CheckSphere(groundChecker.position, groundCheckRadius, groundLayer, QueryTriggerInteraction.Ignore);
         if (isGrounded) {
             controller.stepOffset = startStepOffset;
+            if (!wasGrounded)
+                onLand.Invoke();
         }
         else {
             controller.stepOffset = 0;
+            if (wasGrounded)
+                onLand.Invoke();
         }
+
         //Process movement
         ApplyGravity();
         UpdateVelocity();
         Sliding();
         Look();
         Sprint();
-        handsAnimator.SetBool("Grounded", isGrounded);
+        leftHandAnimator.SetBool("Grounded", isGrounded);
+        rightHandAnimator.SetBool("Grounded", isGrounded);
 
         //Move
         if (canMove) {
-            controller.Move(xzVelocity * SpeedFactor * Time.deltaTime);
+            if (!isTurningBack || isTurningBack == allowMovementInTurn)
+                controller.Move(xzVelocity * SpeedFactor * Time.deltaTime);
+
             if (!isSliding && IsGrounded)
                 speed = Mathf.Lerp(speed, (xzVelocity.magnitude * SpeedFactor) / currentSpeed, 0.1f);
-            handsAnimator.SetFloat("Speed", speed);
+
+            leftHandAnimator.SetFloat("Speed", speed);
+            rightHandAnimator.SetFloat("Speed", speed);
         }
         else {
-            handsAnimator.SetFloat("Speed", 0);
+            leftHandAnimator.SetFloat("Speed", 0);
+            rightHandAnimator.SetFloat("Speed", 0);
         }
         controller.Move(yVelocity * Time.deltaTime);
     }
@@ -261,7 +289,7 @@ public class PlayerController : MonoBehaviour {
         //canStartSprint = isGrounded && sprintTimer <= 0;
 
         isRunning = sprintCmd && sprintTimer <= maxSprintDuration && inputs.z >= inputThreshold &&
-           (handController.CurrentTool.GetType() == typeof(Telescope) && handController.CurrentTool.IsBusy) == false;
+           (handController.CurrentTool.IsBusy == false || handController.CurrentTool.GetType() == typeof(Gun));
 
         //Stop sprint if timer reached max sprint duration
         if (sprintTimer >= maxSprintDuration)
@@ -280,11 +308,12 @@ public class PlayerController : MonoBehaviour {
         }
 
         //Update animator
-        handsAnimator.SetBool("Run", isRunning);
+        leftHandAnimator.SetBool("Run", isRunning);
+        rightHandAnimator.SetBool("Run", isRunning);
     }
 
     private void Look() {
-        if (canMove) {
+        if (canMove && canRotate) {
             //Orient camera thanks to mouse position
             yRotation += -lookPos.y * lookSpeed;
             yRotation = Mathf.Clamp(yRotation, -lookYLimit, lookYLimit);
@@ -293,6 +322,25 @@ public class PlayerController : MonoBehaviour {
             //Rotate player 
             transform.rotation *= Quaternion.Euler(0, lookPos.x * lookSpeed, 0);
         }
+    }
+
+    private IEnumerator TurnBack() {
+        if (isTurningBack) {
+            yield break;
+        }
+
+        canRotate = false;
+        isTurningBack = true;
+
+        float turnSpeed = 180 / turnTime;
+        float rot = 0;
+        while (rot < 180) {
+            transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
+            rot += turnSpeed * Time.deltaTime;
+            yield return null;
+        }
+        canRotate = true;
+        isTurningBack = false;
     }
 
     private void Sliding() {

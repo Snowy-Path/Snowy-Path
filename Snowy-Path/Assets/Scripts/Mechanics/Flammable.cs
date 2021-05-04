@@ -9,11 +9,18 @@ public class Flammable : MonoBehaviour {
     [SerializeField] GameObject fireFX;
     [SerializeField] Transform ignitePointsParent;
     [SerializeField] float fireDuration;
+    [SerializeField] float maxDissolve = .4f;
 
     private bool ignited = false;
+    private float dissolve = 0f;
+    private float dissolveStep;
+    private const float timeStep = .1f;
 
     private List<Transform> fireParticles;
     private List<GameObject> GFXs;
+
+    [SerializeField]
+    private List<GameObject> m_additionalGOToDeactivate;
     #endregion
 
     /// <summary>
@@ -39,6 +46,10 @@ public class Flammable : MonoBehaviour {
         foreach (var gfx in GFXs) {
             gfx.SetActive(true);
         }
+        foreach (var go in m_additionalGOToDeactivate) {
+            go.SetActive(true);
+        }
+        ResetDissolve();
         ignited = false;
     }
 
@@ -65,6 +76,8 @@ public class Flammable : MonoBehaviour {
             fireParticles.Add(go.transform);
         }
 
+        //Init dissolve step
+        dissolveStep = timeStep * maxDissolve / fireDuration;
     }
 
     /// <summary>
@@ -76,6 +89,7 @@ public class Flammable : MonoBehaviour {
             ignited = true;
             fireParticles = ReorderPoints(other.transform.position);
             StartCoroutine(StartFire());
+            ApplyDissolve();
         }
     }
 
@@ -86,21 +100,33 @@ public class Flammable : MonoBehaviour {
     /// <returns></returns>
     IEnumerator StartFire() {
 
+        bool hasSound = false;
+
         for (int i = 0; i < fireParticles.Count; i++) {
             fireParticles[i].GetComponent<ParticleSystem>().Play();
-            fireParticles[i].GetComponent<FMODUnity.StudioEventEmitter>().Play();
+            if (!hasSound) {
+                fireParticles[i].GetComponent<FMODUnity.StudioEventEmitter>().Play();
+                hasSound = true;
+            }
             yield return new WaitForSeconds(fireDuration / fireParticles.Count);
         }
 
         for (int i = 0; i < fireParticles.Count; i++) {
             fireParticles[i].GetComponent<ParticleSystem>().Stop();
-            fireParticles[i].GetComponent<FMODUnity.StudioEventEmitter>().Stop();
         }
 
         foreach (var gfx in GFXs) {
             gfx.SetActive(false);
         }
 
+        foreach (var go in m_additionalGOToDeactivate) {
+            go.SetActive(false);
+        }
+
+        for (int i = 0; i < fireParticles.Count; i++) {
+            fireParticles[i].GetComponent<FMODUnity.StudioEventEmitter>().Stop();
+            yield return new WaitForSeconds(.05f);
+        }
     }
 
     /// <summary>
@@ -110,5 +136,27 @@ public class Flammable : MonoBehaviour {
     /// <returns></returns>
     private List<Transform> ReorderPoints(Vector3 start) {
         return fireParticles.OrderBy(o => (o.position - start).magnitude).ToList();
+    }
+
+    private void ApplyDissolve() {
+
+        dissolve += dissolveStep;
+        foreach (var mesh in GFXs) {
+            MeshRenderer renderer = mesh.GetComponent<MeshRenderer>();
+            renderer.material.SetFloat("_Progress", dissolve);
+        }
+
+        if (dissolve < maxDissolve) {
+            Invoke(nameof(ApplyDissolve), timeStep);
+        }
+    }
+
+    private void ResetDissolve() {
+        foreach (var mesh in GFXs) {
+            MeshRenderer renderer = mesh.GetComponent<MeshRenderer>();
+            renderer.material.SetFloat("_Progress", 0);
+        }
+        dissolve = 0;
+        dissolveStep = timeStep * maxDissolve / fireDuration;
     }
 }

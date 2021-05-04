@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 9218440433854401973}
   - component: {fileID: 9218440433854401972}
   - component: {fileID: 1501252344705738062}
-  m_Layer: 0
+  - component: {fileID: 8276062723798658071}
+  m_Layer: 31
   m_Name: AmmoBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,20 +111,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
+  isTorchInteractable: 0
   onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9218440433854401972}
-        m_MethodName: DestroyItself
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1501252344705738062}
         m_MethodName: ReloadGun
         m_Mode: 1
@@ -175,3 +166,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e0d37dc2053cb4a8b7455e16a5ef24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_bulletPickUpEmitter: {fileID: 8276062723798658071}
+--- !u!114 &8276062723798658071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9218440433854401979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/SFX/Tools/Bullet Pick Up
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

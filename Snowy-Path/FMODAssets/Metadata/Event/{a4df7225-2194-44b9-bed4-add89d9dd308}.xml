@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{a4df7225-2194-44b9-bed4-add89d9dd308}">
-		<property name="color">
-			<value>Blue</value>
-		</property>
 		<property name="name">
 			<value>Gun Bullet Impact</value>
 		</property>
@@ -98,7 +95,7 @@
 			<destination>{d84ce06c-5248-4f63-a29f-3106b42e6cb6}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{6ff218c2-fa7e-4eae-bbf4-de8a28b062a3}</destination>
+			<destination>{3a0791a2-748d-4b18-ac83-5bfac01fb917}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{540d2312-be91-4683-9ddc-c8bdcef0e2d7}" />
@@ -2441,6 +2438,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{f57855c5-cf4f-4e9c-a783-7428785798ed}">
 		<relationship name="effects">
+			<destination>{b66cacd5-c8c2-4857-aae4-f9cf8e2d387b}</destination>
 			<destination>{c2bfd0ae-0858-4283-a1df-5e81faccfa7d}</destination>
 			<destination>{4253b955-fba8-416e-a7db-96589cb1aad1}</destination>
 		</relationship>
@@ -3115,6 +3113,17 @@
 		</property>
 		<relationship name="parameter">
 			<destination>{9a7abb11-aa70-429f-96f5-d8196ad224f8}</destination>
+		</relationship>
+	</object>
+	<object class="MixerSend" id="{b66cacd5-c8c2-4857-aae4-f9cf8e2d387b}">
+		<property name="level">
+			<value>0</value>
+		</property>
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{c6269794-42ec-43d8-9753-eda133a8fa8c}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{c2bfd0ae-0858-4283-a1df-5e81faccfa7d}" />

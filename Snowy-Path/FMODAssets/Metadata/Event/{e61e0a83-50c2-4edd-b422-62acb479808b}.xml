@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{e61e0a83-50c2-4edd-b422-62acb479808b}">
+		<property name="color">
+			<value>Magenta</value>
+		</property>
 		<property name="name">
 			<value>Gun Equip</value>
 		</property>
@@ -53,7 +56,7 @@
 			<destination>{ccad1940-ef48-4053-be51-ecbd09278ff6}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{6ff218c2-fa7e-4eae-bbf4-de8a28b062a3}</destination>
+			<destination>{3a0791a2-748d-4b18-ac83-5bfac01fb917}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{c39e45ff-a738-42cf-95a7-df2d54794b71}" />
@@ -105,9 +108,6 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{2b856911-47d9-4c1e-8f84-d09521a03933}">
-		<property name="volume">
-			<value>-3.5</value>
-		</property>
 		<property name="name">
 			<value>Gun Equip</value>
 		</property>
@@ -123,8 +123,10 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{e6d14443-b0f2-408d-8a03-7a65f5b577dd}">
 		<relationship name="effects">
+			<destination>{78b73e14-8d5c-4a46-b248-498c4ce664fd}</destination>
 			<destination>{e8ec5153-1dc4-4626-8b4a-63a87d06de98}</destination>
 			<destination>{1e9a924c-5e28-4146-a5e7-f8837d34d288}</destination>
+			<destination>{acb1204d-b61b-4a3a-b787-a0d8ade937e2}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{6b86b15f-c1ed-441f-9a3a-bb17412b471b}" />
@@ -166,8 +168,33 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{338d0c77-cd40-4de8-b228-ca4fdc503463}" />
+	<object class="MixerSend" id="{78b73e14-8d5c-4a46-b248-498c4ce664fd}">
+		<property name="level">
+			<value>0</value>
+		</property>
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{c6269794-42ec-43d8-9753-eda133a8fa8c}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{e8ec5153-1dc4-4626-8b4a-63a87d06de98}" />
 	<object class="SpatialiserEffect" id="{1e9a924c-5e28-4146-a5e7-f8837d34d288}" />
+	<object class="MultibandEqEffect" id="{acb1204d-b61b-4a3a-b787-a0d8ade937e2}">
+		<property name="filterTypeA">
+			<value>9</value>
+		</property>
+		<property name="frequencyA">
+			<value>705.863708</value>
+		</property>
+		<property name="qualityA">
+			<value>0.665137947</value>
+		</property>
+		<property name="gainA">
+			<value>3.62068892</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{279dacef-d400-4878-bd54-5e0194b95db0}">
 		<property name="position">
 			<value>1</value>

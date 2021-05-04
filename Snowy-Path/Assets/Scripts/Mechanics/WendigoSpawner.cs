@@ -7,6 +7,12 @@ public class WendigoSpawner : MonoBehaviour {
     [SerializeField]
     private GameObject wendigo;
 
+    [SerializeField]
+    private GameObject rockfall;
+
+    [SerializeField]
+    private GameObject wendigoDespawner;
+
     private bool wendigoIsSpawned = false;
 
     private Vector3 m_wendigoSpawnPosition;
@@ -35,8 +41,12 @@ public class WendigoSpawner : MonoBehaviour {
 
     public void Reset() {
         wendigo.SetActive(false);
+        wendigo.GetComponent<WendigoController>().Reset();
         wendigo.transform.position = m_wendigoSpawnPosition;
         wendigo.transform.rotation = m_wendigoSpawnRotation;
         wendigoIsSpawned = false;
+
+        rockfall.SetActive(false);
+        wendigoDespawner.SetActive(true);
     }
 }

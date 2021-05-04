@@ -7,6 +7,12 @@ using System;
 
 public class HandController : MonoBehaviour {
 
+    // Variables for references of the different tools
+    public GameObject gun;
+    public GameObject telescope;
+    public GameObject compass;
+
+
     public IHandTool CurrentTool {
         get {
             if (currentToolIndex >= 0) {
@@ -17,15 +23,21 @@ public class HandController : MonoBehaviour {
         }
     }
 
-    [SerializeField] Animator handsAnimator;
+    private Animator handAnimator;
     private IHandTool[] tools;
     private int currentToolIndex = 0;
+    private int toolToEquip;
+    private bool canUse = true;
 
     // Start is called before the first frame update
     void Start() {
+        handAnimator = GetComponent<Animator>();
         tools = GetComponentsInChildren<IHandTool>(true);
-        HideTools();
-        tools[currentToolIndex].ToggleDisplay(true);
+        foreach (var tool in tools) {
+            tool.handAnimator = handAnimator;
+        }
+        toolToEquip = currentToolIndex;
+        DisplayCurrentTool();
     }
 
 
@@ -80,7 +92,7 @@ public class HandController : MonoBehaviour {
     /// Use active tool primary function
     /// </summary>
     private void PrimaryUseCurrentTool() {
-        if (tools.Length > 0)
+        if (tools.Length > 0 && canUse)
             tools[currentToolIndex].StartPrimaryUse();
     }
 
@@ -88,7 +100,7 @@ public class HandController : MonoBehaviour {
     /// Use active tool secondary function
     /// </summary>
     private void SecondaryUseCurrentTool() {
-        if (tools.Length > 0)
+        if (tools.Length > 0 && canUse)
             tools[currentToolIndex].SecondaryUse();
     }
 
@@ -97,7 +109,7 @@ public class HandController : MonoBehaviour {
     /// Cancel active tool use
     /// </summary>
     private void CancelUseCurrentTool() {
-        if (tools.Length > 0)
+        if (tools.Length > 0 && canUse)
             tools[currentToolIndex].CancelPrimaryUse();
     }
 
@@ -111,17 +123,18 @@ public class HandController : MonoBehaviour {
             return;
 
         //shift the current index
-        currentToolIndex += indexShift;
+        toolToEquip += indexShift;
 
         //Handle index outside the array
-        if (currentToolIndex >= tools.Length) {
-            currentToolIndex = 0;
+        if (toolToEquip >= tools.Length) {
+            toolToEquip = 0;
         }
-        else if (currentToolIndex < 0) {
-            currentToolIndex = tools.Length - 1;
+        else if (toolToEquip < 0) {
+            toolToEquip = tools.Length - 1;
         }
 
-        ShowTool(currentToolIndex);
+        if (canUse) // = if not in swapping anim
+            LaunchSwapAnimation();
     }
 
     /// <summary>
@@ -139,25 +152,33 @@ public class HandController : MonoBehaviour {
     /// <param name="type">The type of tool to equip</param>
     /// <returns>Returns true if a tool was equiped, fase if not</returns>
     private bool EquipTool(EToolType type) {
-        if (handsAnimator.GetCurrentAnimatorStateInfo(0).IsName("SwitchLeftTool")) {
-            return false;
-        }
-        if (!CurrentTool.IsBusy && TryGetToolIndex(type, out int index) && currentToolIndex != index) {
-            currentToolIndex = index;
+        //if (handAnimator.GetCurrentAnimatorStateInfo(0).IsName("SwitchLeftTool")) {
+        //    return false;
+        //}
 
-            ShowTool(currentToolIndex);
+        if (!CurrentTool.IsBusy && TryGetToolIndex(type, out int index) && currentToolIndex != index) {
+            toolToEquip = index;
+
+            LaunchSwapAnimation();
             return true;
         }
         else
             return false;
     }
 
-    private void ShowTool(int index) {
+    private void LaunchSwapAnimation() {
         //Update display
-        HideTools();
+        CancelUseCurrentTool();
+        handAnimator.SetTrigger("SwitchTool");
         tools[currentToolIndex].IsBusy = false;
+        canUse = false;
+    }
+
+    public void DisplayCurrentTool() {
+        currentToolIndex = toolToEquip;
+        HideTools();
         tools[currentToolIndex].ToggleDisplay(true);
-        handsAnimator.SetTrigger("SwitchTool");
+        canUse = true;
     }
 
     /// <summary>

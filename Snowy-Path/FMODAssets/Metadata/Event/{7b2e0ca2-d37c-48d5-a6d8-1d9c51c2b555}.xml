@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{7b2e0ca2-d37c-48d5-a6d8-1d9c51c2b555}">
-		<property name="color">
-			<value>Blue</value>
-		</property>
 		<property name="name">
 			<value>WendigoDamaged</value>
 		</property>
@@ -56,7 +53,7 @@
 			<destination>{3e28ca73-4891-49cd-9e90-78050235c616}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{6ff218c2-fa7e-4eae-bbf4-de8a28b062a3}</destination>
+			<destination>{3a0791a2-748d-4b18-ac83-5bfac01fb917}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{a74945e1-009e-4bf2-b714-da0d9aa57ac3}" />
@@ -128,6 +125,7 @@
 		<relationship name="effects">
 			<destination>{8260c8fe-4ed0-4deb-a127-db22794c65ee}</destination>
 			<destination>{05cb5a2f-ec7a-4f67-9f91-6fedc5f3f210}</destination>
+			<destination>{3d0deb8a-11f4-4338-8112-0875823c18a3}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{ce4e6ce2-f6c7-44f6-b7fe-b3d6afffa90e}" />
@@ -170,7 +168,19 @@
 	</object>
 	<object class="MixerBusPanner" id="{ce7d17f3-1a89-44e4-a874-a31aafefe5d6}" />
 	<object class="MixerBusFader" id="{8260c8fe-4ed0-4deb-a127-db22794c65ee}" />
-	<object class="SpatialiserEffect" id="{05cb5a2f-ec7a-4f67-9f91-6fedc5f3f210}" />
+	<object class="SpatialiserEffect" id="{05cb5a2f-ec7a-4f67-9f91-6fedc5f3f210}">
+		<property name="maximumDistance">
+			<value>10000</value>
+		</property>
+	</object>
+	<object class="SFXReverbEffect" id="{3d0deb8a-11f4-4338-8112-0875823c18a3}">
+		<property name="decayTime">
+			<value>4000</value>
+		</property>
+		<property name="wetLevel">
+			<value>0</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{bb158712-274f-47fb-9c5d-e0e34534cd9f}">
 		<property name="position">
 			<value>0.60000000000000009</value>

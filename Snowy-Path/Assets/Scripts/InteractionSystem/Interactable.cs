@@ -31,6 +31,10 @@ public class Interactable : MonoBehaviour {
         }
     }
 
+    [Tooltip("If true, the player can interact with it using the torch attack")]
+    [SerializeField]
+    private bool isTorchInteractable = false;
+    public bool IsTorchInteractable { private set { isTorchInteractable = value; } get { return isTorchInteractable; } }
 
     [Header("UnityEvents callbacks")]
 
@@ -43,6 +47,13 @@ public class Interactable : MonoBehaviour {
     [Tooltip("Callbacks called when the player's camera doesn't look anymore at the object")]
     public UnityEvent onHideFeedback;
 
+    public Transform InteractionPoint { private set; get; }
+    #endregion
+
+    #region Built-In Methods
+    private void Start() {
+        InteractionPoint = transform.Find("InteractionPoint");
+    }
     #endregion
 
 
