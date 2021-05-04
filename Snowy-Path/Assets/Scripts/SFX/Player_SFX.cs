@@ -38,6 +38,11 @@ public class Player_SFX : MonoBehaviour {
     [SerializeField]
     private string m_reverbCavernTag;
     #endregion
+
+    #region Music
+    [SerializeField]
+    private string m_musicTag;
+    #endregion
     #endregion
 
     private void Awake() {
@@ -73,6 +78,10 @@ public class Player_SFX : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag(m_reverbCavernTag)) {
             StartReverb(other.GetComponent<ReverbHolder>().m_reverbStrength.m_strength);
+        } else if (other.CompareTag(m_musicTag)) {
+            if (MusicManager.Instance) {
+                MusicManager.Instance.PlayMusic();
+            }
         }
     }
 
