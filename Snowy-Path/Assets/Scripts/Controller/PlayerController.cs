@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -39,6 +40,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float airSpeedFactor = 0.7f;
     [SerializeField] float airSpeedX = 3f;
     [SerializeField] float airSpeedZ = 1f;
+    [SerializeField] UnityEvent onLand;
+    [SerializeField] UnityEvent onJump;
 
     [Space]
     [Header("Slide")]
@@ -163,14 +166,20 @@ public class PlayerController : MonoBehaviour {
     private float speed = 0;
     void Update() {
 
+        bool wasGrounded = isGrounded;
         //Update ground status
         isGrounded = Physics.CheckSphere(groundChecker.position, groundCheckRadius, groundLayer, QueryTriggerInteraction.Ignore);
         if (isGrounded) {
             controller.stepOffset = startStepOffset;
+            if (!wasGrounded)
+                onLand.Invoke();
         }
         else {
             controller.stepOffset = 0;
+            if (wasGrounded)
+                onLand.Invoke();
         }
+
         //Process movement
         ApplyGravity();
         UpdateVelocity();
