@@ -666,9 +666,11 @@ public class WolfController : MonoBehaviour, IEnnemyController {
             onEntry: (state) => {
                 m_timer = Time.time + stunDuration;
                 m_animator.SetTrigger("TookDamage");
+                ExplorationMusic.AddWolfInCombat();
             },
             onExit: (state) => {
                 m_timer = float.NegativeInfinity;
+                ExplorationMusic.RemoveWolfInCombat();
             }
         );
 

@@ -19,7 +19,6 @@ public class ExplorationMusic : MonoBehaviour {
     }
 
     private static void CheckPlayerInCombat() {
-        Debug.Log("CALLED");
         if (m_nbWolfInCombat > 0) {
             if (!m_isInCombat) {
                 m_isInCombat = true;
