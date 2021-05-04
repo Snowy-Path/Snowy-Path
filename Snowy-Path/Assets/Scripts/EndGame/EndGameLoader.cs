@@ -11,6 +11,7 @@ public class EndGameLoader : MonoBehaviour
 
     public void LoadEndGameMainMenu()
     {
+        gameObject.GetComponent<FMODUnity.StudioEventEmitter>()?.Stop();
         SceneLoader.Instance.LoadMainMenu();
     }
 }
