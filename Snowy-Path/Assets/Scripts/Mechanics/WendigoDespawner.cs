@@ -14,7 +14,6 @@ public class WendigoDespawner : MonoBehaviour {
         if (other.CompareTag("Player")) {
             wendigo.GetComponent<WendigoController>().PlayDisappearingAnimation();
             gameObject.SetActive(false);
-            wendigoSpawner.SetActive(false);
         }
     }
 
