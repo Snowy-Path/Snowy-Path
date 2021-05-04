@@ -31,7 +31,19 @@ public class Player_SFX : MonoBehaviour {
     private FMOD.Studio.PARAMETER_ID m_waterCaveDropID;
     private FMOD.Studio.PLAYBACK_STATE m_waterCaveDropPlaybackState;
     #endregion
+
+    #region Reverb
+    static FMOD.Studio.Bus ReverbCavern;
+
+    [SerializeField]
+    private string m_reverbCavernTag;
     #endregion
+    #endregion
+
+    private void Awake() {
+        ReverbCavern = FMODUnity.RuntimeManager.GetBus("bus:/ReverbCavern");
+        ReverbCavern.setVolume(0f);
+    }
 
     private void Start() {
 
@@ -58,19 +70,19 @@ public class Player_SFX : MonoBehaviour {
         m_waterCaveDropInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
     }
 
-    //private void OnTriggerEnter(Collider other) {
-    //    if (other.CompareTag(m_windPlainsTag)) {
-    //        StartWind();
-    //    } else if (other.CompareTag(m_waterCaveDropTag)) {
-    //        StartWater();
-    //    }
-    //}
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag(m_reverbCavernTag)) {
+            StartReverb(other.GetComponent<ReverbHolder>().m_reverbStrength.m_strength);
+        }
+    }
 
     private void OnTriggerExit(Collider other) {
         if (other.CompareTag(m_windPlainsTag)) {
             StopWind();
         } else if (other.CompareTag(m_waterCaveDropTag)) {
             StopCave();
+        } else if (other.CompareTag(m_reverbCavernTag)) {
+            StopReverb();
         }
     }
 
@@ -88,31 +100,20 @@ public class Player_SFX : MonoBehaviour {
         }
     }
 
-    //private void StartWind() {
-    //    FMOD.Studio.PLAYBACK_STATE playbackState;
-    //    m_waterCaveDropInstance.getPlaybackState(out playbackState);
-    //    if (playbackState != FMOD.Studio.PLAYBACK_STATE.PLAYING) {
-    //        m_windPlainsInstance.setParameterByID(m_waterCaveDropID, 0.0f);
-    //        m_windPlainsInstance.start();
-    //    }
-    //}
-
     internal void StopWind() {
         m_windPlainsInstance.setParameterByID(m_windPlainsID, 1.0f);
     }
 
 
-    //private void StartWater() {
-    //    FMOD.Studio.PLAYBACK_STATE playbackState;
-    //    m_waterCaveDropInstance.getPlaybackState(out playbackState);
-    //    if (playbackState != FMOD.Studio.PLAYBACK_STATE.PLAYING) {
-    //        m_waterCaveDropInstance.setParameterByID(m_waterCaveDropID, 0.0f);
-    //        m_waterCaveDropInstance.start();
-    //    }
-    //}
-
     internal void StopCave() {
         m_waterCaveDropInstance.setParameterByID(m_waterCaveDropID, 1.0f);
     }
 
+    private void StartReverb(float value) {
+        ReverbCavern.setVolume(value);
+    }
+
+    private void StopReverb() {
+        ReverbCavern.setVolume(0f);
+    }
 }
