@@ -191,7 +191,6 @@
 		</relationship>
 		<relationship name="audioFile">
 			<destination>{9dba04b8-e2b8-43a7-b50c-e48497ff813e}</destination>
-			<destination>{ba0f8c6d-765f-444d-b4e2-ffe95107bddc}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{634e947c-4b26-44f2-b12d-9b979920de27}">
@@ -323,6 +322,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{2360f0a9-a00e-4ab9-9f63-94b8f668b792}">
 		<relationship name="effects">
+			<destination>{78856471-22df-4f0b-859a-574a46e14345}</destination>
 			<destination>{58fff881-e1f5-4629-9b2f-5db77a35385a}</destination>
 			<destination>{caab3bca-bf28-42ac-b638-f4c23ab02b9e}</destination>
 		</relationship>
@@ -468,6 +468,17 @@
 		</property>
 		<relationship name="parameter">
 			<destination>{ddb8fcf4-47c2-4aef-9deb-aba4cc47f3a5}</destination>
+		</relationship>
+	</object>
+	<object class="MixerSend" id="{78856471-22df-4f0b-859a-574a46e14345}">
+		<property name="level">
+			<value>0</value>
+		</property>
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{c6269794-42ec-43d8-9753-eda133a8fa8c}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{58fff881-e1f5-4629-9b2f-5db77a35385a}" />
