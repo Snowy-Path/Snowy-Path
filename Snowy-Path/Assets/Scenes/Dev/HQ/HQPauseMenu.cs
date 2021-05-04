@@ -71,7 +71,7 @@ public class HQPauseMenu : MonoBehaviour
 
     public void OpenCredits()
     {
-        //CreditsMenu.SetActive(true);
+        CreditsMenu.SetActive(true);
         PauseMenu.SetActive(false);
         SetFocus(CreditsFirstButton);
     }
@@ -89,7 +89,7 @@ public class HQPauseMenu : MonoBehaviour
 
     public void ExitCredits()
     {
-        //CreditsMenu.SetActive(false);
+        CreditsMenu.SetActive(false);
         PauseMenu.SetActive(true);
         SetFocus(CreditsButton);
     }
@@ -117,7 +117,7 @@ public class HQPauseMenu : MonoBehaviour
     /// </summary>
     private void ShowDefaultView()
     {
-        //CreditsMenu.SetActive(false);
+        CreditsMenu.SetActive(false);
         OptionsMenu.SetActive(false);
         PauseMenu.SetActive(true);
         PlayMenu.SetActive(false);
