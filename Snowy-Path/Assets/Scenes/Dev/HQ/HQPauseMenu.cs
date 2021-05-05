@@ -26,6 +26,7 @@ public class HQPauseMenu : MonoBehaviour
     private void OnEnable()
     {
         ShowDefaultView();
+        SetFocus(PauseMenuFirstButton);
     }
 
     public void OnPause(InputAction.CallbackContext context)
@@ -102,14 +103,10 @@ public class HQPauseMenu : MonoBehaviour
     /// Set the selsection focus on the button go
     /// </summary>
     /// <param name="go"></param>
-    private void SetFocus(GameObject go)
+    public void SetFocus(GameObject go)
     {
-        if (OptionHandler.gamepadconnected)
-        {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(go);
-        }
-
     }
 
     /// <summary>
