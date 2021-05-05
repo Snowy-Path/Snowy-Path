@@ -105,12 +105,8 @@ public class HQPauseMenu : MonoBehaviour
     /// <param name="go"></param>
     public void SetFocus(GameObject go)
     {
-        if (OptionHandler.Instance.Gamepadconnected)
-        {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(go);
-        }
-
     }
 
     /// <summary>

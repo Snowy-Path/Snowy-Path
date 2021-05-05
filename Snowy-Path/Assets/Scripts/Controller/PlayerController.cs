@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour {
     [Header("Camera")]
     [Tooltip("Look limit angle up and down")]
     [SerializeField] float lookYLimit = 45.0f;
+    [SerializeField] float debugSensitivity = 10f;
 
     //Status
     private CharacterController controller;
@@ -102,6 +103,8 @@ public class PlayerController : MonoBehaviour {
     //Parameters
     private float startStepOffset;
     private const float inputThreshold = 0.2f;
+    private const float factorLook = 0.01f;
+    private float sensitivity = 1f;
 
     private HandController handController;
 
@@ -312,8 +315,7 @@ public class PlayerController : MonoBehaviour {
         rightHandAnimator.SetBool("Run", isRunning);
     }
 
-    private const float factorLook = 0.01f;
-    private float sensitivity = 1f;
+   
     private void Look() {
         if (canMove && canRotate) {
             //Orient camera thanks to mouse position
@@ -331,7 +333,7 @@ public class PlayerController : MonoBehaviour {
             sensitivity = factorLook * OptionHandler.Instance.Sensitivity;
         }
         else {
-            sensitivity = 10;
+            sensitivity = factorLook * debugSensitivity;
         }
     }
 
