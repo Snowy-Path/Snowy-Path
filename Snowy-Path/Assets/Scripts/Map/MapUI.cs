@@ -90,8 +90,6 @@ public class MapUI : MonoBehaviour
     {
         if (m_state == State.InGame) {
             // Unlock and show mouse
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
 
             // Change input action map and canvas camera
             m_mapCompassTool.SwitchCurrentActionMap("Map");
@@ -110,9 +108,6 @@ public class MapUI : MonoBehaviour
             // Hide cursor
             m_mapCursor.gameObject.SetActive(false);
 
-            // Lock and hide mouse
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
 
             m_mapCompassTool.SwitchCurrentActionMap("Gameplay");
             m_mapCanvasComponent.worldCamera = m_mapCompassTool.InGameMapCamera;
