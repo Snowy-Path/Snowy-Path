@@ -407,6 +407,10 @@ public class SceneLoader : MonoBehaviour
         charController.transform.eulerAngles = new Vector3(14, -104, -83);
         charController.enabled = true;
 
+        // Reset heat source counter
+        // If not happens to be in temperature god mode
+        charController.GetComponent<Temperature>().ResetCounter();
+
         PlayerPlayable playerPlayable = FindObjectOfType<PlayerPlayable>();
         logoClip.Stop();
         loadingScreen.SetActive(false);
