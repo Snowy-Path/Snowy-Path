@@ -8,9 +8,6 @@ public class WendigoSpawner : MonoBehaviour {
     private GameObject wendigo;
 
     [SerializeField]
-    private GameObject rockfall;
-
-    [SerializeField]
     private GameObject wendigoDespawner;
 
     private bool wendigoIsSpawned = false;
@@ -46,7 +43,6 @@ public class WendigoSpawner : MonoBehaviour {
         wendigo.transform.rotation = m_wendigoSpawnRotation;
         wendigoIsSpawned = false;
 
-        rockfall.SetActive(false);
         wendigoDespawner.SetActive(true);
 
         if (MusicManager.Instance) {
