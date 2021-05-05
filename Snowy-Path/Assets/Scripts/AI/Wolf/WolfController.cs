@@ -18,6 +18,7 @@ public class WolfController : MonoBehaviour, IEnnemyController {
     // Components retrieved in Awake method.
     private StateMachine<EWolfState> m_fsm;
     private GenericHealth m_genericHealth;
+
     internal NavMeshAgent m_agent;
 
     [SerializeField]
@@ -469,6 +470,14 @@ public class WolfController : MonoBehaviour, IEnnemyController {
         StateMachine<EWolfState> combat = new StateMachine<EWolfState>(EWolfState.Combat, EWolfState.Lurk, parent,
             onEntry: (state) => {
                 m_agent.speed = m_lurkSpeed;
+                if (ExplorationMusic.Instance) {
+                    ExplorationMusic.Instance.AddWolfInCombat();
+                }
+            },
+            onExit: (state) => {
+                if (ExplorationMusic.Instance) {
+                    ExplorationMusic.Instance.RemoveWolfInCombat();
+                }
             }
         );
 
@@ -661,9 +670,15 @@ public class WolfController : MonoBehaviour, IEnnemyController {
             onEntry: (state) => {
                 m_timer = Time.time + stunDuration;
                 m_animator.SetTrigger("TookDamage");
+                if (ExplorationMusic.Instance) {
+                    ExplorationMusic.Instance.AddWolfInCombat();
+                }
             },
             onExit: (state) => {
                 m_timer = float.NegativeInfinity;
+                if (ExplorationMusic.Instance) {
+                    ExplorationMusic.Instance.RemoveWolfInCombat();
+                }
             }
         );
 
@@ -696,6 +711,9 @@ public class WolfController : MonoBehaviour, IEnnemyController {
 
 
     #region Utility
+    internal bool IsInCombat() {
+        return m_fsm.StateType == EWolfState.Combat;
+    }
 
     /// <summary>
     /// Return the current EWolfState value in the Finite State Machine.
