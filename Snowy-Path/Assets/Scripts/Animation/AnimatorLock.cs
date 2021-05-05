@@ -15,8 +15,5 @@ public class AnimatorLock : MonoBehaviour {
         var state = animator.GetCurrentAnimatorStateInfo(0);
         bool animLock = state.tagHash == Animator.StringToHash("lock");
         animator.SetBool("Locked", animLock);
-
-        //if (Keyboard.current.oKey.wasPressedThisFrame)
-        //    animator.SetTrigger("Death");
     }
 }
