@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{67ccd0dd-2688-432f-8971-baa3d22397da}">
+		<property name="color">
+			<value>Magenta</value>
+		</property>
 		<property name="name">
 			<value>Compass Close</value>
 		</property>
@@ -120,8 +123,10 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{89746d37-a572-4248-8a97-c21b1e8317ad}">
 		<relationship name="effects">
+			<destination>{5f0079b4-81a1-45ba-ae1a-fcd2f2d360ac}</destination>
 			<destination>{4b8a60a5-3be7-4dfd-b0ee-4e6af2e2a40c}</destination>
 			<destination>{fa1f34aa-d837-4b45-80aa-90f5e7e83e37}</destination>
+			<destination>{077dc1a0-ccc0-4353-b83f-aa3b8933bf3c}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{8c400b41-f838-4efb-bd30-202495fc7fbc}" />
@@ -163,8 +168,27 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{f528f2ea-edc3-4502-8420-d04a8f8b0c89}" />
+	<object class="MixerSend" id="{5f0079b4-81a1-45ba-ae1a-fcd2f2d360ac}">
+		<property name="level">
+			<value>0</value>
+		</property>
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{c6269794-42ec-43d8-9753-eda133a8fa8c}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{4b8a60a5-3be7-4dfd-b0ee-4e6af2e2a40c}" />
 	<object class="SpatialiserEffect" id="{fa1f34aa-d837-4b45-80aa-90f5e7e83e37}" />
+	<object class="MultibandEqEffect" id="{077dc1a0-ccc0-4353-b83f-aa3b8933bf3c}">
+		<property name="frequencyA">
+			<value>9215.05566</value>
+		</property>
+		<property name="qualityA">
+			<value>0.7961725</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{6df21ada-dcbb-4d22-bfc1-6dbfc96d8271}">
 		<property name="position">
 			<value>0</value>

@@ -100,9 +100,14 @@ public class Flammable : MonoBehaviour {
     /// <returns></returns>
     IEnumerator StartFire() {
 
+        bool hasSound = false;
+
         for (int i = 0; i < fireParticles.Count; i++) {
             fireParticles[i].GetComponent<ParticleSystem>().Play();
-            fireParticles[i].GetComponent<FMODUnity.StudioEventEmitter>().Play();
+            if (!hasSound) {
+                fireParticles[i].GetComponent<FMODUnity.StudioEventEmitter>().Play();
+                hasSound = true;
+            }
             yield return new WaitForSeconds(fireDuration / fireParticles.Count);
         }
 
@@ -114,7 +119,7 @@ public class Flammable : MonoBehaviour {
             gfx.SetActive(false);
         }
 
-        foreach(var go in m_additionalGOToDeactivate) {
+        foreach (var go in m_additionalGOToDeactivate) {
             go.SetActive(false);
         }
 
