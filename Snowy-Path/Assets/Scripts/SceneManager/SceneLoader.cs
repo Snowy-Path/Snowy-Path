@@ -234,9 +234,6 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadEndScene()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
         // Check if the scene already loaded
         if (!SceneManager.GetSceneByName(sceneDataBase.endScene.sceneName).IsValid())
         {
