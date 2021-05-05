@@ -103,9 +103,9 @@ public class HQPauseMenu : MonoBehaviour
     /// Set the selsection focus on the button go
     /// </summary>
     /// <param name="go"></param>
-    private void SetFocus(GameObject go)
+    public void SetFocus(GameObject go)
     {
-        if (OptionHandler.Gamepadconnected)
+        if (OptionHandler.Instance.Gamepadconnected)
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(go);

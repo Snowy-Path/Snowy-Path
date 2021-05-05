@@ -92,7 +92,7 @@ public class HQMainMenu : MonoBehaviour
     /// <param name="go"></param>
     public void SetFocus(GameObject go)
     {
-        if (OptionHandler.Gamepadconnected)
+        if (OptionHandler.Instance.Gamepadconnected)
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(go);
