@@ -37,5 +37,20 @@ public class AnimSync : MonoBehaviour {
             }
         }
         lastStateHash = state.shortNameHash;
+
+        //if (UnityEngine.InputSystem.Keyboard.current.oKey.wasPressedThisFrame) {
+        //    var player = FindObjectOfType<PlayerController>();
+        //    var health = player.GetComponent<GenericHealth>();
+        //    health.Hit(100);
+        //}
     }
+
+    public void PlayDeathAnimation() {
+        animator.SetTrigger("Death");
+    }
+
+    public void ResetAnimator() {
+        animator.Play("Basic Motion");
+    }
+
 }
