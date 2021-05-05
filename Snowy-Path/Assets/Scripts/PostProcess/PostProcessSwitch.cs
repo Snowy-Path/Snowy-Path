@@ -15,6 +15,9 @@ public class PostProcessSwitch : MonoBehaviour
             if(volume != null)
             {
                 volume.profile = profile;
+                PostProcessHandler pph = volume.GetComponent<PostProcessHandler>();
+                if (pph)
+                    pph.LoadProfile();
             }
         }
     }
