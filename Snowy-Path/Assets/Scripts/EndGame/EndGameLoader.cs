@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EndGameLoader : MonoBehaviour
 {
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
     public void LoadEndGame()
     {
         SceneLoader.Instance.LoadEndScene();
