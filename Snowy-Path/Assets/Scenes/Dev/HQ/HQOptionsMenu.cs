@@ -1,9 +1,8 @@
 ﻿
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
-
-
 
 public class HQOptionsMenu : MonoBehaviour
 {
@@ -14,6 +13,7 @@ public class HQOptionsMenu : MonoBehaviour
     public Slider musicSlider;
     public Slider soundsSlider;
     public Slider gammaSlider;
+    public Slider sensitivitySlider;
     OptionHandler optionhandler;
     AudioSettings audioSettings;
     public Resolution[] resolutions;
@@ -27,11 +27,6 @@ public class HQOptionsMenu : MonoBehaviour
         StartResolution();
         LoadSettings(optionhandler.optionSettings);
     }
-
-    //        RenderSettings.ambientLight = new Color(GammaCorrection, GammaCorrection, GammaCorrection, 1.0f);
-
-
-
 
     public void MasterVolumeLevel(float newMasterVolume)
     {
@@ -56,6 +51,9 @@ public class HQOptionsMenu : MonoBehaviour
         //{
         //    audioSettings.SFXVolumeTestEvent.start();
         //}
+    }
+
+    public void SetSensitivity(float sensitivity) {
     }
 
     public void SetResolution(int resolutionIndex)
@@ -150,6 +148,7 @@ public class HQOptionsMenu : MonoBehaviour
             SFXVolume = soundsSlider.value,
             aa_index = aaDropdown.value,
             resolution_index = resolutionDropdown.value,
+            sensitivity = sensitivitySlider.value,
             gammavalue = gammaSlider.value };
         
         OptionSave.Save(newsettings);
@@ -171,6 +170,7 @@ public class HQOptionsMenu : MonoBehaviour
         aaDropdown.value = settings.aa_index;
         resolutionDropdown.value = settings.resolution_index;
         gammaSlider.value = settings.gammavalue;
+        sensitivitySlider.value = settings.sensitivity;
     }
 
 }
