@@ -14,6 +14,5 @@ public class OptionSettings
     public int resolution_index;
     public int aa_index;
     public float gammavalue;
-
-
+    public float sensitivity;
 }

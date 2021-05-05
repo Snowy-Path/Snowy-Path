@@ -4,13 +4,27 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class OptionHandler : MonoBehaviour {
-    Resolution[] resolutions;
+
+    public static OptionHandler Instance;
+
     public OptionSettings optionSettings;
 
-    public static bool Gamepadconnected { get; private set; }
+    public bool Gamepadconnected { get; private set; }
+    public float Sensitivity { get => optionSettings.sensitivity; }
+
+    private Resolution[] resolutions;
 
     // Start is called before the first frame update
     void Awake() {
+        // Singleton of the GameManager
+        if (Instance == null) {
+            Instance = this;
+        }
+        else {
+            Destroy(Instance);
+            Instance = gameObject.GetComponent<OptionHandler>();
+            return;
+        }
 
         List<string> options = new List<string>();
         resolutions = Screen.resolutions;
@@ -47,9 +61,6 @@ public class OptionHandler : MonoBehaviour {
     private void FixedUpdate() {
         Gamepadconnected = Gamepad.current != null;
     }
-
-
-
 }
 
 // Update is called once per frame
