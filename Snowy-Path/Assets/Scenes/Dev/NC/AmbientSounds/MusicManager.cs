@@ -16,11 +16,7 @@ public class MusicManager : MonoBehaviour {
 
 
     private void Awake() {
-        if (Instance != null && Instance != this) {
-            Destroy(this.gameObject);
-        } else {
-            Instance = this;
-        }
+        Instance = this;
     }
 
     private void Start() {

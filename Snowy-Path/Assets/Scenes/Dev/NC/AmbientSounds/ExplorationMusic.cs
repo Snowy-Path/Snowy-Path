@@ -11,11 +11,7 @@ public class ExplorationMusic : MonoBehaviour {
     private bool m_isInCombat;
 
     private void Awake() {
-        if (Instance != null && Instance != this) {
-            Destroy(this.gameObject);
-        } else {
-            Instance = this;
-        }
+        Instance = this;
     }
 
     public void AddWolfInCombat() {

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9196985829736691071
+--- !u!114 &-9001180726202385417
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/WendigoMovement/WendigoMovement End
+  m_Name: parameter:/Blizzard/Blizzard Changed
   m_EditorClassIdentifier: 
-  Name: WendigoMovement End
+  Name: Blizzard Changed
   Min: 0
   Max: 1
   Default: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
   MinDistance: 0.5
   MaxDistance: 20
   Length: 4614
---- !u!114 &-8765668920056493124
+--- !u!114 &-8909098522325232092
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,9 +116,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Exploration/ExplorationEnd
+  m_Name: parameter:/Safe Place/Safe Place End
   m_EditorClassIdentifier: 
-  Name: ExplorationEnd
+  Name: Safe Place End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-8694992246213384059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Gun Bullet Impact/Bullet Impact
+  m_EditorClassIdentifier: 
+  Name: Bullet Impact
   Min: 0
   Max: 1
   Default: 0
@@ -149,7 +169,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 900
---- !u!114 &-8401424630716284356
+--- !u!114 &-8304542668469804757
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,9 +179,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Exploration/ExplorationAction
+  m_Name: parameter:/Blizzard/Blizzard Changed
   m_EditorClassIdentifier: 
-  Name: ExplorationAction
+  Name: Blizzard Changed
   Min: 0
   Max: 1
   Default: 0
@@ -244,9 +264,29 @@ MonoBehaviour:
   Path: FMODAssets/Build/Desktop/Tools.bank
   Name: Tools
   StudioPath: bank:/Tools
-  lastModified: 637558090104824320
+  lastModified: 637558295101264210
   LoadResult: 0
   FileSizes: []
+  Exists: 1
+--- !u!114 &-8192409606447938564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Exploration/ExplorationAction
+  m_EditorClassIdentifier: 
+  Name: ExplorationAction
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
   Exists: 1
 --- !u!114 &-8188196452108010644
 MonoBehaviour:
@@ -288,50 +328,10 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -5006287032098437709}
+  - {fileID: 4262847870844900420}
   MinDistance: 1
   MaxDistance: 15
   Length: 25105
---- !u!114 &-8141197638165745130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Exploration/ExplorationSafe
-  m_EditorClassIdentifier: 
-  Name: ExplorationSafe
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 0
---- !u!114 &-8046422658259965905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Blizzard/Blizzard Changed
-  m_EditorClassIdentifier: 
-  Name: Blizzard Changed
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
 --- !u!114 &-8041222185264492185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,7 +355,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2710
---- !u!114 &-7990015026449997766
+--- !u!114 &-7883582670946990392
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -365,9 +365,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Oneira Movement/Oneira Movement
+  m_Name: parameter:/WaterCaveDrop/WaterCaveDropEnd
   m_EditorClassIdentifier: 
-  Name: Oneira Movement
+  Name: WaterCaveDropEnd
   Min: 0
   Max: 1
   Default: 0
@@ -395,8 +395,8 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 4397055970602726992}
-  - {fileID: 2746150193870902079}
+  - {fileID: 6283640175394845117}
+  - {fileID: 3634994074165837381}
   MinDistance: 0
   MaxDistance: 0
   Length: 150900
@@ -439,7 +439,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
+  Exists: 1
 --- !u!114 &-7302703203554851573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,13 +460,13 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 7641620250041858285}
-  - {fileID: -8289551829002040243}
-  - {fileID: -5117114191591693926}
+  - {fileID: -2640649155916753169}
+  - {fileID: 8673683476536512979}
+  - {fileID: -1469164675966022730}
   MinDistance: 0
   MaxDistance: 0
   Length: 330000
---- !u!114 &-7175943522150135371
+--- !u!114 &-7207116358395128523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -485,8 +485,8 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
---- !u!114 &-7153853985156651468
+  Exists: 0
+--- !u!114 &-7136690626940865014
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -496,9 +496,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Oneira Sprint/Sprint End
+  m_Name: parameter:/WendigoMovement/WendigoMovement End
   m_EditorClassIdentifier: 
-  Name: Sprint End
+  Name: WendigoMovement End
   Min: 0
   Max: 1
   Default: 0
@@ -589,7 +589,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
---- !u!114 &-6747561626615217810
+--- !u!114 &-6734993456830254073
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -599,29 +599,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/TorchAll/TorchEnd
+  m_Name: parameter:/Wendigo/WendigoEnd
   m_EditorClassIdentifier: 
-  Name: TorchEnd
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 0
---- !u!114 &-6611320795495133457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Gun Bullet Impact/Bullet Impact
-  m_EditorClassIdentifier: 
-  Name: Bullet Impact
+  Name: WendigoEnd
   Min: 0
   Max: 1
   Default: 0
@@ -672,7 +652,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 5095999230438763200}
+  - {fileID: -2556084908463149845}
   MinDistance: 1
   MaxDistance: 20
   Length: 20500
@@ -828,7 +808,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 5705
---- !u!114 &-5931068056538539076
+--- !u!114 &-5932833945744116392
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -838,9 +818,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/WaterCaveDrop/WaterCaveDropEnd
+  m_Name: parameter:/TorchHit/Torch Attack
   m_EditorClassIdentifier: 
-  Name: WaterCaveDropEnd
+  Name: Torch Attack
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-5730384339583358525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Exploration/ExplorationSafe
+  m_EditorClassIdentifier: 
+  Name: ExplorationSafe
   Min: 0
   Max: 1
   Default: 0
@@ -867,7 +867,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
+  Exists: 1
 --- !u!114 &-5588806629407598314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -910,7 +910,27 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
+  Exists: 1
+--- !u!114 &-5561939362001808747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Exploration/ExplorationSafe
+  m_EditorClassIdentifier: 
+  Name: ExplorationSafe
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-5515780686822329793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,7 +951,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &-5486215041816930685
+--- !u!114 &-5469252190268124359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -941,9 +961,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/WindPlains/EndWindPlain
+  m_Name: parameter:/Wendigo/WendigoAttack
   m_EditorClassIdentifier: 
-  Name: EndWindPlain
+  Name: WendigoAttack
   Min: 0
   Max: 1
   Default: 0
@@ -994,11 +1014,11 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 5463822843515235896}
+  - {fileID: 1152203694237833943}
   MinDistance: 1
   MaxDistance: 20
   Length: 5600
---- !u!114 &-5396965547944267612
+--- !u!114 &-5352964386254714514
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1008,9 +1028,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Exploration/ExplorationSafe
+  m_Name: parameter:/WindPlains/EndWindPlain
   m_EditorClassIdentifier: 
-  Name: ExplorationSafe
+  Name: EndWindPlain
   Min: 0
   Max: 1
   Default: 0
@@ -1038,7 +1058,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &-5117114191591693926
+--- !u!114 &-5100534702156353084
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1048,9 +1068,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Exploration/ExplorationSafe
+  m_Name: parameter:/Exploration/ExplorationEnd
   m_EditorClassIdentifier: 
-  Name: ExplorationSafe
+  Name: ExplorationEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-5084827057678776951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Powder Idle/Powder Idle End
+  m_EditorClassIdentifier: 
+  Name: Powder Idle End
   Min: 0
   Max: 1
   Default: 0
@@ -1078,50 +1118,10 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -1946985528335379103}
+  - {fileID: 4153307027281593151}
   MinDistance: 1
   MaxDistance: 75
   Length: 2750
---- !u!114 &-5034437382903210708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Gun Bullet Impact/Bullet Impact
-  m_EditorClassIdentifier: 
-  Name: Bullet Impact
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &-5006287032098437709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/CampfireAll/Campfire End
-  m_EditorClassIdentifier: 
-  Name: Campfire End
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
 --- !u!114 &-4988003983287831427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1155,6 +1155,46 @@ MonoBehaviour:
   m_Name: parameter:/Oneira Sprint/Sprint End
   m_EditorClassIdentifier: 
   Name: Sprint End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-4886837161372538475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CampfireAll/Campfire End
+  m_EditorClassIdentifier: 
+  Name: Campfire End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4868551243404481759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Powder Idle/Powder Idle End
+  m_EditorClassIdentifier: 
+  Name: Powder Idle End
   Min: 0
   Max: 1
   Default: 0
@@ -1201,8 +1241,8 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
---- !u!114 &-4708903888728978825
+  Exists: 1
+--- !u!114 &-4770231523417352256
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1212,17 +1252,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Wendigo/WendigoAttack
+  m_Name: parameter:/Main Title/Snowy_Path_Menu_End
   m_EditorClassIdentifier: 
-  Name: WendigoAttack
+  Name: Snowy_Path_Menu_End
   Min: 0
   Max: 1
   Default: 0
   ID:
     data1: 0
     data2: 0
-  Exists: 0
---- !u!114 &-4670606733791693337
+  Exists: 1
+--- !u!114 &-4765055343218637066
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1232,16 +1272,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Oneira Movement/Oneira Movement
+  m_Name: parameter:/WaterCaveDrop/WaterCaveDropEnd
   m_EditorClassIdentifier: 
-  Name: Oneira Movement
+  Name: WaterCaveDropEnd
   Min: 0
   Max: 1
   Default: 0
   ID:
     data1: 0
     data2: 0
-  Exists: 0
+  Exists: 1
 --- !u!114 &-4634554707596139000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1255,6 +1295,46 @@ MonoBehaviour:
   m_Name: parameter:/WindPlains/EndWindPlain
   m_EditorClassIdentifier: 
   Name: EndWindPlain
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4547739862147822162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Safe Place/Safe Place End
+  m_EditorClassIdentifier: 
+  Name: Safe Place End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4460439525883375690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Sprint/Sprint End
+  m_EditorClassIdentifier: 
+  Name: Sprint End
   Min: 0
   Max: 1
   Default: 0
@@ -1285,7 +1365,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 10
   Length: 1427
---- !u!114 &-4419492175920115089
+--- !u!114 &-4388177403650658479
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1295,9 +1375,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Wolf Movement Footsteps/Changing Soil
+  m_Name: parameter:/Oneira Death/Death Changing Soil
   m_EditorClassIdentifier: 
-  Name: Changing Soil
+  Name: Death Changing Soil
   Min: 0
   Max: 1
   Default: 0
@@ -1305,7 +1385,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &-4367898495172658791
+--- !u!114 &-4265345563427519389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1315,9 +1395,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/TorchAll/TorchEnd
+  m_Name: parameter:/Wendigo/WendigoAttack
   m_EditorClassIdentifier: 
-  Name: TorchEnd
+  Name: WendigoAttack
   Min: 0
   Max: 1
   Default: 0
@@ -1325,26 +1405,6 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &-4302814913915869084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Exploration/ExplorationEnd
-  m_EditorClassIdentifier: 
-  Name: ExplorationEnd
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 0
 --- !u!114 &-4197156284432499361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1385,11 +1445,11 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -3936451152296908676}
+  - {fileID: -26009761519276159}
   MinDistance: 1
   MaxDistance: 20
   Length: 7500
---- !u!114 &-4083157614048940065
+--- !u!114 &-3957554752334931918
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1408,8 +1468,8 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
---- !u!114 &-3936451152296908676
+  Exists: 0
+--- !u!114 &-3885225842828157578
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1419,29 +1479,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Oneira Movement/Oneira Movement
+  m_Name: parameter:/WaterCaveDrop/WaterCaveDropEnd
   m_EditorClassIdentifier: 
-  Name: Oneira Movement
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &-3815020771119728591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Wendigo/WendigoAttack
-  m_EditorClassIdentifier: 
-  Name: WendigoAttack
+  Name: WaterCaveDropEnd
   Min: 0
   Max: 1
   Default: 0
@@ -1472,7 +1512,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 10000
   Length: 4095
---- !u!114 &-3633222469021050628
+--- !u!114 &-3693052042072763193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1482,56 +1522,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Exploration/ExplorationSafe
+  m_Name: parameter:/Oneira Sprint/Sprint End
   m_EditorClassIdentifier: 
-  Name: ExplorationSafe
+  Name: Sprint End
   Min: 0
   Max: 1
   Default: 0
   ID:
     data1: 0
     data2: 0
-  Exists: 1
---- !u!114 &-3466399269194651157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/TorchHit/Torch Attack
-  m_EditorClassIdentifier: 
-  Name: Torch Attack
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &-3457130560179638083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Main Title/Snowy_Path_Menu_End
-  m_EditorClassIdentifier: 
-  Name: Snowy_Path_Menu_End
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-3447374002775022884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1615,46 +1615,6 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
---- !u!114 &-3324013147679105815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/WaterCaveDrop/WaterCaveDropEnd
-  m_EditorClassIdentifier: 
-  Name: WaterCaveDropEnd
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &-3322292317932813569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Wolf Movement Footsteps/Changing Soil
-  m_EditorClassIdentifier: 
-  Name: Changing Soil
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
 --- !u!114 &-3315719842054588385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1670,7 +1630,7 @@ MonoBehaviour:
   Path: FMODAssets/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637558100154420396
+  lastModified: 637558295100984197
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -1697,27 +1657,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 100
   Length: 1429
---- !u!114 &-2919238508252873876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Oneira Death/Death Changing Soil
-  m_EditorClassIdentifier: 
-  Name: Death Changing Soil
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &-2900031467848044102
+--- !u!114 &-3163961973617405347
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1737,7 +1677,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &-2862474929678094846
+--- !u!114 &-3123638911228484222
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1757,6 +1697,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &-2862474929678094846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wolf Movement Footsteps/Changing Soil
+  m_EditorClassIdentifier: 
+  Name: Changing Soil
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-2824890980666758688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1780,6 +1740,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 271132
+--- !u!114 &-2816218146574712909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WendigoMovement/WendigoMovement End
+  m_EditorClassIdentifier: 
+  Name: WendigoMovement End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-2697313950408440723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1803,6 +1783,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
+--- !u!114 &-2640649155916753169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Exploration/ExplorationEnd
+  m_EditorClassIdentifier: 
+  Name: ExplorationEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-2638861090501405377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1818,7 +1818,7 @@ MonoBehaviour:
   Path: FMODAssets/Build/Desktop/Wolf.bank
   Name: Wolf
   StudioPath: bank:/Wolf
-  lastModified: 637558100152454015
+  lastModified: 637558295101854206
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -1865,7 +1865,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 100
   Length: 2750
---- !u!114 &-2542779824268196617
+--- !u!114 &-2556084908463149845
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1875,9 +1875,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/TorchHit/Torch Attack
+  m_Name: parameter:/Powder Idle/Powder Idle End
   m_EditorClassIdentifier: 
-  Name: Torch Attack
+  Name: Powder Idle End
   Min: 0
   Max: 1
   Default: 0
@@ -1904,7 +1904,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
+  Exists: 1
 --- !u!114 &-2176148875653359982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1924,7 +1924,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
+  Exists: 1
 --- !u!114 &-2168558073828230716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2013,46 +2013,6 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
---- !u!114 &-1946985528335379103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Wolf Movement Footsteps/Changing Soil
-  m_EditorClassIdentifier: 
-  Name: Changing Soil
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &-1917744831053626357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/WendigoMovement/WendigoMovement End
-  m_EditorClassIdentifier: 
-  Name: WendigoMovement End
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
   Exists: 1
 --- !u!114 &-1897808035939075761
 MonoBehaviour:
@@ -2074,7 +2034,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
---- !u!114 &-1841408049465295169
+--- !u!114 &-1862872915294761281
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2084,36 +2044,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Safe Place/Safe Place End
+  m_Name: parameter:/Exploration/ExplorationSafe
   m_EditorClassIdentifier: 
-  Name: Safe Place End
+  Name: ExplorationSafe
   Min: 0
   Max: 1
   Default: 0
   ID:
     data1: 0
     data2: 0
-  Exists: 1
---- !u!114 &-1824867399866581549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/WendigoAttackAnnouncement/WendigoAttackAnnouncement End
-  m_EditorClassIdentifier: 
-  Name: WendigoAttackAnnouncement End
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-1817779170518454212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2237,7 +2177,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &-1707761894047135591
+--- !u!114 &-1676567095733371338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2247,16 +2187,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/WendigoAttackAnnouncement/WendigoAttackAnnouncement End
+  m_Name: parameter:/CampfireAll/Campfire End
   m_EditorClassIdentifier: 
-  Name: WendigoAttackAnnouncement End
+  Name: Campfire End
   Min: 0
   Max: 1
   Default: 0
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-1608443913325968926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2277,7 +2217,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -1917744831053626357}
+  - {fileID: -760677490109677546}
   MinDistance: 1
   MaxDistance: 20
   Length: 55600
@@ -2300,28 +2240,8 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
---- !u!114 &-1326094106514909273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Main Title/Snowy_Path_Menu_End
-  m_EditorClassIdentifier: 
-  Name: Snowy_Path_Menu_End
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
   Exists: 1
---- !u!114 &-1224689229705966051
+--- !u!114 &-1469164675966022730
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2331,9 +2251,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/CampfireAll/Campfire End
+  m_Name: parameter:/Exploration/ExplorationSafe
   m_EditorClassIdentifier: 
-  Name: Campfire End
+  Name: ExplorationSafe
   Min: 0
   Max: 1
   Default: 0
@@ -2387,6 +2307,26 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 4000
+--- !u!114 &-1123365891544785195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Movement/Oneira Movement
+  m_EditorClassIdentifier: 
+  Name: Oneira Movement
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-988484728584445529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2422,13 +2362,13 @@ MonoBehaviour:
   Path: FMODAssets/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637558100152374229
+  lastModified: 637558295101084208
   LoadResult: 0
   FileSizes:
   - Name: Desktop
     Value: 4958
   Exists: 1
---- !u!114 &-831238824360107901
+--- !u!114 &-760677490109677546
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2438,29 +2378,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/WindPlains/EndWindPlain
+  m_Name: parameter:/WendigoMovement/WendigoMovement End
   m_EditorClassIdentifier: 
-  Name: EndWindPlain
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 0
---- !u!114 &-630603745709375038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Powder Idle/Powder Idle End
-  m_EditorClassIdentifier: 
-  Name: Powder Idle End
+  Name: WendigoMovement End
   Min: 0
   Max: 1
   Default: 0
@@ -2487,7 +2407,47 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
+  Exists: 1
+--- !u!114 &-530819513130218034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CampfireAll/Campfire End
+  m_EditorClassIdentifier: 
+  Name: Campfire End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-481966881209658798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WindPlains/EndWindPlain
+  m_EditorClassIdentifier: 
+  Name: EndWindPlain
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-447566014024318121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2608,7 +2568,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &-139442539760549792
+--- !u!114 &-26009761519276159
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2618,49 +2578,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Oneira Death/Death Changing Soil
+  m_Name: parameter:/Oneira Movement/Oneira Movement
   m_EditorClassIdentifier: 
-  Name: Death Changing Soil
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 0
---- !u!114 &-113727765209307088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/TorchHit/Torch Attack
-  m_EditorClassIdentifier: 
-  Name: Torch Attack
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 0
---- !u!114 &-39150361506318631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Safe Place/Safe Place End
-  m_EditorClassIdentifier: 
-  Name: Safe Place End
+  Name: Oneira Movement
   Min: 0
   Max: 1
   Default: 0
@@ -2799,7 +2719,7 @@ MonoBehaviour:
   - {fileID: -3315719842054588385}
   StringsBanks:
   - {fileID: -947214524873999307}
-  stringsBankWriteTime: 637558100152374229
+  stringsBankWriteTime: 637558295101084208
   cacheVersion: 6
 --- !u!114 &40356364994095130
 MonoBehaviour:
@@ -2877,6 +2797,26 @@ MonoBehaviour:
   m_Name: parameter:/Exploration/ExplorationEnd
   m_EditorClassIdentifier: 
   Name: ExplorationEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &716763079647602410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TorchAll/TorchEnd
+  m_EditorClassIdentifier: 
+  Name: TorchEnd
   Min: 0
   Max: 1
   Default: 0
@@ -2987,7 +2927,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
---- !u!114 &1154973499082431772
+--- !u!114 &1152203694237833943
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2997,29 +2937,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Blizzard/Blizzard Changed
+  m_Name: parameter:/Oneira Death/Death Changing Soil
   m_EditorClassIdentifier: 
-  Name: Blizzard Changed
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &1224110330996079337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Gun Bullet Impact/Bullet Impact
-  m_EditorClassIdentifier: 
-  Name: Bullet Impact
+  Name: Death Changing Soil
   Min: 0
   Max: 1
   Default: 0
@@ -3047,7 +2967,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -39150361506318631}
+  - {fileID: -3163961973617405347}
   MinDistance: 0
   MaxDistance: 0
   Length: 109000
@@ -3064,6 +2984,26 @@ MonoBehaviour:
   m_Name: parameter:/WendigoMovement/WendigoMovement End
   m_EditorClassIdentifier: 
   Name: WendigoMovement End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &1308782767095902790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wendigo/WendigoEnd
+  m_EditorClassIdentifier: 
+  Name: WendigoEnd
   Min: 0
   Max: 1
   Default: 0
@@ -3117,7 +3057,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 697
---- !u!114 &1557363859206412029
+--- !u!114 &1527371483078309444
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3127,16 +3067,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Blizzard/Blizzard Changed
+  m_Name: parameter:/Oneira Death/Death Changing Soil
   m_EditorClassIdentifier: 
-  Name: Blizzard Changed
+  Name: Death Changing Soil
   Min: 0
   Max: 1
   Default: 0
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &1565714962708456743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3156,8 +3096,28 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
---- !u!114 &1769148949073002916
+  Exists: 1
+--- !u!114 &1567672674669641594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TorchHit/Torch Attack
+  m_EditorClassIdentifier: 
+  Name: Torch Attack
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &1866904632902620175
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3177,7 +3137,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &2114251211990389884
+--- !u!114 &1880533154558873446
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3187,37 +3147,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Powder Idle/Powder Idle End
+  m_Name: parameter:/WendigoAttackAnnouncement/WendigoAttackAnnouncement End
   m_EditorClassIdentifier: 
-  Name: Powder Idle End
+  Name: WendigoAttackAnnouncement End
   Min: 0
   Max: 1
   Default: 0
   ID:
     data1: 0
     data2: 0
-  Exists: 1
---- !u!114 &2141826317362108350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Exploration/ExplorationSafe
-  m_EditorClassIdentifier: 
-  Name: ExplorationSafe
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &2229904557452913609
+  Exists: 0
+--- !u!114 &2018374403136427003
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3237,7 +3177,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
---- !u!114 &2232152432384538271
+--- !u!114 &2229904557452913609
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3247,9 +3187,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/WendigoMovement/WendigoMovement End
+  m_Name: parameter:/WaterCaveDrop/WaterCaveDropEnd
   m_EditorClassIdentifier: 
-  Name: WendigoMovement End
+  Name: WaterCaveDropEnd
   Min: 0
   Max: 1
   Default: 0
@@ -3296,8 +3236,8 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
---- !u!114 &2746150193870902079
+  Exists: 1
+--- !u!114 &2570135149277425522
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3307,9 +3247,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Wendigo/WendigoAttack
+  m_Name: parameter:/WendigoAttackAnnouncement/WendigoAttackAnnouncement End
   m_EditorClassIdentifier: 
-  Name: WendigoAttack
+  Name: WendigoAttackAnnouncement End
   Min: 0
   Max: 1
   Default: 0
@@ -3336,7 +3276,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
+  Exists: 1
 --- !u!114 &2860113463375438871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3360,7 +3300,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 4361
---- !u!114 &2875827401610675415
+--- !u!114 &2867886036631993986
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3370,17 +3310,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Main Title/Snowy_Path_Menu_End
+  m_Name: parameter:/TorchAll/TorchEnd
   m_EditorClassIdentifier: 
-  Name: Snowy_Path_Menu_End
+  Name: TorchEnd
   Min: 0
   Max: 1
   Default: 0
   ID:
     data1: 0
     data2: 0
-  Exists: 0
---- !u!114 &3100280489027263501
+  Exists: 1
+--- !u!114 &2923666519595245017
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3390,9 +3330,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/CampfireAll/Campfire End
+  m_Name: parameter:/TorchAll/TorchEnd
   m_EditorClassIdentifier: 
-  Name: Campfire End
+  Name: TorchEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &2995110358639813581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WindPlains/EndWindPlain
+  m_EditorClassIdentifier: 
+  Name: EndWindPlain
   Min: 0
   Max: 1
   Default: 0
@@ -3423,7 +3383,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 10000
   Length: 1369
---- !u!114 &3264698811218733108
+--- !u!114 &3135822718095292800
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3433,16 +3393,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/CampfireAll/Campfire End
+  m_Name: parameter:/Main Title/Snowy_Path_Menu_End
   m_EditorClassIdentifier: 
-  Name: Campfire End
+  Name: Snowy_Path_Menu_End
   Min: 0
   Max: 1
   Default: 0
   ID:
     data1: 0
     data2: 0
-  Exists: 0
+  Exists: 1
+--- !u!114 &3390787394996909384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TorchAll/TorchEnd
+  m_EditorClassIdentifier: 
+  Name: TorchEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &3423032548045312394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3463,7 +3443,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 4381827820054644467}
+  - {fileID: 8193498645349247573}
   MinDistance: 1
   MaxDistance: 20
   Length: 10062
@@ -3490,7 +3470,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2265
---- !u!114 &3514248766248756763
+--- !u!114 &3634994074165837381
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3500,9 +3480,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Oneira Death/Death Changing Soil
+  m_Name: parameter:/Wendigo/WendigoAttack
   m_EditorClassIdentifier: 
-  Name: Death Changing Soil
+  Name: WendigoAttack
   Min: 0
   Max: 1
   Default: 0
@@ -3530,7 +3510,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -1824867399866581549}
+  - {fileID: 3749988965536960318}
   MinDistance: 1
   MaxDistance: 20
   Length: 143000
@@ -3557,6 +3537,66 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1040
+--- !u!114 &3724263814189224054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wendigo/WendigoEnd
+  m_EditorClassIdentifier: 
+  Name: WendigoEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &3728013952769710061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main Title/Snowy_Path_Menu_End
+  m_EditorClassIdentifier: 
+  Name: Snowy_Path_Menu_End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &3749988965536960318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WendigoAttackAnnouncement/WendigoAttackAnnouncement End
+  m_EditorClassIdentifier: 
+  Name: WendigoAttackAnnouncement End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &3853805201196845524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3570,6 +3610,26 @@ MonoBehaviour:
   m_Name: parameter:/Exploration/ExplorationEnd
   m_EditorClassIdentifier: 
   Name: ExplorationEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &3867158775754283269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wolf Movement Footsteps/Changing Soil
+  m_EditorClassIdentifier: 
+  Name: Changing Soil
   Min: 0
   Max: 1
   Default: 0
@@ -3596,7 +3656,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
+  Exists: 1
 --- !u!114 &4113788263529893407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3617,7 +3677,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
---- !u!114 &4381827820054644467
+--- !u!114 &4153307027281593151
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3627,9 +3687,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Oneira Sprint/Sprint End
+  m_Name: parameter:/Wolf Movement Footsteps/Changing Soil
   m_EditorClassIdentifier: 
-  Name: Sprint End
+  Name: Changing Soil
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &4262847870844900420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CampfireAll/Campfire End
+  m_EditorClassIdentifier: 
+  Name: Campfire End
   Min: 0
   Max: 1
   Default: 0
@@ -3660,7 +3740,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 7800
---- !u!114 &4397055970602726992
+--- !u!114 &4429609619647514227
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3670,9 +3750,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Wendigo/WendigoEnd
+  m_Name: parameter:/Oneira Movement/Oneira Movement
   m_EditorClassIdentifier: 
-  Name: WendigoEnd
+  Name: Oneira Movement
   Min: 0
   Max: 1
   Default: 0
@@ -3716,26 +3796,6 @@ MonoBehaviour:
   m_Name: parameter:/Gun Bullet Impact/Bullet Impact
   m_EditorClassIdentifier: 
   Name: Bullet Impact
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &4605109881837858520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Wendigo/WendigoEnd
-  m_EditorClassIdentifier: 
-  Name: WendigoEnd
   Min: 0
   Max: 1
   Default: 0
@@ -3805,7 +3865,27 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
+  Exists: 1
+--- !u!114 &4993020618919544395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wolf Movement Footsteps/Changing Soil
+  m_EditorClassIdentifier: 
+  Name: Changing Soil
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &5064610773116773814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3826,66 +3906,6 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
---- !u!114 &5095999230438763200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Powder Idle/Powder Idle End
-  m_EditorClassIdentifier: 
-  Name: Powder Idle End
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &5119818625391417152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/WindPlains/EndWindPlain
-  m_EditorClassIdentifier: 
-  Name: EndWindPlain
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &5197490498351308285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Blizzard/Blizzard Changed
-  m_EditorClassIdentifier: 
-  Name: Blizzard Changed
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
 --- !u!114 &5301741665633869521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3968,7 +3988,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
+  Exists: 1
 --- !u!114 &5513572853727817496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4025,26 +4045,6 @@ MonoBehaviour:
   m_Name: parameter:/Powder Idle/Powder Idle End
   m_EditorClassIdentifier: 
   Name: Powder Idle End
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 0
---- !u!114 &5670345684619532092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/TorchHit/Torch Attack
-  m_EditorClassIdentifier: 
-  Name: Torch Attack
   Min: 0
   Max: 1
   Default: 0
@@ -4115,7 +4115,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 1224110330996079337}
+  - {fileID: -8694992246213384059}
   MinDistance: 1
   MaxDistance: 20
   Length: 15000
@@ -4179,11 +4179,11 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -4367898495172658791}
+  - {fileID: 2867886036631993986}
   MinDistance: 1
   MaxDistance: 20
   Length: 36000
---- !u!114 &6041622248680876956
+--- !u!114 &6103468450622940213
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4193,9 +4193,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Gun Bullet Impact/Bullet Impact
+  m_Name: parameter:/Powder Idle/Powder Idle End
   m_EditorClassIdentifier: 
-  Name: Bullet Impact
+  Name: Powder Idle End
   Min: 0
   Max: 1
   Default: 0
@@ -4242,7 +4242,27 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
+  Exists: 1
+--- !u!114 &6283640175394845117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wendigo/WendigoEnd
+  m_EditorClassIdentifier: 
+  Name: WendigoEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &6536526124937576587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4306,7 +4326,27 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &6659890475043610067
+--- !u!114 &6604211109439779174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TorchHit/Torch Attack
+  m_EditorClassIdentifier: 
+  Name: Torch Attack
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &6604244060973206773
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4326,7 +4366,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &6713346866240959941
+--- !u!114 &6642339819534151757
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4336,9 +4376,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Blizzard/Blizzard Changed
+  m_Name: parameter:/Exploration/ExplorationAction
   m_EditorClassIdentifier: 
-  Name: Blizzard Changed
+  Name: ExplorationAction
   Min: 0
   Max: 1
   Default: 0
@@ -4346,6 +4386,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &6702473916737796539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WendigoAttackAnnouncement/WendigoAttackAnnouncement End
+  m_EditorClassIdentifier: 
+  Name: WendigoAttackAnnouncement End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &6749732235065828069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4369,7 +4429,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 9875
---- !u!114 &6875915711889475911
+--- !u!114 &6911332466710962011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4379,16 +4439,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Wendigo/WendigoAttack
+  m_Name: parameter:/Safe Place/Safe Place End
   m_EditorClassIdentifier: 
-  Name: WendigoAttack
+  Name: Safe Place End
   Min: 0
   Max: 1
   Default: 0
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &6993989464537519290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4409,7 +4469,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 5670345684619532092}
+  - {fileID: 7616617077407065748}
   MinDistance: 1
   MaxDistance: 20
   Length: 26125
@@ -4476,6 +4536,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1220
+--- !u!114 &7250603448975019599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Exploration/ExplorationEnd
+  m_EditorClassIdentifier: 
+  Name: ExplorationEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &7305875658799754525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4496,7 +4576,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
---- !u!114 &7455081470178346277
+--- !u!114 &7343523478276555473
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4506,16 +4586,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Wolf Movement Footsteps/Changing Soil
+  m_Name: parameter:/Oneira Movement/Oneira Movement
   m_EditorClassIdentifier: 
-  Name: Changing Soil
+  Name: Oneira Movement
   Min: 0
   Max: 1
   Default: 0
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
+--- !u!114 &7385326586080616198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Blizzard/Blizzard Changed
+  m_EditorClassIdentifier: 
+  Name: Blizzard Changed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
 --- !u!114 &7534358077426734761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4536,27 +4636,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
---- !u!114 &7641620250041858285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Exploration/ExplorationEnd
-  m_EditorClassIdentifier: 
-  Name: ExplorationEnd
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &7644538458741767004
+--- !u!114 &7616617077407065748
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4576,6 +4656,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &7695180649501501171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wendigo/WendigoAttack
+  m_EditorClassIdentifier: 
+  Name: WendigoAttack
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
 --- !u!114 &7701838944306016921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4596,7 +4696,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
---- !u!114 &7748271198232534119
+--- !u!114 &7707204414213378082
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4606,16 +4706,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Oneira Movement/Oneira Movement
+  m_Name: parameter:/WendigoMovement/WendigoMovement End
   m_EditorClassIdentifier: 
-  Name: Oneira Movement
+  Name: WendigoMovement End
   Min: 0
   Max: 1
   Default: 0
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &7817238053156918881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4656,7 +4756,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -3324013147679105815}
+  - {fileID: -7883582670946990392}
   MinDistance: 1
   MaxDistance: 20
   Length: 289500
@@ -4680,11 +4780,11 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 5197490498351308285}
+  - {fileID: 8219175641651156480}
   MinDistance: 1
   MaxDistance: 20
   Length: 834000
---- !u!114 &8012735861996846861
+--- !u!114 &7943030121132773148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4694,9 +4794,49 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Wendigo/WendigoAttack
+  m_Name: parameter:/Gun Bullet Impact/Bullet Impact
   m_EditorClassIdentifier: 
-  Name: WendigoAttack
+  Name: Bullet Impact
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &8180382720888361489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Gun Bullet Impact/Bullet Impact
+  m_EditorClassIdentifier: 
+  Name: Bullet Impact
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &8193498645349247573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Sprint/Sprint End
+  m_EditorClassIdentifier: 
+  Name: Sprint End
   Min: 0
   Max: 1
   Default: 0
@@ -4727,7 +4867,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1827
---- !u!114 &8245280837040416274
+--- !u!114 &8219175641651156480
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4737,29 +4877,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Powder Idle/Powder Idle End
+  m_Name: parameter:/Blizzard/Blizzard Changed
   m_EditorClassIdentifier: 
-  Name: Powder Idle End
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 0
---- !u!114 &8252457044946999257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/CampfireAll/Campfire End
-  m_EditorClassIdentifier: 
-  Name: Campfire End
+  Name: Blizzard Changed
   Min: 0
   Max: 1
   Default: 0
@@ -4807,11 +4927,11 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -3457130560179638083}
+  - {fileID: 3728013952769710061}
   MinDistance: 0
   MaxDistance: 0
   Length: 118000
---- !u!114 &8458753324249931161
+--- !u!114 &8525994369922488774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4821,29 +4941,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Oneira Movement/Oneira Movement
+  m_Name: parameter:/Gun Bullet Impact/Bullet Impact
   m_EditorClassIdentifier: 
-  Name: Oneira Movement
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &8528749263815644645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/WendigoAttackAnnouncement/WendigoAttackAnnouncement End
-  m_EditorClassIdentifier: 
-  Name: WendigoAttackAnnouncement End
+  Name: Bullet Impact
   Min: 0
   Max: 1
   Default: 0
@@ -4851,6 +4951,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &8544193745156479532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Death/Death Changing Soil
+  m_EditorClassIdentifier: 
+  Name: Death Changing Soil
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &8648734558751313379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4871,11 +4991,31 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -7175943522150135371}
+  - {fileID: -481966881209658798}
   MinDistance: 0.5
   MaxDistance: 20
   Length: 127000
---- !u!114 &8672928149134401698
+--- !u!114 &8673683476536512979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Exploration/ExplorationAction
+  m_EditorClassIdentifier: 
+  Name: ExplorationAction
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &8720127262265592892
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4895,26 +5035,6 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &8772688623838873532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Wolf Movement Footsteps/Changing Soil
-  m_EditorClassIdentifier: 
-  Name: Changing Soil
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 0
 --- !u!114 &8922545497015647892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4981,26 +5101,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1500
---- !u!114 &9063335963657011374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/TorchAll/TorchEnd
-  m_EditorClassIdentifier: 
-  Name: TorchEnd
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
 --- !u!114 &9085312238160864350
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class AudioSettings : MonoBehaviour
     static FMOD.Studio.Bus Music;
     static FMOD.Studio.Bus SFX;
     static FMOD.Studio.Bus Master;
+    static FMOD.Studio.Bus ReverbCavern;
     public float MusicVolume;
     public float SFXVolume;
     public float MasterVolume;
@@ -19,6 +20,7 @@ public class AudioSettings : MonoBehaviour
         Music = FMODUnity.RuntimeManager.GetBus("bus:/Music");
         SFX = FMODUnity.RuntimeManager.GetBus("bus:/SFX");
         Master = FMODUnity.RuntimeManager.GetBus("bus:/");
+        ReverbCavern = FMODUnity.RuntimeManager.GetBus("bus:/ReverbCavern");
         SetVolume();
         //SFXVolumeTestEvent = FMODUnity.RuntimeManager.CreateInstance("event:/SFX/SFXVolumeTest");
     }
@@ -28,6 +30,7 @@ public class AudioSettings : MonoBehaviour
         Music.setVolume(MusicVolume);
         SFX.setVolume(SFXVolume);
         Master.setVolume(MasterVolume);
+        ReverbCavern.setVolume(0f);
     }
 
 
