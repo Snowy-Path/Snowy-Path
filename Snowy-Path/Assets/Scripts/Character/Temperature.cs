@@ -195,4 +195,8 @@ public class Temperature : MonoBehaviour {
     {
         m_currentTemperature = maxTemperature;
     }
+
+    public void ResetCounter() {
+        m_heatSources = 0;
+    }
 }
