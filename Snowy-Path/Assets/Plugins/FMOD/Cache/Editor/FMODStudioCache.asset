@@ -1,5 +1,948 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8786451708453903892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Death/Death Changing Soil
+  m_EditorClassIdentifier: 
+  Name: Death Changing Soil
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-8418847715605511690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Wolf/Wolf Aggro
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Wolf/Wolf Aggro
+  guid: 3bf2296f2002704e8b38bb05689b52eb
+  Banks:
+  - {fileID: 635091326496114319}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 100
+  Length: 2750
+--- !u!114 &-8258757699964409895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambiance-Environnement/WindPlains
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambiance-Environnement/WindPlains
+  guid: a4e05bf31590a34291e138e254f290ff
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 1263826200775569955}
+  MinDistance: 0.5
+  MaxDistance: 20
+  Length: 127000
+--- !u!114 &-8108157520985851954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Oneira/Oneira Death
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Oneira/Oneira Death
+  guid: 6dc286dc5a4bcf4e8048b0b5071b9deb
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -8786451708453903892}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5600
+--- !u!114 &-8025301519335160502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambiance-Environnement/RockFall
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambiance-Environnement/RockFall
+  guid: 78d680b88317764bbf8babd4510aff03
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2797
+--- !u!114 &-8002454528707777784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Safe Place/Safe Place End
+  m_EditorClassIdentifier: 
+  Name: Safe Place End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-7732091582189783541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WaterCaveDrop/WaterCaveDropEnd
+  m_EditorClassIdentifier: 
+  Name: WaterCaveDropEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-7698913766100078116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/CampfireAll
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/CampfireAll
+  guid: f09af091fdb795448f18178b5c915384
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 8935146287904506615}
+  MinDistance: 1
+  MaxDistance: 15
+  Length: 25105
+--- !u!114 &-7225844443517498178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Map Equipped Mode Stamp Validation
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Map Equipped Mode Stamp Validation
+  guid: 813645248111da40aca0411c9d895977
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
+--- !u!114 &-6638418918784589413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Spyglass Damaged
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Spyglass Damaged
+  guid: b433d9d1d774d0469accbb3e65c72de3
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1375
+--- !u!114 &-6369401183049823973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TorchHit/Torch Attack
+  m_EditorClassIdentifier: 
+  Name: Torch Attack
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-6124223468383931231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wendigo/Music Wendigo End
+  m_EditorClassIdentifier: 
+  Name: Music Wendigo End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-5654831873199070216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Key Item Used
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Key Item Used
+  guid: 859214b3457558459d9c803e18a01baa
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7288
+--- !u!114 &-5280959525207949988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Wolf/Wolf Damaged
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Wolf/Wolf Damaged
+  guid: 79bae13b10d5a2499e23b58aac09783e
+  Banks:
+  - {fileID: 635091326496114319}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 100
+  Length: 1429
+--- !u!114 &-5278880360143895893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/TorchAll
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/TorchAll
+  guid: 657fe53610dc324f8d2187758d5007cc
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 1705320240781986140}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 36000
+--- !u!114 &-5032968928420217573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Puzzle Finish
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Puzzle Finish
+  guid: 55c223f63c0e134e80ae389428591aba
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 4000
+--- !u!114 &-4982265866290042741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wolf Movement Footsteps/Changing Soil
+  m_EditorClassIdentifier: 
+  Name: Changing Soil
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4829622066841212491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambiance-Environnement/VegetationBranchFire
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambiance-Environnement/VegetationBranchFire
+  guid: f5de86176eaf6c49b211b9fe08df50ed
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3078
+--- !u!114 &-4781232808326916374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Oneira/Oneira Movement
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Oneira/Oneira Movement
+  guid: ee7274c7c72c5a42ba94a6942240b03e
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 5730862229327009530}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7500
+--- !u!114 &-4773428151088749026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Oneira/Oneira Sprint Recovery
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Oneira/Oneira Sprint Recovery
+  guid: 57f3582367032f42aee20f9238f6506b
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 9875
+--- !u!114 &-4690177705494613793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Sprint/Sprint End
+  m_EditorClassIdentifier: 
+  Name: Sprint End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4109053892294107120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambiance-Environnement/AnimalCrow
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambiance-Environnement/AnimalCrow
+  guid: 1619518cadb06c4ea4ccd004acf4a467
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0.5
+  MaxDistance: 20
+  Length: 4614
+--- !u!114 &-3848193573868077847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambiance-Environnement/WaterCaveDrop
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambiance-Environnement/WaterCaveDrop
+  guid: e8862e6358941a4f8bb68c823ddaeaae
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -7732091582189783541}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 289500
+--- !u!114 &-3662759683741862266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambiance-Environnement/IceSpike
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambiance-Environnement/IceSpike
+  guid: 7f85169c28c1974cbfe58c7e1856b30b
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4361
+--- !u!114 &-3631441743422225087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambiance-Environnement/Blizzard
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambiance-Environnement/Blizzard
+  guid: bb794b916bd3724eb7c6a1a9ae1f54f1
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 1355567212669101386}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 834000
+--- !u!114 &-3499844848282227278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Map Equipped Mode Stamp Cancel
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Map Equipped Mode Stamp Cancel
+  guid: 8168726182f6de4abfcc1f622b4c1aa4
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
+--- !u!114 &-3199503460179038762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Map Equipped Edition Apply
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Map Equipped Edition Apply
+  guid: 68aabf8db7038641b438eda36114c6fe
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1040
+--- !u!114 &-2586748637484020484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambiance-Environnement/AnimalBison
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambiance-Environnement/AnimalBison
+  guid: b797217e49202e439b16df0f583a4fcc
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0.5
+  MaxDistance: 30
+  Length: 4449
+--- !u!114 &-2297900958604937251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wendigo/Music Wendigo Attack
+  m_EditorClassIdentifier: 
+  Name: Music Wendigo Attack
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-2237864385167780559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Wolf/WolfCombat
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Wolf/WolfCombat
+  guid: 4c61cbe1c4b63d4f9cf5ebf9f132f2dd
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1827
+--- !u!114 &-2092859795650123706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Musics/Exploration
+  m_EditorClassIdentifier: 
+  Path: event:/Musics/Exploration
+  guid: 46f71c095b2e0a40a7d1c399c6634782
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 2236040986260359296}
+  - {fileID: -1035568975491558528}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 196000
+--- !u!114 &-2039575826229373475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Wendigo/WendigoAttackWhoosh
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Wendigo/WendigoAttackWhoosh
+  guid: 30649585b7b2974f8913e482f7b8d89b
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 10000
+  Length: 4095
+--- !u!114 &-2004964031970637736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WendigoMovement/WendigoMovement End
+  m_EditorClassIdentifier: 
+  Name: WendigoMovement End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-1496563228874962043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambiance-Environnement/WindCave
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambiance-Environnement/WindCave
+  guid: 28d718b9dcf5af448e5133dbcd547fb6
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 15
+  Length: 15154
+--- !u!114 &-1401868305793538015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/TorchAttack
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/TorchAttack
+  guid: 531d7cad3d9610479cc3ce75b4bdf3da
+  Banks:
+  - {fileID: 2213738443597343376}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1375
+--- !u!114 &-1035568975491558528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Exploration/Exploration Action
+  m_EditorClassIdentifier: 
+  Name: Exploration Action
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-907102488144113135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Musics/Wendigo
+  m_EditorClassIdentifier: 
+  Path: event:/Musics/Wendigo
+  guid: d3a10402d60ed64cbb1daffd2d151736
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -6124223468383931231}
+  - {fileID: -2297900958604937251}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 150900
+--- !u!114 &-885317033837691680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Wolf/Wolf Attack
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Wolf/Wolf Attack
+  guid: a6dad902c1df9143bd856905eb71caea
+  Banks:
+  - {fileID: 635091326496114319}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 10
+  Length: 1427
+--- !u!114 &-549757817699957940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Compass Close
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Compass Close
+  guid: ddd0cc6788262f438971baa3d22397da
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 697
+--- !u!114 &-434627927540861041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Map Equipped Mode Stamp Delete
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Map Equipped Mode Stamp Delete
+  guid: 23414bb051a5254e8109e7829d77e223
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1250
+--- !u!114 &-320940308090445977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMODAssets/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637557371657939874
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-246463333798624465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Map Equipped Mode
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Map Equipped Mode
+  guid: 062e06c7d53a814bb036a0485dc93ea1
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1250
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12,10 +955,1131 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
-  EditorBanks: []
-  EditorEvents: []
+  EditorBanks:
+  - {fileID: 3153074265383999657}
+  - {fileID: -320940308090445977}
+  - {fileID: 2213738443597343376}
+  - {fileID: 635091326496114319}
+  EditorEvents:
+  - {fileID: -246463333798624465}
+  - {fileID: 7800239771882241975}
+  - {fileID: 8762027754259302417}
+  - {fileID: 3621514092604824124}
+  - {fileID: 5527325686808850995}
+  - {fileID: 792236029531265149}
+  - {fileID: -4109053892294107120}
+  - {fileID: 3434060603902242538}
+  - {fileID: -434627927540861041}
+  - {fileID: 45532321599302138}
+  - {fileID: -1496563228874962043}
+  - {fileID: 562829647142544210}
+  - {fileID: -2039575826229373475}
+  - {fileID: 2976595667331329098}
+  - {fileID: -2092859795650123706}
+  - {fileID: 2060366067620617959}
+  - {fileID: 1522317512148361129}
+  - {fileID: -2237864385167780559}
+  - {fileID: 7009536009229827529}
+  - {fileID: -5032968928420217573}
+  - {fileID: -4773428151088749026}
+  - {fileID: 8858983069709185479}
+  - {fileID: 8228428688582375016}
+  - {fileID: -5278880360143895893}
+  - {fileID: -3199503460179038762}
+  - {fileID: 109795650617983370}
+  - {fileID: 3911118858695394295}
+  - {fileID: -8108157520985851954}
+  - {fileID: 5322061137148291607}
+  - {fileID: 4603466972289758880}
+  - {fileID: -8025301519335160502}
+  - {fileID: 53780004821160178}
+  - {fileID: -3662759683741862266}
+  - {fileID: -7225844443517498178}
+  - {fileID: -3499844848282227278}
+  - {fileID: 7143745023424377849}
+  - {fileID: -5654831873199070216}
+  - {fileID: 8691164135739006117}
+  - {fileID: 1898589002760357373}
+  - {fileID: 158921783794728638}
+  - {fileID: -8258757699964409895}
+  - {fileID: 7335906901143469721}
+  - {fileID: 1422695721544453818}
+  - {fileID: -6638418918784589413}
+  - {fileID: 3070057552239398344}
+  - {fileID: -2586748637484020484}
+  - {fileID: 7142972494234497496}
+  - {fileID: -3631441743422225087}
+  - {fileID: 7402589218372126248}
+  - {fileID: -907102488144113135}
+  - {fileID: 2814794671178582847}
+  - {fileID: -549757817699957940}
+  - {fileID: 3811165991926581435}
+  - {fileID: -3848193573868077847}
+  - {fileID: 6615080610599735113}
+  - {fileID: -4781232808326916374}
+  - {fileID: 615231327665213325}
+  - {fileID: -7698913766100078116}
+  - {fileID: 1734358314105677344}
+  - {fileID: -4829622066841212491}
+  - {fileID: -1401868305793538015}
+  - {fileID: 6815132068392565454}
+  - {fileID: -8418847715605511690}
+  - {fileID: -5280959525207949988}
+  - {fileID: -885317033837691680}
   EditorParameters: []
-  MasterBanks: []
-  StringsBanks: []
-  stringsBankWriteTime: 0
+  MasterBanks:
+  - {fileID: -320940308090445977}
+  StringsBanks:
+  - {fileID: 3153074265383999657}
+  stringsBankWriteTime: 637557320349295336
   cacheVersion: 6
+--- !u!114 &45532321599302138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Gun Bullet Impact
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Gun Bullet Impact
+  guid: 2572dfa49421b944bed4add89d9dd308
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 8090177600803461938}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 15000
+--- !u!114 &53780004821160178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Gun Shot
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Gun Shot
+  guid: 7b25cb905542ae4ebf8248c43179e791
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1500
+--- !u!114 &109795650617983370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambiance-Environnement/WaterFlow
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambiance-Environnement/WaterFlow
+  guid: 6b729bce024d0747b2754a6cc1724ff5
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 70
+  Length: 302375
+--- !u!114 &158921783794728638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Wendigo/WendigoDamaged
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Wendigo/WendigoDamaged
+  guid: a20c2e7b7cd3d548a6d81d9c51c2b555
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 10000
+  Length: 1369
+--- !u!114 &562829647142544210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Powder Extinguished
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Powder Extinguished
+  guid: 2c6246ab8ef8d940a86721261211db50
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5705
+--- !u!114 &615231327665213325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Wendigo/WendigoSpawn
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Wendigo/WendigoSpawn
+  guid: eff5ca3f8294704a8ff6b25e96d3b430
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 10000
+  Length: 3400
+--- !u!114 &635091326496114319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Wolf.bank
+  m_EditorClassIdentifier: 
+  Path: FMODAssets/Build/Desktop/Wolf.bank
+  Name: Wolf
+  StudioPath: bank:/Wolf
+  lastModified: 637557320349375352
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &792236029531265149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Spyglass Zoom
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Spyglass Zoom
+  guid: 12a4fc597d306a4db7d558f6830c5ba3
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
+--- !u!114 &1263826200775569955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WindPlains/EndWindPlain
+  m_EditorClassIdentifier: 
+  Name: EndWindPlain
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &1355567212669101386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Blizzard/Blizzard Changed
+  m_EditorClassIdentifier: 
+  Name: Blizzard Changed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &1422695721544453818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Gun Reload
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Gun Reload
+  guid: ae9cfbd6064027449897dc8261c45288
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1750
+--- !u!114 &1522317512148361129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Map Equipped
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Map Equipped
+  guid: 4ac96a210a59f94ca473f5a0cc4745ce
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1750
+--- !u!114 &1705320240781986140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TorchAll/TorchEnd
+  m_EditorClassIdentifier: 
+  Name: TorchEnd
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &1734358314105677344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Wendigo/WendigoMovement
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Wendigo/WendigoMovement
+  guid: f1c4dd8cadf683489730479576ed3415
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -2004964031970637736}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 55600
+--- !u!114 &1898589002760357373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Powder Usage
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Powder Usage
+  guid: 8e8da899d1bee44b9f6d98313e05f89a
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3461
+--- !u!114 &2060366067620617959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Oneira/Oneira Sprint
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Oneira/Oneira Sprint
+  guid: 4703dbff97b2034583f70457d77f3f3d
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -4690177705494613793}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10062
+--- !u!114 &2213738443597343376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Tools.bank
+  m_EditorClassIdentifier: 
+  Path: FMODAssets/Build/Desktop/Tools.bank
+  Name: Tools
+  StudioPath: bank:/Tools
+  lastModified: 637557371651491867
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &2236040986260359296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Exploration/Exploration End
+  m_EditorClassIdentifier: 
+  Name: Exploration End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &2814794671178582847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Map Damaged
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Map Damaged
+  guid: d6ec505f506e3049b62cb941eea56edb
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1220
+--- !u!114 &2976595667331329098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Bullet Pick Up
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Bullet Pick Up
+  guid: 315053d589a05a44ad13c4b035a9d6eb
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1250
+--- !u!114 &3070057552239398344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Musics/Main Title
+  m_EditorClassIdentifier: 
+  Path: event:/Musics/Main Title
+  guid: b74d92c5b98e844e8980da89e006786b
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 5955112734954007526}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 86737
+--- !u!114 &3153074265383999657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: FMODAssets/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637557320349295336
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 4946
+  Exists: 1
+--- !u!114 &3434060603902242538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambiance-Environnement/WaterIceFlow
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambiance-Environnement/WaterIceFlow
+  guid: 1a792da988b65d4c97651f201ca126c0
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 271132
+--- !u!114 &3585189912573282981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WendigoAttackAnnouncement/WendigoAttackAnnouncement End
+  m_EditorClassIdentifier: 
+  Name: WendigoAttackAnnouncement End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &3621514092604824124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Powder Idle
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Powder Idle
+  guid: 1135b64e48787f4e822034e1f707be63
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 6558589178091244482}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 20500
+--- !u!114 &3811165991926581435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Gun Bullet PickUp
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Gun Bullet PickUp
+  guid: e249376996d12d4ba8a4081aa97a7332
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1250
+--- !u!114 &3911118858695394295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Oneira/Oneira Breathe Light
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Oneira/Oneira Breathe Light
+  guid: 6d1a661c7b5b494e89582ac135ffed68
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3625
+--- !u!114 &4603466972289758880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Wendigo/WendigoAttackAnnouncement
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Wendigo/WendigoAttackAnnouncement
+  guid: 74d244296529b840b870cc84f1385997
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 3585189912573282981}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 143000
+--- !u!114 &5322061137148291607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Oneira/Oneira Breathe Medium
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Oneira/Oneira Breathe Medium
+  guid: 6f1f1e1ad4c3ba4a85d6dab5b937c674
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4300
+--- !u!114 &5527325686808850995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambiance-Environnement/VegetationWindBush
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambiance-Environnement/VegetationWindBush
+  guid: 125f558f7bf96c42a8a885a324f51eea
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7800
+--- !u!114 &5730862229327009530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Oneira Movement/Oneira Movement
+  m_EditorClassIdentifier: 
+  Name: Oneira Movement
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &5955112734954007526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main Title/Snowy_Path_Menu_End
+  m_EditorClassIdentifier: 
+  Name: Snowy_Path_Menu_End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &6558589178091244482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Powder Idle/Powder Idle End
+  m_EditorClassIdentifier: 
+  Name: Powder Idle End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &6615080610599735113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Oneira/Oneira Breathe Heavy
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Oneira/Oneira Breathe Heavy
+  guid: eaf97c2c3e2b4d4f94039329b483cc12
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 9000
+--- !u!114 &6815132068392565454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Wolf/Wolf Movement Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Wolf/Wolf Movement Footsteps
+  guid: 08870dbd16381e41bcd8662f6bb9eb12
+  Banks:
+  - {fileID: 635091326496114319}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -4982265866290042741}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2750
+--- !u!114 &7009536009229827529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Map Equipped Edition Delete
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Map Equipped Edition Delete
+  guid: 50bbe4ab382a784d84beecbef7fab9ab
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
+--- !u!114 &7142972494234497496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Wendigo/WendigoAttack
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Wendigo/WendigoAttack
+  guid: b9e9d29d5e432d4f94458af5a48be223
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3692
+--- !u!114 &7143745023424377849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Gun Equip
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Gun Equip
+  guid: 830a1ee6c250dd4eb42262acb479808b
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
+--- !u!114 &7335906901143469721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Spyglass Equipped
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Spyglass Equipped
+  guid: ae1523630b61c44eb2afc40d344f050b
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 900
+--- !u!114 &7402589218372126248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/TorchHit
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/TorchHit
+  guid: ca438383d853f349b51015c98e900a9c
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -6369401183049823973}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 26125
+--- !u!114 &7800239771882241975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Oneira/Oneira Death Water
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Oneira/Oneira Death Water
+  guid: 0a42faa431fcf44398e511308a8d0b5d
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7500
+--- !u!114 &8090177600803461938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Gun Bullet Impact/Bullet Impact
+  m_EditorClassIdentifier: 
+  Name: Bullet Impact
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &8228428688582375016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Wolf/WolfDeath
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Wolf/WolfDeath
+  guid: 5e5d7c7810899e418136121a3dbc1bb9
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2710
+--- !u!114 &8691164135739006117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambiance-Environnement/RockDoor
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambiance-Environnement/RockDoor
+  guid: 85d05804266be8419ec1da5f1b78873f
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1920
+--- !u!114 &8762027754259302417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Tools/Map Equipped Mode Stamp Draw
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Tools/Map Equipped Mode Stamp Draw
+  guid: 0b8231dfeaed964db266318c2a0e6d90
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2265
+--- !u!114 &8858983069709185479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Musics/Safe Place
+  m_EditorClassIdentifier: 
+  Path: event:/Musics/Safe Place
+  guid: 59351732eb60fa4192deb5fc0266f2d6
+  Banks:
+  - {fileID: -320940308090445977}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8002454528707777784}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 109000
+--- !u!114 &8935146287904506615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CampfireAll/Campfire End
+  m_EditorClassIdentifier: 
+  Name: Campfire End
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
