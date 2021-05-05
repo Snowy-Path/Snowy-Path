@@ -70,6 +70,11 @@ public class Temperature : MonoBehaviour {
     void Update() {
         // If the player is near at least one heat source, increase his temperature
         if (m_heatSources > 0) {
+
+            if (ExplorationMusic.Instance) {
+                ExplorationMusic.Instance.EnterSafeMusic();
+            }
+
             // Increase our temperature regen timer
             m_temperatureRegenerationCooldownTimer += Time.deltaTime;
 
@@ -85,6 +90,11 @@ public class Temperature : MonoBehaviour {
         }
         // Else, if the player is not near an heat source, decrease his temperature
         else {
+
+            if (ExplorationMusic.Instance) {
+                ExplorationMusic.Instance.ExitSafeMusic();
+            }
+
             // Increase our temperature loss timer
             m_temperatureLossCooldownTimer += Time.deltaTime;
 

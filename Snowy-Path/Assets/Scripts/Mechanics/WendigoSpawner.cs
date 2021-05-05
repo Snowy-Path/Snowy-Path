@@ -48,5 +48,9 @@ public class WendigoSpawner : MonoBehaviour {
 
         rockfall.SetActive(false);
         wendigoDespawner.SetActive(true);
+
+        if (MusicManager.Instance) {
+            MusicManager.Instance.ChangeParametter("WendigoEnd", 1f);
+        }
     }
 }
