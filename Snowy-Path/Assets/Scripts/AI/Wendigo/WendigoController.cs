@@ -123,6 +123,12 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
         m_damagedEvent.Play();
     }
 
+    private void StartPursuitMusic() {
+        if (MusicManager.Instance) {
+            MusicManager.Instance.ChangeParametter("WendigoAttack", 1f);
+        }
+    }
+
     private void StopMovementSFX() {
         FMOD.Studio.PARAMETER_ID m_movementEND_ID;
         FMOD.Studio.EventDescription movementEventDesc;
@@ -145,6 +151,9 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     }
 
     private void Deactivate() {
+        if (MusicManager.Instance) {
+            MusicManager.Instance.ChangeParametter("WendigoEnd", 1f);
+        }
         gameObject.SetActive(false);
     }
     #endregion
