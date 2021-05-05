@@ -14,8 +14,8 @@ public class Campfire : MonoBehaviour {
 
     [Header("Campfire Tweaking")]
 
-    [Tooltip("Time for the fire to extinguish")]
-    public float extinctionTime = 0f;
+    //[Tooltip("Time for the fire to extinguish")]
+    //public float extinctionTime = 0f;
 
     [Tooltip("Radius of the extinction range")]
     public float radius = 0f;
@@ -34,7 +34,7 @@ public class Campfire : MonoBehaviour {
 
     private HeatSource heatSource;
 
-    private float extinctionFireTimer = 0f;
+    //private float extinctionFireTimer = 0f;
 
     // Stopping timer when fire is not active
     private bool isFireActive = false;
@@ -49,19 +49,19 @@ public class Campfire : MonoBehaviour {
         heatSource.enabled = false;
     }
 
-    private void Update() {
+    //private void Update() {
 
-        if (isFireActive) {
-            // Increase the extinction timer
-            extinctionFireTimer += Time.deltaTime;
+    //    if (isFireActive) {
+    //        // Increase the extinction timer
+    //        extinctionFireTimer += Time.deltaTime;
 
-            // Process exctinction and reset timer if its value is higher than cooldown
-            if (extinctionFireTimer > extinctionTime) {
-                extinctionFireTimer = 0;
-                ExctinguishFire();
-            }
-        }
-    }
+    //        // Process exctinction and reset timer if its value is higher than cooldown
+    //        if (extinctionFireTimer > extinctionTime) {
+    //            extinctionFireTimer = 0;
+    //            ExctinguishFire();
+    //        }
+    //    }
+    //}
 
     /// <summary>
     /// Call every method necessary when interacting with the campfire
@@ -87,7 +87,7 @@ public class Campfire : MonoBehaviour {
     /// </summary>
     internal void ExctinguishFire() {
         isFireActive = false;
-        extinctionFireTimer = 0;
+        //extinctionFireTimer = 0;
         onExtinguish.Invoke();
         heatSource.enabled = false;
     }
