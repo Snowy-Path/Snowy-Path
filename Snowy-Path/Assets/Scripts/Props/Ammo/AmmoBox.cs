@@ -16,6 +16,13 @@ public class AmmoBox : MonoBehaviour {
                     gun.ammunitionInInventory++;
                     m_bulletPickUpEmitter.Play();
                     Destroy(this.gameObject);
+                    if(FindObjectOfType<HandController>()?.CurrentTool == (IHandTool)gun)
+                    {
+                        if(gun.ammoLoaded <= 0 && !gun.IsBusy)
+                        {
+                            gun.Reload();
+                        }
+                    }
                 }
             }
         }
