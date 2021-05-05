@@ -11,19 +11,18 @@ public class HQMainMenu : MonoBehaviour
     public GameObject OptionsMenu, CreditsMenu, MainMenu;
     public GameObject OptionsButton, CreditsButton;
     public GameObject MainMenuFirstButton, OptionsFirstButton, CreditsFirstButton;
-    public PlayerInput playerInput;
+
+    public InputActionAsset inputActionAsset;
+    private BackButton backButton;
+
     public void OnEnable()
     {
-
-        if (OptionHandler.gamepadconnected)
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(MainMenuFirstButton);
-        }
-
-
-
+        SetFocus(MainMenuFirstButton);
+        backButton = GetComponent<BackButton>();
+        inputActionAsset.FindAction("Map/Cancel").performed += (InputAction.CallbackContext c) => backButton.Back();
     }
+
+
     public void PlayGame()
     {
 
@@ -91,14 +90,10 @@ public class HQMainMenu : MonoBehaviour
     /// Set the selsection focus on the button go
     /// </summary>
     /// <param name="go"></param>
-    private void SetFocus(GameObject go)
+    public void SetFocus(GameObject go)
     {
-        if (OptionHandler.gamepadconnected)
-        {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(go);
-        }
-
     }
 
     /// <summary>
