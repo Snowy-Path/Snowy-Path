@@ -39,6 +39,10 @@ public class PostProcessHandler : MonoBehaviour {
     void Start() {
         controller = FindObjectOfType<PlayerController>();
         playerCamera = Camera.main;
+        LoadProfile();
+    }
+
+    public void LoadProfile() {
         Volume volume = GetComponent<Volume>();
         DepthOfField tmpDoF;
         if (volume.profile.TryGet<DepthOfField>(out tmpDoF)) {
@@ -46,7 +50,6 @@ public class PostProcessHandler : MonoBehaviour {
         }
         volume.profile.TryGet<Vignette>(out vignetteComponent);
     }
-
 
     void Update() {
         float fovStep = (fovMax - fovMin) / fovTransitionTime * Time.deltaTime;
