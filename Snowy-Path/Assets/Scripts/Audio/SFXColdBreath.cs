@@ -65,6 +65,7 @@ public class SFXColdBreath : MonoBehaviour {
     public void ResetTimer() {
         timer = 0;
         isPlaying = false;
+        emitter.Stop();
         delay = Random.Range(minDelay, maxDelay);
         StartCoroutine(FadeOut());
     }
