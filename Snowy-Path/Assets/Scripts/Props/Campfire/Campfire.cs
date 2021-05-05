@@ -37,7 +37,7 @@ public class Campfire : MonoBehaviour {
     //private float extinctionFireTimer = 0f;
 
     // Stopping timer when fire is not active
-    private bool isFireActive = false;
+    public bool isFireActive = false;
 
     // The ID must be generated for it to be saved properly
     [ContextMenu("Generate Id")]
