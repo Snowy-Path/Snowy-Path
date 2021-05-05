@@ -5,6 +5,13 @@ using UnityEngine.InputSystem;
 
 public class EndGameLoader : MonoBehaviour
 {
+
+    private void Awake()
+    {
+        FMOD.Studio.Bus Master = FMODUnity.RuntimeManager.GetBus("bus:/");
+        Master.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
