@@ -30,8 +30,10 @@ public class InteractionController : MonoBehaviour {
     private LayerMask blockingLayers;
 
     [SerializeField]
-    [Header("Player Camera")]
+    [Header("Set up")]
     private Camera playerCamera;
+
+    [SerializeField] Animator animator;
 
     private Interactable m_interactable;
 
@@ -44,6 +46,7 @@ public class InteractionController : MonoBehaviour {
     /// </summary>
     void Update() {
         CheckForInteractable();
+        animator.SetBool("Hover", CanInteract());
     }
 
     #endregion
@@ -71,7 +74,8 @@ public class InteractionController : MonoBehaviour {
                 Vector3 _interPosition;
                 if (_interHit.InteractionPoint) {
                     _interPosition = _interHit.InteractionPoint.position;
-                } else {
+                }
+                else {
                     _interPosition = _interHit.transform.position;
                 }
 
@@ -86,7 +90,8 @@ public class InteractionController : MonoBehaviour {
                                 m_interactable.HideInteractionFeedback();
                                 m_interactable = null;
                             }
-                        } else if (m_interactable != _interHit) { //If previous object is different from current object
+                        }
+                        else if (m_interactable != _interHit) { //If previous object is different from current object
 
                             if (m_interactable != null) { // Hide previous object if it was a real object
                                 m_interactable.HideInteractionFeedback();
@@ -96,7 +101,8 @@ public class InteractionController : MonoBehaviour {
                             m_interactable = _interHit;
                             m_interactable.ShowInteractionFeedback();
                         }
-                    } else {
+                    }
+                    else {
                         // Hide previous object if it was a real object & switch to null
                         if (m_interactable != null) {
                             m_interactable.HideInteractionFeedback();
@@ -105,7 +111,8 @@ public class InteractionController : MonoBehaviour {
                     }
                 }
 
-            } else { // A non-interactable object was detected
+            }
+            else { // A non-interactable object was detected
 
                 // Hide previous object if it was a real object & switch to null
                 if (m_interactable != null) {
@@ -114,7 +121,8 @@ public class InteractionController : MonoBehaviour {
                 }
             }
 
-        } else if (m_interactable != null) {
+        }
+        else if (m_interactable != null) {
             // If nothing was hit
             // Hide previous object if it was a real object & switch to null
             m_interactable.HideInteractionFeedback();
