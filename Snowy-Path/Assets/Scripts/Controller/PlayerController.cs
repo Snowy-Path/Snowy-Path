@@ -55,10 +55,9 @@ public class PlayerController : MonoBehaviour {
 
     [Space]
     [Header("Camera")]
-    [Tooltip("Look sensitivity")]
-    [SerializeField] float lookSpeed = 1.0f;
     [Tooltip("Look limit angle up and down")]
     [SerializeField] float lookYLimit = 45.0f;
+    [SerializeField] float debugSensitivity = 10f;
 
     //Status
     private CharacterController controller;
@@ -104,6 +103,8 @@ public class PlayerController : MonoBehaviour {
     //Parameters
     private float startStepOffset;
     private const float inputThreshold = 0.2f;
+    private const float factorLook = 0.01f;
+    private float sensitivity = 1f;
 
     private HandController handController;
 
@@ -165,6 +166,8 @@ public class PlayerController : MonoBehaviour {
 
     private float speed = 0;
     void Update() {
+
+        UpdateSensitivity();
 
         bool wasGrounded = isGrounded;
         //Update ground status
@@ -312,15 +315,25 @@ public class PlayerController : MonoBehaviour {
         rightHandAnimator.SetBool("Run", isRunning);
     }
 
+   
     private void Look() {
         if (canMove && canRotate) {
             //Orient camera thanks to mouse position
-            yRotation += -lookPos.y * lookSpeed;
+            yRotation += -lookPos.y * sensitivity;
             yRotation = Mathf.Clamp(yRotation, -lookYLimit, lookYLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(yRotation, 0, 0);
 
             //Rotate player 
-            transform.rotation *= Quaternion.Euler(0, lookPos.x * lookSpeed, 0);
+            transform.rotation *= Quaternion.Euler(0, lookPos.x * sensitivity, 0);
+        }
+    }
+
+    private void UpdateSensitivity() {
+        if (OptionHandler.Instance) {
+            sensitivity = factorLook * OptionHandler.Instance.Sensitivity;
+        }
+        else {
+            sensitivity = factorLook * debugSensitivity;
         }
     }
 
