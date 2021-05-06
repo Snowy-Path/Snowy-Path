@@ -22,6 +22,8 @@ public class AgentLinkMover : MonoBehaviour {
 
     private NavMeshAgent agent;
 
+    public bool teleported = false;
+
     /// <summary>
     /// Retrieves the NavMeshAgent and disable auto traverse link.
     /// </summary>
@@ -53,6 +55,7 @@ public class AgentLinkMover : MonoBehaviour {
                 //    yield return StartCoroutine(Curve(agent, 0.5f));
                 agent.CompleteOffMeshLink();
             }
+            teleported = false;
             yield return null;
         }
     }
@@ -66,7 +69,7 @@ public class AgentLinkMover : MonoBehaviour {
         OffMeshLinkData data = agent.currentOffMeshLinkData;
         Vector3 endPos = data.endPos + Vector3.up * agent.baseOffset;
         agent.updateRotation = false;
-        while (agent.transform.position != endPos) {
+        while (agent.transform.position != endPos && !teleported) {
             RotateAgent(agent, endPos);
             agent.transform.position = Vector3.MoveTowards(agent.transform.position, endPos, agent.speed * Time.deltaTime);
             yield return null;

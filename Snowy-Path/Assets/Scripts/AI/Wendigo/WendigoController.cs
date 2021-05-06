@@ -14,6 +14,8 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
 
     private float m_normalSpeed; //Normal speed retrieved from NavMeshAgent
 
+    private AgentLinkMover m_agentLinkMover;
+
     [Tooltip("Wendigo speed when hit by gun.")]
     [Min(0)]
     [SerializeField]
@@ -57,6 +59,7 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     void Start() {
         m_player = FindObjectOfType<PlayerController>().transform;
         m_agent = GetComponent<NavMeshAgent>();
+        m_agentLinkMover = GetComponent<AgentLinkMover>();
         m_normalSpeed = m_agent.speed;
     }
 
@@ -105,6 +108,7 @@ public class WendigoController : MonoBehaviour, IEnnemyController {
     /// <param name="newWendigoPos">The new position to warp at.</param>
     internal void Teleport(Transform newWendigoPos) {
         m_agent.Warp(newWendigoPos.position);
+        m_agentLinkMover.teleported = true;
     }
 
     internal void PlayDisappearingAnimation() {
