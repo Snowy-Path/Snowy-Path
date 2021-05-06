@@ -135,6 +135,7 @@ public class HQPauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         playerInput.SwitchCurrentActionMap("Gameplay");
+        AudioSettings.SFX.setPaused(false);
 
 
 
@@ -153,6 +154,7 @@ public class HQPauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         playerInput.SwitchCurrentActionMap("PauseMenu");
+        AudioSettings.SFX.setPaused(true);
 
     }
 
