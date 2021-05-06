@@ -148,6 +148,7 @@ public class HQOptionsMenu : MonoBehaviour
         }
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.RefreshShownValue();
+        resolutionDropdown.value = currentResolutionIndex;
         return currentResolutionIndex;
     }
     
