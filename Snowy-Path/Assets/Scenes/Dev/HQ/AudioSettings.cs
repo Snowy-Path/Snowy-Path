@@ -7,10 +7,10 @@ public class AudioSettings : MonoBehaviour
 
     FMOD.Studio.EventInstance SFXVolumeTestEvent;
 
-    static FMOD.Studio.Bus Music;
-    static FMOD.Studio.Bus SFX;
-    static FMOD.Studio.Bus Master;
-    static FMOD.Studio.Bus ReverbCavern;
+    public static FMOD.Studio.Bus Music;
+    public static FMOD.Studio.Bus SFX;
+    public static FMOD.Studio.Bus Master;
+    public static FMOD.Studio.Bus ReverbCavern;
     public float MusicVolume;
     public float SFXVolume;
     public float MasterVolume;
