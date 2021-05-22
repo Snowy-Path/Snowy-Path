@@ -28,6 +28,17 @@ public class HQOptionsMenu : MonoBehaviour
         LoadSettings(optionhandler.optionSettings);
     }
 
+    private void OnEnable() {
+        generalSlider.value = optionhandler.optionSettings.MasterVolume;
+        musicSlider.value = optionhandler.optionSettings.MusicVolume;
+        soundsSlider.value = optionhandler.optionSettings.SFXVolume;
+        gammaSlider.value = optionhandler.optionSettings.gammavalue;
+        sensitivitySlider.value = optionhandler.optionSettings.sensitivity;
+
+        resolutionDropdown.value = optionhandler.optionSettings.resolution_index;
+        aaDropdown.value = optionhandler.optionSettings.aa_index;
+    }
+
     public void MasterVolumeLevel(float newMasterVolume)
     {
         audioSettings.MasterVolume = newMasterVolume;
@@ -137,6 +148,7 @@ public class HQOptionsMenu : MonoBehaviour
         }
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.RefreshShownValue();
+        resolutionDropdown.value = currentResolutionIndex;
         return currentResolutionIndex;
     }
     

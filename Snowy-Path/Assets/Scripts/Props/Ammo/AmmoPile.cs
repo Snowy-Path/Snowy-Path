@@ -15,6 +15,13 @@ public class AmmoPile : MonoBehaviour {
                 if (gun.ammunitionInInventory < gun.ammunitionInventoryLimit) {
                     gun.ammunitionInInventory = gun.ammunitionInventoryLimit;
                     m_bulletPickUpEmitter.Play();
+                    if (FindObjectOfType<HandController>()?.CurrentTool == (IHandTool)gun)
+                    {
+                        if (gun.ammoLoaded <= 0 && !gun.IsBusy)
+                        {
+                            gun.Reload();
+                        }
+                    }
                 }
             }
         }

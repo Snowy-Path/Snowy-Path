@@ -9,9 +9,9 @@ public class HQPauseMenu : MonoBehaviour
 {
     //private OptionSettings inputDevice;
     public static bool gameIsPaused;
-    public GameObject OptionsMenu, CreditsMenu, PauseMenu, PlayMenu;
-    public GameObject OptionsButton, CreditsButton;
-    public GameObject PauseMenuFirstButton, OptionsFirstButton, CreditsFirstButton;
+    public GameObject OptionsMenu, CreditsMenu, PauseMenu, ChapterMenu;
+    public GameObject OptionsButton, CreditsButton, ChapterButton;
+    public GameObject PauseMenuFirstButton, OptionsFirstButton, CreditsFirstButton, ChapterFirstButton;
     public PlayerInput playerInput;
  
 
@@ -77,6 +77,13 @@ public class HQPauseMenu : MonoBehaviour
         SetFocus(CreditsFirstButton);
     }
 
+    public void OpenChapters()
+    {
+        ChapterMenu.SetActive(true);
+        PauseMenu.SetActive(false);
+        SetFocus(ChapterFirstButton);
+    }
+
     #endregion
 
     #region CLOSE MENUS
@@ -93,6 +100,13 @@ public class HQPauseMenu : MonoBehaviour
         CreditsMenu.SetActive(false);
         PauseMenu.SetActive(true);
         SetFocus(CreditsButton);
+    }
+
+    public void ExitChapter()
+    {
+        ChapterMenu.SetActive(false);
+        PauseMenu.SetActive(true);
+        SetFocus(ChapterButton);
     }
 
     #endregion
@@ -117,7 +131,7 @@ public class HQPauseMenu : MonoBehaviour
         CreditsMenu.SetActive(false);
         OptionsMenu.SetActive(false);
         PauseMenu.SetActive(true);
-        PlayMenu.SetActive(false);
+        ChapterMenu.SetActive(false);
     }
 
     /// <summary>

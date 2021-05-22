@@ -110,7 +110,7 @@ public class Gun : MonoBehaviour, IHandTool {
     /// <summary>
     /// Triggered when the player hit secondary use or don't have any ammo
     /// </summary>
-    private void Reload() {
+    internal void Reload() {
 
         handAnimator.SetTrigger("Reload");
 

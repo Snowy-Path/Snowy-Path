@@ -27,11 +27,11 @@ public class AnimSync : MonoBehaviour {
 
                 AnimatorStateInfo otherState = otherAnimator.GetCurrentAnimatorStateInfo(0);
                 if (otherState.shortNameHash == motionStateHash) {
-                    animator.CrossFade(motionStateHash, .15f, 0, otherState.normalizedTime );
+                    animator.CrossFade(motionStateHash, .1f, 0, otherState.normalizedTime );
                     //animator.Play(motionStateHash, 0, otherState.normalizedTime);
                 }
                 else if (otherState.shortNameHash == runStateHash) {
-                    animator.CrossFade(runStateHash, .15f, 0, otherState.normalizedTime );
+                    animator.CrossFade(runStateHash, .1f, 0, otherState.normalizedTime );
                     //animator.Play(runStateHash, 0, otherState.normalizedTime);
                 }
             }

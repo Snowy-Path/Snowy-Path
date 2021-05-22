@@ -14,6 +14,9 @@ public class IceWallReset : MonoBehaviour
 
     public void Reset()
     {
-        gameObject.SetActive(true);
+        if(gameObject != null)
+        {
+            gameObject.SetActive(true);
+        }
     }
 }
