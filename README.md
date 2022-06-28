@@ -1,6 +1,6 @@
 # Snowy Path
 
-<p><strong>Snowy Path </strong>is a solo adventure survival game on PC. It has been  made by <strong>students </strong>at Gamagora in 4 mounths with the help of MAAAV and CPE students. This is a <strong>vertical slice </strong>of what the game could be if it had a longer development.<br></p>
+<p><strong>Snowy Path </strong>is a solo adventure survival game on PC. It has been  made by <strong>students </strong>at Gamagora in 4 months with the help of MAAAV and CPE students. This is a <strong>vertical slice </strong>of what the game could be if it had a longer development.<br></p>
 <p>In Snowy Path, you play as Oneira, a young <strong>Iroquois </strong>girl lost in a <strong>cold </strong>and <strong>enchanted moutain</strong>. Your goal is to <strong>explore </strong>and <strong>survive</strong>. You will have to manage your <strong>temperature</strong>, <strong>solve puzzles </strong>and encounter <strong>dangerous creatures</strong>!</p>
 <hr>
 <div class="custom-rows">
